@@ -1,10 +1,22 @@
+DROP TABLE if exists 'account';
+DROP TABLE if exists 'category';
+DROP TABLE if exists 'hire';
+DROP TABLE if exists 'job';
+DROP TABLE if exists 'message';
+DROP TABLE if exists 'orde';
+DROP TABLE if exists 'orderlog';
+DROP TABLE if exists 'profile';
+DROP TABLE if exists 'sendresume';
+DROP TABLE if exists 'transactionrecords';
+DROP TABLE if exists 'user';
+DROP TABLE if exists 'workpublisher';
 CREATE TABLE `account`  (
   `id` int NOT NULL AUTO_INCREMENT,
   `user_id` int NOT NULL COMMENT '用户id',
   `money` double NOT NULL COMMENT '账户余额',
   `time` datetime NOT NULL COMMENT '最近修改时间',
   PRIMARY KEY (`id`)
-) COMMENT = '账户余额,且金额设置触发器不许为负数';
+) COMMENT = '账户余额';
 
 CREATE TABLE `category`  (
   `id` int NOT NULL AUTO_INCREMENT COMMENT '种类ID',
