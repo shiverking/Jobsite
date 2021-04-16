@@ -1,15 +1,15 @@
-DROP TABLE if exists 'account';
-DROP TABLE if exists 'category';
-DROP TABLE if exists 'hire';
-DROP TABLE if exists 'job';
-DROP TABLE if exists 'message';
-DROP TABLE if exists 'orde';
-DROP TABLE if exists 'orderlog';
-DROP TABLE if exists 'profile';
-DROP TABLE if exists 'sendresume';
-DROP TABLE if exists 'transactionrecords';
-DROP TABLE if exists 'user';
-DROP TABLE if exists 'workpublisher';
+DROP TABLE if exists account;
+DROP TABLE if exists category;
+DROP TABLE if exists hire;
+DROP TABLE if exists job;
+DROP TABLE if exists message;
+DROP TABLE if exists orde;
+DROP TABLE if exists orderlog;
+DROP TABLE if exists profile;
+DROP TABLE if exists sendresume;
+DROP TABLE if exists transactionrecords;
+DROP TABLE if exists user;
+DROP TABLE if exists workpublisher;
 CREATE TABLE `account`  (
   `id` int NOT NULL AUTO_INCREMENT,
   `user_id` int NOT NULL COMMENT '用户id',
