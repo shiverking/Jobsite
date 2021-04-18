@@ -23,7 +23,7 @@
 </head>
 <body>
 
-<!-- Header 02
+<!-- Header Homepage的header和其他页面不太一样，Homepage使用自己的header,其他页面用同一个header
 ================================================== -->
 <header class="header_02">
 	<div class="header_main">
@@ -38,10 +38,10 @@
 					<div class="navigation">
 						<nav>
 							<div class="hamburger hamburger--spring js-hamburger ">
-						        <div class="hamburger-box">
-						          <div class="hamburger-inner"></div>
-						        </div>
-						      </div>
+								<div class="hamburger-box">
+									<div class="hamburger-inner"></div>
+								</div>
+							</div>
 							<ul>
 								<li class="has-sub-menu current_page">
 									<a href="index.html" >Home</a>
@@ -84,7 +84,7 @@
 										<li>
 											<a href="pages/registration.html">Registration</a>
 										</li>
-										
+
 									</ul>
 								</li>
 
@@ -104,7 +104,7 @@
 										<li>
 											<a href="find-staff.html">Find staff</a>
 										</li>
-										
+
 										<li>
 											<a href="emp-edit-profile.html">Update profile</a>
 										</li>
@@ -141,33 +141,33 @@
 										</li>
 										<li>
 											<a href="404.html">404</a>
-										</li>	
+										</li>
 									</ul>
 								</li>
 							</ul>
 						</nav>
 						<div class="ac_nav">
 							<!--Not logedin-->
-								<div class="login_pop">
-									<button class="btn btn-primary">登陆  /  注册 <i class="fas fa-caret-down"></i></button>
-									<div class="login_pop_box">
+							<div class="login_pop">
+								<button class="btn btn-primary">登陆  /  注册 <i class="fas fa-caret-down"></i></button>
+								<div class="login_pop_box">
 										<span class="twobtn_cont">
-											<a class=" signjs_btn" href="registration.html">				 
-											<span>找工作</span> 注册
+											<a class=" signjs_btn" th:href="@{/register}">
+											<span>应聘者</span> 注册
 											<i class="far fa-user"></i>
 											</a>
-										<a class=" signrs_btn" href="emp-registration.html">	<span>雇主</span> 注册
+										<a class=" signrs_btn" th:href="@{/register/employer}"><span>雇主</span> 注册
 											<i class="fas fa-landmark"></i>
 										</a>
 										</span>
-										<div>
-											<span class="member_btn">已有账号?</span>
-											<a class="lgin_btn btn btn-primary" href="login.html"> 
-											   	登陆
-											</a>
-										</div>
+									<div>
+										<span class="member_btn">已有账号?</span>
+										<a class="lgin_btn btn btn-primary" th:href="@{/login}">
+											登陆
+										</a>
 									</div>
 								</div>
+							</div>
 							<!--end logedin-->
 						</div>
 					</div>
@@ -200,7 +200,7 @@
 										</div>
 										<div>
 											<h3>我想找工作</h3>
-											
+
 											<!-- <i class="fas fa-long-arrow-alt-right"></i> -->
 										</div>
 									</a>
@@ -214,31 +214,24 @@
 										</div>
 										<div>
 											<h3>我想发布工作</h3>
-											
+
 											<!-- <i class="fas fa-long-arrow-alt-right"></i>
- -->										</div>
+    -->										</div>
 									</a>
 								</div>
 							</div>
 						</div>
 					</div>
-				</div>	
-			</div>	
+				</div>
+			</div>
 		</div>
-	</div> 
+	</div>
 </header>
-
-
-<!-- End Header 02
-================================================== -->
-
-
 
 <!-- Main 
 ================================================== -->
 <main>
 	<div class="section category-section-2 ">
-		
 		<div class="container">
 			<h2 class="section_h">当前最热门的工作</h2>
 			<div class="row">
@@ -833,117 +826,9 @@
 	</div>
 </main>
 
-
 <!-- Footer Container
 ================================================== -->
-<footer id="colophon" class="site-footer custom_footer">
-	<div class="container">
-		<div class="row footer_widget">
-				<div class="col-md-3">
-					<div class="footer_widget_box">
-						<h2 >Job seekers</h2>
-						<ul >
-							<li>
-								<a href="browse-jobs.html">Browse jobs</a>
-							</li>
-							<li>
-								<a href="job-single.html">Job single</a>
-							</li>
-							<li>
-								<a href="my-stared-jobs.html">My stared jobs</a>
-							</li>
-							<li>
-								<a href="edit-profile.html">Update my profile</a>
-							</li>
-							<li>
-								<a href="edit-password.html">Change password</a>
-							</li>
-						</ul>
-					</div>
-				</div>
-				<div class="col-md-3">
-					<div class="footer_widget_box">
-						<h2 >Employers</h2>
-						<ul >
-							<li>
-								<a href="emp-registration.html">Get a FREE Employer Account</a> 
-							</li>
-							<li>
-								<a href="post-a-job.html">Post a job</a>
-							</li>
-							<li>
-								<a href="find-staff.html">Find staff</a>
-							</li>
-							<li>
-								<a href="job-dashboard.html">Job dashboard</a>
-							</li>
-							<li>
-								<a href="emp-edit-profile.html">Update profile</a>
-							</li>
-							<li>
-								<a href="emp-edit-password.html">Change password</a>
-							</li>
-						</ul>
-					</div>
-				</div>
-				<div class="col-md-3">
-					<div class="footer_widget_box">
-						<h2 >Community</h2>
-						<ul>
-			              <li> <a href="contact-us.html">Help / Contact Us</a> 
-			              </li>
-			              <li> <a href="content-page.html">Guidelines</a> 
-			              </li>
-			              <li> <a href="content-page.html">Terms of Use</a> 
-			              </li>
-			              <li> <a href="content-page.html">Privacy &amp; Cookies </a> 
-			              </li>
-			            </ul>
-					</div>
-				</div>
-				<div class="col-md-3">
-					<div class="footer_widget_box">
-						<h2 >联系我们</h2>
-						<ul class="social_list">
-							<li> <a href="#"><i class="fab fa-twitter"></i></a> 
-							</li>
-							<li> <a href="#"><i class="fab fa-facebook"></i></a> 
-							</li>
-							<li> <a href="#"><i class="fab fa-linkedin"></i></a> 
-							</li>
-							<li> <a href="#"><i class="fab fa-youtube"></i></a> 
-							</li>
-						</ul>
-
-					</div>
-					
-          <div class="footer_widget_box">
-						<form class="newsletter">
-			                  <h2 >建议与合作</h2>
-			                  <div  class="d-flex">
-
-			                    <input class="form-control" type="email" placeholder="输入你的邮箱">
-			                    <button class="btn btn-primary"><i class="fa fa-paper-plane"></i></button>
-			                   
-			                  </div>
-		                   
-		                </form>
-		            </div> 
-				</div>
-				<div class="col-md-12">
-					<div class="footer_widget_box"  >
-						<p class="copyright-text">© Copyright 2020 by JoSite. All rights <a href="http://www.bootstrapmb.com/">reserved</a>.
-						</p>
-					</div>
-				</div>
-			</div>
-		<!-- .site-info -->
-	</div>
-</footer>
-
-
-<!-- End Footer Container
-================================================== -->
+<footer id="colophon" class="site-footer custom_footer" th:include="/footer.html"/>
 
 <!-- Scripts
 ================================================== -->

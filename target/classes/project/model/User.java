@@ -1,20 +1,32 @@
 package project.model;
 
+import com.sun.istack.internal.NotNull;
+import org.springframework.context.annotation.Bean;
+
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+
 /**
  * @author ：闫崇傲
  * @description：用户类定义
  * @date ：2021/4/14 22:30
  */
+
 public class User {
     //用户id
     private int id;
     //用户名
+    @NotEmpty
     private String username;
     //密码
+    @Size(min = 6, max = 15)
     private String password;
     //电话
+    @NotEmpty
     private String telephone;
     //邮箱
+    @Email
     private String email;
     //地址
     private String location;

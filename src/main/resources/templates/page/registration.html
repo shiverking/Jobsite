@@ -190,7 +190,7 @@
             </div>
         </div>
         <div class="header_btm">
-            <h2>Register</h2>
+            <h2>注册</h2>
         </div>
     </div>
 </header>
@@ -207,7 +207,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <p class="only-form-box">
+                    <div class="only-form-box">
                     <div class="welcome-text text-center mb-5">
                         <h5 class="mb-0">创建一个你的账户!</h5>
                         <span>已经有账户？ <a href="login">登录!</a></span>
@@ -219,11 +219,11 @@
                             <label class="user_type" for="usertype-1">
                                 <input type="radio" checked="" name="identity" th:value="employee"
                                        id="usertype-1">
-                                <span><i class="far fa-user"></i>employee</span>
+                                <span><i class="far fa-user"></i>应聘者</span>
                             </label>
                             <label class="user_type" for="usertype-2">
                                 <input type="radio" name="identity" id="usertype-2" value="employer">
-                                <span><i class="fas fa-landmark"></i>employer</span>
+                                <span><i class="fas fa-landmark"></i>雇主</span>
                             </label>
                         </div>
                         <div class="form-group">
@@ -236,14 +236,14 @@
                             <input class="form-control" type="password" name="password" placeholder="密码">
                         </div>
                         <div class="form-group">
-                            <input class="form-control" type="password" placeholder="Re-enter Password * ">
+                            <input class="form-control" type="password" placeholder="再次输入密码">
                         </div>
                         <div class="form-group">
                             <input class="btn btn-primary" type="submit" value="注册">
                         </div>
                         <div class="form-group form-check">
                             <label class="form-check-label">
-                                <input class="form-check-input" type="checkbox"> Remember me
+                                <input class="form-check-input" type="checkbox"> 记住我
                             </label>
                         </div>
 
@@ -251,9 +251,9 @@
                     </form>
                     <div class="social_login">
                         <p class="or_span"><span>or</span></p>
-                        <button class="btn btn-facebook"><i class="fab fa-facebook-f"></i> Log In via Facebook
+                        <button class="btn btn-facebook"><i class="fab fa-facebook-f"></i>Facebook 登陆
                         </button>
-                        <button class="btn btn-google"><i class="fab fa-google-plus-g"></i> Register via Google+
+                        <button class="btn btn-google"><i class="fab fa-google-plus-g"></i>Google 登陆
                         </button>
                     </div>
                 </div>
@@ -266,113 +266,7 @@
 
 <!-- Footer Container
 ================================================== -->
-<footer id="colophon" class="site-footer custom_footer dark_footer">
-    <div class="container">
-        <div class="row footer_widget">
-            <div class="col-md-3">
-                <div class="footer_widget_box">
-                    <h2>Job seekers</h2>
-                    <ul>
-                        <li>
-                            <a href="browse-jobs.html">Browse jobs</a>
-                        </li>
-                        <li>
-                            <a href="job-single.html">Job single</a>
-                        </li>
-                        <li>
-                            <a href="my-stared-jobs.html">My stared jobs</a>
-                        </li>
-                        <li>
-                            <a href="edit-profile.html">Update my profile</a>
-                        </li>
-                        <li>
-                            <a href="edit-password.html">Change password</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="footer_widget_box">
-                    <h2>Employers</h2>
-                    <ul>
-                        <li>
-                            <a href="emp-registration.html">Get a FREE Employer Account</a>
-                        </li>
-                        <li>
-                            <a href="post-a-job.html">Post a job</a>
-                        </li>
-                        <li>
-                            <a href="find-staff.html">Find staff</a>
-                        </li>
-                        <li>
-                            <a href="job-dashboard.html">Job dashboard</a>
-                        </li>
-                        <li>
-                            <a href="emp-edit-profile.html">Update profile</a>
-                        </li>
-                        <li>
-                            <a href="emp-edit-password.html">Change password</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="footer_widget_box">
-                    <h2>Community</h2>
-                    <ul>
-                        <li><a href="contact-us.html">Help / Contact Us</a>
-                        </li>
-                        <li><a href="content-page.html">Guidelines</a>
-                        </li>
-                        <li><a href="content-page.html">Terms of Use</a>
-                        </li>
-                        <li><a href="content-page.html">Privacy &amp; Cookies </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="footer_widget_box">
-                    <h2>Get In Touch</h2>
-                    <ul class="social_list">
-                        <li><a href="#"><i class="fab fa-twitter"></i></a>
-                        </li>
-                        <li><a href="#"><i class="fab fa-facebook"></i></a>
-                        </li>
-                        <li><a href="#"><i class="fab fa-linkedin"></i></a>
-                        </li>
-                        <li><a href="#"><i class="fab fa-youtube"></i></a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="footer_widget_box">
-                    <form class="newsletter">
-                        <h2>Newsletter</h2>
-                        <div class="d-flex">
-
-                            <input class="form-control" type="email" placeholder="Enter your email ">
-                            <button class="btn btn-primary"><i class="fa fa-paper-plane"></i></button>
-
-                        </div>
-
-                    </form>
-                </div>
-            </div>
-            <div class="col-md-12">
-                <div class="footer_widget_box">
-                    <p class="copyright-text">© Copyright 2020 by JoDice. All rights <a
-                            href="http://www.bootstrapmb.com/">reserved</a>.
-                    </p>
-                </div>
-            </div>
-        </div>
-        <!-- .site-info -->
-    </div>
-</footer>
-
-
-<!-- End Footer Container
-================================================== -->
+<footer th:include="/footer.html"></footer>
 
 <!-- Scripts
 ================================================== -->
