@@ -1,0 +1,192 @@
+﻿<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+<!-- Basic Page Needs
+================================================== -->
+<title>JoDice</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<link rel="icon" href="/assets/images/fav.png" type="image/gif" sizes="64x64">
+
+<!-- CSS
+================================================== -->
+<link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700&display=swap&subset=latin-ext" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/all.min.css">
+<link rel="stylesheet" href="/assets/css/lq-score.css">
+<link href="/assets/css/aos.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+<link href="/assets/css/select2.min.css" rel="stylesheet" />
+<link href="/assets/css/owl.carousel.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="/assets/css/style.css">
+<link rel="stylesheet" href="/assets/css/color-1.css">
+</head>
+<body>
+
+<!-- Header
+================================================== -->
+<header th:include="/header.html">
+</header>
+
+<!-- Main 
+================================================== -->
+<main>
+<br>
+<div class="single_job">
+    <div class="container">
+      <div class="row">
+      	<div class="col-md-9">
+      		<div class="row ">
+		        <div class="col-md-12 single_job_main">
+		        	<h2>工作介绍</h2>
+                    <p th:text="${job.description}"></p>
+		        </div>
+		        <div class="section-divider"></div>
+		        <div class="section-divider"></div>
+		        <div class="col-md-12 single_job_main">
+		        	<h2>相似的工作</h2>
+		        	<div class="row two_col featured_box_outer">
+						<div class="col-sm-6">
+							<div class="featured_box ">
+								<div class="fb_image">
+									<img alt="brand logo" src="/assets/images/c-logo-01.webp">
+								</div>
+								<div class="fb_content">
+									<h4>2000 Words English to German</h4>
+									<ul>
+										<li>
+											<a href="#">
+												<i class="fas fa-landmark"></i>
+												Magna Aliqua
+											</a>
+										</li>
+										<li>
+											<a href="#">
+												<i class="fas fa-map-marker-alt"></i>
+												New York
+											</a>
+										</li>
+										<li>
+											<a href="#">
+												<i class="far fa-clock"></i>
+												2 days ago
+											</a>
+										</li>
+									</ul>
+								</div>
+								<div class="fb_action">
+									<a title="add to favourite" href="#"><i class="far fa-heart"></i></a>
+									<a class="btn btn-third" href="job-single.html">Apply Now</a>
+									
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-6">
+							<div class="featured_box ">
+								<div class="fb_image">
+									<img  alt="brand logo" src="/assets/images/c-logo-02.webp">
+								</div>
+								<div class="fb_content">
+									<h4>Fix Python Selenium Code</h4>
+									<ul>
+										<li>
+											<a href="#">
+												<i class="fas fa-landmark"></i>
+												Magna Aliqua
+											</a>
+										</li>
+										<li>
+											<a href="#">
+												<i class="fas fa-map-marker-alt"></i>
+												New York
+											</a>
+										</li>
+										<li>
+											<a href="#">
+												<i class="far fa-clock"></i>
+												3 days ago
+											</a>
+										</li>
+									</ul>
+								</div>
+								<div class="fb_action">
+									<a title="add to favourite" href="#"><i class="fas fa-heart"></i></a>
+									<a class="btn btn-third" href="job-single.html">Apply Now</a>
+									
+								</div>
+							</div>
+						</div>				
+						<div class="col-md-12 text-center">
+							<a class="btn btn-primary" th:href="@{/job}">查看所有工作<i class="fas fa-long-arrow-alt-right"></i></a>
+						</div>
+					</div>
+		        </div>
+		      </div>
+      	</div>
+        <!--右侧简介-->
+      	<div class="col-md-3 ">
+      		<div class="single-job-sidebar">
+				<div class="sjs_box">
+					<h3>简介</h3>
+	      			<ul class="single-job-sidebar-features">
+	      				<li>
+	      					<i class="fas fa-briefcase"></i>
+	      					<h6>工作类型</h6>
+	      					<p>一次性结清</p>
+	      				</li>
+	      				<li>
+	      					<i class="fas fa-money-bill-alt"></i>
+	      					<h6>薪酬</h6>
+	      					<p th:text="${job.budget}"></p>
+	      				</li>
+	      				<li>
+	      					<i class="fas fa-user"></i>
+	      					<h6>所需人数</h6>
+	      					<p th:text="${job.required}"></p>
+	      				</li>
+                        <li>
+                            <i class="fas fa-user-graduate"></i>
+                            <h6>专业水平</h6>
+                            <p th:text="${job.expertize_level}"></p>
+                        </li>
+	      			</ul>
+				</div>      			
+      			<div class="sjs_box">
+      				<h3>标签</h3>
+      				<ul class="tags">
+						<li>PHP</li>
+						<li>MySQL </li>
+						<li>API Development</li>
+						<li>PHP</li>
+						<li>MySQL </li>
+						<li>API Development</li>
+					</ul>
+      			</div>
+      			
+      		</div>
+      		<div class=" sjs_box_action">
+      				<a class="btn btn-third" href="#">联系雇主</a>
+      					<p>- 或 -</p>
+      				<a class="btn btn-primary" href="#">投递简历</a>
+      			</div>
+      	</div>
+      </div>
+    </div>
+  </div>
+</main>
+
+
+<!-- Footer Container
+================================================== -->
+<footer id="colophon" class="site-footer custom_footer" th:include="/footer.html"/>
+
+<!-- Scripts
+================================================== -->
+<script src="/assets/js/jquery-3.4.1.min.js"></script>
+<script src="/assets/js/select2.min.js"></script>
+<script src="/assets/js/bootstrap.min.js"></script>
+<script src="/assets/js/owl.carousel.min.js"></script>
+<script src="/assets/js/custom.js"></script>
+</body>
+</html>
