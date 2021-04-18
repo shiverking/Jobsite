@@ -247,6 +247,21 @@ form {
 	transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }
 
+.form-control-v{
+	display: block;
+	height: auto;
+	padding: 8.5px;
+	font-size: 1rem;
+	font-weight: 400;
+	line-height: 1.5;
+	color: #495057;
+	background-color: #fff;
+	background-clip: padding-box;
+	border: 1px solid #ced4da;
+	border-radius: 0;
+	transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
 /*.form-control:focus{
 	box-shadow: 0 0 0 3px rgba(0,0,0,0.1);
 	border-color: transparent;
@@ -2513,7 +2528,7 @@ padding-bottom: 0;*/
 }
 .ut_or {
 	position: absolute;
-	border: ;
+	border: #1fc8d7 ;
 	left: 0;
 	right: 0;
 	text-align: center;
