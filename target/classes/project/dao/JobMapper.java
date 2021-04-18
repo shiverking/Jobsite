@@ -20,5 +20,5 @@ public interface JobMapper {
     //根据id找到Job
     Job findJobById(@Param("id") int id);
     //根据job信息模糊搜索
-    //Job
+    Job findJobByName(@Param("name") String name);
 }

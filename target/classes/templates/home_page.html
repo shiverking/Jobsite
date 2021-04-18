@@ -152,17 +152,17 @@
 								<button class="btn btn-primary">登陆  /  注册 <i class="fas fa-caret-down"></i></button>
 								<div class="login_pop_box">
 										<span class="twobtn_cont">
-											<a class=" signjs_btn" href="registration.html">
-											<span>找工作</span> 注册
+											<a class=" signjs_btn" th:href="@{/register}">
+											<span>应聘者</span> 注册
 											<i class="far fa-user"></i>
 											</a>
-										<a class=" signrs_btn" href="emp-registration.html">	<span>雇主</span> 注册
+										<a class=" signrs_btn" th:href="@{/register/employer}"><span>雇主</span> 注册
 											<i class="fas fa-landmark"></i>
 										</a>
 										</span>
 									<div>
 										<span class="member_btn">已有账号?</span>
-										<a class="lgin_btn btn btn-primary" href="login.html">
+										<a class="lgin_btn btn btn-primary" th:href="@{/login}">
 											登陆
 										</a>
 									</div>
