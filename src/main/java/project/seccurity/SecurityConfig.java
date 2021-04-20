@@ -10,13 +10,13 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-@Configuration
-@EnableWebSecurity
+//@Configuration
+//@EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/login","/register","/register/employer","/resources/**","/assets/**","/images/**","/registration","/add","/").permitAll()
+                .antMatchers("/login","/error","/resources/**","/assets/**","/images/**","/registration","/add").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
