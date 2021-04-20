@@ -1,5 +1,5 @@
 ﻿<!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 
 <!-- Basic Page Needs
@@ -19,20 +19,20 @@
 <link href="assets/css/select2.min.css" rel="stylesheet" />
 <link href="assets/css/owl.carousel.min.css" rel="stylesheet" />
 <link rel="stylesheet" href="assets/css/style.css">
-<link rel="stylesheet" href="assets/css/color-1.css">
+<link rel="stylesheet" href="assets/css/color-2.css">
 </head>
 <body>
 
-<!-- Header 01
+<!-- Header 02
 ================================================== -->
-<header class="header_01">
+<header class="header_02">
 	<div class="header_main">
 		<div class="header_menu fixed-top">
 			<div class="container">
 				<div class="header_top">
 					<div class="logo">
 						<a href="index.html">
-							<img  alt="JoDice" class="img-fluid" src="assets/images/dice-logo.png">
+							<img alt="JoDice" class="img-fluid" src="assets/images/logo-2.png">
 						</a>
 					</div>
 					<div class="navigation">
@@ -46,10 +46,10 @@
 								<li class="has-sub-menu current_page">
 									<a href="index.html" >Home</a>
 									<ul class="sub-menu">
-										<li class="current_page">
+										<li >
 											<a href="index.html">Homepage 1</a>
 										</li>
-										<li>
+										<li class="current_page">
 											<a href="home-page-2.html">Homepage 2</a>
 										</li>
 										<li>
@@ -69,30 +69,22 @@
 										<li>
 											<a href="browse-jobs.html">Browse jobs</a>
 										</li>
-										
 										<li>
 											<a href="job-single.html">Job single</a>
 										</li>
-										
 										<li>
 											<a href="my-stared-jobs.html">My stared jobs</a>
 										</li>
 										<li>
-											<a href="staff-profile-single.html">Job seeker profile</a>
-										</li>
-										<li>
 											<a href="edit-profile.html">Update my profile</a>
 										</li>
-										
 										<li>
 											<a href="edit-password.html">Change password</a>
 										</li>
 										<li>
 											<a href="pages/registration.html">Registration</a>
 										</li>
-										<li>
-											<a href="browse-companies.html">Browse companies</a>
-										</li>
+										
 									</ul>
 								</li>
 
@@ -111,9 +103,6 @@
 										</li>
 										<li>
 											<a href="find-staff.html">Find staff</a>
-										</li>
-										<li>
-											<a href="compnay-profile-single.html">Company profile</a>
 										</li>
 										
 										<li>
@@ -151,9 +140,6 @@
 											<a href="lost-password.html">Lost password</a>
 										</li>
 										<li>
-											<a href="user-interface-elements.html">User interface elements</a>
-										</li>
-										<li>
 											<a href="404.html">404</a>
 										</li>	
 									</ul>
@@ -163,21 +149,21 @@
 						<div class="ac_nav">
 							<!--Not logedin-->
 								<div class="login_pop">
-									<button class="btn btn-primary">Login / Sign up <i class="fas fa-caret-down"></i></button>
+									<button class="btn btn-primary">登陆  /  注册 <i class="fas fa-caret-down"></i></button>
 									<div class="login_pop_box">
 										<span class="twobtn_cont">
-											<a class=" signjs_btn" href="pages/registration.html">
-											<span>Job seekers</span> Sign up
+											<a class=" signjs_btn" href="registration.html">				 
+											<span>找工作</span> 注册
 											<i class="far fa-user"></i>
 											</a>
-										<a class=" signrs_btn" href="emp-registration.html">	<span>EMPLOYERS</span> Sign up
+										<a class=" signrs_btn" href="emp-registration.html">	<span>雇主</span> 注册
 											<i class="fas fa-landmark"></i>
 										</a>
 										</span>
 										<div>
-											<span class="member_btn">Already a member?</span>
-											<a class="lgin_btn btn btn-primary" href="pages/login.html">
-											   	Login
+											<span class="member_btn">已有账号?</span>
+											<a class="lgin_btn btn btn-primary" href="login.html"> 
+											   	登陆
 											</a>
 										</div>
 									</div>
@@ -188,93 +174,55 @@
 				</div>
 			</div>
 		</div>
-		<div class="header_btm">
-			<!-- <div class="bg-v" >
-				<div class="bg-v-2 bg-b-r">
-				</div>
-			</div> -->
+		<div class="header_btm ">
 			<div class="container">
-				<div class="banner_slider ">
-					<div class="">	
-						<div class="row align-items-center">
-							<div class="col-lg-4" data-aos="fade-down" data-aos-delay="200">
-								<h2>Find the  most exciting<br> starup jobs</h2>
-								<p>Most complete 2020 template for Job board sites.</p>
-								<a class="btn btn-primary" href="browse-jobs.html">Know more
-									<i class="material-icons">arrow_right_alt</i>
-								</a>
+				<div >
+					<h2>轻松&简单的找到工作</h2>
+					<p>专业的远程工作平台，致力于连接每一位梦想家和企业家</p>
+					<form action="browse-jobs.html">
+						<div class="banerSearch">
+							<div class="fild-wrap fw-job-title">
+								<i class="fas fa-briefcase"></i>
+								<input class="form-control" style= "background-color:transparent;border:0;padding-left: 40px;padding-right: 0px" type="text" name="name" placeholder="Placeholder ">
 							</div>
-							<div class="col-lg-8" >
-								<div class="banner_form_cont" >
-									<form action="browse-jobs.html">
-										<div class="banerSearch" data-aos="fade-up" data-aos-delay="200">
-											<div class="fild-wrap fw-job-title">
-												<i class="fas fa-briefcase"></i>
-												<select class="js-example-basic-multiple" name="state">
-												  <option value="AL"> JOB TITLE, SKILL, INDUSTRY</option>
-												  <option value="1">Concierge</option>
-												  <option value="2">Event Planner</option>
-												  <option value="3">Executive Chef</option>
-												   <option value="4">General Manager</option>
-
-												</select>
-											</div>
-											<div class="fild-wrap fw-job-location">
-												<i class="fas fa-map-marker-alt"></i>
-												<select class="js-example-basic-single" name="state">
-												  <option value="AL">ALABAMA</option>
-												  <option value="WY">WYOMING</option>
-												</select>
-											</div>
-											<div class="fild-wrap fw-submit">
-												<button type="submit" class="btn btn-primary" value="">
-													 <i class="material-icons">search</i> SEARCH JOBS
-												</button>
-											</div>
+							<div class="fild-wrap fw-submit">
+								<input type="submit" class="btn btn-primary" value="查找工作">
+							</div>
+						</div>
+					</form>
+					<div class="user_type-3">
+						<div class="row">
+							<div class="col-md-6">
+								<div class="user_type_inner  user_type_seeker">
+									<a href="browse-jobs.html">
+										<div class="usertype_img">
+											<i class="far fa-user"></i>
 										</div>
-									</form>
-									<div class="user_type">
-										<div class="row">
-											<div class="col-md-6" >
-												<div class="user_type_inner  user_type_seeker" >
-													<a href="browse-jobs.html">
-														<div class="usertype_img">
-															<img alt="" src="assets/images/usertype-2.png">
-															<img alt="" class="usertype-addon" src="assets/images/usertype-2-addon.png">
-														</div>
-														<div>
-															<h3>I'm looking for a job</h3>
-															<p>Post CV and apply job you love</p>
-															<i class="fas fa-long-arrow-alt-right"></i>
-														</div>
-													</a>
-												</div>
-											</div>
-											<div class="col-md-6">
-												<div class="user_type_inner user_type_post" >
-													<a href="post-a-job.html">
-														<div class="usertype_img">
-															<img alt=""  src="assets/images/usertype-1.png">
-															<img alt=""  class="usertype-addon" src="assets/images/usertype-1-addon.png">
-														</div>
-														<div>
-															<h3>I want to post job</h3>
-															<p>Post jobs & hire porfessionls</p>
-															<i class="fas fa-long-arrow-alt-right"></i>
-														</div>
-													</a>
-												</div>
-											</div>
+										<div>
+											<h3>我想找工作</h3>
+											
+											<!-- <i class="fas fa-long-arrow-alt-right"></i> -->
 										</div>
-									</div>
+									</a>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="user_type_inner user_type_post">
+									<a href="post-a-job.html">
+										<div class="usertype_img">
+											<i class="far fa-paper-plane"></i>
+										</div>
+										<div>
+											<h3>我想发布工作</h3>
+											
+											<!-- <i class="fas fa-long-arrow-alt-right"></i>
+ -->										</div>
+									</a>
 								</div>
 							</div>
 						</div>
 					</div>
-					
-					
-				</div>
-					
+				</div>	
 			</div>	
 		</div>
 	</div> 
@@ -289,36 +237,15 @@
 <!-- Main 
 ================================================== -->
 <main>
-	<div class="section category-section ">
-		<div class="bg-v">
-			<div class="bg-v-1 bg-t-l" data-aos="zoom-in">
-			</div>
-			<div class="bg-v-2 bg-b-r" data-aos="zoom-in">
-			</div>
-			<!-- <div class="bg-v-4">
-			</div>
-			<div class="bg-v-5">
-			</div>
-			<div class="bg-v-6">
-			</div>
-			<div class="bg-v-7">
-			</div>
-			<div class="bg-v-8">
-			</div>
-			<div class="bg-v-9">
-			</div>
-			<div class="bg-v-10">
-			</div>
-			<div class="bg-v-11">
-			</div> -->
-		</div>
+	<div class="section category-section-2 ">
+		
 		<div class="container">
-			<h2 data-aos="fade-up" data-aos-delay="400" class="section_h">Popular Job Categories</h2>
+			<h2 class="section_h">当前最热门的工作</h2>
 			<div class="row">
-				<div class="col-lg-3 col-md-6" >
-					<div class="category_box" >
+				<div class="col-md-6">
+					<div class="category_box">
 						<div class="cb_header">
-							<img alt=""  src="assets/images/i-code.png">
+							<i class="far fa-file-code"></i>
 							<span class="job_count">363</span>
 						</div>
 						<div class="cb_bottom">
@@ -327,10 +254,10 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-lg-3 col-md-6" >
-					<div class="category_box" >
+				<div class="col-md-6">
+					<div class="category_box">
 						<div class="cb_header">
-							<img alt=""  src="assets/images/i-server.png">
+							<i class="fas fa-cloud-upload-alt"></i>
 							<span class="job_count">572</span>
 						</div>
 						<div class="cb_bottom">
@@ -339,10 +266,10 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-lg-3 col-md-6" >
-					<div class="category_box" >
+				<div class="col-md-6">
+					<div class="category_box">
 						<div class="cb_header">
-							<img alt=""  src="assets/images/i-calculator.png">
+							<i class="fas fa-calculator"></i>
 							<span class="job_count">252</span>
 						</div>
 						<div class="cb_bottom">
@@ -351,10 +278,10 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-lg-3 col-md-6" >
-					<div class="category_box" >
+				<div class="col-md-6">
+					<div class="category_box">
 						<div class="cb_header">
-							<img alt=""  src="assets/images/i-pan.png">
+							<i class="fas fa-pen-fancy"></i>
 							<span class="job_count">523</span>
 						</div>
 						<div class="cb_bottom">
@@ -363,10 +290,10 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-lg-3 col-md-6" >
-					<div class="category_box" >
+				<div class="col-md-6">
+					<div class="category_box">
 						<div class="cb_header">
-							<img alt=""  src="assets/images/i-chart.png">
+							<i class="fas fa-chart-pie"></i>
 							<span class="job_count">98</span>
 						</div>
 						<div class="cb_bottom">
@@ -375,10 +302,10 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-lg-3 col-md-6" >
-					<div class="category_box" >
+				<div class="col-md-6">
+					<div class="category_box">
 						<div class="cb_header">
-							<img alt=""  src="assets/images/i-graphic.png">
+							<i class="fas fa-camera-retro"></i>
 							<span class="job_count">53</span>
 						</div>
 						<div class="cb_bottom">
@@ -387,10 +314,10 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-lg-3 col-md-6" >
-					<div class="category_box" >
+				<div class="col-md-6">
+					<div class="category_box">
 						<div class="cb_header">
-							<img alt=""  src="assets/images/i-digital.png">
+							<i class="fas fa-bullhorn"></i>
 							<span class="job_count">75</span>
 						</div>
 						<div class="cb_bottom">
@@ -399,10 +326,10 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-lg-3 col-md-6" >
-					<div class="category_box" >
+				<div class="col-md-6">
+					<div class="category_box">
 						<div class="cb_header">
-							<img alt=""  src="assets/images/i-education.png">
+							<i class="fas fa-graduation-cap"></i>
 							<span class="job_count">366</span>
 						</div>
 						<div class="cb_bottom">
@@ -414,28 +341,60 @@
 			</div>   
 		</div>
 	</div>
-
-	<div class="section dark-section featured_section">
-		<div class="bg-v">
-			<div class="bg-v-3 bg-t-r">
-			</div>
-			<div class="bg-v-3 bg-b-l">
+	<div class="section work_section gray">
+		<div class="container">
+			<h2 class="section_h">JoSite 的<br>工作流程</h2>
+			<div class="row">
+				<div class="col-md-3">
+					<div class="workbox">
+						<div class="workbox_inner">
+							<img alt="search icon" src="assets/images/icon-1.1.png">
+							<p>按类别、位置等搜索合适的工作。</p>
+							<h5>查找工作</h5>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="workbox">
+						<div class="workbox_inner">
+							<img alt="search icon" src="assets/images/icon-2.1.png">
+							<p>公司简介，工作细节，薪资待遇等等！</p>
+							<h5>查看详细的信息</h5>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="workbox">
+						<div class="workbox_inner">
+							<img alt="search icon" src="assets/images/icon-3.1.png">
+							<p>一键告知雇主你的意象！</p>
+							<h5>应聘工作</h5>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="workbox">
+						<div class="workbox_inner">
+							<img alt="search icon" src="assets/images/icon-4.1.png">
+							<p>雇主可以根据你的经验和资历雇佣你。</p>
+							<h5>让雇主找到你</h5>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
+	</div>
+	<div class="section  featured_section">
 		<div class="container">
-			<h2 data-aos="fade-up" data-aos-delay="400" class="section_h">Featured Jobs</h2>
-			<div class="row two_col featured_box_outer">
-				<div class="col-sm-6" >
+			<h2 class="section_h">Featured Jobs</h2>
+			<div class="row full_width featured_box_outer">
+				<div class="col-sm-12">
 					<div class="featured_box ">
-						<div class="fb_image" >
-							<a href="compnay-profile-single.html">
-								<img   alt="brand logo" src="assets/images/c-logo-01.webp">
-							</a>
+						<div class="fb_image">
+							<img alt="brand logo" src="assets/images/c-logo-01.webp">
 						</div>
-						<div class='fb_content' >
-							<h4>
-								<a href="job-single.html">2000 Words English to German</a>
-							</h4>
+						<div class='fb_content'>
+							<h4><a href="job-single.html">Restaurant General Manager</a></h4>
 							<ul>
 								<li>
 									<a href="#">
@@ -457,28 +416,24 @@
 								</li>
 							</ul>
 						</div>
-						<div class="fb_action" >
+						<ul class="tags">
+							<li>copywriting</li>
+							<li>translating</li>
+							<li>editing</li>
+						</ul>
+						<div class="fb_action">
 							<a title="add to favourite" href="#"><i class="far fa-heart"></i></a>
-							<a class="btn btn-third" href="job-single.html">Apply Now</a>
-							<ul class="tags">
-								<li>copywriting</li>
-								<li>translating</li>
-								<li>editing</li>
-							</ul>
+							<a class="btn btn-primary" href="job-single.html">Apply Now</a>
 						</div>
 					</div>
 				</div>
-				<div class="col-sm-6" >
+				<div class="col-sm-12">
 					<div class="featured_box ">
-						<div class="fb_image" >
-							<a href="compnay-profile-single.html">
-								<img   alt="brand logo" src="assets/images/c-logo-02.webp">
-							</a>
+						<div class="fb_image">
+							<img alt="brand logo" src="assets/images/c-logo-02.webp">
 						</div>
-						<div class='fb_content' >
-							<h4>
-								<a href="job-single.html">Fix Python Selenium Code</a>
-							</h4>
+						<div class='fb_content'>
+							<h4><a href="job-single.html">Fix Python Selenium Code</a></h4>
 							<ul>
 								<li>
 									<a href="#">
@@ -500,28 +455,24 @@
 								</li>
 							</ul>
 						</div>
-						<div class="fb_action"  >
+						<ul class="tags">
+							<li>Python</li>
+							<li>Flask</li>
+							<li>API Development</li>
+						</ul>
+						<div class="fb_action">
 							<a title="add to favourite" href="#"><i class="fas fa-heart"></i></a>
-							<a class="btn btn-third" href="job-single.html">Apply Now</a>
-							<ul class="tags">
-								<li>Python</li>
-								<li>Flask</li>
-								<li>API Development</li>
-							</ul>
+							<a class="btn btn-primary" href="job-single.html">Apply Now</a>
 						</div>
 					</div>
 				</div>
-				<div class="col-sm-6">
+				<div class="col-sm-12">
 					<div class="featured_box ">
-						<div class="fb_image" >
-							<a href="compnay-profile-single.html">
-								<img   alt="brand logo" src="assets/images/c-logo-03.webp">
-							</a>
+						<div class="fb_image">
+							<img alt="brand logo" src="assets/images/c-logo-03.webp">
 						</div>
 						<div class='fb_content'>
-							<h4>
-								<a href="job-single.html">Restaurant General Manager</a>
-							</h4>
+							<h4><a href="job-single.html">Fix Python Selenium Code</a></h4>
 							<ul>
 								<li>
 									<a href="#">
@@ -543,28 +494,24 @@
 								</li>
 							</ul>
 						</div>
-						<div class="fb_action" >
+						<ul class="tags">
+							<li>Python</li>
+							<li>Flask</li>
+							<li>API Development</li>
+						</ul>
+						<div class="fb_action">
 							<a title="add to favourite" href="#"><i class="far fa-heart"></i></a>
-							<a class="btn btn-third disabled" href="job-single.html">Applied</a>
-							<ul class="tags">
-								<li>Python</li>
-								<li>Flask</li>
-								<li>API Development</li>
-							</ul>
+							<a class="btn btn-primary disabled" href="#">Applied</a>
 						</div>
 					</div>
 				</div>
-				<div class="col-sm-6" >
+				<div class="col-sm-12">
 					<div class="featured_box ">
-						<div class="fb_image" >
-							<a href="compnay-profile-single.html">
-								<img  alt="brand logo" src="assets/images/c-logo-05.webp">
-							</a>
+						<div class="fb_image">
+							<img alt="brand logo" src="assets/images/c-logo-05.webp">
 						</div>
-						<div class='fb_content' >
-							<h4>
-								<a href="job-single.html">PHP Core Website Fixes</a>
-							</h4>
+						<div class='fb_content'>
+							<h4><a href="job-single.html">PHP Core Website Fixes</a></h4>
 							<ul>
 								<li>
 									<a href="#">
@@ -586,28 +533,24 @@
 								</li>
 							</ul>
 						</div>
-						<div class="fb_action" >
+						<ul class="tags">
+							<li>PHP</li>
+							<li>MySQL Administration</li>
+							<li>API Development</li>
+						</ul>
+						<div class="fb_action">
 							<a title="add to favourite" href="#"><i class="far fa-heart"></i></a>
-							<a class="btn btn-third" href="job-single.html">Apply Now</a>
-							<ul class="tags">
-								<li>PHP</li>
-								<li>MySQL </li>
-								<li>API Development</li>
-							</ul>
+							<a class="btn btn-primary" href="job-single.html">Apply Now</a>
 						</div>
 					</div>
 				</div>
-				<div class="col-sm-6"  >
-					<div class="featured_box "> 
-						<div class="fb_image" >
-							<a href="compnay-profile-single.html">
-								<img   alt="brand logo" src="assets/images/c-logo-05.webp">
-							</a>
+				<div class="col-sm-12">
+					<div class="featured_box ">
+						<div class="fb_image">
+							<img alt="brand logo" src="assets/images/c-logo-05.webp">
 						</div>
-						<div class='fb_content' >
-							<h4>
-								<a href="job-single.html">Restaurant General Manager</a>
-							</h4>
+						<div class='fb_content'>
+							<h4><a href="job-single.html">Restaurant General Manager</a></h4>
 							<ul>
 								<li>
 									<a href="#">
@@ -629,28 +572,25 @@
 								</li>
 							</ul>
 						</div>
-						<div class="fb_action" >
+						<ul class="tags">
+							<li>PHP</li>
+							<li>MySQL Administration</li>
+							<li>API Development</li>
+						</ul>
+						<div class="fb_action">
 							<a title="add to favourite" href="#"><i class="far fa-heart"></i></a>
-							<a class="btn btn-third" href="job-single.html">Apply Now</a>
-							<ul class="tags">
-								<li>PHP</li>
-								<li>MySQL </li>
-								<li>API Development</li>
-							</ul>
+							<a class="btn btn-primary" href="job-single.html">Apply Now</a>
+
 						</div>
 					</div>
 				</div>
-				<div class="col-sm-6" >
+				<div class="col-sm-12">
 					<div class="featured_box ">
-						<div class="fb_image" >
-							<a href="compnay-profile-single.html">
-								<img  alt="brand logo" src="assets/images/c-logo-05.webp">
-							</a>
+						<div class="fb_image">
+							<img alt="brand logo" src="assets/images/c-logo-05.webp">
 						</div>
-						<div class='fb_content' >
-							<h4>
-								<a href="job-single.html">Food Delviery Mobile App</a>
-							</h4>
+						<div class='fb_content'>
+							<h4><a href="job-single.html">Food Delviery Mobile App</a></h4>
 							<ul>
 								<li>
 									<a href="#">
@@ -672,44 +612,37 @@
 								</li>
 							</ul>
 						</div>
-						<div class="fb_action" >
+						<ul class="tags">
+							<li>IOS</li>
+							<li>Android</li>
+							<li>mobile apps</li>
+							<li>design</li>
+						</ul>
+						<div class="fb_action">
 							<a title="add to favourite" href="#"><i class="far fa-heart"></i></a>
-							<a class="btn btn-third" href="job-single.html">Apply Now</a>
-							<ul class="tags">
-								<li>IOS</li>
-								<li>Android</li>
-								<li>mobile apps</li>
-								<li>design</li>
-							</ul>
+							<a class="btn btn-primary" href="job-single.html">Apply Now</a>
 						</div>
 					</div>
 				</div>
-				<div class="col-md-12 text-right" > 
-					<a data-aos="fade-down" data-aos-delay="400" class="btn btn-primary" href="browse-jobs.html">Browse All Jobs <i class="fas fa-long-arrow-alt-right"></i></a>
+				<div class="col-md-12 text-center mt-4">
+					<a class="btn btn-primary" th:href="@{/job}" >查看所有工作<i class="fas fa-long-arrow-alt-right"></i></a>
 				</div>
 			</div>
 		</div>
 	</div>
-	
-	<div class="section  paln_section">
-		<div class="bg-v">
-			<div class="bg-v-1 bg-t-l">
-			</div>
-			<div class="bg-v-2 bg-b-l">
-			</div>
-		</div>
+	<div class="section gray paln_section">
 		<div class="container">
-			<h2 data-aos="fade-up" data-aos-delay="400" class="section_h">Membership Plans</h2>
-			<div class="planduration" data-aos="fade-in" data-aos-delay="400">
+			<h2 class="section_h">Membership Plans</h2>
+			<div class="planduration">
 				<div class="custom-control custom-switch text-center">
 				  <label class="before-custom-control-label" for="customSwitch1"> <span>Billed Monthly</span></label>
 				  <input type="checkbox" class="custom-control-input" id="customSwitch1">
 				  <label class="custom-control-label" for="customSwitch1"> <span>Billed Yearly</span> </label>
-				 <div class="small-alert alert-success"> Save 21%  </div>
+				  <div class="small-alert alert-success"> Save 21% </div>
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-md-4" data-aos="fade-left" data-aos-delay="600">
+				<div class="col-md-4">
 					<div class="plan_box">
 						<h3>Basic Plan</h3>
 						<p>One time fee for one listing or task highlighted in search results.</p>
@@ -727,7 +660,7 @@
 							<li><i class="fas fa-check"></i>Fraud protection</li>
           					<li><i class="fas fa-check"></i>Featured Listing</li>
 						</ul>
-						<a class="btn btn-third" href="#">Buy Now</a>
+						<a class="btn btn-primary" href="#">Buy Now</a>
 					</div>
 				</div>
 				<div class="col-md-4">
@@ -751,10 +684,10 @@
 							<li><i class="fas fa-check"></i>Fraud protection</li>
           					<li><i class="fas fa-check"></i>Featured Listing</li>
 						</ul>
-						<a class="btn btn-third" href="#">Buy Now</a>
+						<a class="btn btn-primary" href="#">Buy Now</a>
 					</div>
 				</div>
-				<div class="col-md-4" data-aos="fade-right" data-aos-delay="600">
+				<div class="col-md-4">
 					<div class="plan_box">
 
 						<h3>Extended Plan</h3>
@@ -773,26 +706,19 @@
 							<li><i class="fas fa-check"></i>Fraud protection</li>
           					<li><i class="fas fa-check"></i>Featured Listing</li>
 						</ul>
-						<a class="btn btn-third" href="#">Buy Now</a>
+						<a class="btn btn-primary" href="#">Buy Now</a>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-
 	<div class="section post_section">
-		<div class="bg-v">
-			<div class="bg-v-2 bg-t-l">
-			</div>
-			<div class="bg-v-2 bg-b-r">
-			</div>
-		</div>
 		<div class="container">
-			<h2 data-aos="fade-up" data-aos-delay="400" class="section_h">Featured Posts</h2>
+			<h2 class="section_h">Featured Posts</h2>
 			<div class="row">
-				<div class="col-md-4" >
+				<div class="col-md-4">
 					<div class="post_box">
-						<img  alt="" src="assets/images/blog1.jpg" class="img-responsive">
+						<img alt="" src="assets/images/blog1.jpg" class="img-responsive">
 						<div class="post_content">
 							<h6>
 								<a href="blog-single.html">4 Secrets To Be Strategic About Your Job Search</a>
@@ -804,7 +730,7 @@
 				</div>
 				<div class="col-md-4">
 					<div class="post_box">
-						<img   alt="" src="assets/images/blog2.jpg" class="img-responsive">
+						<img alt="" src="assets/images/blog2.jpg" class="img-responsive">
 						<div class="post_content">
 							<h6>
 								<a href="blog-single.html">Why Long-Term Unemployment Isn’t As Bad As You Think</a>
@@ -814,9 +740,9 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-md-4" >
+				<div class="col-md-4">
 					<div class="post_box">
-						<img  alt="" src="assets/images/blog3.jpg" class="img-responsive">
+						<img alt="" src="assets/images/blog3.jpg" class="img-responsive">
 						<div class="post_content">	
 							<h6>
 								<a href="blog-single.html">6 Ways Your Job is Losing You Future Earnings</a>
@@ -829,43 +755,38 @@
 			</div>
 		</div> 
 	</div>
-	<div class="section status_section">
-		<div class="bg-v">
-			<div class="bg-v-1 bg-t-r">
-			</div>
-			<div class="bg-v-2 bg-b-l">
-			</div>
-		</div>
+	<div class="section status_section gray">
+		
 		<div class="container">
-			<h2 data-aos="fade-up" data-aos-delay="400" class="section_h">JoDice Status</h2>
+			<h2 class="section_h">JoDice Status</h2>
 			
-			<div class="row justify-content-center">
+			<div class="row justify-content-between">
 				<div class="col-auto">
-					<div class="status_box" data-aos="fade-in" data-aos-delay="600">
-						<img alt=""  data-aos="fade-up" data-aos-delay="1000" src="assets/images/i-paper-plane.png">
+					<div class="status_box-3">
+						<i class="fas fa-paper-plane"></i>
 
 						<h3>83</h3>
 						<p>Job Posted.</p>
 					</div>
 				</div>
 				<div class="col-auto">
-					<div class="status_box" data-aos="fade-in" data-aos-delay="800">
-						<img alt=""  data-aos="fade-up" data-aos-delay="1200" src="assets/images/i-doctor.png">
+					<div class="status_box-3">
+						<i class="fas fa-vote-yea"></i>
 						
 						<h3>16</h3>
 						<p>Job Filled.</p>
 					</div>
 				</div>
 				<div class="col-auto">
-					<div class="status_box" data-aos="fade-in" data-aos-delay="1000">
-						<img alt=""  data-aos="fade-up" data-aos-delay="1400" src="assets/images/i-company.png">
+					<div class="status_box-3">
+						<i class="fas fa-building"></i>
 						<h3>36</h3>
 						<p>Companies</p>
 					</div>
 				</div>
 				<div class="col-auto">
-					<div class="status_box" data-aos="fade-in" data-aos-delay="1200">
-						<img alt=""  data-aos="fade-up" data-aos-delay="1600" src="assets/images/i-mamber.png">
+					<div class="status_box-3">
+						<i class="fas fa-users"></i>
 						<h3>175</h3>
 						<p>Members</p>
 					</div>
@@ -873,45 +794,39 @@
 			</div>
 		</div>
 	</div>
-	<div class="section gray  partner_section">
-		<div class="bg-v">
-			<div class="bg-v-1 bg-t-l">
-			</div>
-			<div class="bg-v-3 bg-b-r">
-			</div>
-		</div>
+	<div class="section  partner_section">
 		<div class="container">
-			<h2 data-aos="fade-up" data-aos-delay="400" class="section_h">Our Partners</h2>
+			<h2 class="section_h">我们的合作伙伴</h2>
 			<ul class="partner_carousel owl-carousel owl-theme">
 				<li>
-					<a href="#"><img  alt="brand logo" src="assets/images/company-logo-1.svg"></a>
+					<a href="#"><img alt="brand logo" src="assets/images/company-logo-1.svg"></a>
 				</li>
 				<li>
-					<a href="#"><img   alt="brand logo" src="assets/images/company-logo-2.svg"></a>
+					<a href="#"><img alt="brand logo" src="assets/images/company-logo-2.svg"></a>
 				</li>
 				<li>
-					<a href="#"><img   alt="brand logo" src="assets/images/company-logo-3.svg"></a>
+					<a href="#"><img alt="brand logo" src="assets/images/company-logo-3.svg"></a>
 				</li>
 				<li>
-					<a href="#"><img  alt="brand logo" src="assets/images/company-logo-4.png"></a>
+					<a href="#"><img alt="brand logo" src="assets/images/company-logo-4.png"></a>
 				</li>
 				<li>
-					<a href="#"><img   alt="brand logo" src="assets/images/company-logo-5.png"></a>
+					<a href="#"><img alt="brand logo" src="assets/images/company-logo-5.png"></a>
 				</li>	
 				<li>
-					<a href="#"><img   alt="brand logo" src="assets/images/company-logo-1.svg"></a>
+					<a href="#"><img alt="brand logo" src="assets/images/company-logo-1.svg"></a>
 				</li>
 				<li>
-					<a href="#"><img  alt="brand logo" src="assets/images/company-logo-2.svg"></a>
+					<a href="#"><img alt="brand logo" src="assets/images/company-logo-2.svg"></a>
 				</li>
 				<li>
-					<a href="#"><img  alt="brand logo" src="assets/images/company-logo-3.svg"></a>
+					<a href="#"><img alt="brand logo" src="assets/images/company-logo-3.svg"></a>
 				</li>
 				<li>
-					<a href="#"><img   alt="brand logo" src="assets/images/company-logo-4.png"></a>
+					<a href="#"><img alt="brand logo" src="assets/images/company-logo-4.png"></a>
 				</li>
 				<li>
-					<a href="#"><img  alt="brand logo" src="assets/images/company-logo-5.png"></a>
+					<a href="#"><img alt="brand logo" src="assets/images/company-logo-5.png"></a>
 				</li>	
 			</ul>
 		</div>
@@ -921,13 +836,13 @@
 
 <!-- Footer Container
 ================================================== -->
-<footer id="colophon" class="site-footer custom_footer dark_footer">
+<footer id="colophon" class="site-footer custom_footer">
 	<div class="container">
 		<div class="row footer_widget">
 				<div class="col-md-3">
 					<div class="footer_widget_box">
-						<h2 data-aos="fade-up" data-aos-delay="400">Job seekers</h2>
-						<ul data-aos="fade-in" data-aos-delay="200">
+						<h2 >Job seekers</h2>
+						<ul >
 							<li>
 								<a href="browse-jobs.html">Browse jobs</a>
 							</li>
@@ -948,8 +863,8 @@
 				</div>
 				<div class="col-md-3">
 					<div class="footer_widget_box">
-						<h2 data-aos="fade-up" data-aos-delay="400">Employers</h2>
-						<ul data-aos="fade-in" data-aos-delay="200">
+						<h2 >Employers</h2>
+						<ul >
 							<li>
 								<a href="emp-registration.html">Get a FREE Employer Account</a> 
 							</li>
@@ -973,24 +888,23 @@
 				</div>
 				<div class="col-md-3">
 					<div class="footer_widget_box">
-						<h2 data-aos="fade-up" data-aos-delay="400">Community</h2>
-						<ul data-aos="fade-in" data-aos-delay="200">
-							<li> <a href="contact-us.html">Help / Contact Us</a> 
-				            </li>
-				            <li> <a href="content-page.html">Guidelines</a> 
-				            </li>
-				            <li> <a href="content-page.html">Terms of Use</a> 
-				            </li>
-				            <li> <a href="content-page.html">Privacy &amp; Cookies </a> 
-				            </li>
-						</ul>
-						
+						<h2 >Community</h2>
+						<ul>
+			              <li> <a href="contact-us.html">Help / Contact Us</a> 
+			              </li>
+			              <li> <a href="content-page.html">Guidelines</a> 
+			              </li>
+			              <li> <a href="content-page.html">Terms of Use</a> 
+			              </li>
+			              <li> <a href="content-page.html">Privacy &amp; Cookies </a> 
+			              </li>
+			            </ul>
 					</div>
 				</div>
 				<div class="col-md-3">
 					<div class="footer_widget_box">
-						<h2 data-aos="fade-up" data-aos-delay="400">Get In Touch</h2>
-						<ul data-aos="fade-in" data-aos-delay="200" class="social_list">
+						<h2 >联系我们</h2>
+						<ul class="social_list">
 							<li> <a href="#"><i class="fab fa-twitter"></i></a> 
 							</li>
 							<li> <a href="#"><i class="fab fa-facebook"></i></a> 
@@ -1005,10 +919,10 @@
 					
           <div class="footer_widget_box">
 						<form class="newsletter">
-			                  <h2 data-aos="fade-up" data-aos-delay="400">Newsletter</h2>
-			                  <div data-aos="fade-in" data-aos-delay="200" class="d-flex">
+			                  <h2 >建议与合作</h2>
+			                  <div  class="d-flex">
 
-			                    <input class="form-control" type="email" placeholder="Enter your email ">
+			                    <input class="form-control" type="email" placeholder="输入你的邮箱">
 			                    <button class="btn btn-primary"><i class="fa fa-paper-plane"></i></button>
 			                   
 			                  </div>
@@ -1018,7 +932,7 @@
 				</div>
 				<div class="col-md-12">
 					<div class="footer_widget_box"  >
-						<p class="copyright-text">© Copyright 2020 by JoDice. All rights <a href="http://www.bootstrapmb.com/">reserved</a>.
+						<p class="copyright-text">© Copyright 2020 by JoSite. All rights <a href="http://www.bootstrapmb.com/">reserved</a>.
 						</p>
 					</div>
 				</div>
@@ -1037,7 +951,6 @@
 <script src="assets/js/select2.min.js"></script>
 <script src="assets/js/bootstrap.min.js"></script>
 <script src="assets/js/owl.carousel.min.js"></script>
-<script src="assets/js/aos.js"></script>
 <script src="assets/js/custom.js"></script>
 </body>
 </html>
