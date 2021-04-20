@@ -2,6 +2,7 @@ package project.dao;
 
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 import project.model.User;
 
@@ -10,5 +11,6 @@ import project.model.User;
 public interface UserMapper {
      User findUserByUsername (String username);
      int insertUser(User user);
+     User findUserByTelephone(@Param("telephone") String telephone);
 
 }
