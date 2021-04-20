@@ -8,7 +8,33 @@
         <!--这个地方不能加分号，否则无法分页-->
         select * from job
     </select>
+
     <select id="findJobById" resultType="project.model.Job">
-        select * from job where id=#{id};
+        select * from job where id=#{id}
     </select>
+
+    <select id="getAllJobDesc" resultType="project.model.Job">
+        select * from job j by j.create_time desc
+    </select>
+
+    <select id="getAllJobAsc" resultType="project.model.Job">
+        select * from job j by j.create_time asc
+    </select>
+
+    <select id="deleteJobById" resultType="int">
+        delete from job where id=#{id}
+    </select>
+
+    <select id="getJobIsCheck" resultType="project.model.Job">
+        select * from job where ischeck = 1
+    </select>
+
+    <select id="updateJobCheck" resultType="int">
+        update job set ischeck = 1 where id=#{id}
+    </select>
+
+    <select id="getJobNotCheck" resultType="project.model.Job">
+        select * from job where ischeck = 0
+    </select>
+
 </mapper>

@@ -25,4 +25,24 @@
         select * from user where telephone = #{telephone}
         </if>
     </select>
+
+    <select id="getAllUsers" resultType="project.model.User">
+        select * from user
+    </select>
+
+    <select id="getUserByIdentity" resultType="project.model.User">
+        <if test="identity!= null " >
+            select * from user where identity = #{identity}
+        </if>
+    </select>
+
+    <select id="updatePassword" resultType="int">
+        update user set password=#{password} where id=#{id}
+    </select>
+
+    <select id="deleteUser" resultType="int">
+        delete from user where id=#{id}
+    </select>
+
+
 </mapper>

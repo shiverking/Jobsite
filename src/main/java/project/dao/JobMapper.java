@@ -21,4 +21,16 @@ public interface JobMapper {
     Job findJobById(@Param("id") int id);
     //根据job信息模糊搜索
     Job findJobByName(@Param("name") String name);
+    // 按时间降序排列
+    List<Job> getAllJobDesc();
+    // 按时间升序排列
+    List<Job> getAllJobAsc();
+    //根据id删除Job
+    int deleteJobById(@Param("id") int id);
+    //获得所有通过审核的Job
+    List<Job> getJobIsCheck();
+    //将未审核的Job更新为审核通过
+    int updateJobCheck(@Param("id") int id);
+    //获得所有未审核的Job
+    List<Job> getJobNotcheck();
 }
