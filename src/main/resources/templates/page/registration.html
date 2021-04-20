@@ -207,59 +207,61 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <p class="only-form-box">
-                    <div class="welcome-text text-center mb-5">
-                        <h5 class="mb-0">创建一个你的账户!</h5>
-                        <span>已经有账户？ <a href="login">登录!</a></span>
-                </div>
-                    <form th:action="@{/add}" th:method="post">
-
-                    <div class="com_class_form">
-                        <div class="form-group user_type_cont">
-                            <label class="user_type" for="usertype-1">
-                                <input type="radio" checked="" name="identity" th:value="employee"
-                                       id="usertype-1">
-                                <span><i class="far fa-user"></i>employee</span>
-                            </label>
-                            <label class="user_type" for="usertype-2">
-                                <input type="radio" name="identity" id="usertype-2" value="employer">
-                                <span><i class="fas fa-landmark"></i>employer</span>
-                            </label>
+                    <div class="only-form-box">
+                        <div class="welcome-text text-center mb-5">
+                            <h5 class="mb-0">创建一个你的账户!</h5>
+                            <span>已经有账户？ <a href="login">登录!</a></span>
                         </div>
-                        <div class="form-group">
-                            <input class="form-control" type="email" size="40" name="email" placeholder="邮件地址">
+                        <input th:id="errormsg" class="alert alert-danger" style="display:none" disabled>
+                        <div>
+                                <div class="com_class_form">
+                                    <div class="form-group user_type_cont">
+                                        <label class="user_type" for="usertype-1">
+                                            <input type="radio" checked="" name="identity" th:value="employee"
+                                                   id="usertype-1">
+                                            <span><i class="far fa-user"></i>employee</span>
+                                        </label>
+                                        <label class="user_type" for="usertype-2">
+                                            <input type="radio" name="identity" id="usertype-2" value="employer">
+                                            <span><i class="fas fa-landmark"></i>employer</span>
+                                        </label>
+                                    </div>
+                                    <div class="form-group">
+                                        <input class="form-control" type="text" size="40" th:id="username" name="username"
+                                               placeholder="用户名">
+                                    </div>
+                                    <div class="form-group">
+                                        <input class="form-control" type="text" th:id="telephone" name="telephone" placeholder="手机号">
+                                    </div>
+                                    <div class="form-group-inline">
+                                        <input class="form-control" type="text" th:id="verifycode" name="verifycode" placeholder="验证码"
+                                        style="width: 60%">
+                                        <button  th:id="mobileCode" value="免费获取验证码" style="width: 40%">获取验证码</button>
+                                    </div>
+                                    <div class="form-group">
+                                        <input class="form-control" type="password" name="password" th:id="password" placeholder="密码">
+                                    </div>
+                                    <div class="form-group">
+                                        <input class="form-control" th:id="repassword" type="password" placeholder="重复密码">
+                                    </div>
+                                    <div class="form-group">
+                                        <input class="form-control" type="text" size="40" th:id="email" name="email"
+                                               placeholder="邮件地址(可选）">
+                                    </div>
+                                    <div class="form-group">
+                                        <input class="btn btn-primary"  th:id="submit" value="注册">
+                                    </div>
+                                    <div class="form-group form-check">
+                                        <label class="form-check-label">
+                                            <input class="form-check-input" type="checkbox"> Remember me
+                                        </label>
+                                    </div>
+                                </div>
                         </div>
-                        <div class="form-group">
-                            <input class="form-control" type="text" size="40" name="username" placeholder="用户名">
-                        </div>
-                        <div class="form-group">
-                            <input class="form-control" type="password" name="password" placeholder="密码">
-                        </div>
-                        <div class="form-group">
-                            <input class="form-control" type="password" placeholder="Re-enter Password * ">
-                        </div>
-                        <div class="form-group">
-                            <input class="btn btn-primary" type="submit" value="注册">
-                        </div>
-                        <div class="form-group form-check">
-                            <label class="form-check-label">
-                                <input class="form-check-input" type="checkbox"> Remember me
-                            </label>
-                        </div>
-
-                    </div>
-                    </form>
-                    <div class="social_login">
-                        <p class="or_span"><span>or</span></p>
-                        <button class="btn btn-facebook"><i class="fab fa-facebook-f"></i> Log In via Facebook
-                        </button>
-                        <button class="btn btn-google"><i class="fab fa-google-plus-g"></i> Register via Google+
-                        </button>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
     </div>
 </main>
 
@@ -381,5 +383,6 @@
 <script src="assets/js/bootstrap.min.js"></script>
 <script src="assets/js/owl.carousel.min.js"></script>
 <script src="assets/js/custom.js"></script>
+<script src="assets/js/userLogin.js"></script>
 </body>
 </html>

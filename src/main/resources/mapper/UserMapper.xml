@@ -20,4 +20,9 @@
     <select id="findUserByUsername" resultMap="UserResultMap" parameterType="String">
         select * from user where username = #{username}
     </select>
+    <select id="findUserByTelephone" resultType="project.model.User">
+        <if test="telephone!= null " >
+        select * from user where telephone = #{telephone}
+        </if>
+    </select>
 </mapper>

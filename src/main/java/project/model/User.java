@@ -17,16 +17,16 @@ public class User {
     //用户id
     private int id;
     //用户名
-    @NotEmpty
+    @NotEmpty(message = "用户名不能为空")
     private String username;
     //密码
-    @Size(min = 6, max = 15)
+    @Size(min = 6, max = 15,message = "密码的位数为6~15")
     private String password;
     //电话
-    @NotEmpty
+    @NotEmpty(message = "手机号不能为空")
     private String telephone;
     //邮箱
-    @Email
+    @Email(message = "请输入正确的邮箱地址")
     private String email;
     //地址
     private String location;

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
+import project.exception.ServiceException;
 import project.model.User;
 import project.service.UserServiceimpl;
 
@@ -27,7 +28,7 @@ public class MemberController {
         return new ModelAndView("page/login");
     }
     @RequestMapping("/add")
-    public ModelAndView addUser(User user){
+    public ModelAndView addUser(User user) throws ServiceException {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         String encodedPassword = passwordEncoder.encode(user.getPassword().trim());
         user.setPassword(encodedPassword);

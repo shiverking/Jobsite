@@ -2267,6 +2267,7 @@ textarea.form-control {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
+    margin-bottom: 1rem
 }
 .form-text {
     display: block;
