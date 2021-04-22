@@ -7,5 +7,5 @@ public interface UserService {
     User findUserByUsername(String username);
     int insertUser(User user) throws ServiceException;
     String generateAuthCode(String telephone);
-
+    boolean isEmailExist(String email);
 }

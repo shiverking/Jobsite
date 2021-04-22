@@ -41,4 +41,16 @@ public class UserServiceimpl implements UserService {
         }
         return sb.toString();
     }
+
+    /**
+     * 判断email是否存在
+     * @param email
+     * @return 存在则返回true,不存在则返回false
+     */
+    @Override
+    public boolean isEmailExist(String email) {
+        return userMapper.isEmailExist(email);
+    }
+
+
 }

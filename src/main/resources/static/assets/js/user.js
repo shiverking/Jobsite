@@ -34,7 +34,6 @@ $(document).ready(function () {
                 contentType: "application/json",
                 success: function (data) {
                     if (data.status == 200) {
-                        console.log("this 分支")
                         register()
                     } else {
                         $("#errormsg").val(data.msg)
@@ -175,3 +174,37 @@ function countdown() {
         countdown()
     }, 1000)
 }
+
+/**
+ * 找回密码
+ */
+$(document).ready(function () {
+    $("#retrievePassword").click(function () {
+        var email = $("#email").val();
+        if (email == "") {
+            $("#errormsg").html("<strong>请填写邮箱信息!</strong>")
+            $("#errormsg").show();
+            $("#successmsg").hide();
+        } else {
+            var obj1 = {
+                "email": email
+            }
+            $.ajax({
+                url: "/forgetPassword/email",
+                type: "post",
+                data: JSON.stringify(obj1),
+                contentType: "application/json",
+                success: function (data) {
+                    if (data.status == 200) {
+                        $("#successmsg").show();
+                        $("#errormsg").hide();
+                    } else {
+                        $("#errormsg").html("<strong>邮箱不存在!该邮箱未注册或未绑定</strong>")
+                        $("#successmsg").hide();
+                        $("#errormsg").show();
+                    }
+                }
+            })
+        }
+    })
+})

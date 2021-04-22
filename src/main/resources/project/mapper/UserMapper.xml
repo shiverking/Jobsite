@@ -25,4 +25,12 @@
         select * from user where telephone = #{telephone}
         </if>
     </select>
+    <!--查询邮箱是否存在，前提必须是邮箱已存在且唯一且已被绑定-->
+    <select id="isEmailExist" resultType="java.lang.Boolean">
+        <![CDATA[ select count(id)
+        from user where email = #{email}]]>
+    </select>
+    <select id="findPasswordByEmail" resultType="java.lang.String">
+        select password from user where email = #{email}
+    </select>
 </mapper>

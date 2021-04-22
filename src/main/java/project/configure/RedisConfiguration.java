@@ -1,4 +1,4 @@
-package project.configue;
+package project.configure;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
@@ -21,7 +21,7 @@ import project.service.RedisServiceimpl;
 import java.time.Duration;
 
 @Component
-public class RedisConfiguation {
+public class RedisConfiguration {
     @Bean
     public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory redisConnectionFactory) {
         RedisSerializer<Object> serializer = redisSerializer();
