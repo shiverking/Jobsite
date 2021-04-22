@@ -1,7 +1,5 @@
 package project.exception;
 
-
-import com.sun.xml.internal.ws.api.model.ExceptionType;
 import lombok.Data;
 
 @Data

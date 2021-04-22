@@ -1,19 +1,18 @@
 package project.controller;
 
 
-import com.power.common.model.CommonResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import project.exception.ServiceException;
 import project.model.RespBean;
 import project.model.User;
 import project.service.RedisServiceimpl;
-import project.service.UserService;
 import project.service.UserServiceimpl;
 
 import javax.jws.WebParam;
@@ -82,8 +81,16 @@ public class UserController {
         }
     }
 
+    /**
+     * 修改个人注册信息
+     * @return
+     */
+    @RequestMapping("/editProfile")
+    public ModelAndView editProfile(Model model){
+        return new ModelAndView("user/edit_Profile");
+    }
 
-    @ResponseBody
+
     @RequestMapping("/add")
     public RespBean test(@RequestBody  @Valid User user, BindingResult bindingResult) throws ServiceException {
         Map<String,Object> map = new HashMap<>();
