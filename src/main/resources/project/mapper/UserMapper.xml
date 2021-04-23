@@ -17,6 +17,14 @@
         #{username},#{password},#{telephone},#{email},#{location},#{identity},#{headurl}
         );
     </insert>
+    <update id="updatePasswordByEmail" parameterType="project.model.User">
+        update user
+            <set>
+                password = #{password}
+            </set>
+        where email = #{email};
+    </update>
+
     <select id="findUserByUsername" resultMap="UserResultMap" parameterType="String">
         select * from user where username = #{username}
     </select>
@@ -25,7 +33,6 @@
         select * from user where telephone = #{telephone}
         </if>
     </select>
-
     <select id="getAllUsers" resultType="project.model.User">
         select * from user
     </select>
@@ -35,14 +42,22 @@
             select * from user where identity = #{identity}
         </if>
     </select>
-
+  
     <select id="updatePassword" resultType="int">
         update user set password=#{password} where id=#{id}
     </select>
-
+  
     <select id="deleteUser" resultType="int">
         delete from user where id=#{id}
     </select>
-
-
+  
+    <!--查询邮箱是否存在，前提必须是邮箱已存在且唯一且已被绑定-->
+    <select id="isEmailExist" resultType="java.lang.Boolean">
+        <![CDATA[ select count(id)
+        from user where email = #{email}]]>
+    </select>
+  
+    <select id="findPasswordByEmail" resultType="java.lang.String">
+        select password from user where email = #{email}
+    </select>
 </mapper>
