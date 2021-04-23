@@ -108,7 +108,6 @@ $(document).ready(function () {
             $("#errormsg").val("两次密码不一致");
             $("#errormsg").show()
         } else {
-
             $("#submit").attr("disabled", false);
         }
     })
@@ -120,7 +119,6 @@ $(document).ready(function () {
             $("#errormsg").val("两次密码不一致");
             $("#errormsg").show()
         } else {
-
             $("#submit").attr("disabled", false);
         }
     })

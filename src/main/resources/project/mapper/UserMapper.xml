@@ -17,6 +17,14 @@
         #{username},#{password},#{telephone},#{email},#{location},#{identity},#{headurl}
         );
     </insert>
+    <update id="updatePasswordByEmail" parameterType="project.model.User">
+        update user
+            <set>
+                password = #{password}
+            </set>
+        where email = #{email};
+    </update>
+
     <select id="findUserByUsername" resultMap="UserResultMap" parameterType="String">
         select * from user where username = #{username}
     </select>

@@ -41,7 +41,7 @@ public class EmailUtil {
         // 根据配置创建会话对象, 用于和邮件服务器交互
         Session session = Session.getInstance(props);
         // 设置debug模式，便于查看发送过程所产生的日志
-        session.setDebug(true);
+        //session.setDebug(true);
 
         try {
             // 创建一封邮件
@@ -82,6 +82,7 @@ public class EmailUtil {
      */
     public static MimeMessage createMimeMessage(Session session, String sendMail, String receiveMail,
                                                 String mailContent) throws Exception {
+
         // 创建一封邮件
         MimeMessage message = new MimeMessage(session);
 

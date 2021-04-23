@@ -8,4 +8,5 @@ public interface UserService {
     int insertUser(User user) throws ServiceException;
     String generateAuthCode(String telephone);
     boolean isEmailExist(String email);
+    boolean changePasswordByWord(String email,String password);
 }

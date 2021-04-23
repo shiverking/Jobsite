@@ -14,4 +14,5 @@ public interface UserMapper {
      User findUserByTelephone(@Param("telephone") String telephone);
      boolean isEmailExist(@Param("email")String email);
      String findPasswordByEmail(@Param("email") String email);
+     int updatePasswordByEmail(@Param("password") String password,@Param("email") String email);
 }
