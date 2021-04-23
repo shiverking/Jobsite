@@ -9,9 +9,9 @@
         <relativePath/>
     </parent>
     <groupId>com.example</groupId>
-    <artifactId>demo</artifactId>
+    <artifactId>Jobsite</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>demo</name>
+    <name>JobSite</name>
     <description>Jobsite project for Spring Boot</description>
     <properties>
         <java.version>1.8</java.version>
@@ -98,6 +98,18 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper-spring-boot-starter</artifactId>
+            <version>1.2.12</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.sun.mail</groupId>
+            <artifactId>jakarta.mail</artifactId>
+            <version>1.6.3</version>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -107,5 +119,23 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
         </plugins>
+        <!-- 配置将哪些资源文件(静态文件/模板文件/mapper文件)加载到tomcat输出目录里 -->
+        <resources>
+            <resource>
+                <directory>src/main/java</directory><!--java文件的路径-->
+                <includes>
+                    <include>**/*.*</include>
+                </includes>
+                <!-- <filtering>false</filtering>-->
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory><!--资源文件的路径-->
+                <includes>
+                    <include>**/*.*</include>
+                </includes>
+                <!-- <filtering>false</filtering>-->
+            </resource>
+        </resources>
     </build>
+
 </project>

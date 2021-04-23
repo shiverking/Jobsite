@@ -12,7 +12,7 @@ import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfi
  * @date ：2021/4/15 23:56
  */
 
-@SpringBootApplication(exclude = SecurityAutoConfiguration.class)
+@SpringBootApplication
 public class JobSiteApplication {
     public static void main(String[] args) {
         SpringApplication.run(JobSiteApplication.class, args);

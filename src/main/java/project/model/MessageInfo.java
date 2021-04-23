@@ -4,10 +4,10 @@ import java.util.Date;
 
 /**
  * @author ：闫崇傲
- * @description：发送的消息实体类
+ * @description：发送的消息实体类(Message类已经被占用)
  * @date ：2021/4/14 22:38
  */
-public class message {
+public class MessageInfo{
     int id;
     //发送者的id
     private int sender_id;

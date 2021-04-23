@@ -28,6 +28,10 @@ public class RespBean {
     public static RespBean error(String msg, Object obj) {
         return new RespBean(500, msg, obj);
     }
+    //超时返回
+    public static RespBean timeout(String msg){return new RespBean(1, msg, null);}
+    //无效链接
+    public static RespBean invalid(String msg){return new RespBean(2, msg, null);}
 
     private RespBean() {
     }
