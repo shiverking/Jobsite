@@ -16,7 +16,7 @@ import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.stereotype.Component;
 import project.service.RedisService;
-import project.service.RedisServiceimpl;
+import project.service.RedisServIceImpl;
 
 import java.time.Duration;
 
@@ -59,6 +59,6 @@ public class RedisConfiguration {
 
     @Bean
     public RedisService redisService(){
-        return new RedisServiceimpl();
+        return new RedisServIceImpl();
     }
 }

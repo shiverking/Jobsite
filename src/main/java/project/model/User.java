@@ -1,11 +1,15 @@
 package project.model;
 
-import com.sun.istack.internal.NotNull;
-import org.springframework.context.annotation.Bean;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 /**
  * @author ：闫崇傲
@@ -13,7 +17,7 @@ import javax.validation.constraints.Size;
  * @date ：2021/4/14 22:30
  */
 
-public class User {
+public class User implements UserDetails{
     //用户id
     private int id;
     //用户名
@@ -30,11 +34,44 @@ public class User {
     private String email;
     //地址
     private String location;
-    //身份（存储权限）(employer,employee,admin,superadmin)
-    private String identity;
     //头像存储地址
     private String headurl;
+    //角色列表
+    private List<Role> roles;
+    //账号是否可用
+    private Boolean enabled;
+    //账号是是否锁定
+    private Boolean locked;
 
+    //账户是否过期
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+    //账户是否被锁定
+    @Override
+    public boolean isAccountNonLocked() {
+        return !locked;
+    }
+    //证书是否过期
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+    //账户是否能使用
+    @Override
+    public boolean isEnabled() {
+        return enabled;
+    }
+    //返回用户的角色列表
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        List<SimpleGrantedAuthority> authorities = new ArrayList<>();
+        for (Role role : roles) {
+            authorities.add(new SimpleGrantedAuthority(role.getName()));
+        }
+        return authorities;
+    }
     public int getId() {
         return id;
     }
@@ -83,20 +120,36 @@ public class User {
         this.location = location;
     }
 
-    public String getIdentity() {
-        return identity;
-    }
-
-    public void setIdentity(String identity) {
-        this.identity = identity;
-    }
-
     public String getHeadurl() {
         return headurl;
     }
 
     public void setHeadurl(String headurl) {
         this.headurl = headurl;
+    }
+
+    public Boolean getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    public Boolean getLocked() {
+        return locked;
+    }
+
+    public void setLocked(Boolean locked) {
+        this.locked = locked;
+    }
+
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
     }
 
     @Override
@@ -107,7 +160,6 @@ public class User {
                 ", telephone='" + telephone + '\'' +
                 ", email='" + email + '\'' +
                 ", location='" + location + '\'' +
-                ", identity='" + identity + '\'' +
                 ", headurl='" + headurl + '\'' +
                 '}';
     }

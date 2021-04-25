@@ -109,6 +109,14 @@
             <artifactId>jakarta.mail</artifactId>
             <version>1.6.3</version>
         </dependency>
+        <!--使用flyway进行数据库版本管理-->
+        <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-core</artifactId>
+            <version>5.2.4</version>
+        </dependency>
+
+
 
     </dependencies>
 
@@ -117,6 +125,21 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <!--flyway插件-->
+            <plugin>
+                <groupId>org.flywaydb</groupId>
+                <artifactId>flyway-maven-plugin</artifactId>
+                <version>5.2.4</version>
+                <configuration>
+                    <user>root</user>
+                    <password>123456</password>
+                    <driver>com.mysql.cj.jdbc.Driver</driver>
+                    <url>jdbc:mysql://127.0.0.1:3306/jobsite?serverTimezone=UTC</url>
+                    <baselineOnMigrate>true</baselineOnMigrate>
+                    <!-- //sql脚本位置，flyway会自动去找到这个目录并且执行里面的sql脚本 -->
+                    <locations>classpath:db/migration/</locations>
+                </configuration>
             </plugin>
         </plugins>
         <!-- 配置将哪些资源文件(静态文件/模板文件/mapper文件)加载到tomcat输出目录里 -->

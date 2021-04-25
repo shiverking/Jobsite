@@ -1,7 +1,7 @@
 package project.controller;
 
-import com.sun.tools.internal.xjc.reader.xmlschema.bindinfo.BIConversion;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,8 +12,9 @@ import org.springframework.web.servlet.ModelAndView;
 import project.exception.ServiceException;
 import project.model.RespBean;
 import project.model.User;
-import project.service.RedisServiceimpl;
-import project.service.UserServiceimpl;
+import project.service.RedisServIceImpl;
+import project.service.RoleServiceImpl;
+import project.service.UserServiceImpl;
 import project.util.AESUtil;
 import project.util.EmailUtil;
 import javax.validation.Valid;
@@ -23,7 +24,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 /**
  * 用户登录注册控制
@@ -32,13 +32,16 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 public class UserController {
 
     @Autowired
-    UserServiceimpl userServiceimpl;
+    UserServiceImpl userServiceimpl;
     @Autowired
-    RedisServiceimpl redisServiceimpl;
+    RedisServIceImpl redisServiceimpl;
     @Autowired
     EmailUtil emailUtil;
-//    @Autowired
-//    BCryptPasswordEncoder bCryptPasswordEncoder;
+    @Autowired
+    RoleServiceImpl roleServiceimpl;
+    //@Autowired
+    //BCryptPasswordEncoder bCryptPasswordEncoder;
+
     // aes算法中的密钥（临时）
     private static String aesKey = "123456";
 
@@ -125,23 +128,47 @@ public class UserController {
     }
 
     /**
-     * 注册方法
+     * 注册方法,添加一个用户
      */
+    @ResponseBody
     @RequestMapping("/add")
-    public RespBean test(@RequestBody  @Valid User user, BindingResult bindingResult) throws ServiceException {
+    public RespBean test(@RequestBody Map<String,Object> info, BindingResult bindingResult) throws ServiceException {
         Map<String,Object> map = new HashMap<>();
         if(bindingResult.hasErrors()){
             StringBuffer sb = new StringBuffer();
             sb.append(bindingResult.getAllErrors().get(0).getDefaultMessage());
             return RespBean.error(sb.toString());
         }else {
+            User user = new User();
+//            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+//            String encodedPassword = passwordEncoder.encode(user.getPassword().trim());
+//            user.setPassword(encodedPassword);
             BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-            String encodedPassword = passwordEncoder.encode(user.getPassword().trim());
+            String encodedPassword = passwordEncoder.encode(((String)info.get("password")).trim());
+            int id = userServiceimpl.getLastId()+1;
             user.setPassword(encodedPassword);
-            user.setHeadurl("sss");
-            user.setLocation("xian");
+            user.setId(id);
+            user.setUsername((String)info.get("username"));
+            user.setEmail((String)info.get("email"));
+            user.setTelephone((String)info.get("telephone"));
+            //添加用户
             userServiceimpl.insertUser(user);
-            return RespBean.ok("添加成功");
+            //System.out.println(user.toString());
+            //System.out.println(info.get("identity"));
+            String identity = (String)info.get("identity");
+            //System.out.println(identity);
+            if(identity.equals("employer")){
+                if(roleServiceimpl.addUserAndRole(id,1)){
+                    return RespBean.ok("注册成功!");
+                }
+            }
+            if(identity.equals("employee")){
+                if(roleServiceimpl.addUserAndRole(id,2)){
+                    return RespBean.ok("注册成功!");
+                }
+            }
+            return RespBean.error("注册失败");
+
         }
     }
 
@@ -259,5 +286,26 @@ public class UserController {
         }
         //返回错误信息
         return RespBean.error("修改密码失败");
+    }
+
+    /**
+     * 设置个人信息
+     * @param model
+     * @return
+     */
+    @RequestMapping("/setting")
+    public String editInformation(Model model){
+        return "user/setting";
+    }
+
+    /**
+     * 个人密码是否正确
+     * @param authentication
+     * @return
+     */
+    @ResponseBody
+    @PostMapping("/setting/isPasswordExist")
+    public RespBean isPasswordExist(Authentication authentication){
+        return RespBean.ok("密码存在");
     }
 }
