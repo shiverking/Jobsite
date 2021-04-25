@@ -64,6 +64,7 @@ function register() {
         "telephone": register_telephone,
         "identity": identity
     }
+
     if (register_name == "") {
         $("#errormsg").val("请输入用户名")
         $("#errormsg").show()
@@ -83,16 +84,18 @@ function register() {
             data: JSON.stringify(obj),
             contentType: "application/json",
             success: function (data) {
+                //添加User成功
                 if (data.status == 200) {
-                    window.location.href = "/login"
+                    window.location.href = "/login";
                 } else {
-                    $("#errormsg").val(data.msg)
-                    $("#errormsg").show()
+                    $("#errormsg").val(data.msg);
+                    $("#errormsg").show();
                 }
-                console.log(data)
-                return data;
+                console.log(data);
+                //return data;
             }
         })
+
     }
 }
 
@@ -207,3 +210,4 @@ $(document).ready(function () {
         }
     })
 })
+

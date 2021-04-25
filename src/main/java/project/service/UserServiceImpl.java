@@ -1,6 +1,10 @@
 package project.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import project.dao.UserMapper;
 import project.exception.ServiceException;
@@ -8,7 +12,7 @@ import project.model.User;
 import java.util.Random;
 
 @Service
-public class UserServiceimpl implements UserService {
+public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Autowired
     UserMapper userMapper;
@@ -26,7 +30,7 @@ public class UserServiceimpl implements UserService {
         if (userMapper.findUserByTelephone(user.getTelephone()) != null) {
             throw new ServiceException("该手机号已经存在", "203");
         }
-        return userMapper.insertUser(user);
+        return userMapper.insertUser(user.getId(),user.getUsername(),user.getPassword(),user.getTelephone(),user.getEmail());
     }
 
     public String generateAuthCode(String telephone) {
@@ -57,5 +61,29 @@ public class UserServiceimpl implements UserService {
         return false;
     }
 
+    /**
+     * 找到User表中最后一位ID
+     * @return
+     */
+    @Override
+    public int getLastId() {
+        return userMapper.getLastId();
+    }
+
+    /**
+     * 登录时调用
+     * @param username
+     * @return
+     * @throws UsernameNotFoundException
+     */
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        User user = this.findUserByUsername(username);
+        if(user.equals(null)){
+            throw new UsernameNotFoundException("User is not found");
+        }
+        UserDetails userDetails = new org.springframework.security.core.userdetails.User(user.getUsername(),user.getPassword(), AuthorityUtils.commaSeparatedStringToAuthorityList("admin"));
+        return userDetails;
+    }
 
 }

@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 @Service
-public class RedisServiceimpl implements RedisService{
+public class RedisServIceImpl implements RedisService{
 
     @Autowired
     private RedisTemplate<String, Object> redisTemplate;

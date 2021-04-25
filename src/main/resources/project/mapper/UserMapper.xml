@@ -7,14 +7,13 @@
         <result column="telephone" property="telephone"/>
         <result column="email" property="email"/>
         <result column="location" property="location"/>
-        <result column="identity" property="identity"/>
         <result column="headurl" property="headurl"/>
         <result column="username" property="username" jdbcType="VARCHAR"/>
         <result column="password" property="password" jdbcType="VARCHAR"/>
     </resultMap>
-    <insert id="insertUser" parameterType="project.model.User">
-        insert into user (username, password, telephone, email, location, identity , headurl) values (
-        #{username},#{password},#{telephone},#{email},#{location},#{identity},#{headurl}
+    <insert id="insertUser">
+        insert into user (id,username, password, telephone, email) values (
+        #{id},#{username},#{password},#{telephone},#{email}
         );
     </insert>
     <update id="updatePasswordByEmail" parameterType="project.model.User">
@@ -59,5 +58,8 @@
   
     <select id="findPasswordByEmail" resultType="java.lang.String">
         select password from user where email = #{email}
+    </select>
+    <select id="getLastId" resultType="java.lang.Integer">
+        select max(id) from user;
     </select>
 </mapper>

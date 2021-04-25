@@ -9,4 +9,5 @@ public interface UserService {
     String generateAuthCode(String telephone);
     boolean isEmailExist(String email);
     boolean changePasswordByWord(String email,String password);
+    int getLastId();
 }
