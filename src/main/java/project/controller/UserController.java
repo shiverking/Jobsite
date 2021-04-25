@@ -2,6 +2,7 @@ package project.controller;
 
 import com.sun.tools.internal.xjc.reader.xmlschema.bindinfo.BIConversion;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +19,7 @@ import project.util.AESUtil;
 import project.util.EmailUtil;
 import javax.validation.Valid;
 import java.io.UnsupportedEncodingException;
+import java.security.Principal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -127,6 +129,7 @@ public class UserController {
     /**
      * 注册方法
      */
+    @ResponseBody
     @RequestMapping("/add")
     public RespBean test(@RequestBody  @Valid User user, BindingResult bindingResult) throws ServiceException {
         Map<String,Object> map = new HashMap<>();
@@ -259,5 +262,26 @@ public class UserController {
         }
         //返回错误信息
         return RespBean.error("修改密码失败");
+    }
+
+    /**
+     * 设置个人信息
+     * @param model
+     * @return
+     */
+    @RequestMapping("/setting")
+    public String editInformation(Model model){
+        return "user/setting";
+    }
+
+    /**
+     * 个人密码是否正确
+     * @param authentication
+     * @return
+     */
+    @ResponseBody
+    @PostMapping("/setting/isPasswordExist")
+    public RespBean isPasswordExist(Authentication authentication){
+        return RespBean.ok("密码存在");
     }
 }

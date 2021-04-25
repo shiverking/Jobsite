@@ -89,7 +89,7 @@ function register() {
                     $("#errormsg").val(data.msg)
                     $("#errormsg").show()
                 }
-                console.log(data.errors)
+                console.log(data)
                 return data;
             }
         })
@@ -143,7 +143,8 @@ $(document).ready(function () {
                 contentType: "application/json",
                 success: function (data) {
                     if (data.status == 200) {
-                        countdown()
+                        console.log(data);
+                        countdown();
                     } else {
                         $("#errormsg").val(data.msg)
                         $("#errormsg").show()

@@ -1,11 +1,12 @@
 package project.model;
 
-import com.sun.istack.internal.NotNull;
-import org.springframework.context.annotation.Bean;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
+import java.util.Collection;
 
 /**
  * @author ：闫崇傲
@@ -46,10 +47,35 @@ public class User {
     public String getUsername() {
         return username;
     }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
+//    //账户是否过期
+//    @Override
+//    public boolean isAccountNonExpired() {
+//        return false;
+//    }
+//    //账户是否被锁定
+//    @Override
+//    public boolean isAccountNonLocked() {
+//        return false;
+//    }
+//    //证书是否过期
+//    @Override
+//    public boolean isCredentialsNonExpired() {
+//        return false;
+//    }
+//    //账户是否能使用
+//    @Override
+//    public boolean isEnabled() {
+//        return false;
+//    }
+//
+//    public void setUsername(String username) {
+//        this.username = username;
+//    }
+//
+//    @Override
+//    public Collection<? extends GrantedAuthority> getAuthorities() {
+//        return null;
+//    }
 
     public String getPassword() {
         return password;
