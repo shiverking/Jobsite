@@ -113,4 +113,28 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         }
         return false;
     }
+
+    /**
+     * 通过ID获取邮箱
+     * @param id
+     * @return
+     */
+    @Override
+    public String getEmail(int id) {
+        return userMapper.getEmailById(id);
+    }
+
+    /**
+     * 修改用户的email
+     * @param email
+     * @param id
+     * @return
+     */
+    @Override
+    public boolean setEmail(String email, int id) {
+        if(userMapper.setEmailById(email,id)==1){
+            return true;
+        }
+        return false;
+    }
 }

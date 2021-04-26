@@ -2,350 +2,314 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 
-<!-- Basic Page Needs
-================================================== -->
-<title>JoDice</title>
-<meta charset="utf-8" xmlns:th="http://www.thymeleaf.org">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<link rel="icon" href="/assets/images/fav.png" type="image/gif" sizes="64x64">
+    <!-- Basic Page Needs
+    ================================================== -->
+    <title>JoDice</title>
+    <meta charset="utf-8" xmlns:th="http://www.thymeleaf.org">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="icon" href="/assets/images/fav.png" type="image/gif" sizes="64x64">
 
-<!-- CSS
-================================================== -->
-<link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700&display=swap&subset=latin-ext" rel="stylesheet">
-<link rel="stylesheet" href="/assets/css/all.min.css">
-<link href="/assets/css/aos.css" rel="stylesheet">
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-<link rel="stylesheet" href="/assets/css/bootstrap.min.css">
-<link href="/assets/css/select2.min.css" rel="stylesheet" />
-<link href="/assets/css/owl.carousel.min.css" rel="stylesheet" />
-<link rel="stylesheet" href="/assets/css/style.css">
-<link rel="stylesheet" href="/assets/css/color-1.css">
-<!--提醒的样式-->
-<link href="/assets/css/light-theme.min.css" rel="stylesheet">
-<link href="/assets/css/dark-theme.min.css" rel="stylesheet">
-<link href="/assets/css/colored-theme.min.css" rel="stylesheet">
+    <!-- CSS
+    ================================================== -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700&display=swap&subset=latin-ext"
+          rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/all.min.css">
+    <link href="/assets/css/aos.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+    <link href="/assets/css/select2.min.css" rel="stylesheet"/>
+    <link href="/assets/css/owl.carousel.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/color-1.css">
+    <!--提醒的样式-->
+    <link href="/assets/css/light-theme.min.css" rel="stylesheet">
+    <link href="/assets/css/dark-theme.min.css" rel="stylesheet">
+    <link href="/assets/css/colored-theme.min.css" rel="stylesheet">
 </head>
 <body>
 
 <!-- Header 01
 ================================================== -->
 <header class="header_01 header_inner">
-  <div class="header_main">
-    <div class="header_menu fixed-top" th:include="/header.html"></div>
-    <div class="header_btm">
-      <h2>设置</h2>
+    <div class="header_main">
+        <div class="header_menu fixed-top" th:include="/header.html"></div>
+        <div class="header_btm">
+            <h2>设置</h2>
+        </div>
     </div>
-  </div> 
 </header>
 
 
 <!-- Main 
 ================================================== -->
 <main>
-  <div class="job_container">
-    <div class="container">
-      <div class="row job_main">
-        <div class="sidebar">
-        <h5>我的账户</h5>
-        <ul class="user_navigation">    
-            <li class="is-active">
-              <a id="1" ><i class="fas fa-user"></i>更新简历</a>
-            </li>
-            <li>
-              <a id="2" ><i class="fas fa-key"></i>账户密码</a>
-            </li>
-            <li >
-              <a href="#"><i class="fas fa-at"></i>绑定邮箱</a>
-            </li>
-            <li >
-              <a href="#"><i class="far fa-address-card"></i>个人资料</a>
-            </li>
-            <li>
-              <a th:href="@{/logout}"><i class="fas fa-power-off"></i>登出</a>
-            </li>
-          </ul>
-        </div>
-        <div class="job_main_right">
-          <!--更新简历-->
-          <div class="row job_section">
-            <div  class="col-sm-12">
-              <div class="jm_headings">
-                <h5>更新我的简历</h5>
-                <a class="btn btn-primary mypbtn" href="staff-profile-single.html">我的简历</a>
-              </div>
-              <div class="section-divider">
-              </div>
-              <form>
-                <div class="big_form_group">
-                  <div class="row">
-                    <div class="col-md-6">
-                      <div class="form-group ">
-                        <label  >First Name</label>
-                        <input type="text" class="form-control" placeholder="" value="Dedolp ">
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="form-group ">
-                        <label  >Last Name</label>
-                        <input type="text" class="form-control" placeholder="" value="Seofls ">
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="form-group ">
-                        <label  >Email</label>
-                        <input type="text" class="form-control" placeholder="" value="Seofls@itsexample.com ">
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="form-group ">
-                        <label  >User Name</label>
-                        <input type="text" class="form-control" placeholder="" value="Seofls_ss ">
-                      </div>
-                    </div>
-                  </div>
+    <div class="job_container">
+        <div class="container">
+            <div class="row job_main">
+                <div class="sidebar">
+                    <h5>我的账户</h5>
+                    <ul class="user_navigation">
+                        <li class="is-active">
+                            <a id="1"><i class="fas fa-user"></i>更新简历</a>
+                        </li>
+                        <li>
+                            <a id="2"><i class="fas fa-key"></i>账户密码</a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fas fa-at"></i>绑定邮箱</a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="far fa-address-card"></i>个人资料</a>
+                        </li>
+                        <li>
+                            <a th:href="@{/logout}"><i class="fas fa-power-off"></i>登出</a>
+                        </li>
+                    </ul>
                 </div>
-                <div class="big_form_group">
-                  <div class="row">
-                    <div class="col-md-6">
-                      <div class="form-group ">
-                        <label  >Location</label>
-                        <input type="text" class="form-control" placeholder="" value="London, United Kingdom ">
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="form-group ">
-                        <label  >Job Type</label>
-                        <input type="text" class="form-control" placeholder="" value="Full time ">
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="form-group ">
-                        <label  >Expected Salary</label>
-                        <input type="text" class="form-control" placeholder="" value="$35k - $38k">
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="form-group ">
-                        <label  >Total experience</label>
-                        <input type="text" class="form-control" placeholder="" value="5 Years ">
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                <div class="job_main_right">
+                    <!--更新简历-->
+                    <div class="row job_section">
+                        <div class="col-sm-12">
+                            <div class="jm_headings">
+                                <h5>更新我的简历</h5>
+                                <a class="btn btn-primary mypbtn" href="staff-profile-single.html">我的简历</a>
+                            </div>
+                            <div class="section-divider">
+                            </div>
+                            <form>
+                                <div class="big_form_group">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group ">
+                                                <label>First Name</label>
+                                                <input type="text" class="form-control" placeholder="" value="Dedolp ">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group ">
+                                                <label>Last Name</label>
+                                                <input type="text" class="form-control" placeholder="" value="Seofls ">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group ">
+                                                <label>Email</label>
+                                                <input type="text" class="form-control" placeholder=""
+                                                       value="Seofls@itsexample.com ">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group ">
+                                                <label>User Name</label>
+                                                <input type="text" class="form-control" placeholder=""
+                                                       value="Seofls_ss ">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="big_form_group">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group ">
+                                                <label>Location</label>
+                                                <input type="text" class="form-control" placeholder=""
+                                                       value="London, United Kingdom ">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group ">
+                                                <label>Job Type</label>
+                                                <input type="text" class="form-control" placeholder=""
+                                                       value="Full time ">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group ">
+                                                <label>Expected Salary</label>
+                                                <input type="text" class="form-control" placeholder=""
+                                                       value="$35k - $38k">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group ">
+                                                <label>Total experience</label>
+                                                <input type="text" class="form-control" placeholder="" value="5 Years ">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
 
-                <div class="big_form_group">
-                  <div class="row">
-                    <div class="col-md-6">
-                      <div class="form-group ">
-                        <label  >Skills</label>
-                        <select class="form-control">
-                          <option>
-                            PHP
-                          </option>
-                          <option>
-                            MySQL
-                          </option>
-                          <option>
-                            API Development
-                          </option>
+                                <div class="big_form_group">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group ">
+                                                <label>Skills</label>
+                                                <select class="form-control">
+                                                    <option>
+                                                        PHP
+                                                    </option>
+                                                    <option>
+                                                        MySQL
+                                                    </option>
+                                                    <option>
+                                                        API Development
+                                                    </option>
 
-                        </select>
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="form-group ">
-                        <label  >Attachments</label>
-                        <input type="file" class="form-control"  >
-                      </div>
-                    </div>
-                    <div class="col-md-12">
-                      <div class="form-group ">
-                        <label  >Jobseekers Description</label>
-                        <textarea class="form-control" >
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group ">
+                                                <label>Attachments</label>
+                                                <input type="file" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group ">
+                                                <label>Jobseekers Description</label>
+                                                <textarea class="form-control">
                         </textarea>
 
-                      </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <div class="col-md-9 ">
+                                        <button type="submit" class="btn btn-primary">确定</button>
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
                     </div>
+                    <!--修改密码-->
+                    <div class="row job_section">
+                        <div class="col-sm-12">
+                            <div class="jm_headings">
+                                <h5>修改密码</h5>
+                            </div>
+                            <div class="section-divider">
+                            </div>
+                            <form>
+                                <div class="form-group row">
+                                    <div class="col-md-2">
+                                        <h5>密码</h5>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <input type="password" class="form-control" id="password">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-md-2">
+                                        <h5>新密码</h5>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <input type="password" class="form-control" id="newPassword">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-md-2">
+                                        <h5>确认新密码</h5>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <input type="password" class="form-control" id="newPassword2">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-md-9 offset-md-2">
+                                        <input id="confirmChangePassword" class="btn btn-primary" type="button"
+                                               th:value="确定" style="width: 30%"></input>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <!--绑定邮箱-->
+                    <div class="row job_section">
+                        <div class="col-sm-12">
+                            <div class="jm_headings">
+                                <h5>绑定邮箱</h5>
+                            </div>
+                            <!--提示-->
+                            <div class="card" style="width: 65%">
+                                <div class="card-header">
+                                    <a class="card-link" data-toggle="collapse" href="#collapseOne">
+                                        温馨提示
+                                    </a>
+                                </div>
+                                <div id="collapseOne" class="collapse show" data-parent="#accordion">
+                                    <div class="card-body">
+                                        绑定邮箱后可获取「每周项目进度」邮件通知，建议填写企业邮箱地址。
+                                    </div>
+                                </div>
+                            </div>
+                            <form>
+                              <div class="alert alert-light">
+                                <strong>当前未绑定任何邮箱</strong>
+                              </div>
+                                <div class="big_form_group">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group ">
+                                                <label>邮箱地址</label>
+                                                <input id="email" type="text" class="form-control"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-md-9 ">
+                                        <input id="bindEmailConfirm" class="btn btn-primary" type="button"
+                                               th:value="提交绑定" style="width: 30%"></input>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <!--个人资料-->
+                    <div class="row job_section">
+                        <div class="col-sm-12">
+                            <div class="jm_headings">
+                                <h5>基本资料</h5>
+                            </div>
+                            <div class="section-divider">
+                            </div>
+                            <form>
 
-                  </div>
+                                <div class="big_form_group">
+                                    <div class="form-group" id="element_id">
+                                        <h6>新用户名</h6>
+                                        <input type="password" class="form-control" placeholder="真实姓名或英文名，请勿填写社交昵称">
+                                        <h6>省份</h6>
+                                        <select class="province form-control">
+                                            <option value="浙江省" selected>浙江省</option>
+                                        </select>
+                                        <h6>地市</h6>
+                                        <select class="city form-control">
+                                        </select>
+                                        <br>
+                                        <select class="area form-control">
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <div class="col-md-9 offset-md-2" style="margin-left: 0px">
+                                        <input class="btn btn-primary" type="button" th:value="保存"
+                                               style="width: 30%"></input>
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
                 </div>
-
-                <div class="form-group row">
-                  <div  class="col-md-9 ">
-                    <button type="submit" class="btn btn-primary">确定</button>
-                  </div>
-                </div>
-
-              </form>
             </div>
-          </div>
-          <!--修改密码-->
-          <div class="row job_section">
-            <div class="col-sm-12">
-              <div class="jm_headings">
-                <h5>修改密码</h5>
-              </div>
-              <div class="section-divider">
-              </div>
-              <form >
-                <div class="form-group row">
-                  <div class="col-md-2">
-                    <h5>密码</h5>
-                  </div>
-                  <div class="col-md-9">
-                    <input type="password" class="form-control" id="password">
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <div class="col-md-2">
-                    <h5>新密码</h5>
-                  </div>
-                  <div class="col-md-9">
-                    <input type="password" class="form-control" id="newPassword">
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <div class="col-md-2">
-                    <h5>确认新密码</h5>
-                  </div>
-                  <div class="col-md-9">
-                    <input type="password" class="form-control"  id="newPassword2">
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <div  class="col-md-9 offset-md-2">
-                    <input id="confirmChangePassword" class="btn btn-primary" type="button" th:value="确定" style="width: 30%"></input>
-                  </div>
-                </div>
-              </form>
-            </div>
-          </div>
-          <!--绑定邮箱-->
-          <div class="row job_section">
-            <div  class="col-sm-12">
-              <div class="jm_headings">
-                <h5>绑定邮箱</h5>
-              </div>
-              <!--提示-->
-              <div class="card" style="width: 65%">
-                <div class="card-header">
-                  <a class="card-link" data-toggle="collapse" href="#collapseOne">
-                    温馨提示
-                  </a>
-                </div>
-                <div id="collapseOne" class="collapse show" data-parent="#accordion">
-                  <div class="card-body">
-                    绑定邮箱后可获取「每周项目进度」邮件通知，建议填写企业邮箱地址。
-                  </div>
-                </div>
-              </div>
-              <form>
-                <div class="big_form_group">
-                  <div class="row">
-                    <div class="col-md-6">
-                      <div class="form-group ">
-                        <label>邮箱地址</label>
-                        <input type="text" class="form-control" placeholder="email">
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <div  class="col-md-9 ">
-                    <button type="submit" class="btn btn-primary">提交绑定</button>
-                  </div>
-                </div>
-              </form>
-            </div>
-          </div>
-          <!--个人资料-->
-          <div class="row job_section">
-            <div  class="col-sm-12">
-              <div class="jm_headings">
-                <h5>基本资料</h5>
-              </div>
-              <div class="section-divider">
-              </div>
-              <form>
-                <div class="big_form_group">
-                  <div class="row">
-                    <div class="col-md-6">
-                      <div class="form-group ">
-                        <label  >Location</label>
-                        <input type="text" class="form-control" placeholder="" value="London, United Kingdom ">
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="form-group ">
-                        <label  >Job Type</label>
-                        <input type="text" class="form-control" placeholder="" value="Full time ">
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="form-group ">
-                        <label  >Expected Salary</label>
-                        <input type="text" class="form-control" placeholder="" value="$35k - $38k">
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="form-group ">
-                        <label  >Total experience</label>
-                        <input type="text" class="form-control" placeholder="" value="5 Years ">
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="big_form_group">
-                  <div class="row">
-                    <div class="col-md-6">
-                      <div class="form-group ">
-                        <label  >Skills</label>
-                        <select class="form-control">
-                          <option>
-                            PHP
-                          </option>
-                          <option>
-                            MySQL
-                          </option>
-                          <option>
-                            API Development
-                          </option>
-
-                        </select>
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="form-group ">
-                        <label  >Attachments</label>
-                        <input type="file" class="form-control"  >
-                      </div>
-                    </div>
-                    <div class="col-md-12">
-                      <div class="form-group ">
-                        <label  >Jobseekers Description</label>
-                        <textarea class="form-control" >
-                        </textarea>
-
-                      </div>
-                    </div>
-
-                  </div>
-                </div>
-
-                <div class="form-group row">
-                  <div  class="col-md-9 ">
-                    <button type="submit" class="btn btn-primary">确定</button>
-                  </div>
-                </div>
-
-              </form>
-            </div>
-          </div>
         </div>
-      </div>
     </div>
-  </div>
 </main>
 
 
@@ -361,7 +325,11 @@
 <script src="/assets/js/bootstrap.min.js"></script>
 <script src="/assets/js/owl.carousel.min.js"></script>
 <script src="/assets/js/custom.js"></script>
+<!--提醒有关的js-->
 <script src="/assets/js/growl-notification.min.js"></script>
+<!--地理位置选择下拉框js-->
+<script src="/assets/js/jquery.cxselect.js"></script>
+<!--自己写的js-->
 <script src="/assets/js/setting.js"></script>
 </body>
 </html>

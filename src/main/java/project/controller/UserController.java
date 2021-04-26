@@ -297,6 +297,11 @@ public class UserController {
      */
     @RequestMapping("/setting")
     public String editInformation(Model model){
+        //获取用户的验证信息
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = (User)principal;
+        //添加邮箱属性
+        model.addAttribute("email",userServiceimpl.getEmail(user.getId()));
         return "user/setting";
     }
 
@@ -343,7 +348,25 @@ public class UserController {
         return RespBean.error("修改密码失败");
     }
     /**
-     * 一个小测试类
+     * 设置邮箱
+     * @param info
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("/setting/setEmail")
+    public RespBean setEmail(@RequestBody Map<String,Object> info){
+        //获取用户的验证信息
+        String email = (String) info.get("email");
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = (User)principal;
+        //设置邮箱，如果成功则返回结果
+        if(userServiceimpl.setEmail(email,user.getId())){
+            return RespBean.ok("邮箱设置成功");
+        }
+        return RespBean.error("邮箱设置失败");
+    }
+    /**
+     * 一个小测试类,主要是用来测试登陆用户信息的
      * @return
      */
     @ResponseBody

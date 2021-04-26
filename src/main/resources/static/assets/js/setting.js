@@ -113,8 +113,76 @@ $("#confirmChangePassword").click(function(){
             })
         }
 });
+// 需在引入 <script src="jquery.cxselect.js"></script> 之后，调用之前设置
+$.cxSelect.defaults.url = '/assets/js/cityData.min.js';
+$.cxSelect.defaults.emptyStyle = 'none';
+$('#element_id').cxSelect({
+    url: '/assets/js/cityData.min.js',               // 提示：如果服务器不支持 .json 类型文件，请将文件改为 .js 文件
+    selects: ['province', 'city', 'area'],  // selects 为数组形式，请注意顺序
+    emptyStyle: 'none'
+});
 
-
+//绑定邮箱按钮
+$("#bindEmailConfirm").click(function(){
+    var email = $("#email").val();
+    var obj = {
+        "email": email
+    }
+    //验证邮箱
+    var reg = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/;
+    //如果输入的邮箱为空
+    if(email==""||email==null){
+        GrowlNotification.notify({
+            title: '提醒!',
+            description: '请输入邮箱',
+            type: 'warning',
+            position: 'bottom-right',
+            closeTimeout: 3000
+        });
+    }
+    //邮箱格式不正确
+    else if(!reg.test(email)){
+        GrowlNotification.notify({
+            title: '提醒!',
+            description: '邮箱输入格式不正确',
+            type: 'warning',
+            position: 'bottom-right',
+            closeTimeout: 3000
+        });
+    }
+    //格式也正确，也不为空
+    else{
+        $.ajax({
+            url: "/setting/setEmail",
+            type: "post",
+            data: JSON.stringify(obj),
+            contentType: "application/json",
+            success: function (data) {
+                if (data.status == 200) {
+                    //弹出提示
+                    GrowlNotification.notify({
+                        title: '成功!',
+                        description: '邮箱设置成功',
+                        type: 'success',
+                        position: 'bottom-right',
+                        closeTimeout: 3000
+                    });
+                    //清空值
+                    $("#email").val("");
+                } else {
+                    //弹出错误提示
+                    GrowlNotification.notify({
+                        title: '错误!',
+                        description: '邮箱设置失败',
+                        type: 'error',
+                        position: 'bottom-right',
+                        closeTimeout: 3000
+                    });
+                }
+            }
+        })
+    }
+})
 
 
 

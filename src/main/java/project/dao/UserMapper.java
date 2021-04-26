@@ -42,4 +42,8 @@ public interface UserMapper {
      String findPasswordById(@Param("id") int id);
      //根据ID修改密码
      int changePassWordById(@Param("password") String password,@Param("id") int id);
+     //根据ID修改邮箱
+     int setEmailById(@Param("email")String Email,@Param("id")int id);
+     //根据ID找到邮箱
+     String getEmailById(@Param("id") int id);
 }
