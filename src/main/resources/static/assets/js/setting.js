@@ -2,6 +2,11 @@ $(window).on('load', function(){
   $(".job_main_right>div").eq(0).show().siblings().hide();
     //默认禁用按钮
     $("#confirmChangePassword").attr("disabled", true);
+    //如果没有绑定邮箱，则设置为提示文字
+    var boundemail = $("#boundemail").val();
+    if(boundemail==""||boundemail==null){
+        $("#boundemail").val("您还未绑定邮箱哦!");
+    }
 });
 
 $(document).ready(function () {
@@ -169,6 +174,8 @@ $("#bindEmailConfirm").click(function(){
                     });
                     //清空值
                     $("#email").val("");
+                    //设置显示内容
+                    $("#boundemail").val(email);
                 } else {
                     //弹出错误提示
                     GrowlNotification.notify({
