@@ -32,6 +32,8 @@ public class RespBean {
     public static RespBean timeout(String msg){return new RespBean(1, msg, null);}
     //无效链接
     public static RespBean invalid(String msg){return new RespBean(2, msg, null);}
+    //密码不存在
+    public static RespBean passwordNotExist(String msg){return new RespBean(3, msg, null);}
 
     private RespBean() {
     }

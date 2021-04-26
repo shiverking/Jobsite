@@ -54,7 +54,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public boolean changePasswordByWord(String email, String password) {
+    public boolean changePasswordByEmail(String email, String password) {
         if (userMapper.updatePasswordByEmail(email,password) == 1) {
             return true;
         }
@@ -67,7 +67,12 @@ public class UserServiceImpl implements UserService, UserDetailsService {
      */
     @Override
     public int getLastId() {
-        return userMapper.getLastId();
+        try{
+            return userMapper.getLastId();
+        }catch (Exception e){
+            //如果是第一个数据
+            return 0;
+        }
     }
 
     /**
@@ -78,12 +83,34 @@ public class UserServiceImpl implements UserService, UserDetailsService {
      */
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = this.findUserByUsername(username);
+        User user = userMapper.loadUserByUsername(username);
         if(user.equals(null)){
-            throw new UsernameNotFoundException("User is not found");
+            throw new UsernameNotFoundException("账户不存在!");
         }
-        UserDetails userDetails = new org.springframework.security.core.userdetails.User(user.getUsername(),user.getPassword(), AuthorityUtils.commaSeparatedStringToAuthorityList("admin"));
-        return userDetails;
+        user.setRoles(userMapper.getUserRolesByUid(user.getId()));
+        return user;
     }
 
+    /**
+     * 根据id获取密码
+     * @param id
+     * @return
+     */
+    @Override
+    public String getPassWord(int id) {
+        return userMapper.findPasswordById(id);
+    }
+
+    /**
+     * 改变用户密码
+     * @param id
+     * @return
+     */
+    @Override
+    public boolean changePassword(String password,int id) {
+        if(userMapper.changePassWordById(password,id)==1){
+            return true;
+        }
+        return false;
+    }
 }

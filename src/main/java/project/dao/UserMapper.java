@@ -4,6 +4,7 @@ package project.dao;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
+import project.model.Role;
 import project.model.User;
 
 import java.util.List;
@@ -33,4 +34,12 @@ public interface UserMapper {
      int updatePasswordByEmail(@Param("password") String password,@Param("email") String email);
      //找到数据库中最后一位ID
      int getLastId();
+     //重要函数，登录自动调用
+     User loadUserByUsername(@Param("username") String username);
+     //获取用户的角色列表
+     List<Role> getUserRolesByUid(@Param("id") int id);
+     //根据ID找到密码
+     String findPasswordById(@Param("id") int id);
+     //根据ID修改密码
+     int changePassWordById(@Param("password") String password,@Param("id") int id);
 }

@@ -21,16 +21,16 @@ public class User implements UserDetails{
     //用户id
     private int id;
     //用户名
-    @NotEmpty(message = "用户名不能为空")
+    //@NotEmpty(message = "用户名不能为空")
     private String username;
     //密码
-    @Size(min = 6, max = 15,message = "密码的位数为6~15")
+    //@Size(min = 6, max = 15,message = "密码的位数为6~15")
     private String password;
     //电话
-    @NotEmpty(message = "手机号不能为空")
+    //@NotEmpty(message = "手机号不能为空")
     private String telephone;
     //邮箱
-    @Email(message = "请输入正确的邮箱地址")
+    //@Email(message = "请输入正确的邮箱地址")
     private String email;
     //地址
     private String location;
@@ -61,8 +61,10 @@ public class User implements UserDetails{
     //账户是否能使用
     @Override
     public boolean isEnabled() {
-        return enabled;
+        return true;
+        //return enabled;
     }
+
     //返回用户的角色列表
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -72,6 +74,7 @@ public class User implements UserDetails{
         }
         return authorities;
     }
+
     public int getId() {
         return id;
     }

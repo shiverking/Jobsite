@@ -23,6 +23,13 @@
             </set>
         where email = #{email};
     </update>
+    <update id="changePassWordById">
+        update user
+        <set>
+            password = #{password}
+        </set>
+        where id=#{id};
+    </update>
 
     <select id="findUserByUsername" resultMap="UserResultMap" parameterType="String">
         select * from user where username = #{username}
@@ -61,5 +68,14 @@
     </select>
     <select id="getLastId" resultType="java.lang.Integer">
         select max(id) from user;
+    </select>
+    <select id="loadUserByUsername" resultType="project.model.User">
+         select * from user where username=#{username}
+    </select>
+    <select id="getUserRolesByUid" resultType="project.model.Role">
+        select * from role r,user_role ur where r.id=ur.rid and ur.uid=#{id}
+    </select>
+    <select id="findPasswordById" resultType="java.lang.String">
+        select password from user where id=#{id}
     </select>
 </mapper>
