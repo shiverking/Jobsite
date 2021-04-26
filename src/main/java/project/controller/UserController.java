@@ -2,6 +2,7 @@ package project.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +20,7 @@ import project.util.AESUtil;
 import project.util.EmailUtil;
 import javax.validation.Valid;
 import java.io.UnsupportedEncodingException;
+import java.security.Principal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -264,7 +266,7 @@ public class UserController {
     }
 
     /**
-     * 修改密码确认链接
+     * 按照邮箱修改密码确认链接
      * @return
      */
     @ResponseBody
@@ -281,7 +283,7 @@ public class UserController {
         String[] res = decryptRes.split("@",2);
         String email = res[1];
         //重设密码
-        if(userServiceimpl.changePasswordByWord(encoder.encode(newpPassword),email)){
+        if(userServiceimpl.changePasswordByEmail(encoder.encode(newpPassword),email)){
             return RespBean.ok("修改密码成功");
         }
         //返回错误信息
@@ -295,17 +297,85 @@ public class UserController {
      */
     @RequestMapping("/setting")
     public String editInformation(Model model){
+        //获取用户的验证信息
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = (User)principal;
+        //添加邮箱属性
+        model.addAttribute("email",userServiceimpl.getEmail(user.getId()));
         return "user/setting";
     }
 
     /**
      * 个人密码是否正确
-     * @param authentication
+     * @param info
      * @return
      */
     @ResponseBody
     @PostMapping("/setting/isPasswordExist")
-    public RespBean isPasswordExist(Authentication authentication){
-        return RespBean.ok("密码存在");
+    public RespBean isPasswordExist(@RequestBody Map<String,Object> info){
+        //获取用户输入的密码
+        String inputPassword = (String) info.get("password");
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = (User)principal;
+        String password = userServiceimpl.getPassWord(user.getId());
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        //比较两个面，如果密码相同，则返回成功结果
+        if(passwordEncoder.matches(inputPassword,password)){
+            return RespBean.ok("密码存在");
+        }
+        return RespBean.passwordNotExist("输入密码错误");
+
+    }
+    /**
+     * 重置密码
+     * @param info
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("/setting/restPassword")
+    public RespBean resetPassWord(@RequestBody Map<String,Object> info){
+        //获取用户的验证信息
+        String newPassword = (String) info.get("newPassword");
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = (User)principal;
+        //对密码进行加密
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        String encodedPassword = passwordEncoder.encode(newPassword.trim());
+        //修改密码，如果成功则返回结果
+        if(userServiceimpl.changePassword(encodedPassword,user.getId())){
+            return RespBean.ok("修改密码成功");
+        }
+        return RespBean.error("修改密码失败");
+    }
+    /**
+     * 设置邮箱
+     * @param info
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("/setting/setEmail")
+    public RespBean setEmail(@RequestBody Map<String,Object> info){
+        //获取用户的验证信息
+        String email = (String) info.get("email");
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = (User)principal;
+        //设置邮箱，如果成功则返回结果
+        if(userServiceimpl.setEmail(email,user.getId())){
+            return RespBean.ok("邮箱设置成功");
+        }
+        return RespBean.error("邮箱设置失败");
+    }
+    /**
+     * 一个小测试类,主要是用来测试登陆用户信息的
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("/hello")
+    public String test(){
+        //测试代码
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = (User)principal;
+        System.out.println("当前登录用户信息：" + user.toString());
+        return principal.toString();
     }
 }
