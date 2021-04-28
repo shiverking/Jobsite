@@ -27,7 +27,6 @@ $(window).on('load', function(){
         if($("#staff_name7").val()!=null){
             editor.txt.html($("#staff_name7").val());
         }
-
     }
 
 });
@@ -250,7 +249,7 @@ $('#saveProfile').click(function(){
         "biography":biography
     }
     //如果之前没存过合同，则向/saveProfile接口发送请求
-    if(!$("#staff_name1").val()) {
+    if($("#staff_name1").val()=="false") {
         $.ajax({
             url: "/saveProfile",
             type: "post",
@@ -282,7 +281,7 @@ $('#saveProfile').click(function(){
         })
     }
     //如果存过合同，则向/updateProfile接口发送请求
-    else{
+    if($("#staff_name1").val()=="true") {
         $.ajax({
             url: "/updateProfile",
             type: "post",
