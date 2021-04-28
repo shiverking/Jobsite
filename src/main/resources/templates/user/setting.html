@@ -88,12 +88,12 @@
                             </div>
                             <form >
                                 <input type="hidden" th:value="${isProfileExist}" id="staff_name1"/>
-                                <input type="hidden" th:if="${profile.completiontime!=null}" th:value="${profile.completiontime}" id="staff_name2"/>
-                                <input type="hidden" th:if="${profile.expertize_realm!=null}" th:value="${profile.expertize_realm}" id="staff_name3"/>
-                                <input type="hidden" th:if="${profile.compensation!=null}" th:value="${profile.compensation}" id="staff_name4"/>
-                                <input type="hidden" th:if="${profile.expertize_level!=null}" th:value="${profile.expertize_level}" id="staff_name5"/>
-                                <input type="hidden" th:if="${profile.workexperience!=null}" th:value="${profile.workexperience}" id="staff_name6"/>
-                                <input type="hidden" th:if="${profile.biography!=null}" th:value="${profile.biography}" id="staff_name7"/>
+                                <input type="hidden" th:if="${isProfileExist}" th:value="${profile.completiontime}" id="staff_name2"/>
+                                <input type="hidden" th:if="${isProfileExist}" th:value="${profile.expertize_realm}" id="staff_name3"/>
+                                <input type="hidden" th:if="${isProfileExist}" th:value="${profile.compensation}" id="staff_name4"/>
+                                <input type="hidden" th:if="${isProfileExist}" th:value="${profile.expertize_level}" id="staff_name5"/>
+                                <input type="hidden" th:if="${isProfileExist}" th:value="${profile.workexperience}" id="staff_name6"/>
+                                <input type="hidden" th:if="${isProfileExist}" th:value="${profile.biography}" id="staff_name7"/>
                                 <div class="big_form_group">
                                     <div class="row">
                                         <div class="col-md-6">
