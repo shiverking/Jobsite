@@ -16,7 +16,11 @@ public class Profile {
     //专业等级
     private String expertize_level;
     //专业领域
-    private String realm;
+    private String expertize_realm;
+    //预期完成时间
+    private String completiontime;
+    //预期酬金
+    private String compensation;
 
     public int getId() {
         return id;
@@ -58,23 +62,40 @@ public class Profile {
         this.expertize_level = expertize_level;
     }
 
-    public String getRealm() {
-        return realm;
+    public String getExpertize_realm() {
+        return expertize_realm;
     }
 
-    public void setRealm(String realm) {
-        this.realm = realm;
+    public void setExpertize_realm(String expertize_realm) {
+        this.expertize_realm = expertize_realm;
+    }
+
+    public String getCompletiontime() {
+        return completiontime;
+    }
+
+    public void setCompletiontime(String completiontime) {
+        this.completiontime = completiontime;
+    }
+
+    public String getCompensation() {
+        return compensation;
+    }
+
+    public void setCompensation(String compensation) {
+        this.compensation = compensation;
     }
 
     @Override
     public String toString() {
         return "Profile{" +
-                "id=" + id +
-                ", user_id=" + user_id +
+                "user_id=" + user_id +
                 ", biography='" + biography + '\'' +
                 ", workexperience='" + workexperience + '\'' +
                 ", expertize_level='" + expertize_level + '\'' +
-                ", realm='" + realm + '\'' +
+                ", expertize_realm='" + expertize_realm + '\'' +
+                ", complationTime='" + completiontime + '\'' +
+                ", compensation='" + compensation + '\'' +
                 '}';
     }
 }
