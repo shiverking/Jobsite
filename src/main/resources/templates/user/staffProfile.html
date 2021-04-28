@@ -2,59 +2,62 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 
-<!-- Basic Page Needs
-================================================== -->
-<title>JoDice</title>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<link rel="icon" href="assets/images/fav.png" type="image/gif" sizes="64x64">
+    <!-- Basic Page Needs
+    ================================================== -->
+    <title>JoDice</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="icon" href="/assets/images/fav.png" type="image/gif" sizes="64x64">
 
-<!-- CSS
-================================================== -->
-<link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700&display=swap&subset=latin-ext" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/all.min.css">
-<link href="assets/css/aos.css" rel="stylesheet">
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/bootstrap.min.css">
-<link href="assets/css/select2.min.css" rel="stylesheet" />
-<link href="assets/css/owl.carousel.min.css" rel="stylesheet" />
-<link rel="stylesheet" href="assets/css/style.css">
-<link rel="stylesheet" href="assets/css/color-1.css">
+    <!-- CSS
+    ================================================== -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700&display=swap&subset=latin-ext"
+          rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/all.min.css">
+    <link href="/assets/css/aos.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+    <link href="/assets/css/select2.min.css" rel="stylesheet"/>
+    <link href="/assets/css/owl.carousel.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/color-1.css">
 </head>
 <body>
 
 <!-- Header 01
 ================================================== -->
 <header class="header_01 header_inner">
-  <div class="header_main header_job_single_main">
-    <div class="header_menu fixed-top" th:include="/header.html">
+    <div class="header_main header_job_single_main">
+        <div class="header_menu fixed-top" th:include="/header.html">
+        </div>
+        <div class="header_btm header_job_single">
+            <div class="header_job_single_inner container">
+                <div class="poster_staff">
+                    <img alt="brand logo" src="/assets/images/profile-5.png">
+                </div>
+                <div class="poster_details">
+                    <h2 th:text="${user.username}" style=" margin-bottom: 15px;"><span class="varified"><i class="fas fa-check"></i>Verified</span></h2>
+                    <h5 th:if="${profile.expertize_level == 'expert'}" th:text="${'专家'}" style="margin-bottom: 20px"></h5>
+					<h5 th:if="${profile.expertize_level == 'intermediate'}" th:text="${'中级'}" style="margin-bottom: 20px"></h5>
+					<h5 th:if="${profile.expertize_level == 'beginner'}" th:text="${'菜鸟'}" style="margin-bottom: 20px"></h5>
+                    <div class="staff_rating">
+                        <span>4.5</span>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                </div>
+                <div class="poster_action">
+                    <a class="addtofav" title="add to favourite" href="#"><i class="far fa-heart"></i></a>
+                    <a class="btn btn-third" href="#">雇佣我</a>
+
+                </div>
+            </div>
+
+        </div>
     </div>
-    <div class="header_btm header_job_single">
-	<div class="header_job_single_inner container">
-		<div class="poster_staff">
-			<img  alt="brand logo" src="assets/images/profile-5.png">
-		</div> 
-		<div class="poster_details">
-			<h2>Dedolp Seofls  <span class="varified"><i class="fas fa-check"></i>Verified</span></h2>
-			<h5>Magento Certified Developer</h5>
-			<div class="staff_rating">
-        <span>4.5</span>
-        <i class="fas fa-star"></i>
-        <i class="fas fa-star"></i>
-        <i class="fas fa-star"></i>
-        <i class="fas fa-star"></i>
-        <i class="fas fa-star-half-alt"></i>
-      </div>		
-		</div>
-		<div class="poster_action">
-			<a class="addtofav" title="add to favourite" href="#"><i class="far fa-heart"></i></a>
-			<a class="btn btn-third" href="#">Hire me</a>
-			
-		</div>
-	</div>
-    	
-    </div>
-  </div> 
 </header>
 
 
@@ -62,132 +65,128 @@
 ================================================== -->
 
 
-
-<!-- Main 
+<!-- Main
 ================================================== -->
 <main>
-  <div class="single_job">
-    <div class="container">
-      <div class="row">
-      	<div class="col-md-9">
-      		<div class="row ">
-		        <div class="col-md-12 single_job_main">
-		        	<h2>Jobseekers Description</h2>
-		        
-		        	<p> Suspendisse potenti. Suspendisse efficitur augue enim, a aliquet nunc malesuada sit amet. Praesent finibus egestas velit sit amet lobortis. Aliquam ultricies tempus facilisis. Sed maximus, turpis eu pharetra fringilla, sem tellus pharetra lorem, at dictum tortor libero sit amet nulla. Cras quis enim vitae enim congue elementum. Integer tincidunt sit amet nulla at ultricies. Mauris id hendrerit urna. </p>
-		          <ul>
-                <li>Suspendisse efficitur augue enim, a aliquet nunc malesuada sit amet.</li>
-                <li>sit amet nulla at ultricies. Mauris id hendrerit urna.</li>
-                <li>turpis eu pharetra fringilla, sem tellus pharetra lorem.</li>
-                <li>sit amet Mauris id hendrerit urna. nulla at ultricies. </li>
-                <li>turpis eu , sem tellus pharetra lorem pharetra fringilla.</li>
-              </ul>
+    <div class="single_job">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-9">
+                    <div class="row ">
+                        <div class="col-md-12 single_job_main">
+                            <h2>个人简介</h2>
+                            <!--带格式文本显示-->
+                            <p th:utext='${profile.biography}'/>
+                        </div>
+                        <div class="section-divider"></div>
+                        <div class="col-md-12 single_job_main">
+                            <h2>相似的求职者</h2>
+                            <div class="row two_col featured_box_outer">
+                                <div class="col-sm-6">
+                                    <div class="featured_box ">
+                                        <div class="fb_image">
+                                            <img alt="brand logo" src="/assets/images/profile-2.png">
+                                        </div>
+                                        <div class="fb_content">
+                                            <h4>Dedolp Seofls </h4>
+                                            <ul class="tags">
+                                                <li>PHP</li>
+                                                <li>MySQL</li>
+                                                <li>API Development</li>
+                                            </ul>
+                                        </div>
+                                        <div class="fb_action">
+                                            <a title="add to favourite" href="#"><i class="far fa-heart"></i></a>
+                                            <a class="btn btn-third" href="#">View Profile</a>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="featured_box ">
+                                        <div class="fb_image">
+                                            <img alt="brand logo" src="/assets/images/profile-4.png">
+                                        </div>
+                                        <div class="fb_content">
+                                            <h4>Dedolp Seofls </h4>
+                                            <ul class="tags">
+                                                <li>PHP</li>
+                                                <li>MySQL</li>
+                                                <li>API Development</li>
+
+                                            </ul>
+                                        </div>
+                                        <div class="fb_action">
+                                            <a title="add to favourite" href="#"><i class="fas fa-heart"></i></a>
+                                            <a class="btn btn-third" href="#">View Profile</a>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 text-center">
+                                    <a class="btn btn-primary" href="find-staff.html">查看所有求职者<i
+                                            class="fas fa-long-arrow-alt-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 ">
+                    <div class="single-job-sidebar">
+                        <div class="sjs_box">
+                            <h3>应聘者信息</h3>
+                            <ul class="single-job-sidebar-features">
+                                <li>
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <h6>位置</h6>
+                                    <p th:if="${user.location}!=null" th:text="${user.location}"/>
+<!--                                    <p th:unless="${user.location}" th:text="${'暂无'}"/>-->
+                                </li>
+                                <li>
+                                    <i class="fas fa-briefcase"></i>
+                                    <h6>预期完成时间</h6>
+                                    <p th:if="${profile.completiontime}!=null" th:text="${profile.completiontime}"/>
+<!--                                    <p th:unless="${profile.completiontime}!=null" th:text="${'暂无'}"/>-->
+                                </li>
+                                <li>
+                                    <i class="fas fa-money-bill-alt"></i>
+                                    <h6>预期薪资</h6>
+                                    <p th:if="${profile.compensation}!=null" th:text="${profile.compensation}"/>
+<!--                                    <p th:unless="${profile.compensation}" th:text="${'暂无'}"/>-->
+                                </li>
+                                <li>
+                                    <i class="far fa-clock"></i>
+                                    <h6>工作经验</h6>
+                                    <p th:if="${profile.workexperience}!=null" th:text="${profile.workexperience}"/>
+<!--                                    <p th:unless="${profile.workexperience}==null" th:text="${'暂无'}"/>-->
+                                </li>
+
+                            </ul>
+                        </div>
+                        <div class="sjs_box">
+                            <h3>专业领域</h3>
+                            <ul class="tags">
+                                <li>PHP</li>
+                                <li>MySQL</li>
+                                <li>API Development</li>
+                                <li>PHP</li>
+                                <li>MySQL</li>
+                                <li>API Development</li>
+                            </ul>
+                        </div>
+
+
+                    </div>
+                    <div class="sjs_box sjs_box_action">
+                        <h3>Attachments</h3>
+                        <a target="_blank" class="download-cv" href="#"><i class="fas fa-file-download"></i><span>Curriculum Vitae</span></a>
+                        <a class="btn btn-primary" href="#">雇佣</a>
+                    </div>
+
+                </div>
             </div>
-		        
-		        <div class="section-divider"></div>
-		        <div class="col-md-12 single_job_main">
-		        	<h2>Similar Employee </h2>
-		        	<div class="row two_col featured_box_outer">
-						<div class="col-sm-6">
-							<div class="featured_box ">
-								<div class="fb_image">
-									<img   alt="brand logo" src="assets/images/profile-2.png">
-								</div>
-								<div class="fb_content">
-									<h4>Dedolp Seofls </h4>
-									<ul class="tags">
-                <li>PHP</li>
-                <li>MySQL </li>
-                <li>API Development</li>
-                
-              </ul>
-								</div>
-								<div class="fb_action">
-									<a title="add to favourite" href="#"><i class="far fa-heart"></i></a>
-									<a class="btn btn-third" href="#">View Profile</a>
-									
-								</div>
-							</div>
-						</div>
-						<div class="col-sm-6">
-							<div class="featured_box ">
-								<div class="fb_image">
-									<img  alt="brand logo" src="assets/images/profile-4.png">
-								</div>
-								<div class="fb_content">
-									<h4>Dedolp Seofls </h4>
-									<ul class="tags">
-                <li>PHP</li>
-                <li>MySQL </li>
-                <li>API Development</li>
-                
-              </ul>
-								</div>
-								<div class="fb_action">
-									<a title="add to favourite" href="#"><i class="fas fa-heart"></i></a>
-									<a class="btn btn-third" href="#">View Profile</a>
-									
-								</div>
-							</div>
-						</div>				
-						<div class="col-md-12 text-center">
-							<a class="btn btn-primary" href="find-staff.html">Browse All job seekers <i class="fas fa-long-arrow-alt-right"></i></a>
-						</div>
-					</div>
-		        </div>
-		      </div>
-      	</div>
-      	<div class="col-md-3 ">
-      		<div class="single-job-sidebar">
-				<div class="sjs_box">
-					<h3>Employee Summary</h3>
-	      			<ul class="single-job-sidebar-features">
-	      				<li>
-	      					<i class="fas fa-map-marker-alt"></i>
-	      					<h6>Location</h6>
-	      					<p>London, United Kingdom</p>
-	      				</li>
-	      				<li>
-	      					<i class="fas fa-briefcase"></i>
-	      					<h6>Job Type</h6>
-	      					<p>Full Time</p>
-	      				</li>
-	      				<li>
-	      					<i class="fas fa-money-bill-alt"></i>
-	      					<h6>Expected Salary</h6>
-	      					<p>$35k - $38k</p>
-	      				</li>
-	      				<li>
-	      					<i class="far fa-clock"></i>
-	      					<h6>Apply date</h6>
-	      					<p>18-02-2020</p>
-	      				</li>
-	      			</ul>
-				</div>      			
-      			<div class="sjs_box">
-      				<h3>Skills</h3>
-      				<ul class="tags">
-    						<li>PHP</li>
-    						<li>MySQL </li>
-    						<li>API Development</li>
-    						<li>PHP</li>
-    						<li>MySQL </li>
-    						<li>API Development</li>
-    					</ul>
-      			</div>
-              
-      			
-      		</div>
-          <div class="sjs_box sjs_box_action">
-              <h3>Attachments</h3>
-              <a target="_blank" class="download-cv" href="#"><i class="fas fa-file-download"></i><span>Curriculum Vitae</span></a>
-              <a class="btn btn-primary" href="#">Hire me</a>
-            </div>
-      		
-      	</div>
-      </div>
+        </div>
     </div>
-  </div>
 </main>
 
 
@@ -201,10 +200,10 @@
 
 <!-- Scripts
 ================================================== -->
-<script src="assets/js/jquery-3.4.1.min.js"></script>
-<script src="assets/js/select2.min.js"></script>
-<script src="assets/js/bootstrap.min.js"></script>
-<script src="assets/js/owl.carousel.min.js"></script>
-<script src="assets/js/custom.js"></script>
+<script src="/assets/js/jquery-3.4.1.min.js"></script>
+<script src="/assets/js/select2.min.js"></script>
+<script src="/assets/js/bootstrap.min.js"></script>
+<script src="/assets/js/owl.carousel.min.js"></script>
+<script src="/assets/js/custom.js"></script>
 </body>
 </html>

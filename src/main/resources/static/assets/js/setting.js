@@ -7,6 +7,29 @@ $(window).on('load', function(){
     if(boundemail==""||boundemail==null){
         $("#boundemail").val("您还未绑定邮箱哦!");
     }
+    //如果曾经编辑过简历，则输入个人简历的内容
+    if($("#staff_name1").val()){
+        if($("#staff_name2").val()!=null){
+            $("#completionTime").val($("#staff_name2").val());
+        }
+        if($("#staff_name3").val()!=null) {
+            $("#expertize_realm").val($("#staff_name3").val());
+        }
+        if($("#staff_name4").val()!=null){
+            $("#compensation").val($("#staff_name4").val());
+        }
+        if($("#staff_name5").val()!=null){
+            $("#expertize_level").val($("#staff_name5").val());
+        }
+        if($("#staff_name6").val()!=null){
+            $("#workexperience").val($("#staff_name6").val());
+        }
+        if($("#staff_name7").val()!=null){
+            editor.txt.html($("#staff_name7").val());
+        }
+
+    }
+
 });
 
 $(document).ready(function () {
@@ -191,8 +214,106 @@ $("#bindEmailConfirm").click(function(){
     }
 })
 
+$('#isProfileExist').click(function () {
+    //如果以前有简历保存
+    if($("#staff_name1").val()){
+        window.location.href = "/profile";
+    }
+    //如果没有简历保存
+    else{
+        //没有查询到简历，弹出错误提示
+        $("#profileNotExist").show();
+    }
+})
 
+//保存简历按钮按下触发事件
+$('#saveProfile').click(function(){
+    //预期完成时间
+    var completionTime = $("#completionTime").val();
+    //专业领域
+    var expertize_realm = $("#expertize_realm").val();
+    //预期报酬
+    var compensation = $("#compensation").val();
+    //专业等级
+    var expertize_level = $("#expertize_level option:selected").val();
+    //预期完成时间
+    var workexperience = $("#workexperience").val();
+    //自我介绍
+    var biography = editor.txt.html();
 
+    var obj={
+        "completionTime":completionTime,
+        "expertize_realm":expertize_realm,
+        "compensation" :compensation,
+        "expertize_level":expertize_level,
+        "workexperience":workexperience,
+        "biography":biography
+    }
+    //如果之前没存过合同，则向/saveProfile接口发送请求
+    if(!$("#staff_name1").val()) {
+        $.ajax({
+            url: "/saveProfile",
+            type: "post",
+            data: JSON.stringify(obj),
+            contentType: "application/json",
+            success: function (data) {
+                if (data.status == 200) {
+                    //弹出成功提示
+                    GrowlNotification.notify({
+                        title: '成功!',
+                        description: '简历保存成功!',
+                        type: 'success',
+                        position: 'bottom-right',
+                        closeTimeout: 3000
+                    });
+                    //关闭提示框
+                    $('#profileNotExist').hidden();
+                } else {
+                    //弹出保存失败
+                    GrowlNotification.notify({
+                        title: '失败!',
+                        description: '简历保存失败!',
+                        type: 'error',
+                        position: 'bottom-right',
+                        closeTimeout: 3000
+                    });
+                }
+            }
+        })
+    }
+    //如果存过合同，则向/updateProfile接口发送请求
+    else{
+        $.ajax({
+            url: "/updateProfile",
+            type: "post",
+            data: JSON.stringify(obj),
+            contentType: "application/json",
+            success: function (data) {
+                if (data.status == 200) {
+                    //弹出成功提示
+                    GrowlNotification.notify({
+                        title: '成功!',
+                        description: '简历更新成功!',
+                        type: 'success',
+                        position: 'bottom-right',
+                        closeTimeout: 3000
+                    });
+                    //关闭提示框
+                    $('#profileNotExist').hidden();
+                } else {
+                    //弹出保存失败
+                    GrowlNotification.notify({
+                        title: '失败!',
+                        description: '简历更新失败!',
+                        type: 'error',
+                        position: 'bottom-right',
+                        closeTimeout: 3000
+                    });
+                }
+            }
+        })
+    }
+})
 
 
 
