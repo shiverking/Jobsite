@@ -323,7 +323,6 @@ public class UserController {
             Profile profile = profileServiceimpl.getProfile(user_id);
             model.addAttribute("isProfileExist",true );
             model.addAttribute("profile",profile);
-            System.out.println(profile.toString());
 //            model.addAttribute("complationTime", profile.getComplationTime());
 //            model.addAttribute("expertize_realm",profile.getExpertize_level());
 //            model.addAttribute("compensation",profile.getCompensation());
@@ -332,7 +331,6 @@ public class UserController {
 //            model.addAttribute("biography",profile.getBiography());
         }
         else{
-            System.out.println("=========没找到简历=========");
             model.addAttribute("isProfileExist",false );
         }
         return "user/setting";
