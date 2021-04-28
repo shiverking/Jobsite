@@ -412,8 +412,8 @@ public class UserController {
     public String test() {
         //测试代码
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        User user = (User) principal;
-        System.out.println("当前登录用户信息：" + user.toString());
+        System.out.println("当前登录用户信息：" + principal.toString());
+        //User user = (User) principal;
         return principal.toString();
     }
 }
