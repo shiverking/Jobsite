@@ -14,4 +14,8 @@ public interface JobService {
     //按照id找到Job
     public Job findJobById(int id);
 
+    public int insertJob(Job job);
+
+    public List<Job> findJobsByEmployerId(int employer_id);
+
 }
