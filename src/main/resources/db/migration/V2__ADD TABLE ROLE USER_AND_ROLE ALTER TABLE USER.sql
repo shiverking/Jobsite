@@ -21,4 +21,8 @@ CREATE TABLE `user_role`  (
 ALTER TABLE `user_role` ADD CONSTRAINT `user_role_uid` FOREIGN KEY (`uid`) REFERENCES `user` (`id`);
 ALTER TABLE `user_role` ADD CONSTRAINT `user_role_rid` FOREIGN KEY (`rid`) REFERENCES `role` (`id`);
 
+INSERT INTO `role` VALUES (1, 'ROLE_employer', '雇主');
+INSERT INTO `role` VALUES (2, 'ROLE_employee', '应聘者');
+INSERT INTO `role` VALUES (3, 'ROLE_admin', '管理员');
+INSERT INTO `role` VALUES (4, 'ROLE_superadmin', '超级管理员');
 

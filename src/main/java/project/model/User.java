@@ -164,6 +164,8 @@ public class User implements UserDetails{
                 ", email='" + email + '\'' +
                 ", location='" + location + '\'' +
                 ", headurl='" + headurl + '\'' +
+                ", enabled=" + enabled +
+                ", locked=" + locked +
                 '}';
     }
 }
