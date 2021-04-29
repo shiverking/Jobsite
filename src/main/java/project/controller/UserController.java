@@ -21,6 +21,7 @@ import project.util.EmailUtil;
 import javax.validation.Valid;
 import java.io.UnsupportedEncodingException;
 import java.security.Principal;
+import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -376,6 +377,8 @@ public class UserController {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = (User)principal;
         System.out.println("当前登录用户信息：" + user.toString());
+        System.out.println("当前登录用户id：" + user.getId());
+
         return principal.toString();
     }
 }

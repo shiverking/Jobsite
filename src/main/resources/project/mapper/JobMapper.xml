@@ -4,6 +4,13 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="project.dao.JobMapper">
+    <insert id="insertJob" useGeneratedKeys="true" keyProperty="id" parameterType="project.model.Job">
+        insert into job values (
+            null,#{title},#{employer_id},#{description},#{budget},#{expertize_level},#{isCheck},#{create_time}
+            ,#{required},#{skill},#{work_time},#{work_time}
+        );
+
+    </insert>
     <select id="getAllJobs" resultType="project.model.Job">
         <!--这个地方不能加分号，否则无法分页-->
         select * from job
@@ -35,6 +42,9 @@
 
     <select id="getJobNotCheck" resultType="project.model.Job">
         select * from job where ischeck = 0
+    </select>
+    <select id="findJobsByEmployerId" resultType="project.model.Job">
+        select * from job where employer_id = #{employer_id}
     </select>
 
 </mapper>

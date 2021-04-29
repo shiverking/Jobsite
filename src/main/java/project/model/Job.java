@@ -1,5 +1,10 @@
 package project.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 /**
@@ -12,19 +17,35 @@ public class Job {
     //雇佣者id
     private int employer_id;
     //题目
+    @NotNull(message = "工作标题不能为空")
     private String title;
     //描述
+    @NotNull(message = "描述不能为空")
     private String description;
-    //预算
+    //时薪
+    @NotNull(message = "时薪不能为空")
+    @Min(value = 1, message = "时薪最少为1")
     private double budget;
     //所需专业等级
+    @NotNull(message = "所需专业等级不能为空")
     private String expertize_level;
     //是否通过审核
     private boolean isCheck;
     //创建时间
     private Date create_time;
     //所需人数
+    @NotNull(message = "工作所需人数不能为空")
+    @Min(value = 1,message = "最少需求人数为1")
     private int required;
+    //岗位
+    private String position;
+    //每日平均工作时间
+    @NotNull(message = "每日平均工作时间不能为空")
+    @Min(value = 1,message = "每日平均工作时间最小为1")
+    @Max(value = 24,message="每日平均工作时间最大为24")
+    private int work_time;
+    //工作所需要的技术
+    private String skill;
 
     public int getId() {
         return id;
@@ -98,6 +119,30 @@ public class Job {
         this.required = required;
     }
 
+    public String getPosition() {
+        return position;
+    }
+
+    public void setPosition(String position) {
+        this.position = position;
+    }
+
+    public String getSkill() {
+        return skill;
+    }
+
+    public void setSkill(String skill) {
+        this.skill = skill;
+    }
+
+    public int getWork_time() {
+        return work_time;
+    }
+
+    public void setWork_time(int work_time) {
+        this.work_time = work_time;
+    }
+
     @Override
     public String toString() {
         return "Job{" +
@@ -110,6 +155,9 @@ public class Job {
                 ", isCheck=" + isCheck +
                 ", create_time=" + create_time +
                 ", required=" + required +
+                ", position='" + position + '\'' +
+                ", work_time=" + work_time +
+                ", skill='" + skill + '\'' +
                 '}';
     }
 }
