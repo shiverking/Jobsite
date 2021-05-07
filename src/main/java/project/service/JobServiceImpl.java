@@ -27,5 +27,14 @@ public class JobServiceImpl implements JobService{
         return jobMapper.findJobById(id);
     }
 
+    public int insertJob(Job job){
+        return jobMapper.insertJob(job);
+    }
+
+    @Override
+    public List<Job> findJobsByEmployerId(int employer_id) {
+        return jobMapper.findJobsByEmployerId(employer_id);
+    }
+
 
 }

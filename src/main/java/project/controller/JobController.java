@@ -2,16 +2,22 @@ package project.controller;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.mysql.cj.protocol.ResultBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 import project.model.Job;
+import project.model.RespBean;
+import project.model.User;
 import project.service.JobService;
 
-import java.util.List;
+import javax.validation.Valid;
+import java.sql.Timestamp;
+import java.util.*;
 
 /**
  * @author ：闫崇傲
@@ -37,7 +43,6 @@ public class JobController {
                 PageInfo<Job> pageInfo = new PageInfo<Job>(jobs,5);
 
                 model.addAttribute("pageInfo",pageInfo);
-
                 //获得当前页
                 model.addAttribute("pageNum", pageInfo.getPageNum());
                 //获得一页显示的条数
@@ -57,6 +62,55 @@ public class JobController {
                 model.addAttribute("job",job);
                 return "job/single_job";
 
+        }
+
+
+        @RequestMapping("/job/postJob")
+        public String toPostJobPage(){
+                return "/job/post-a-job";
+        }
+
+
+        /**
+         * 发布工作
+         * @param
+         * @return
+         */
+        @ResponseBody
+        @RequestMapping("/job/postAJob")
+        public RespBean postJob(@Valid @RequestBody Job job) {
+                //获取当前发布用户id
+                Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+                User user = (User)principal;
+                job.setEmployer_id(user.getId());
+                //获取当前系统创建时间
+                Date date = new Date();
+                Timestamp timestamp = new Timestamp(date.getTime());
+                job.setCreate_time(timestamp);
+                //设置为未审核
+                job.setCheck(false);
+                //插入对象
+                jobService.insertJob(job);
+                //获取插入对象的id值
+                Map<String,Object> map = new HashMap<>();
+                map.put("JobId",job.getId());
+            return RespBean.ok("发布工作成功",map);
+        }
+
+        @RequestMapping("/job/MyJobLists")
+        public ModelAndView toMyJobListsPage(){
+                ModelAndView modelAndView = new ModelAndView("/job/my-job-listing");
+                List<Job> jobs;
+                Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+                User user = (User)principal;
+                jobs = jobService.findJobsByEmployerId(user.getId());
+                if(jobs.size()>0){
+                        modelAndView.addObject("jobs",jobs);
+                        modelAndView.addObject("hasJobs",true);
+                }else {
+                        modelAndView.addObject("hasJobs",false);
+                }
+                return modelAndView;
         }
 
 

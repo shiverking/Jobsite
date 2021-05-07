@@ -269,12 +269,6 @@ a:hover {
 .header_01 .user_type {
   box-shadow: 0 31px 31px -14px rgba(55,35,84,0.1);
 }
-
-
-.header_01 .user_type_seeker i{
-  color: 
-}
-
 .user_type_inner  a h3 {
   color: var(--thm-color-1-2)
 }

@@ -6,11 +6,11 @@ import lombok.Data;
 public class ServiceException extends Exception{
     private static final long serialVersionUID = -5519743897907627214L;
     private String message ;
-    private String state;
+    private String statue;
 
-    public ServiceException(String message, String state) {
+    public ServiceException(String message, String statue) {
         this.message = message;
-        this.state = state;
+        this.statue = statue;
     }
 
     @Override
@@ -22,11 +22,11 @@ public class ServiceException extends Exception{
         this.message = message;
     }
 
-    public String getState() {
-        return state;
+    public String getStatue() {
+        return statue;
     }
 
-    public void setState(String state) {
-        this.state = state;
+    public void setStatue(String statue) {
+        this.statue = statue;
     }
 }
