@@ -46,4 +46,8 @@ public interface UserMapper {
      int setEmailById(@Param("email")String Email,@Param("id")int id);
      //根据ID找到邮箱
      String getEmailById(@Param("id") int id);
+     //根据ID找到用户名
+     String getUsernameById(@Param("id") int id);
+     //根据用户名找到ID
+     int getIdByUserName(@Param("username") String username);
 }

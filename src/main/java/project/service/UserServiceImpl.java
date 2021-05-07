@@ -125,6 +125,26 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     /**
+     * 通过用户名返回id
+     * @param username
+     * @return
+     */
+    @Override
+    public int getId(String username) {
+        return userMapper.getIdByUserName(username);
+    }
+
+    /**
+     * 通过id获取用户名
+     * @param id
+     * @return
+     */
+    @Override
+    public String getUserName(int id) {
+        return userMapper.getUsernameById(id);
+    }
+
+    /**
      * 修改用户的email
      * @param email
      * @param id

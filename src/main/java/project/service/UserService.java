@@ -24,4 +24,8 @@ public interface UserService {
     boolean setEmail(String Email,int id);
     //通过ID获取邮箱
     String getEmail(int id);
+    //通过ID获得用户名
+    String getUserName(int id);
+    //通过用户名获取id
+    int getId(String username);
 }
