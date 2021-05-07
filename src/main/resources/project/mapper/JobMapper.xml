@@ -7,10 +7,16 @@
     <insert id="insertJob" useGeneratedKeys="true" keyProperty="id" parameterType="project.model.Job">
         insert into job values (
             null,#{title},#{employer_id},#{description},#{budget},#{expertize_level},#{isCheck},#{create_time}
-            ,#{required},#{skill},#{work_time},#{work_time}
+            ,#{required},#{skill},#{work_time},#{position},#{job_statue}
         );
 
     </insert>
+    <update id="closeJobById">
+        update job set job_statue = 0 where id=#{id}
+    </update>
+    <update id="openJobById">
+        update job set job_statue = 1 where id=#{id}
+    </update>
     <select id="getAllJobs" resultType="project.model.Job">
         <!--这个地方不能加分号，否则无法分页-->
         select * from job

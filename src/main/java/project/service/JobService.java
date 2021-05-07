@@ -18,4 +18,8 @@ public interface JobService {
 
     public List<Job> findJobsByEmployerId(int employer_id);
 
+    public int closeJobById(int id);
+
+    public int openJobById(int id);
+
 }

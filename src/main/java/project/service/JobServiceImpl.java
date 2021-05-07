@@ -36,5 +36,23 @@ public class JobServiceImpl implements JobService{
         return jobMapper.findJobsByEmployerId(employer_id);
     }
 
+    @Override
+    public int closeJobById(int id) {
+        if(findJobById(id) != null){
+            return jobMapper.closeJobById(id);
+        }else{
+            return -1;
+        }
+    }
+
+    @Override
+    public int openJobById(int id) {
+        if(findJobById(id) != null){
+            return jobMapper.openJobById(id);
+        }else{
+            return -1;
+        }
+    }
+
 
 }

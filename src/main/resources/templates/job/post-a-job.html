@@ -51,7 +51,7 @@
                             <a href="/job/postJob"><i class="fas fa-paper-plane"></i>发布工作</a>
                         </li>
                         <li>
-                            <a href="/job/MyJobLists"><i class="far fa-list-alt"></i>职位管理</a>
+                            <a th:id="toJobLists"><i class="far fa-list-alt"></i>职位管理</a>
                         </li>
                     </ul>
                 </div>
@@ -124,12 +124,26 @@
                                                 </option>
                                             </select>
                                         </div>
+                                        <div class="form-group" style="display: none" th:id="positions">
+                                            <label>需求岗位</label>
+                                            <select class="form-control" th:id="position">
+                                                <option></option>
+                                            </select>
+                                        </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label>需求岗位</label>
-                                            <input type="text" th:id="position" class="form-control"
-                                                   onkeyup="this.value=this.value.replace(/[, ]/g,'')">
+                                            <label>需求人才类型</label>
+                                            <select class="form-control" th:id="skill">
+                                                <option>------</option>
+                                                <option>技术</option>
+                                                <option>文案写作</option>
+                                                <option>运营</option>
+                                                <option>市场营销</option>
+                                                <option>设计</option>
+                                                <option>音视频</option>
+                                                <option>生活与更多</option>
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="col-md-12">
@@ -149,6 +163,10 @@
                             </div>
                         </div>
                     </div>
+                </div>
+
+                <div th:id="context">
+
                 </div>
             </div>
         </div>

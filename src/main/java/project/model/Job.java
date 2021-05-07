@@ -1,6 +1,8 @@
 package project.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -12,6 +14,9 @@ import java.util.Date;
  * @description：发布的职位实体类
  * @date ：2021/4/14 23:20
  */
+
+
+@Data
 public class Job {
     private int id;
     //雇佣者id
@@ -37,8 +42,6 @@ public class Job {
     @NotNull(message = "工作所需人数不能为空")
     @Min(value = 1,message = "最少需求人数为1")
     private int required;
-    //岗位
-    private String position;
     //每日平均工作时间
     @NotNull(message = "每日平均工作时间不能为空")
     @Min(value = 1,message = "每日平均工作时间最小为1")
@@ -46,6 +49,15 @@ public class Job {
     private int work_time;
     //工作所需要的技术
     private String skill;
+    //岗位
+    private String position;
+    //该招聘是否开启
+    private boolean job_statue;
+
+    //一个工作最多有三个标签
+    private String tag1;
+    private String tag2;
+    private String tag3;
 
     public int getId() {
         return id;
@@ -103,6 +115,7 @@ public class Job {
         isCheck = check;
     }
 
+    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm")
     public Date getCreate_time() {
         return create_time;
     }
@@ -127,6 +140,14 @@ public class Job {
         this.position = position;
     }
 
+    public int getWork_time() {
+        return work_time;
+    }
+
+    public void setWork_time(int work_time) {
+        this.work_time = work_time;
+    }
+
     public String getSkill() {
         return skill;
     }
@@ -135,12 +156,36 @@ public class Job {
         this.skill = skill;
     }
 
-    public int getWork_time() {
-        return work_time;
+    public boolean isJob_statue() {
+        return job_statue;
     }
 
-    public void setWork_time(int work_time) {
-        this.work_time = work_time;
+    public void setJob_statue(boolean job_statue) {
+        this.job_statue = job_statue;
+    }
+
+    public String getTag1() {
+        return tag1;
+    }
+
+    public void setTag1(String tag1) {
+        this.tag1 = tag1;
+    }
+
+    public String getTag2() {
+        return tag2;
+    }
+
+    public void setTag2(String tag2) {
+        this.tag2 = tag2;
+    }
+
+    public String getTag3() {
+        return tag3;
+    }
+
+    public void setTag3(String tag3) {
+        this.tag3 = tag3;
     }
 
     @Override
@@ -155,9 +200,13 @@ public class Job {
                 ", isCheck=" + isCheck +
                 ", create_time=" + create_time +
                 ", required=" + required +
-                ", position='" + position + '\'' +
                 ", work_time=" + work_time +
                 ", skill='" + skill + '\'' +
+                ", position='" + position + '\'' +
+                ", job_statue=" + job_statue +
+                ", tag1='" + tag1 + '\'' +
+                ", tag2='" + tag2 + '\'' +
+                ", tag3='" + tag3 + '\'' +
                 '}';
     }
 }
