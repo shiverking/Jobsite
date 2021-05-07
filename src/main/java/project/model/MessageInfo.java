@@ -8,7 +8,15 @@ import java.util.Date;
  * @date ：2021/4/14 22:38
  */
 public class MessageInfo{
+    //文本
+    public static final int MESSAGE_TYPE_TEXT = 0;
+
+    //图片
+    public static final int MESSAGE_TYPE_IMAGE = 1;
+
     int id;
+    //聊天关系表id
+    private int link_id;
     //发送者的id
     private int sender_id;
     //接受者的id
@@ -17,6 +25,11 @@ public class MessageInfo{
     private String content;
     //发送的时间
     private Date send_time;
+    //是否是最后一条
+    private Boolean isLatest;
+
+    //消息类型  0--普通文本（默认）
+    private int type = MESSAGE_TYPE_TEXT;
 
     public int getId() {
         return id;
@@ -58,14 +71,41 @@ public class MessageInfo{
         this.send_time = send_time;
     }
 
+    public int getLink_id() {
+        return link_id;
+    }
+
+    public void setLink_id(int link_id) {
+        this.link_id = link_id;
+    }
+
+    public Boolean getLatest() {
+        return isLatest;
+    }
+
+    public void setLatest(Boolean latest) {
+        isLatest = latest;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
+
     @Override
     public String toString() {
-        return "message{" +
+        return "MessageInfo{" +
                 "id=" + id +
+                ", link_id=" + link_id +
                 ", sender_id=" + sender_id +
                 ", receiver_id=" + receiver_id +
                 ", content='" + content + '\'' +
                 ", send_time=" + send_time +
+                ", isLatest=" + isLatest +
+                ", type=" + type +
                 '}';
     }
 }

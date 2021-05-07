@@ -68,8 +68,9 @@
                         <li sec:authorize="isAuthenticated()">
                             <a>工作管理</a>
                         </li>
+
                         <li sec:authorize="isAuthenticated()">
-                            <a  href="#">在线沟通</a>
+                            <a  th:href="@{'/chatlist'}">在线沟通</a>
                         </li>
                     </ul>
                 </nav>

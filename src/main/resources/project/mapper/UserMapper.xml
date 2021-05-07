@@ -88,4 +88,10 @@
     <select id="getEmailById" resultType="java.lang.String">
         select email from user where id=#{id}
     </select>
+    <select id="getUsernameById" resultType="java.lang.String">
+        select username from user where id=#{id}
+    </select>
+    <select id="getIdByUserName" resultType="java.lang.Integer">
+        select id from user where username=#{username}
+    </select>
 </mapper>
