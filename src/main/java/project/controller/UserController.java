@@ -409,11 +409,12 @@ public class UserController {
      */
     @ResponseBody
     @RequestMapping("/hello")
-    public String test() {
+    public String test(Principal principal) {
         //测试代码
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        System.out.println("当前登录用户信息：" + principal.toString());
+        //Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        //System.out.println("当前登录用户信息：" + principal.toString());
         //User user = (User) principal;
+        System.out.println(principal.getName());
         return principal.toString();
     }
 }

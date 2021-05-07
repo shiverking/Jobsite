@@ -1250,8 +1250,9 @@
     <orderEntry type="library" name="Maven: com.github.pagehelper:pagehelper-spring-boot-autoconfigure:1.2.12" level="project" />
     <orderEntry type="library" name="Maven: com.github.pagehelper:pagehelper:5.1.10" level="project" />
     <orderEntry type="library" name="Maven: com.github.jsqlparser:jsqlparser:2.0" level="project" />
-    <orderEntry type="library" name="Maven: com.sun.mail:jakarta.mail:1.6.3" level="project" />
-    <orderEntry type="library" name="Maven: com.sun.activation:jakarta.activation:1.2.2" level="project" />
     <orderEntry type="library" name="Maven: org.flywaydb:flyway-core:5.2.4" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter-websocket:2.3.7.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-messaging:5.3.5" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-websocket:5.3.5" level="project" />
   </component>
 </module>
