@@ -107,9 +107,11 @@
     <select id="findUserById" resultType="project.model.User">
         select * from user where id = #{id}
     </select>
+        
     <select id="getUserByRid" resultType="project.model.User">
         select * from user u,user_role ur where u.id=ur.uid and ur.rid=#{rid}
-
+    </select>
+        
     <select id="getUsernameById" resultType="java.lang.String">
         select username from user where id=#{id}
     </select>
