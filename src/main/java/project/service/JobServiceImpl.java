@@ -27,6 +27,7 @@ public class JobServiceImpl implements JobService{
         return jobMapper.findJobById(id);
     }
 
+
     @Override
     public boolean checkJob(int id) {
         if(jobMapper.updateJobCheck(id)==1){
@@ -56,6 +57,33 @@ public class JobServiceImpl implements JobService{
     @Override
     public List<Job> findAllJobsDesc() {
         return jobMapper.getAllJobDesc();
+
+    public int insertJob(Job job){
+        return jobMapper.insertJob(job);
+    }
+
+    @Override
+    public List<Job> findJobsByEmployerId(int employer_id) {
+        return jobMapper.findJobsByEmployerId(employer_id);
+    }
+
+    @Override
+    public int closeJobById(int id) {
+        if(findJobById(id) != null){
+            return jobMapper.closeJobById(id);
+        }else{
+            return -1;
+        }
+    }
+
+    @Override
+    public int openJobById(int id) {
+        if(findJobById(id) != null){
+            return jobMapper.openJobById(id);
+        }else{
+            return -1;
+        }
+
     }
 
 

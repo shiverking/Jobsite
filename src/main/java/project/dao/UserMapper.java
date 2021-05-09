@@ -42,6 +42,7 @@ public interface UserMapper {
      int setEmailById(@Param("email")String Email,@Param("id")int id);
      //根据ID找到邮箱
      String getEmailById(@Param("id") int id);
+
      //根据用户名修改密码
      int changePasswordByUsername(@Param("password") String password,@Param("username") String username);
      //根据ID获得用户
@@ -52,4 +53,10 @@ public interface UserMapper {
      boolean isUsernameExist(@Param("username") String username);
      //手机号是否存在
      boolean isTelephoneExist(@Param("telephone") String telephone);
+
+     //根据ID找到用户名
+     String getUsernameById(@Param("id") int id);
+     //根据用户名找到ID
+     int getIdByUserName(@Param("username") String username);
+
 }

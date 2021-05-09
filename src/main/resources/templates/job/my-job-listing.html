@@ -1,0 +1,117 @@
+﻿<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <!-- Basic Page Needs
+    ================================================== -->
+    <title>JoDice</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="icon" href="assets/images/fav.png" type="image/gif" sizes="64x64">
+
+    <!-- CSS
+    ================================================== -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700&display=swap&subset=latin-ext"
+          rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/all.min.css">
+    <link rel="stylesheet" href="/assets/css/lq-score.css">
+    <link href="/assets/css/aos.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+    <link href="/assets/css/select2.min.css" rel="stylesheet"/>
+    <link href="/assets/css/owl.carousel.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/color-1.css">
+    <link href="/assets/css/light-theme.min.css" rel="stylesheet">
+    <link href="/assets/css/dark-theme.min.css" rel="stylesheet">
+    <link href="/assets/css/colored-theme.min.css" rel="stylesheet">
+</head>
+<body>
+
+<header class="header_01 header_inner">
+    <div class="header_main">
+        <div class="header_menu fixed-top" th:include="/header.html"></div>
+        <div class="header_btm">
+            <h2>设置</h2>
+        </div>
+    </div>
+</header>
+
+
+<!-- Main 
+================================================== -->
+<main>
+    <div class="job_container">
+        <div class="container">
+            <div class="row job_main">
+                <div class="sidebar">
+                    <ul class="user_navigation">
+                        <li>
+                            <a href="/job/postJob"><i class="fas fa-paper-plane"></i>发布工作</a>
+                        </li>
+                        <li class="is-active">
+                            <a href="/job/MyJobLists"><i class="far fa-list-alt"></i>职位管理</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class=" job_main_right" style="height: 700px">
+                    <div class="row job_section">
+                        <div class="col-sm-12">
+                            <div class="jm_headings" >
+                                <h6>发布的工作如下展示</h6>
+                            </div>
+                            <div class="table-cont">
+                                <table class="table" >
+                                    <thead>
+                                    <tr>
+                                        <th>标题</th>
+                                        <th>需求人数</th>
+                                        <th>岗位</th>
+                                        <th>发布时间</th>
+                                        <th>投递人数</th>
+                                        <th>状态</th>
+                                        <th></th>
+                                        <th></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody th:id="openlist">
+                                    </tbody>
+                                    <tbody th:id="closelist">
+                                    </tbody>
+                                </table>
+                            </div>
+<!--                            <div th:if="${not hasJobs}">-->
+<!--                                <h4>没工作，快去布发工作吧</h4>-->
+<!--                                <button class="btn btn-primary" onclick="window.location.href='/job/postJob'">发布工作-->
+<!--                                </button>-->
+<!--                            </div>-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+<!-- Footer Container
+================================================== -->
+<footer id="colophon" class="site-footer custom_footer" th:include="/footer.html"/>
+
+
+<!-- End Footer Container
+================================================== -->
+
+<!-- Scripts
+================================================== -->
+<script src="/assets/js/jquery-3.4.1.min.js"></script>
+<script src="/assets/js/select2.min.js"></script>
+<script src="/assets/js/bootstrap.min.js"></script>
+<script src="/assets/js/owl.carousel.min.js"></script>
+<script src="/assets/js/custom.js"></script>
+<script src="/assets/js/job.js"></script>
+<script src="/assets/js/jobList.js"></script>
+<script src="/assets/js/growl-notification.min.js"></script>
+
+</body>
+</html>

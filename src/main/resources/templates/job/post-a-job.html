@@ -1,0 +1,190 @@
+﻿<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <!-- Basic Page Needs
+    ================================================== -->
+    <title>JoDice</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="icon" href="assets/images/fav.png" type="image/gif" sizes="64x64">
+
+    <!-- CSS
+    ================================================== -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700&display=swap&subset=latin-ext"
+          rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/all.min.css">
+    <link rel="stylesheet" href="/assets/css/lq-score.css">
+    <link href="/assets/css/aos.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+    <link href="/assets/css/select2.min.css" rel="stylesheet"/>
+    <link href="/assets/css/owl.carousel.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/color-1.css">
+    <link href="/assets/css/light-theme.min.css" rel="stylesheet">
+    <link href="/assets/css/dark-theme.min.css" rel="stylesheet">
+    <link href="/assets/css/colored-theme.min.css" rel="stylesheet">
+</head>
+<body>
+
+<!-- Header 01
+================================================== -->
+<header class="header_01 header_inner">
+    <div class="header_main">
+        <div class="header_menu fixed-top" th:include="/header.html"></div>
+        <div class="header_btm">
+            <h2>设置</h2>
+        </div>
+    </div>
+</header>
+
+<!-- Main 
+================================================== -->
+<main>
+    <div class="job_container">
+        <div class="container">
+            <div class="row job_main">
+                <div class="sidebar">
+                    <ul class="user_navigation">
+                        <li class="is-active">
+                            <a href="/job/postJob"><i class="fas fa-paper-plane"></i>发布工作</a>
+                        </li>
+                        <li>
+                            <a th:id="toJobLists"><i class="far fa-list-alt"></i>职位管理</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class=" job_main_right">
+                    <div class="row job_section">
+                        <div class="col-sm-12">
+                            <div class="jm_headings">
+                                <h5>发布工作</h5>
+                            </div>
+                            <div class="section-divider">
+                            </div>
+                            <div class="big_form_group">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group ">
+                                            <label>工作标题</label>
+                                            <input type="text" class="form-control" th:id="title">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group ">
+                                            <label>公司名称</label>
+                                            <input type="text" class="form-control" th:id="company_name"
+                                                   onkeyup="this.value=this.value.replace(/[, ]/g,'')">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="big_form_group">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group ">
+                                            <label>时薪</label>
+                                            <input type="text" class="form-inline" th:id="budgetByHour"
+                                                   style="width: 60%;float: left"
+                                                   onkeyup="this.value=this.value.replace(/[, ]/g,'')"/>
+                                            <h6 style="float: left">元/时</h6>
+                                            <br>
+                                            <br>
+                                            <label>平均每日工作时长</label>
+                                            <input type="text" class="form-control" th:id="work_time"
+                                                   onkeyup="this.value=this.value.replace(/[, ]/g,'')">
+
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group ">
+                                            <label>需求人数</label>
+                                            <input type="text" class="form-control" th:id="require_people"
+                                                   onkeyup="this.value=this.value.replace(/[, ]/g,'')">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="big_form_group">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group ">
+                                            <label>需求人才级别</label>
+                                            <select class="form-control" th:id="require_skill">
+                                                <option th:id="beginner">
+                                                    新手（工作经验0-3年）
+                                                </option>
+                                                <option th:id="intermediate">
+                                                    熟练（工作经验3-5年）
+                                                </option>
+                                                <option th:id="expert">
+                                                    专家（工作经验5年以上）
+                                                </option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group" style="display: none" th:id="positions">
+                                            <label>需求岗位</label>
+                                            <select class="form-control" th:id="position">
+                                                <option></option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>需求人才类型</label>
+                                            <select class="form-control" th:id="skill">
+                                                <option>------</option>
+                                                <option>技术</option>
+                                                <option>文案写作</option>
+                                                <option>运营</option>
+                                                <option>市场营销</option>
+                                                <option>设计</option>
+                                                <option>音视频</option>
+                                                <option>生活与更多</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group ">
+                                            <label>工作描述</label>
+                                            <textarea th:id="description" class="form-control"></textarea>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <div class="col-md-9 ">
+                                    <button type="submit" th:id="postJob" class="btn btn-primary">Submit</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div th:id="context">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+<footer id="colophon" class="site-footer custom_footer" th:include="/footer.html"/>
+
+<!-- Scripts
+================================================== -->
+<script src="/assets/js/jquery-3.4.1.min.js"></script>
+<script src="/assets/js/select2.min.js"></script>
+<script src="/assets/js/bootstrap.min.js"></script>
+<script src="/assets/js/owl.carousel.min.js"></script>
+<script src="/assets/js/custom.js"></script>
+<script src="/assets/js/job.js"></script>
+<script src="/assets/js/growl-notification.min.js"></script>
+
+</body>
+</html>

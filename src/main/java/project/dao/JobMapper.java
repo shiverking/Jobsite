@@ -32,5 +32,13 @@ public interface JobMapper {
     //将未审核的Job更新为审核通过
     int updateJobCheck(@Param("id") int id);
     //获得所有未审核的Job
-    List<Job> getJobNotcheck();
+    List<Job> getJobNotCheck();
+    //插入工作
+    int insertJob(Job job);
+    //根据雇主id查询工作列表
+    List<Job> findJobsByEmployerId(@Param("employer_id") int employer_id);
+
+    int closeJobById(@Param("id") int id);
+
+    int openJobById(@Param("id") int id);
 }

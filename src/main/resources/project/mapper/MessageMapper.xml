@@ -2,7 +2,55 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="project.dao.MessageMapper">
+    <resultMap id="MessageResultMap" type="project.model.MessageInfo">
+        <result column="is_latest" property="isLatest"/>
+    </resultMap>
+    <insert id="insertChatUserLink">
+        insert into chat_user_link (from_id, to_id, create_time) values (
+         #{from_id},#{to_id},#{create_time,jdbcType=DATE});
+    </insert>
+    <insert id="insertChatList">
+        insert into chat_list (link_id,from_id,to_id,from_window,to_window,unread,status) values (
+        #{link_id},#{from_id},#{to_id},#{from_window},#{to_window},#{unread},#{status});
+    </insert>
+    <insert id="insertMessageRecord">
+        insert into message (link_id,sender_id,receiver_id,content,send_time) values (
+        #{link_id},#{sender_id},#{receiver_id},#{content},#{send_time,jdbcType=DATE});
+    </insert>
+
+    <update id="updateOnlineStatus">
+        update chat_list
+        <set>
+            from_window = #{from_window}
+        </set>
+        where from_id=#{from_id};
+    </update>
+    <update id="updateUnread">
+        update chat_list
+        <set>
+            unread = #{unread}
+        </set>
+        where from_id=#{from_id} and to_id=#{to_id};
+    </update>
+
     <select id="findMessageBySenderIdAndReceiverId" resultType="project.model.MessageInfo">
-        select * from Message where senderId= #{senderId} and receiverId = #{receiverId};
+        select * from message where (sender_id= #{sender_id} and receiver_id = #{receiver_id}) or (sender_id= #{receiver_id} and receiver_id = #{sender_id});
+    </select>
+    <!--查询是否有记录，前提是记录必须存在且唯一-->
+    <select id="isFirstChat" resultType="java.lang.Boolean">
+        <![CDATA[ select count(id)
+                  from chat_user_link where from_id = #{from_id} and to_id = #{to_id}]]>
+    </select>
+    <select id="getUnreadByFromIdAndToId" resultType="java.lang.Integer">
+        select unread from chat_list where from_id=#{from_id} and to_id=#{to_id};
+    </select>
+    <select id="selectLinkId" resultType="java.lang.Integer">
+        select id from chat_user_link where (from_id=#{from_id} and to_id=#{to_id}) or (from_id=#{to_id} and to_id=#{from_id});
+    </select>
+    <select id="getRecentChatList" resultType="java.lang.Integer">
+        select to_id from chat_list where from_id=#{from_id};
+    </select>
+    <select id="getChatRecord" resultType="project.model.MessageInfo">
+        select * from message where sender_id=#{sender_id}
     </select>
 </mapper>

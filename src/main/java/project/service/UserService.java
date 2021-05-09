@@ -26,6 +26,7 @@ public interface UserService {
     boolean setEmail(String Email,int id);
     //通过ID获取邮箱
     String getEmail(int id);
+
     //删除用户
     boolean deleteUserByUsername(String username);
     //根据用户名修改密码
@@ -40,4 +41,10 @@ public interface UserService {
     boolean isUsernameExist(String username);
     //输入的手机号是否存在
     boolean isTelephoneExist(String telephone);
+
+    //通过ID获得用户名
+    String getUserName(int id);
+    //通过用户名获取id
+    int getId(String username);
+
 }

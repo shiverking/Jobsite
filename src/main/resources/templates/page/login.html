@@ -47,13 +47,15 @@
       <div class="row">
         <div class="col-md-12">
         	<div class="only-form-box" th:id="loginByPassword" >
+                <div class="alert alert-danger" th:if="${param.error}">
+                    <strong>登录失败!</strong> 用户名或密码不正确,请重试
+                </div>
                <span style="float: right">
-                <a  th:id="gotoPhone"  >手机验证码登录</a>
+                <a th:id="gotoPhone"  >手机验证码登录</a>
                  </span>
     				<form th:href="@{/login}" th:method="post">
     					<div class="com_class_form">
     						<div class="form-group">
-
     							<input class="form-control" type="text" name="username" size="40" placeholder=" 请输入您的用户名 ">
     						</div>
     						<div class="form-group">

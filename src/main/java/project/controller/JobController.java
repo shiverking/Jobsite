@@ -2,16 +2,23 @@ package project.controller;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.mysql.cj.protocol.ResultBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 import project.model.Job;
+import project.model.RespBean;
+import project.model.User;
 import project.service.JobService;
+import project.service.ResumeService;
 
-import java.util.List;
+import javax.validation.Valid;
+import java.sql.Timestamp;
+import java.util.*;
 
 /**
  * @author ：闫崇傲
@@ -22,6 +29,9 @@ import java.util.List;
 public class JobController {
         @Autowired
         JobService jobService;
+
+        @Autowired
+        ResumeService resumeService;
         /**
          * 分页查找所有工作
          * @param model
@@ -37,7 +47,6 @@ public class JobController {
                 PageInfo<Job> pageInfo = new PageInfo<Job>(jobs,5);
 
                 model.addAttribute("pageInfo",pageInfo);
-
                 //获得当前页
                 model.addAttribute("pageNum", pageInfo.getPageNum());
                 //获得一页显示的条数
@@ -60,7 +69,97 @@ public class JobController {
         }
 
 
+        @RequestMapping("/job/postJob")
+        public String toPostJobPage(){
+                return "/job/post-a-job";
+        }
 
 
+        /**
+         * 发布工作
+         * @param
+         * @return
+         */
+        @ResponseBody
+        @RequestMapping("/job/postAJob")
+        public RespBean postJob(@Valid @RequestBody Job job) {
+                //获取当前发布用户id
+                Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+                User user = (User)principal;
+                job.setEmployer_id(user.getId());
+                //获取当前系统创建时间
+                Date date = new Date();
+                Timestamp timestamp = new Timestamp(date.getTime());
+                job.setCreate_time(timestamp);
+                //设置为未审核，开启招聘
+                job.setCheck(false);
+                job.setJob_statue(true);
+                //插入对象
+                jobService.insertJob(job);
+                //获取插入对象的id值
+                Map<String,Object> map = new HashMap<>();
+                map.put("JobId",job.getId());
+            return RespBean.ok("发布工作成功",map);
+        }
+
+
+        @RequestMapping("/job/MyJobLists")
+        public String toMyJobListsPage(){
+                return "/job/my-job-listing";
+        }
+
+
+        //获取给用户展示的工作列表
+        @ResponseBody
+        @RequestMapping("/job/showMyJobLists")
+        public RespBean showMyJobLists(){
+                ModelAndView modelAndView = new ModelAndView("/job/my-job-listing");
+                List<Job> jobs;
+                //获取当前用户id
+                Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+                User user = (User)principal;
+                jobs = jobService.findJobsByEmployerId(user.getId());
+                if(jobs.size()>0){
+                        //添加工作列表
+                        Map<String, Object> map = new HashMap<>();
+                        map.put("jobLists",jobs);
+                        //获取每个工作作为投递对象的次数
+                        List<Integer> sends = new ArrayList<>();
+                        for(Job job : jobs){
+                                int i = resumeService.countByJobId(job.getId());
+                                sends.add(i);
+                        }
+                        //添加
+                        map.put("sends",sends);
+                        return RespBean.ok("添加成功",map);
+                }else {
+                        return RespBean.error("列表未空");
+                }
+        }
+
+
+        @ResponseBody
+        @RequestMapping("/job/closeJob/{id}")
+        public RespBean closeJobById(@PathVariable("id") int id){
+                int a =jobService.closeJobById(id);
+                if (a == -1){
+                        return RespBean.error("未找到该职位招聘信息");
+                }else {
+                        return RespBean.ok("关闭该职位招聘成功");
+                }
+
+        }
+
+        @ResponseBody
+        @RequestMapping("/job/openJob/{id}")
+        public RespBean openJobById(@PathVariable("id") int id){
+                int a =jobService.openJobById(id);
+                if (a == -1){
+                        return RespBean.error("未找到该职位招聘信息");
+                }else {
+                        return RespBean.ok("开启该职位招聘成功");
+                }
+
+        }
 
 }
