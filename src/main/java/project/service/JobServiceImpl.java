@@ -57,7 +57,9 @@ public class JobServiceImpl implements JobService{
     @Override
     public List<Job> findAllJobsDesc() {
         return jobMapper.getAllJobDesc();
-
+    }
+    
+    @Override
     public int insertJob(Job job){
         return jobMapper.insertJob(job);
     }
