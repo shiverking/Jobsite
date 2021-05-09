@@ -13,5 +13,14 @@ public interface JobService {
     public List<Job> findAllJobs();
     //按照id找到Job
     public Job findJobById(int id);
-
+    //对job进行审核
+    boolean checkJob(int id);
+    //返回所有通过审核的job
+    List<Job> findAllJobsChecked();
+    //删除job
+    boolean deleteJob(int id);
+    //按时间升序查看job
+    List<Job> findAllJobsAsc();
+    //按时间降序查看job
+    List<Job> findAllJobsDesc();
 }

@@ -313,7 +313,7 @@ public class UserController {
     @ResponseBody
     @PostMapping("/setting/isPasswordExist")
     public RespBean isPasswordExist(@RequestBody Map<String,Object> info){
-        //获取用户输入的密码
+        //获取用户输入的用户名
         String inputPassword = (String) info.get("password");
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = (User)principal;

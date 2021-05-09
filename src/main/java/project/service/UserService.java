@@ -3,6 +3,8 @@ package project.service;
 import project.exception.ServiceException;
 import project.model.User;
 
+import java.util.List;
+
 public interface UserService {
     //通过用户名找到用户
     User findUserByUsername(String username);
@@ -24,4 +26,18 @@ public interface UserService {
     boolean setEmail(String Email,int id);
     //通过ID获取邮箱
     String getEmail(int id);
+    //删除用户
+    boolean deleteUserByUsername(String username);
+    //根据用户名修改密码
+    boolean changePasswordByUsername(String password,String username);
+    //获得所有用户
+    List<User> findAllUsers();
+    //通过id获得用户
+    User findUserById(int id);
+    //通过身份获得用户
+    List<User> findUserByRid(int rid);
+    //输入的用户名是否存在
+    boolean isUsernameExist(String username);
+    //输入的手机号是否存在
+    boolean isTelephoneExist(String telephone);
 }

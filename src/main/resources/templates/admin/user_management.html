@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <!-- Basic Page Needs
+    ================================================== -->
+    <title>JoDice</title>
+    <meta charset="utf-8" xmlns:th="http://www.thymeleaf.org">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="icon" href="/assets/images/fav.png" type="image/gif" sizes="64x64">
+
+    <!-- CSS
+    ================================================== -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700&display=swap&subset=latin-ext"
+          rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/all.min.css">
+    <link href="/assets/css/aos.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+    <link href="/assets/css/select2.min.css" rel="stylesheet"/>
+    <link href="/assets/css/owl.carousel.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/color-1.css">
+    <!--提醒的样式-->
+    <link href="/assets/css/light-theme.min.css" rel="stylesheet">
+    <link href="/assets/css/dark-theme.min.css" rel="stylesheet">
+    <link href="/assets/css/colored-theme.min.css" rel="stylesheet">
+</head>
+<body>
+
+<!-- Header 01
+================================================== -->
+<header class="header_01 header_inner">
+    <div class="header_main">
+        <div class="header_menu fixed-top" th:include="/header.html"></div>
+        <div class="header_btm">
+            <h2>管理</h2>
+        </div>
+    </div>
+</header>
+
+
+<!-- Main
+================================================== -->
+<main>
+    <div class="job_container">
+        <div class="container">
+            <div class="row job_main">
+                <div class="sidebar">
+                    <h5>后台管理系统</h5>
+                    <ul class="user_navigation">
+                        <li >
+                            <a href="/admin"><i class="fas fa-star"></i>职位</a>
+                        </li>
+                        <li>
+                            <a href="/admin/order"><i class="fas fa-list-alt"></i>订单</a>
+                        </li>
+                        <li class="is-active">
+                            <a href="/admin/user"><i class="fas fa-user"></i>人员</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="job_main_right">
+                    <!--人员管理-->
+                    <div class="row job_section">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <div class="field" style="float: right;width: 150px">
+                                    <i class="fas fa-briefcase"></i>
+                                    <select class="js-example-basic-single" name="state" onchange="selectUser()">
+                                        <option value="user">所有用户</option>
+                                        <option value="employer">招聘者</option>
+                                        <option value="employee">应聘者</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="section-divider">
+                            </div>
+                            <div id="displayInList" class="row full_width feat ured_box_outer">
+                                <div class="col-sm-12" th:each="user : ${pageInfo.list}">
+                                    <div class="featured_box ">
+                                        <div class="fb_image">
+                                            <img  alt="brand logo" src="/assets/images/profile-1.png">
+                                        </div>
+                                        <div class="fb_content">
+                                            <a th:href="@{'/user/' + ${user.id} }">
+                                            <h4 th:text="${user.username}" />
+                                            <ul>
+                                                <li style="width: 50px">
+                                                    <i class="fas fa-user" th:text="${user.id}" style="color: #dd4b39"></i>
+                                                </li>
+                                                <li style="width: 150px">
+                                                    <i class="fas fa-phone" th:text="${user.telephone}" style="color: #dd4b39"></i>
+                                                </li>
+                                                <li style="width: 150px">
+                                                    <i id=jobId class="fas fa-at" th:text="${user.email}" style="color: #dd4b39"></i>
+                                                </li>
+                                            </ul>
+                                            </a>
+                                        </div>
+                                        <div class="fb_action">
+                                            <a class="btn btn-primary" href="/admin/singleUser">查看</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--分页部分  -->
+                            <ul class="pagination">
+                                <!-- 向前1页-->
+                                <li>
+                                    <a  class="btn btn-outline-secondary" th:if="${pageNum-1>0}" th:href="@{${'job'}(pageNum=${pageNum-1},pageSize=${pageSize})}" aria-label="Previous">
+                                        <span aria-hidden="true">上一页</span>
+                                    </a>
+                                    <a  class="btn btn-outline-secondary" th:if="${pageNum-1<=0}" href="javascript:void(0);" aria-label="Previous">
+                                        <span aria-hidden="true">上一页</span>
+                                    </a>
+                                </li>
+                                <!--只显示5页-->
+
+                                <l th:if="${pageNum<totalPages-5}"  th:each="pageNo : ${#numbers.sequence(pageNum, pageNum+5)}">
+                                    <a class="btn btn-outline-secondary" th:if="${pageNum eq pageNo}" href="javascript:void(0);">
+                                        <span th:text="${pageNo}"></span>
+                                    </a>
+
+                                    <a class="btn btn-outline-secondary" th:if="${not (pageNum eq pageNo)}" th:href="@{${'job'}(pageNum=${pageNo},pageSize=${pageSize})}">
+                                        <span th:text="${pageNo}"></span>
+                                    </a>
+                                </l>
+                                <l th:if="${pageNum>=totalPages-5}"  th:each="pageNo : ${#numbers.sequence(totalPages-5,totalPages)}">
+                                    <a  class="btn btn-outline-secondary"th:if="${pageNum eq pageNo}" href="javascript:void(0);">
+                                        <span th:text="${pageNo}"></span>
+                                    </a>
+
+                                    <a  class="btn btn-outline-secondary" th:if="${not (pageNum eq pageNo)}" th:href="@{${'job'}(pageNum=${pageNo},pageSize=${pageSize})}">
+                                        <span th:text="${pageNo}"></span>
+                                    </a>
+                                </l>
+                                <!--向后五页-->
+                                <li>
+                                    <a class="btn btn-outline-secondary" th:if="${totalPages-pageNum>=0}" th:href="@{${'job'}(pageNum=${pageNum+5},pageSize=${pageSize})}" aria-label="Next">
+                                        <span aria-hidden="true">下一页</span>
+                                    </a>
+                                    <a class="btn btn-outline-secondary" th:if="${totalPages-pageNum<0}" href="javascript:void(0);" aria-label="Next">
+                                        <span aria-hidden="true">下一页</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+<!-- Footer Container
+================================================== -->
+<footer id="colophon" class="site-footer custom_footer" th:include="/footer.html"/>
+
+
+<!-- Scripts
+================================================== -->
+<script src="/assets/js/jquery-3.4.1.min.js"></script>
+<script src="/assets/js/select2.min.js"></script>
+<script src="/assets/js/bootstrap.min.js"></script>
+<script src="/assets/js/owl.carousel.min.js"></script>
+<script src="/assets/js/custom.js"></script>
+<!--提醒有关的js-->
+<script src="/assets/js/growl-notification.min.js"></script>
+<!--自己写的js-->
+<script src="/assets/js/admin.js"></script>
+</body>
+</html>
