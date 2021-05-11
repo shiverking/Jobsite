@@ -176,7 +176,9 @@
                         <li>
                             <i class="fas fa-user-graduate"></i>
                             <h6>专业水平</h6>
-                            <p th:text="${job.expertize_level}"></p>
+                            <p th:if="${job.expertize_level=='beginner'}" th:text="新手"></p>
+							<p th:if="${job.expertize_level=='intermediate'}" th:text="新手"></p>
+							<p th:if="${job.expertize_level=='expert'}" th:text="新手"></p>
                         </li>
 	      			</ul>
 				</div>      			
@@ -216,5 +218,10 @@
 <script src="/assets/js/bootstrap.min.js"></script>
 <script src="/assets/js/owl.carousel.min.js"></script>
 <script src="/assets/js/custom.js"></script>
+<script>
+	$(document).ready(function() {
+		$("#5").addClass("current_page").siblings().removeClass("current_page");
+	})
+</script>
 </body>
 </html>

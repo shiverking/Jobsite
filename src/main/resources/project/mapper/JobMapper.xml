@@ -56,5 +56,8 @@
     <select id="findJobsByEmployerId" resultType="project.model.Job">
         select * from job where employer_id = #{employer_id}
     </select>
+    <select id="findJobByName" resultType="project.model.Job">
+        select * from job where title = #{title}
+    </select>
 
 </mapper>

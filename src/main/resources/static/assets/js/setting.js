@@ -1,5 +1,5 @@
 $(window).on('load', function(){
-  $(".job_main_right>div").eq(0).show().siblings().hide();
+    $(".job_main_right>div").eq(0).show().siblings().hide();
     //默认禁用按钮
     $("#confirmChangePassword").attr("disabled", true);
     //如果没有绑定邮箱，则设置为提示文字
@@ -313,8 +313,6 @@ $('#saveProfile').click(function(){
         })
     }
 })
-
-
 
 
 

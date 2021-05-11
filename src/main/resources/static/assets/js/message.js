@@ -48,7 +48,8 @@ function handleNotification(message) {
     //对方的用户名
     var username= $("#currentUserName").val();
     var now = new Date().Format("yyyy-MM-dd");
-    addOtherRecord(message.body,username,now);
+    var headurl=$("#currentHeadUrl").val();
+    addOtherRecord(message.body,username,now,headurl);
 }
 function sendSpittle(toUserName,text) {
     //用ascii码为0x01的字符分割，该字符键盘无法输入，十分安全
@@ -60,10 +61,11 @@ $("#stop").click(function () {
 });
 
 //添加对方的聊天数据到ul
-function addOtherRecord(message,username,time){
+function addOtherRecord(message,username,time,headurl){
+
     var li_str='<li class="d-flex message">\n' +
         '                            <div class="mr-lg-3 me-2">\n' +
-        '                                <img class="avatar sm rounded-circle" src="/assets_Message/images/xs/avatar5.jpg"\n' +
+        '                                <img class="avatar sm rounded-circle" src=\"'+headurl+'\"\n' +
         '                                     alt="avatar">\n' +
         '                            </div>\n' +
         '                            <div class="message-body">\n' +
@@ -102,14 +104,21 @@ $("li[id^=user]").click(function () {
     $(this).addClass("active").siblings().removeClass("active");
     var toUserName = $(this).find('h6').html();
     var toUserId = $(this).attr("id").replace('user','');
+    var toUserHeadUrl = $(this).find('img').attr("src");
     //清空右侧所有聊天信息
     $("#content-list").find("li").remove();
     //修改当前聊天显示的用户名
     $("#currentChatUserName").html(toUserName);
     //修改当前聊天显示的ID
     $("#currentUserId").val(toUserId);
+    //修改当前聊天的用户头像
+    $('#communication').find('img').attr('src',toUserHeadUrl);
     //记录当前的聊天用户名
     $("#currentUserName").val(toUserName);
+    //记录当前聊天的用户头像地址
+    $("#currentHeadUrl").val(toUserHeadUrl);
+
+
     //向后台发送消息，查找聊天记录
     var obj = {
         "toUserName":toUserName,
@@ -126,7 +135,7 @@ $("li[id^=user]").click(function () {
                        addOwnRecord(data[i]["content"],data[i]["send_time"]);
                    }
                    else{
-                       addOtherRecord(data[i]["content"],toUserName,data[i]["send_time"]);
+                       addOtherRecord(data[i]["content"],toUserName,data[i]["send_time"],toUserHeadUrl);
                    }
             }
             //滑动到最低端
