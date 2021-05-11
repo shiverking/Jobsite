@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import project.dao.UserMapper;
 import project.exception.ServiceException;
 import project.model.User;
+
+import java.util.List;
 import java.util.Random;
 
 @Service
@@ -160,7 +162,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     /**
-     * 根据idx修改用户的头像地址
+     * 根据id修改用户的头像地址
      * @param id
      * @param headrul
      * @return
@@ -198,6 +200,41 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     /**
+     * 通过用户名删除用户
+     * @param username
+     * @return
+     */
+    @Override
+    public boolean deleteUserByUsername(String username){
+        if(userMapper.deleteUserByUsername(username)==1)
+            return true;
+        else return false;
+    }
+
+    /**
+     * 通过用户名修改密码
+     * @param password
+     * @param username
+     * @return
+     */
+    @Override
+    public boolean changePasswordByUsername(String password,String username){
+        if(userMapper.changePasswordByUsername(password,username)==1)
+            return true;
+        else return false;
+    }
+
+    /**
+     * 获得所有用户
+     * @return
+     */
+    @Override
+    public List<User> findAllUsers() {
+        return userMapper.getAllUsers();
+    }
+
+
+    /**
      * 通过用户的id查找其位置
      * @param id
      * @return
@@ -205,5 +242,46 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Override
     public String getLocation(int id) {
         return userMapper.getLocationById(id);
+    }
+
+    /**
+     * 通过id获取用户
+     * @param id
+     * @return
+     */
+    public User findUserById(int id) {
+        return userMapper.findUserById(id);
+    }
+
+    /**
+     * 根据RID获取用户
+     * @param rid
+     * @return
+     */
+    @Override
+    public List<User> findUserByRid(int rid) {
+        return userMapper.getUserByRid(rid);
+    }
+
+
+    /**
+     * 判断用户名是否存在
+     * @param username
+     * @return 存在返回true，否则返回false
+     */
+    @Override
+    public boolean isUsernameExist(String username) {
+        return userMapper.isUsernameExist(username);
+    }
+
+    /**
+     * 判断手机号是否存在
+     * @param telephone
+     * @return 存在返回true，否则返回false
+     */
+    @Override
+    public boolean isTelephoneExist(String telephone) {
+        return userMapper.isTelephoneExist(telephone);
+
     }
 }

@@ -10,7 +10,8 @@ import java.util.List;
 @Mapper
 @Component
 public interface OrderMapper {
-        //获得所有Order
-        List<Order> getAllOrders();
-
+    //获得所有Order
+    List<Order> findAllOrders();
+    //根据id查找order
+    Order findOrderById(@Param("id") int id);
 }

@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <!-- Basic Page Needs
+    ================================================== -->
+    <title>JoDice</title>
+    <meta charset="utf-8" xmlns:th="http://www.thymeleaf.org">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="icon" href="/assets/images/fav.png" type="image/gif" sizes="64x64">
+
+    <!-- CSS
+    ================================================== -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700&display=swap&subset=latin-ext"
+          rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/all.min.css">
+    <link href="/assets/css/aos.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+    <link href="/assets/css/select2.min.css" rel="stylesheet"/>
+    <link href="/assets/css/owl.carousel.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/color-1.css">
+    <!--提醒的样式-->
+    <link href="/assets/css/light-theme.min.css" rel="stylesheet">
+    <link href="/assets/css/dark-theme.min.css" rel="stylesheet">
+    <link href="/assets/css/colored-theme.min.css" rel="stylesheet">
+</head>
+<body>
+
+<!-- Header 01
+================================================== -->
+<header class="header_01 header_inner">
+    <div class="header_main">
+        <div class="header_menu fixed-top" th:include="/header.html"></div>
+        <div class="header_btm">
+            <h2>管理</h2>
+        </div>
+    </div>
+</header>
+
+
+<!-- Main
+================================================== -->
+<main>
+    <div class="job_container">
+        <div class="container">
+            <div class="row job_main">
+                <div class="sidebar">
+                    <h5>超管系统</h5>
+                    <ul class="user_navigation">
+                        <li class="is-active">
+                            <a id="1"><i class="fas fa-user"></i>创建管理员账号</a>
+                        </li>
+                        <li>
+                            <a id="2"><i class="fas fa-key"></i>修改管理员密码</a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fas fa-paper-plane"></i>删除管理员账号</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="job_main_right">
+                    <!--创建管理员账号-->
+                    <div class="row job_section">
+                        <div class="col-sm-12">
+                            <div class="jm_headings">
+                                <h5>创建管理员账号</h5>
+                            </div>
+                            <div class="section-divider">
+                            </div>
+                            <form>
+                                <div class="form-group row">
+                                    <div class="col-md-2">
+                                        <h5>用户名</h5>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <input type="text" class="form-control" id="username1">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-md-2">
+                                        <h5>手机号</h5>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <input type="text" class="form-control" id="telephone">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-md-2">
+                                        <h5>密码</h5>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <input type="password" class="form-control" id="password">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-md-2">
+                                        <h5>重复密码</h5>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <input type="password" class="form-control" id="repeatPassword">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-md-9 offset-md-2">
+                                        <input id="confirmInsertUser" class="btn btn-primary" type="button"
+                                               th:value="确定" style="width: 30%"></input>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <!--修改管理员密码-->
+                    <div class="row job_section">
+                        <div class="col-sm-12">
+                            <div class="jm_headings">
+                                <h5>修改管理员密码</h5>
+                            </div>
+                            <div class="section-divider">
+                            </div>
+                            <form>
+                                <div class="form-group row">
+                                    <div class="col-md-2">
+                                        <h5>管理员用户名</h5>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <input type="text" class="form-control" id="username2">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-md-2">
+                                        <h5>新密码</h5>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <input type="password" class="form-control" id="newPassword">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-md-2">
+                                        <h5>确认新密码</h5>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <input type="password" class="form-control" id="newPassword2">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-md-9 offset-md-2">
+                                        <input id="confirmChangePassword" class="btn btn-primary" type="button"
+                                               th:value="确定" style="width: 30%"></input>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <!--删除管理员账号-->
+                    <div class="row job_section">
+                        <div class="col-sm-12">
+                            <div class="jm_headings">
+                                <h5>删除管理员账号</h5>
+                            </div>
+                            <div class="section-divider">
+                            </div>
+                            <form>
+                                <div class="form-group row">
+                                    <div class="col-md-2">
+                                        <h5>管理员用户名</h5>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <input type="text" class="form-control" id="username3">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-md-9 offset-md-2">
+                                        <input id="confirmDeleteUser" class="btn btn-primary" type="button"
+                                               th:value="确定" style="width: 30%"></input>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+<!-- Footer Container
+================================================== -->
+<footer id="colophon" class="site-footer custom_footer" th:include="/footer.html"/>
+
+
+<!-- Scripts
+================================================== -->
+<script src="/assets/js/jquery-3.4.1.min.js"></script>
+<script src="/assets/js/select2.min.js"></script>
+<script src="/assets/js/bootstrap.min.js"></script>
+<script src="/assets/js/owl.carousel.min.js"></script>
+<script src="/assets/js/custom.js"></script>
+<!--提醒有关的js-->
+<script src="/assets/js/growl-notification.min.js"></script>
+<!--自己写的js-->
+<script src="/assets/js/superadmin.js"></script>
+</body>
+</html>

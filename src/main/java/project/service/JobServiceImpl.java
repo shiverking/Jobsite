@@ -27,6 +27,39 @@ public class JobServiceImpl implements JobService{
         return jobMapper.findJobById(id);
     }
 
+
+    @Override
+    public boolean checkJob(int id) {
+        if(jobMapper.updateJobCheck(id)==1){
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public List<Job> findAllJobsChecked() {
+        return jobMapper.getJobIsCheck();
+    }
+
+    @Override
+    public boolean deleteJob(int id) {
+        if(jobMapper.deleteJobById(id)==1){
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public List<Job> findAllJobsAsc() {
+        return jobMapper.getAllJobAsc();
+    }
+
+    @Override
+    public List<Job> findAllJobsDesc() {
+        return jobMapper.getAllJobDesc();
+    }
+    
+    @Override
     public int insertJob(Job job){
         return jobMapper.insertJob(job);
     }
@@ -34,6 +67,25 @@ public class JobServiceImpl implements JobService{
     @Override
     public List<Job> findJobsByEmployerId(int employer_id) {
         return jobMapper.findJobsByEmployerId(employer_id);
+    }
+
+    @Override
+    public int closeJobById(int id) {
+        if(findJobById(id) != null){
+            return jobMapper.closeJobById(id);
+        }else{
+            return -1;
+        }
+    }
+
+    @Override
+    public int openJobById(int id) {
+        if(findJobById(id) != null){
+            return jobMapper.openJobById(id);
+        }else{
+            return -1;
+        }
+
     }
 
 
