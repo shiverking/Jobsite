@@ -1,0 +1,162 @@
+﻿<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <!-- Basic Page Needs
+    ================================================== -->
+    <title>JoDice</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="icon" href="assets/images/fav.png" type="image/gif" sizes="64x64">
+
+    <!-- CSS
+    ================================================== -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700&display=swap&subset=latin-ext"
+          rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/all.min.css">
+    <link rel="stylesheet" href="/assets/css/lq-score.css">
+    <link href="/assets/css/aos.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+    <link href="/assets/css/select2.min.css" rel="stylesheet"/>
+    <link href="/assets/css/owl.carousel.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/color-1.css">
+    <link href="/assets/css/light-theme.min.css" rel="stylesheet">
+    <link href="/assets/css/dark-theme.min.css" rel="stylesheet">
+    <link href="/assets/css/colored-theme.min.css" rel="stylesheet">
+</head>
+<body>
+
+<!-- Header 01
+================================================== -->
+<header class="header_01 header_inner">
+    <div class="header_main">
+        <div class="header_menu fixed-top" th:include="/header.html"></div>
+        <div class="header_btm">
+            <h2>评价</h2>
+        </div>
+    </div>
+</header>
+
+<!-- Main 
+================================================== -->
+<main>
+    <div class="job_container">
+        <div class="container">
+            <div class="row job_main">
+                <div class="sidebar">
+                    <ul class="user_navigation">
+                        <li >
+                            <a href="/job/postJob"><i class="fas fa-paper-plane"></i>发布工作</a>
+                        </li>
+                        <li>
+                            <a th:id="toJobLists"><i class="far fa-list-alt"></i>职位管理</a>
+                        </li>
+                        <li class="is-active">
+                            <a th:href="@{/appraisals}"><i class="far fa-comment"></i>评价</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class=" job_main_right">
+                    <div class="row job_section">
+                        <div class="col-sm-12">
+                            <div class="jm_headings">
+                                <h5 style="font-weight: bold">评价</h5>
+                            </div>
+                            <!--导航栏-->
+                            <nav class="navbar navbar-expand-lg navbar-light bg-light" style="padding-left: 0;">
+                                <div class="collapse navbar-collapse" id="navbarNav">
+                                    <ul class="navbar-nav">
+                                        <li class="nav-item active">
+                                            <a class="nav-link" href="#" style=" padding-left: 0;">我收到的评价</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#">我发出的评价</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </nav>
+
+                            <div class="list-group" id="comments_from_me" >
+                                <a href="#" class="list-group-item list-group-item-action active">
+                                    <div class="d-flex w-100 justify-content-between">
+                                        <h5 class="mb-1">List group item heading</h5>
+                                        <small>3 days ago</small>
+                                    </div>
+                                    <p class="mb-1">Some placeholder content in a paragraph.</p>
+                                    <small>And some small print.</small>
+                                </a>
+                                <a href="#" class="list-group-item list-group-item-action">
+                                    <div class="d-flex w-100 justify-content-between">
+                                        <h5 class="mb-1">List group item heading</h5>
+                                        <small class="text-muted">3 days ago</small>
+                                    </div>
+                                    <p class="mb-1">Some placeholder content in a paragraph.</p>
+                                    <small class="text-muted">And some muted small print.</small>
+                                </a>
+                                <a href="#" class="list-group-item list-group-item-action">
+                                    <div class="d-flex w-100 justify-content-between">
+                                        <h5 class="mb-1">List group item heading</h5>
+                                        <small class="text-muted">3 days ago</small>
+                                    </div>
+                                    <p class="mb-1">Some placeholder content in a paragraph.</p>
+                                    <small class="text-muted">And some muted small print.</small>
+                                </a>
+                            </div>
+
+                            <div class="list-group" id="comments_to_me">
+                                <a href="#" class="list-group-item list-group-item-action active">
+                                    <div class="d-flex w-100 justify-content-between">
+                                        <h5 class="mb-1">List group item heading</h5>
+                                        <small>2 days ago</small>
+                                    </div>
+                                    <p class="mb-1">Some placeholder content in a paragraph.</p>
+                                    <small>And some small print.</small>
+                                </a>
+                                <a href="#" class="list-group-item list-group-item-action">
+                                    <div class="d-flex w-100 justify-content-between">
+                                        <h5 class="mb-1">List group item heading</h5>
+                                        <small class="text-muted">3 days ago</small>
+                                    </div>
+                                    <p class="mb-1">Some placeholder content in a paragraph.</p>
+                                    <small class="text-muted">And some muted small print.</small>
+                                </a>
+                                <a href="#" class="list-group-item list-group-item-action">
+                                    <div class="d-flex w-100 justify-content-between">
+                                        <h5 class="mb-1">List group item heading</h5>
+                                        <small class="text-muted">3 days ago</small>
+                                    </div>
+                                    <p class="mb-1">Some placeholder content in a paragraph.</p>
+                                    <small class="text-muted">And some muted small print.</small>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div th:id="context">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+<footer id="colophon" class="site-footer custom_footer" th:include="/footer.html"/>
+
+<!-- Scripts
+================================================== -->
+<script src="/assets/js/jquery-3.4.1.min.js"></script>
+<script src="/assets/js/select2.min.js"></script>
+<script src="/assets/js/bootstrap.min.js"></script>
+<script src="/assets/js/owl.carousel.min.js"></script>
+<script src="/assets/js/custom.js"></script>
+<script src="/assets/js/job.js"></script>
+<script src="/assets/js/growl-notification.min.js"></script>\
+<!--自己写的js-->
+<script src="/assets/js/appraisals.js"></script>
+
+</body>
+</html>

@@ -28,4 +28,12 @@ public interface UserService {
     String getUserName(int id);
     //通过用户名获取id
     int getId(String username);
+    //获取用户的url
+    String getHeadurl(int id);
+    //修改用户的头像地址
+    boolean updateAvatar(int id,String headrul);
+    //修改用户的位置
+    boolean updateLocation(int id,String location);
+    //获取用户的位置
+    String getLocation(int id);
 }

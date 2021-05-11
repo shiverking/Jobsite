@@ -27,7 +27,7 @@
     <div class="header_main">
         <div class="header_menu fixed-top" th:include="/header.html"></div>
         <div class="header_btm">
-            <h2>设置</h2>
+            <h2>职位管理</h2>
         </div>
     </div>
 </header>
@@ -36,57 +36,58 @@
 <!-- Main 
 ================================================== -->
 <main>
-  <div class="job_container">
-    <div class="container">
-      <div class="row job_main">
-        <div class="sidebar">
-          <ul class="user_navigation">
-			  <li>
-				  <a href="/job/postJob"><i class="fas fa-paper-plane"></i>发布工作</a>
-			  </li>
-			  <li class="is-active">
-				  <a href="/job/MyJobLists"><i class="far fa-list-alt"></i>职位管理</a>
-			  </li>
-          </ul>
-        </div>
-        <div class=" job_main_right">
-          <div class="row job_section">
-      		<div class="col-sm-12">
-      			<div class="jm_headings" th:if="${hasJobs}">
-	              <h6>发布的工作如下展示</h6>
-	          	</div>
-              <div class="table-cont" >
-          		 <table class="table" th:if="${hasJobs}">
-      					<thead>
-      						<tr>
-      							<th>标题</th>
-      							<th>需求人数</th>
-								<th>岗位</th>
-      							<th>发布时间</th>
-      							<th>时薪</th>
-								<th>每日工作时长</th>
-								<th></th>
-      						</tr>
-      					</thead>
-      					<tbody>
-							<tr th:each="job:${jobs}">
-								<td th:text="${job.title}"></td>
-								<td th:text="${job.required}"></td>
-								<td th:text="${job.position}"></td>
-								<td th:text="${job.create_time}"></td>
-								<td th:text="${job.budget}"></td>
-								<td th:text="${job.work_time}"></td>
-								<td ></td>
-							</tr>
-      					</tbody>
-      				</table>
-              </div>
-				<div th:if="${not hasJobs}">
-					<h4>没工作，快去布发工作吧</h4>
-					<button class="btn btn-primary" onclick="window.location.href='/job/postJob'">发布工作</button>
-				</div>
-      		</div>
-          </div>
+
+    <div class="job_container">
+        <div class="container">
+            <div class="row job_main">
+                <div class="sidebar">
+                    <ul class="user_navigation">
+                        <li>
+                            <a href="/job/postJob"><i class="fas fa-paper-plane"></i>发布工作</a>
+                        </li>
+                        <li class="is-active">
+                            <a href="/job/MyJobLists"><i class="far fa-list-alt"></i>职位管理</a>
+                        </li>
+                        <li >
+                            <a th:href="@{/appraisals}"><i class="far fa-comment"></i>评价</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class=" job_main_right" style="height: 700px">
+                    <div class="row job_section">
+                        <div class="col-sm-12">
+                            <div class="jm_headings" >
+                                <h6>发布的工作如下展示</h6>
+                            </div>
+                            <div class="table-cont">
+                                <table class="table" >
+                                    <thead>
+                                    <tr>
+                                        <th>标题</th>
+                                        <th>需求人数</th>
+                                        <th>岗位</th>
+                                        <th>发布时间</th>
+                                        <th>投递人数</th>
+                                        <th>状态</th>
+                                        <th></th>
+                                        <th></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody th:id="openlist">
+                                    </tbody>
+                                    <tbody th:id="closelist">
+                                    </tbody>
+                                </table>
+                            </div>
+<!--                            <div th:if="${not hasJobs}">-->
+<!--                                <h4>没工作，快去布发工作吧</h4>-->
+<!--                                <button class="btn btn-primary" onclick="window.location.href='/job/postJob'">发布工作-->
+<!--                                </button>-->
+<!--                            </div>-->
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
       </div>
     </div>

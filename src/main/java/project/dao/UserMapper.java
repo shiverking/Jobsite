@@ -15,7 +15,7 @@ public interface UserMapper {
      //通过用户名找到用户
      User findUserByUsername (String username);
      //添加一名用户
-     int insertUser(@Param("id") int id,@Param("username") String username,@Param("password") String password,@Param("telephone") String telephone,@Param("email") String email);
+     int insertUser(@Param("id") int id,@Param("username") String username,@Param("password") String password,@Param("telephone") String telephone,@Param("email") String email,@Param("headurl") String headurl);
      //通过电话找到用户
      User findUserByTelephone(@Param("telephone") String telephone);
      //查看所有用户
@@ -50,4 +50,12 @@ public interface UserMapper {
      String getUsernameById(@Param("id") int id);
      //根据用户名找到ID
      int getIdByUserName(@Param("username") String username);
+     //根据ID找到聊天对象的头像地址
+     String getHeadurlById(@Param("id")int id);
+     //根据ID 修改聊天对象的头像地址
+     int updateHeadUrlById(@Param("headurl") String headurl,@Param("id")int id);
+     //通过用户的id找到其位置
+     String getLocationById(@Param("id")int id);
+     //根据id修改用户当前位置
+     int updateLocationById(@Param("location") String location,@Param("id")int id);
 }
