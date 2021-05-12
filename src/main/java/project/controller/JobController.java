@@ -33,12 +33,6 @@ public class JobController {
     @Autowired
     ProfileService profileService;
 
-    @RequestMapping("/job/postJob")
-    public String toPostJobPage() {
-        return "/job/post-a-job";
-    }
-
-
     /**
      * 发布工作
      */
@@ -96,52 +90,55 @@ public class JobController {
             return RespBean.ok("获取成功", map);
         } else {
             return RespBean.error("列表为空");
-        /**
-         * 分页查找所有工作
-         * @param model
-         * @return
-         */
-        @RequestMapping("/job")
-        public String getJobList(Model model, @RequestParam(defaultValue = "1") Integer pageNum, @RequestParam(defaultValue = "8") Integer pageSize){
-                //如果已经登录,则添加用户属性
-                if(!SecurityContextHolder.getContext().getAuthentication().getName().equals("anonymousUser")) {
-                        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-                        User user = (User) principal;
-                        model.addAttribute("user", user);
-                }
-                //引入分页查询
-                PageHelper.startPage(pageNum,pageSize);
-                //分页查询
-                List<Job> jobs = jobService.findAllJobs();
-                //使用pageinfo封装查询结果
-                PageInfo<Job> pageInfo = new PageInfo<Job>(jobs,5);
-
-                model.addAttribute("pageInfo",pageInfo);
-                //获得当前页
-                model.addAttribute("pageNum", pageInfo.getPageNum());
-                //获得一页显示的条数
-                model.addAttribute("pageSize", pageInfo.getPageSize());
-                //是否是第一页
-                model.addAttribute("isFirstPage", pageInfo.isIsFirstPage());
-                //获得总页数
-                model.addAttribute("totalPages", pageInfo.getPages());
-                //是否是最后一页
-                model.addAttribute("isLastPage", pageInfo.isIsLastPage());
-
-                return "job/browse_jobs";
         }
-        @RequestMapping("/job/{id}")
-        public String getJobById(Model model,@PathVariable int id){
-                //如果已经登录,则添加用户属性
-                if(!SecurityContextHolder.getContext().getAuthentication().getName().equals("anonymousUser")) {
-                        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-                        User user = (User) principal;
-                        model.addAttribute("user", user);
-                }
-                Job job = jobService.findJobById(id);
-                model.addAttribute("job",job);
-                return "job/single_job";
         }
+    /**
+     * 分页查找所有工作
+     * @param model
+     * @return
+     */
+    @RequestMapping("/job")
+    public String getJobList(Model model, @RequestParam(defaultValue = "1") Integer pageNum, @RequestParam(defaultValue = "8") Integer pageSize){
+            //如果已经登录,则添加用户属性
+            if(!SecurityContextHolder.getContext().getAuthentication().getName().equals("anonymousUser")) {
+                    Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+                    User user = (User) principal;
+                    model.addAttribute("user", user);
+            }
+            //引入分页查询
+            PageHelper.startPage(pageNum,pageSize);
+            //分页查询
+            List<Job> jobs = jobService.findAllJobs();
+            //使用pageinfo封装查询结果
+            PageInfo<Job> pageInfo = new PageInfo<Job>(jobs,5);
+
+            model.addAttribute("pageInfo",pageInfo);
+            //获得当前页
+            model.addAttribute("pageNum", pageInfo.getPageNum());
+            //获得一页显示的条数
+            model.addAttribute("pageSize", pageInfo.getPageSize());
+            //是否是第一页
+            model.addAttribute("isFirstPage", pageInfo.isIsFirstPage());
+            //获得总页数
+            model.addAttribute("totalPages", pageInfo.getPages());
+            //是否是最后一页
+            model.addAttribute("isLastPage", pageInfo.isIsLastPage());
+
+            return "job/browse_jobs";
+    }
+
+
+    @RequestMapping("/job/{id}")
+    public String getJobById(Model model,@PathVariable int id){
+            //如果已经登录,则添加用户属性
+            if(!SecurityContextHolder.getContext().getAuthentication().getName().equals("anonymousUser")) {
+                    Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+                    User user = (User) principal;
+                    model.addAttribute("user", user);
+            }
+            Job job = jobService.findJobById(id);
+            model.addAttribute("job",job);
+            return "job/single_job";
     }
 
 
@@ -153,15 +150,19 @@ public class JobController {
             return RespBean.error("未找到该职位招聘信息");
         } else {
             return RespBean.ok("关闭该职位招聘成功");
-        @RequestMapping("/job/postJob")
-        public String toPostJobPage(Model model){
-                Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-                User user = (User) principal;
-                model.addAttribute("user", user);
-                return "/job/post-a-job";
-        }
 
+        }
     }
+
+    @RequestMapping("/job/postJob")
+    public String toPostJobPage (Model model){
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = (User) principal;
+        model.addAttribute("user", user);
+        return "/job/post-a-job";
+    }
+
+
 
     @ResponseBody
     @RequestMapping("/job/openJob/{id}")
@@ -208,7 +209,6 @@ public class JobController {
 
     }
 
-        }
 
 
 //        @ResponseBody
@@ -221,6 +221,5 @@ public class JobController {
 //                        return RespBean.ok("开启该职位招聘成功");
 //                }
 //        }
-
 
 }

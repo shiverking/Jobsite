@@ -3,8 +3,6 @@
   <component name="SqlDialectMappings">
     <file url="file://$PROJECT_DIR$/src/main/resources/db/migration/V1__createjobsite.sql" dialect="MySQL" />
     <file url="file://$PROJECT_DIR$/src/main/resources/db/migration/V2__ADD TABLE ROLE USER_AND_ROLE ALTER TABLE USER.sql" dialect="MySQL" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/db/migration/V3.1__ALTER TABLE PROFILE.sql" dialect="MySQL" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/db/migration/V3__ALTER TABLE PROFILE.sql" dialect="MySQL" />
     <file url="file://$PROJECT_DIR$/src/main/resources/db/migration/V4__ALTER TABLE PROFILE.sql" dialect="MySQL" />
     <file url="PROJECT" dialect="MySQL" />
   </component>

@@ -14,8 +14,6 @@ public interface OrderService {
     int insertNewOrder(int job_id, String state, Date create_time, Date end_time, int employer_id, int employee_id);
     boolean isOrderExistByJobAndEmployee(int job_id, int employee_id);
     //返回所有订单
-    public List<Order> findAllOrder();
-
+    List<Order> findAllOrder();
     Order findOrderById(int id);
-
 }
