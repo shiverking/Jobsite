@@ -85,6 +85,12 @@ public class JobServiceImpl implements JobService{
         }else{
             return -1;
         }
+    }
+
+    public boolean isJobExist(int job_id) {
+        //如果没有找到简历，则返回false
+        return jobMapper.isJobExist(job_id);
+    }
 
     }
 

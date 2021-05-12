@@ -4,14 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 import project.model.Profile;
 import project.model.RespBean;
 import project.model.User;
 import project.service.ProfileServiceImpl;
+import project.service.UserService;
 
 import java.util.Map;
 
@@ -24,6 +23,9 @@ import java.util.Map;
 public class ProfileController {
     @Autowired
     ProfileServiceImpl profileServiceImpl;
+
+    @Autowired
+    UserService userService;
 
     /**
      * 判断该用户的Profile是否存在
@@ -53,13 +55,14 @@ public class ProfileController {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = (User) principal;
         int user_id = user.getId();
+        String user_name = user.getUsername();
         String complationTime = (String) info.get("completionTime");
         String expertize_realm = (String) info.get("expertize_realm");
         String compensation = (String)info.get("compensation");
         String expertize_level = (String) info.get("expertize_level");
         String workexperience = (String) info.get("workexperience");
         String biography = (String) info.get("biography");
-        if(profileServiceImpl.saveProfile(user_id,complationTime,expertize_realm,compensation,workexperience,expertize_level,biography)){
+        if(profileServiceImpl.saveProfile(user_id,complationTime,expertize_realm,compensation,workexperience,expertize_level,biography,user_name)){
             return RespBean.ok("保存成功！");
         }
         return RespBean.error("保存简历失败");
@@ -102,5 +105,25 @@ public class ProfileController {
         model.addAttribute("user",user);
 
         return "user/staffProfile";
+    }
+
+
+    @RequestMapping("/user/viewStaffProfile")
+    public String toProfilePage(){
+        return "user/staffProfile";
+    }
+
+
+    /**
+     * 根据指定用户id来查看简历
+     */
+    @RequestMapping("/viewProfile/user_id={user_id}")
+    public ModelAndView viewProfileById(@PathVariable("user_id") int user_id){
+        ModelAndView modelAndView = new ModelAndView("/user/staffProfile");
+        User user = userService.getUserById(user_id);
+        Profile profile = profileServiceImpl.getProfile(user_id);
+        modelAndView.addObject("profile",profile);
+        modelAndView.addObject("user",user);
+        return modelAndView;
     }
 }

@@ -10,9 +10,12 @@ import java.util.List;
  */
 public interface JobService {
     //返回所有的job
-    public List<Job> findAllJobs();
+    List<Job> findAllJobs();
     //按照id找到Job
-    public Job findJobById(int id);
+    Job findJobById(int id);
+
+
+    int insertJob(Job job);
 
     //对job进行审核
     boolean checkJob(int id);
@@ -28,7 +31,14 @@ public interface JobService {
 
     public int insertJob(Job job);
 
-    public List<Job> findJobsByEmployerId(int employer_id);
+
+    List<Job> findJobsByEmployerId(int employer_id);
+
+    int closeJobById(int id);
+
+    int openJobById(int id);
+
+    boolean isJobExist(int job_id);
 
     public int closeJobById(int id);
 

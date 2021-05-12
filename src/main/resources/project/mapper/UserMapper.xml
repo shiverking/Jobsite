@@ -139,4 +139,7 @@
     <select id="getLocationById" resultType="java.lang.String">
         select locaion from user where id=#{id}
     </select>
+    <select id="getUserById" resultType="project.model.User">
+        select * from user where id=#{id}
+    </select>
 </mapper>

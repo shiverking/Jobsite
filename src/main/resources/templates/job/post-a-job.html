@@ -25,6 +25,7 @@
     <link href="/assets/css/light-theme.min.css" rel="stylesheet">
     <link href="/assets/css/dark-theme.min.css" rel="stylesheet">
     <link href="/assets/css/colored-theme.min.css" rel="stylesheet">
+
 </head>
 <body>
 
@@ -34,7 +35,7 @@
     <div class="header_main">
         <div class="header_menu fixed-top" th:include="/header.html"></div>
         <div class="header_btm">
-            <h2>发布工作</h2>
+            <h2>管理</h2>
         </div>
     </div>
 </header>
@@ -54,6 +55,7 @@
                             <a th:id="toJobLists"><i class="far fa-list-alt"></i>职位管理</a>
                         </li>
                         <li>
+                            <a href="/order/jobOrders"><i class="far fa-list-alt"></i>订单管理</a>
                             <a th:href="@{/appraisals}"><i class="far fa-comment"></i>评价</a>
                         </li>
                     </ul>

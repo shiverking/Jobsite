@@ -14,7 +14,7 @@ import project.model.Profile;
 @Component
 public interface ProfileMapper {
     //根据ID找到用户的Profile
-    Profile getProfileById(@Param("user_id") int user_id);
+    Profile getProfileByUserId(@Param("user_id") int user_id);
 
     //是否存在用户的Profile
     boolean isProfileExist(@Param("user_id") int user_id);
@@ -23,11 +23,14 @@ public interface ProfileMapper {
     int insertNewProfile(@Param("user_id") int user_id, @Param("completiontime") String completiontime,
                          @Param("expertize_realm") String expertize_realm, @Param("compensation") String compensation,
                          @Param("workexperience") String workexperience,@Param("expertize_level") String expertize_level,
-                         @Param("biography") String biography);
+                         @Param("biography") String biography,
+                         @Param("user_name") String user_name);
 
     //更新一个用户的Profile信息
     int updatePofileById(@Param("completiontime") String completiontime,
                          @Param("expertize_realm") String expertize_realm, @Param("compensation") String compensation,
                          @Param("workexperience") String workexperience,@Param("expertize_level") String expertize_level,
                          @Param("biography") String biography,@Param("user_id") int user_id);
+
+    Profile getProfileById(@Param("id") int id);
 }

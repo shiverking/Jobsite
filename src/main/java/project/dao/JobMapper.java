@@ -37,8 +37,10 @@ public interface JobMapper {
     int insertJob(Job job);
     //根据雇主id查询工作列表
     List<Job> findJobsByEmployerId(@Param("employer_id") int employer_id);
-
+    //关闭指定id工作招聘通道
     int closeJobById(@Param("id") int id);
-
+    //开启指定id工作招聘通道
     int openJobById(@Param("id") int id);
+    //检测指定id工作是否存在
+    boolean isJobExist(@Param("job_id") int job_id);
 }

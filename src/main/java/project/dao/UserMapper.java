@@ -56,6 +56,9 @@ public interface UserMapper {
      String getUsernameById(@Param("id") int id);
      //根据用户名找到ID
      int getIdByUserName(@Param("username") String username);
+
+     User getUserById(@Param("id") int id);
+
      //根据ID找到聊天对象的头像地址
      String getHeadurlById(@Param("id")int id);
      //根据ID 修改聊天对象的头像地址
