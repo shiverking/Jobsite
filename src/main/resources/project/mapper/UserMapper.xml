@@ -94,4 +94,7 @@
     <select id="getIdByUserName" resultType="java.lang.Integer">
         select id from user where username=#{username}
     </select>
+    <select id="getUserById" resultType="project.model.User">
+        select * from user where id=#{id}
+    </select>
 </mapper>

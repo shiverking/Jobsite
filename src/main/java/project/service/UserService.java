@@ -28,4 +28,6 @@ public interface UserService {
     String getUserName(int id);
     //通过用户名获取id
     int getId(String username);
+
+    User getUserById(int id);
 }

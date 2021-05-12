@@ -12,7 +12,7 @@ $(document).ready(function (){
 $(document).ready(function (){
     $.ajax({
         url: "/job/showMyJobLists",
-        type: "post",
+        type: "get",
         success(data){
             if(data.status == 200){
                 var jobs = data.obj.jobLists;
@@ -26,9 +26,9 @@ $(document).ready(function (){
                             "<td>" + jobs[i].required + "</td>" +
                             "<td>" + jobs[i].position + "</td>" +
                             "<td>" + jobs[i].create_time + "</td>" +
-                            "<td>" + sends[i] + "</td>"+
+                            "<td>" +"<a href='/job/viewSeeker/job_id="+jobs[i].id+"'>"+ sends[i] + "</a></td>"+
                             "<td>开启</td>" +
-                            "<td><input  type=\"button\" onclick=\"colRow(this," + jobs[i].id + ");\" value=\"-关闭(样式未调)\"/></td>"+
+                            "<td><input  type=\"button\" onclick=\"colRow(this," + jobs[i].id + ");\" value=\"-关闭\"/></td>"+
                             "</tr>"
                         }
                     else {
@@ -45,7 +45,12 @@ $(document).ready(function (){
                 }
                 openlist.innerHTML = str1;
                 closelist.innerHTML = str2;
+            }else if(data.msg == "列表为空"){
+                $("#nojob").show();
+                $("#hasjob").hide();
+
             }else{
+                console.log(data)
                 warning("获取列表失败，请重新尝试")
             }
         },
@@ -90,7 +95,7 @@ function openRow(obj,id){
                 if(data.status == 200){
                     pa.eq(5).html("开启")
                     pa.eq(5).css("color","black")
-                    pa.eq(6).html("<input  type=\"button\" onclick=\"colRow(this," + id + ");\" value=\"-关闭(样式未调)\"/>")
+                    pa.eq(6).html("<input  type=\"button\" onclick=\"colRow(this," + id + ");\" value=\"-关闭\"/>")
                 }
             }
         })

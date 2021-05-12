@@ -4,8 +4,8 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="project.dao.ProfileMapper">
     <insert id="insertNewProfile">
-        insert into profile (user_id, completiontime,expertize_realm, compensation,workexperience,expertize_level,biography)
-        values (#{user_id},#{completiontime},#{expertize_realm},#{compensation},#{workexperience},#{expertize_level},#{biography});
+        insert into profile (user_id, completiontime,expertize_realm, compensation,workexperience,expertize_level,biography,user_name)
+        values (#{user_id},#{completiontime},#{expertize_realm},#{compensation},#{workexperience},#{expertize_level},#{biography},#{user_name});
     </insert>
     <update id="updatePofileById">
         update profile
@@ -19,12 +19,15 @@
         </set>
         where user_id =#{user_id}
     </update>
-    <select id="getProfileById" resultType="project.model.Profile">
+    <select id="getProfileByUserId" resultType="project.model.Profile">
         select * from profile where user_id =#{user_id}
     </select>
     <!--查询Profile是否存在，前提必须是邮箱已存在且唯一,否则大于两个的话会出错-->
     <select id="isProfileExist" resultType="java.lang.Boolean">
         <![CDATA[ select count(id)
         from profile where user_id = #{user_id}]]>
+    </select>
+    <select id="getProfileById" resultType="project.model.Profile">
+        select * from profile where id=#{id}
     </select>
 </mapper>

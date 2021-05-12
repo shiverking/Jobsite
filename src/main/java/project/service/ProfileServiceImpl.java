@@ -33,7 +33,7 @@ public class ProfileServiceImpl implements ProfileService {
      */
     @Override
     public Profile getProfile(int userId) {
-        return profileMapper.getProfileById(userId);
+        return profileMapper.getProfileByUserId(userId);
     }
 
     /**
@@ -48,8 +48,8 @@ public class ProfileServiceImpl implements ProfileService {
      * @return
      */
     @Override
-    public boolean saveProfile(int user_id, String completiontime, String expertize_realm, String compensation, String workexperience, String expertize_level, String biography) {
-        if(profileMapper.insertNewProfile(user_id,completiontime,expertize_realm,compensation,workexperience,expertize_level,biography)==1){
+    public boolean saveProfile(int user_id, String completiontime, String expertize_realm, String compensation, String workexperience, String expertize_level, String biography,String user_name) {
+        if(profileMapper.insertNewProfile(user_id,completiontime,expertize_realm,compensation,workexperience,expertize_level,biography,user_name)==1){
             return true;
         }
         return false;
@@ -72,5 +72,15 @@ public class ProfileServiceImpl implements ProfileService {
             return true;
         }
         return false;
+    }
+
+    /**
+     * 根据其id查找一个profile
+     * @param id
+     * @return
+     */
+    @Override
+    public Profile getProfileById(int id) {
+        return profileMapper.getProfileById(id);
     }
 }

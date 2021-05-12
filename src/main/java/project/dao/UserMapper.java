@@ -50,4 +50,6 @@ public interface UserMapper {
      String getUsernameById(@Param("id") int id);
      //根据用户名找到ID
      int getIdByUserName(@Param("username") String username);
+
+     User getUserById(@Param("id") int id);
 }

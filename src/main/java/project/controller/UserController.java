@@ -410,7 +410,7 @@ public class UserController {
      */
     @ResponseBody
     @RequestMapping("/hello")
-    public String test(Principal principal) {
+    public String test() {
         //测试代码
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = (User)principal;

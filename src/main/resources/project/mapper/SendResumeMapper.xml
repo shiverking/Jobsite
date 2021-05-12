@@ -5,4 +5,7 @@
     <select id="CountResumeByJobID" resultType="java.lang.Integer">
         select count(*) as count from sendresume where job_id=#{job_id}
     </select>
+    <select id="getProfileByJob" resultType="java.lang.Integer">
+        select profile_id from sendresume where job_id=#{job_id}
+    </select>
 </mapper>
