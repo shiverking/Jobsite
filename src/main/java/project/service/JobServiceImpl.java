@@ -27,6 +27,39 @@ public class JobServiceImpl implements JobService{
         return jobMapper.findJobById(id);
     }
 
+
+    @Override
+    public boolean checkJob(int id) {
+        if(jobMapper.updateJobCheck(id)==1){
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public List<Job> findAllJobsChecked() {
+        return jobMapper.getJobIsCheck();
+    }
+
+    @Override
+    public boolean deleteJob(int id) {
+        if(jobMapper.deleteJobById(id)==1){
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public List<Job> findAllJobsAsc() {
+        return jobMapper.getAllJobAsc();
+    }
+
+    @Override
+    public List<Job> findAllJobsDesc() {
+        return jobMapper.getAllJobDesc();
+    }
+    
+    @Override
     public int insertJob(Job job){
         return jobMapper.insertJob(job);
     }
@@ -58,5 +91,8 @@ public class JobServiceImpl implements JobService{
         //如果没有找到简历，则返回false
         return jobMapper.isJobExist(job_id);
     }
+
+    }
+
 
 }

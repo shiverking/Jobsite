@@ -11,7 +11,6 @@ import java.util.Date;
 public class OrderServiceImpl implements OrderService {
 
 
-
     @Autowired
     OrderMapper orderMapper;
 
@@ -30,4 +29,5 @@ public class OrderServiceImpl implements OrderService {
     public boolean isOrderExistByJobAndEmployee(int job_id, int employee_id) {
         return orderMapper.isOrderExistByJobAndEmployee(job_id,employee_id);
     }
+
 }

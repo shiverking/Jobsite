@@ -44,10 +44,13 @@ public class MessageController {
         private int id;
         //和自己聊过天的人的用户名
         private String userName;
+        //和自己聊过天的人的头像地址
+        private String headurl;
         //构造函数
-        public ResultInfo(int id, String userName) {
+        public ResultInfo(int id, String userName,String headurl) {
             this.id = id;
             this.userName = userName;
+            this.headurl=headurl;
         }
         public int getId() {
             return id;
@@ -63,6 +66,14 @@ public class MessageController {
 
         public void setUserName(String userName) {
             this.userName = userName;
+        }
+
+        public String getHeadurl() {
+            return headurl;
+        }
+
+        public void setHeadurl(String headurl) {
+            this.headurl = headurl;
         }
     }
 
@@ -94,11 +105,10 @@ public class MessageController {
             //获取聊天的信息列表
             List<ResultInfo> chatList = new ArrayList<ResultInfo>();
             for (int tmpId: chatListId) {
-                chatList.add(new ResultInfo(tmpId,userServiceImpl.getUserName(tmpId)));
+                chatList.add(new ResultInfo(tmpId,userServiceImpl.getUserName(tmpId),userServiceImpl.getHeadurl(tmpId)));
             }
             //model.addAttribute("chatListId",chatListId);
             model.addAttribute("chatList",chatList);
-            model.addAttribute("myName",user.getUsername());
         }
         //查看聊天双方是否以前聊过天,如果聊过天
         else{
@@ -107,11 +117,10 @@ public class MessageController {
             //获取聊天的信息列表
             List<ResultInfo> chatList = new ArrayList<ResultInfo>();
             for (int tmpId: chatListId) {
-                chatList.add(new ResultInfo(tmpId,userServiceImpl.getUserName(tmpId)));
+                chatList.add(new ResultInfo(tmpId,userServiceImpl.getUserName(tmpId),userServiceImpl.getHeadurl(tmpId)));
             }
             //model.addAttribute("chatListId",chatListId);
             model.addAttribute("chatList",chatList);
-            model.addAttribute("myName",user.getUsername());
         }
         return "message/index";
     }
@@ -126,17 +135,18 @@ public class MessageController {
         //获取用户的验证信息
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = (User) principal;
+        //添加当前用户模型
+        model.addAttribute("user", user);
         int myId = user.getId();
         //查询和自己聊过天的列表
         List<Integer>chatListId = messageServiceImpl.getFromUserChatList(myId);
         //获取聊天的姓名列表
         List<ResultInfo> chatList = new ArrayList<ResultInfo>();
         for (int tmpId: chatListId) {
-            chatList.add(new ResultInfo(tmpId,userServiceImpl.getUserName(tmpId)));
+            chatList.add(new ResultInfo(tmpId,userServiceImpl.getUserName(tmpId),userServiceImpl.getHeadurl(tmpId)));
         }
         //model.addAttribute("chatListId",chatListId);
         model.addAttribute("chatList",chatList);
-        model.addAttribute("myName",user.getUsername());
         return "message/index";
     }
 

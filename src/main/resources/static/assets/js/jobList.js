@@ -12,7 +12,8 @@ $(document).ready(function (){
 $(document).ready(function (){
     $.ajax({
         url: "/job/showMyJobLists",
-        type: "get",
+
+        type: "post",
         success(data){
             if(data.status == 200){
                 var jobs = data.obj.jobLists;
@@ -29,6 +30,7 @@ $(document).ready(function (){
                             "<td>" +"<a href='/job/viewSeeker/job_id="+jobs[i].id+"'>"+ sends[i] + "</a></td>"+
                             "<td>开启</td>" +
                             "<td><input  type=\"button\" onclick=\"colRow(this," + jobs[i].id + ");\" value=\"-关闭\"/></td>"+
+
                             "</tr>"
                         }
                     else {
@@ -96,6 +98,7 @@ function openRow(obj,id){
                     pa.eq(5).html("开启")
                     pa.eq(5).css("color","black")
                     pa.eq(6).html("<input  type=\"button\" onclick=\"colRow(this," + id + ");\" value=\"-关闭\"/>")
+
                 }
             }
         })

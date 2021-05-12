@@ -46,7 +46,7 @@
 					</form>
 					<div class="user_type-3">
 						<div class="row">
-							<div class="col-md-6">
+							<div class="col-md-6" sec:authorize="hasRole('ROLE_employee')||!isAuthenticated()">
 								<div class="user_type_inner  user_type_seeker">
 									<a href="browse-jobs.html">
 										<div class="usertype_img">
@@ -60,7 +60,7 @@
 									</a>
 								</div>
 							</div>
-							<div class="col-md-6">
+							<div class="col-md-6" sec:authorize="hasRole('ROLE_employer')||!isAuthenticated()">
 								<div class="user_type_inner user_type_post">
 									<a href="/job/postJob">
 										<div class="usertype_img">

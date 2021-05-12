@@ -13,6 +13,7 @@ import java.util.List;
 @Mapper
 @Component
 public interface OrderMapper {
+
         //获得所有Order
         List<Order> getAllOrders();
 
@@ -26,4 +27,9 @@ public interface OrderMapper {
         //根据job_ID和employee_id来判断是否已经有该order，防止重复
         boolean isOrderExistByJobAndEmployee(@Param("job_id") int job_id,@Param("employee_id") int employee_id);
 
+
+    //获得所有Order
+    List<Order> findAllOrders();
+    //根据id查找order
+    Order findOrderById(@Param("id") int id);
 }

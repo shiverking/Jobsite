@@ -17,6 +17,12 @@
     <select id="isOrderExistByJobAndEmployee" resultType="java.lang.Boolean">
        <![CDATA[ select count(id)
           from `orderinfo` where job_id = #{job_id} and employee_id = #{employee_id}]]>
+    <select id="findAllOrders" resultType="project.model.Order">
+        select * from `order`
+
     </select>
 
+    <select id="findOrderById" resultType="project.model.Order">
+        select * from `order` where id = #{id}
+    </select>
 </mapper>

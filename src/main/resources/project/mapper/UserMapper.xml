@@ -12,8 +12,8 @@
         <result column="password" property="password" jdbcType="VARCHAR"/>
     </resultMap>
     <insert id="insertUser">
-        insert into user (id,username, password, telephone, email) values (
-        #{id},#{username},#{password},#{telephone},#{email}
+        insert into user (id,username, password, telephone, email,headurl) values (
+        #{id},#{username},#{password},#{telephone},#{email},#{headurl}
         );
     </insert>
     <update id="updatePasswordByEmail" parameterType="project.model.User">
@@ -37,6 +37,28 @@
         </set>
         where id=#{id};
     </update>
+    <update id="updateHeadUrlById">
+        update user
+        <set>
+            headurl = #{headurl}
+        </set>
+        where id = #{id}
+    </update>
+    <update id="updateLocationById">
+        update user
+        <set>
+            location = #{location}
+        </set>
+        where id = #{id}
+    </update>
+
+    <update id="changePasswordByUsername">
+        update user
+        <set>
+            password = #{password}
+        </set>
+        where username = #{username}
+    </update>
 
     <select id="findUserByUsername" resultMap="UserResultMap" parameterType="String">
         select * from user where username = #{username}
@@ -55,21 +77,28 @@
             select * from user where identity = #{identity}
         </if>
     </select>
+
   
-    <select id="updatePassword" resultType="int">
-        update user set password=#{password} where id=#{id}
-    </select>
-  
-    <select id="deleteUser" resultType="int">
-        delete from user where id=#{id}
-    </select>
+    <delete id="deleteUserByUsername" parameterType="project.model.User">
+        delete from user where username=#{username}
+    </delete>
   
     <!--查询邮箱是否存在，前提必须是邮箱已存在且唯一且已被绑定-->
     <select id="isEmailExist" resultType="java.lang.Boolean">
         <![CDATA[ select count(id)
         from user where email = #{email}]]>
     </select>
-  
+
+    <select id="isUsernameExist" resultType="java.lang.Boolean">
+        <![CDATA[ select count(id)
+        from user where username = #{username}]]>
+    </select>
+
+    <select id="isTelephoneExist" resultType="java.lang.Boolean">
+        <![CDATA[ select count(id)
+        from user where telephone = #{telephone}]]>
+    </select>
+
     <select id="findPasswordByEmail" resultType="java.lang.String">
         select password from user where email = #{email}
     </select>
@@ -88,11 +117,27 @@
     <select id="getEmailById" resultType="java.lang.String">
         select email from user where id=#{id}
     </select>
+
+    <select id="findUserById" resultType="project.model.User">
+        select * from user where id = #{id}
+    </select>
+        
+    <select id="getUserByRid" resultType="project.model.User">
+        select * from user u,user_role ur where u.id=ur.uid and ur.rid=#{rid}
+    </select>
+        
     <select id="getUsernameById" resultType="java.lang.String">
         select username from user where id=#{id}
     </select>
     <select id="getIdByUserName" resultType="java.lang.Integer">
         select id from user where username=#{username}
+
+    </select>
+    <select id="getHeadurlById" resultType="java.lang.String">
+        select headurl from user where id=#{id}
+    </select>
+    <select id="getLocationById" resultType="java.lang.String">
+        select locaion from user where id=#{id}
     </select>
     <select id="getUserById" resultType="project.model.User">
         select * from user where id=#{id}

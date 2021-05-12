@@ -150,8 +150,6 @@ function success(str, time){
         position: 'bottom-right',
         closeTimeout: time
     });
+
 }
-
-
-
 

@@ -2,24 +2,25 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 
-<!-- Basic Page Needs
-================================================== -->
-<title>JoDice</title>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<link rel="icon" href="/assets/images/fav.png" type="image/gif" sizes="64x64">
+    <!-- Basic Page Needs
+    ================================================== -->
+    <title>JoDice</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="icon" href="/assets/images/fav.png" type="image/gif" sizes="64x64">
 
-<!-- CSS
-================================================== -->
-<link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700&display=swap&subset=latin-ext" rel="stylesheet">
-<link rel="stylesheet" href="/assets/css/all.min.css">
-<link href="/assets/css/aos.css" rel="stylesheet">
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-<link rel="stylesheet" href="/assets/css/bootstrap.min.css">
-<link href="/assets/css/select2.min.css" rel="stylesheet" />
-<link href="/assets/css/owl.carousel.min.css" rel="stylesheet" />
-<link rel="stylesheet" href="/assets/css/style.css">
-<link rel="stylesheet" href="/assets/css/color-1.css">
+    <!-- CSS
+    ================================================== -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700&display=swap&subset=latin-ext"
+          rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/all.min.css">
+    <link href="/assets/css/aos.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+    <link href="/assets/css/select2.min.css" rel="stylesheet"/>
+    <link href="/assets/css/owl.carousel.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/color-1.css">
 </head>
 <body>
 
@@ -27,161 +28,188 @@
 ================================================== -->
 <header class="header_01 header_inner">
   <div class="header_main">
-    <div class="header_menu fixed-top" th:include="/header.html">
+    <div class="header_menu fixed-top" th:include="/header.html"></div>
+    <div class="header_btm">
+      <h2>找工作</h2>
     </div>
   </div>
 </header>
-
 <!-- Main 
 ================================================== -->
 <main>
-  <div class="job_container">
-    <div class="container">
-      <div class="row job_main">
-        <ul class=" job_main_right">
-            <div class="jm_headings"></div>
-          <div>
-              <h4 style="font-weight:bold">热门工作</h4>
-          </div>
-          <div class="col-md-12" style="padding-left:0px;">
-            <div class="letters-list" style="margin-bottom: 20px;text-align:left;">
-              <text>职位类型 </text>
-              <a href="#">技术</a>
-              <a href="#" class="current">文案写作</a>
-              <a href="#">运营</a>
-              <a href="#">市场营销</a>
-              <a href="#">设计</a>
-              <a href="#">音视频</a>
-              <a href="#">生活与更多</a>
-            </div>
-          </div>
-          <div class="custom-control custom-switch">
-            <input type="checkbox" class="custom-control-input" id="customSwitch" onchange="checkboxOnchange(this)">
-            <label class="custom-control-label" for="customSwitch"><h6 id="checkBoxText">表格显示</h6></label>
-            <script>
-              var obj = document.getElementById("customSwitch");
-              obj.checked = false;// 设置复选框默认为不选中状态
-              function checkboxOnchange(checkbox){
-                if ( checkbox.checked == true){
-                  $('#checkBoxText').text("列表显示");
-                  $('#displayInGrid').show();
-                  $('#displayInList').hide();
-                }else{
-                  $('#checkBoxText').text("表格显示");
-                  $('#displayInList').show();
-                  $('#displayInGrid').hide();
-                }
-              }
-            </script>
-          </div>
-          <!--按照列表显示-->
-          <div id="displayInList" class="row full_width featured_box_outer">
-            <div class="col-sm-12" th:each="job : ${pageInfo.list}">
-              <div class="featured_box ">
-                <div class="fb_image">
-                  <img  alt="brand logo" src="/assets/images/c-logo-03.webp">
-                </div>
-                <div class="fb_content">
-                  <a th:href="@{'/job/' + ${job.id} }">
-                  <h4 th:text="${job.title}" />
-                  <ul>
-                    <li style="width: 100px">
-                        <i class="fas fa-yen-sign" th:text="${job.budget}" style="color: #dd4b39"></i>
-                    </li>
-                    <li style="width: 50px">
-                        <i class="fas fa-user" th:text="${job.required}" style="color: #dd4b39"></i>
-                    </li>
-                    <li style="width: 130px">
-                        <i class="far fa-clock" th:text="${#dates.format(job.create_time, 'yyyy-MM-dd')}" style="color: #dd4b39"></i>
-                    </li>
-                    <li style="width: 70px">
-                        <i class="fas fa-user-graduate" th:text="${job.expertize_level}" style="color: #dd4b39"></i>
-                    </li>
-                  </ul>
-                  </a>
-                </div>
-                <div class="fb_action">
-                  <a class="btn btn-primary" href="#">申请</a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!--按照图标显示-->
-          <div id="displayInGrid" class="row two_col featured_box_outer" style="display: none" >
-            <div class="col-sm-6" th:each="job: ${pageInfo.list}">
-              <div class="featured_box ">
-                <div class="fb_image">
-                  <img  alt="brand logo" src="/assets/images/c-logo-03.webp">
-                </div>
-                <div class="fb_content">
-                  <h4 th:text="${job.title}"></h4>
-                  <ul>
-                    <li style="width: 130px">
-                        <i class="fas fa-yen-sign" th:text="${job.budget}" style="color: #dd4b39"></i>
-                    </li>
-                    <li style="width: 130px">
-                        <i class="fas fa-user" th:text="${job.required}" style="color: #dd4b39"></i>
-                    </li>
-                    <li style="width: 130px">
-                        <i class="far fa-clock" th:text="${#dates.format(job.create_time, 'yyyy-MM-dd')}" style="color: #dd4b39"></i>
-                    </li>
-                    <li style="width: 130px">
-                        <i class="fas fa-user-graduate" th:text="${job.expertize_level}" style="color: #dd4b39"></i>
-                    </li>
-                  </ul>
-                </div>
-                <div class="fb_action">
-                  <a class="btn btn-primary" href="#" style="margin-left: 0px">申请</a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <br>
-          <!--分页部分  -->
-          <ul class="pagination">
-              <!-- 向前1页-->
-              <li>
-                <a  class="btn btn-outline-secondary" th:if="${pageNum-1>0}" th:href="@{${'job'}(pageNum=${pageNum-1},pageSize=${pageSize})}" aria-label="Previous">
-                  <span aria-hidden="true">上一页</span>
-                </a>
-                <a  class="btn btn-outline-secondary" th:if="${pageNum-1<=0}" href="javascript:void(0);" aria-label="Previous">
-                  <span aria-hidden="true">上一页</span>
-                </a>
-              </li>
-              <!--只显示5页-->
+    <div class="job_container">
+        <div class="container">
+            <div class="row job_main">
+                <ul class=" job_main_right">
+                    <div class="jm_headings"></div>
+                    <div>
+                        <h4 style="font-weight:bold">热门工作</h4>
+                    </div>
+                    <div class="col-md-12" style="padding-left:0px;">
+                        <div class="letters-list" style="margin-bottom: 20px;text-align:left;">
+                            <text>职位类型</text>
+                            <a href="#">技术</a>
+                            <a href="#" class="current">文案写作</a>
+                            <a href="#">运营</a>
+                            <a href="#">市场营销</a>
+                            <a href="#">设计</a>
+                            <a href="#">音视频</a>
+                            <a href="#">生活与更多</a>
+                        </div>
+                    </div>
+                    <div class="custom-control custom-switch">
+                        <input type="checkbox" class="custom-control-input" id="customSwitch"
+                               onchange="checkboxOnchange(this)">
+                        <label class="custom-control-label" for="customSwitch"><h6 id="checkBoxText">表格显示</h6></label>
+                        <script>
+                            var obj = document.getElementById("customSwitch");
+                            obj.checked = false;// 设置复选框默认为不选中状态
+                            function checkboxOnchange(checkbox) {
+                                if (checkbox.checked == true) {
+                                    $('#checkBoxText').text("列表显示");
+                                    $('#displayInGrid').show();
+                                    $('#displayInList').hide();
+                                } else {
+                                    $('#checkBoxText').text("表格显示");
+                                    $('#displayInList').show();
+                                    $('#displayInGrid').hide();
+                                }
+                            }
+                        </script>
+                    </div>
+                    <!--按照列表显示-->
+                    <div id="displayInList" class="row full_width featured_box_outer">
+                        <div class="col-sm-12" th:each="job : ${pageInfo.list}">
+                            <div class="featured_box ">
+                                <div class="fb_image">
+                                    <img alt="brand logo" src="/assets/images/c-logo-03.webp">
+                                </div>
+                                <div class="fb_content">
+                                    <a th:href="@{'/job/' + ${job.id} }">
+                                        <h4 th:text="${job.title}"/>
+                                        <ul>
+                                            <li style="width: 100px">
+                                                <i class="fas fa-yen-sign" th:text="${job.budget}"
+                                                   style="color: #dd4b39"></i>
+                                            </li>
+                                            <li style="width: 50px">
+                                                <i class="fas fa-user" th:text="${job.required}"
+                                                   style="color: #dd4b39"></i>
+                                            </li>
+                                            <li style="width: 130px">
+                                                <i class="far fa-clock"
+                                                   th:text="${#dates.format(job.create_time, 'yyyy-MM-dd')}"
+                                                   style="color: #dd4b39"></i>
+                                            </li>
+                                            <li style="width: 70px">
+                                                <i class="fas fa-user-graduate" th:if="${job.expertize_level=='beginner'}" th:text="新手" style="color: #dd4b39"></i>
+                                                <i class="fas fa-user-graduate" th:if="${job.expertize_level=='intermediate'}" th:text="中级" style="color: #dd4b39"></i>
+                                                <i class="fas fa-user-graduate" th:if="${job.expertize_level=='expert'}" th:text="专家" style="color: #dd4b39"></i>
+                                            </li>
+                                        </ul>
+                                    </a>
+                                </div>
+                                <div class="fb_action">
+                                    <a class="btn btn-primary" href="#">申请</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--按照图标显示-->
+                    <div id="displayInGrid" class="row two_col featured_box_outer" style="display: none">
+                        <div class="col-sm-6" th:each="job: ${pageInfo.list}">
+                            <div class="featured_box ">
+                                <div class="fb_image">
+                                    <img alt="brand logo" src="/assets/images/c-logo-03.webp">
+                                </div>
+                                <div class="fb_content">
+                                    <h4 th:text="${job.title}"></h4>
+                                    <ul>
+                                        <li style="width: 130px">
+                                            <i class="fas fa-yen-sign" th:text="${job.budget}"
+                                               style="color: #dd4b39"></i>
+                                        </li>
+                                        <li style="width: 130px">
+                                            <i class="fas fa-user" th:text="${job.required}" style="color: #dd4b39"></i>
+                                        </li>
+                                        <li style="width: 130px">
+                                            <i class="far fa-clock"
+                                               th:text="${#dates.format(job.create_time, 'yyyy-MM-dd')}"
+                                               style="color: #dd4b39"></i>
+                                        </li>
+                                        <li style="width: 130px">
+                                            <i class="fas fa-user-graduate" th:if="${job.expertize_level=='beginner'}" th:text="新手" style="color: #dd4b39"></i>
+                                            <i class="fas fa-user-graduate" th:if="${job.expertize_level=='intermediate'}" th:text="中级" style="color: #dd4b39"></i>
+                                            <i class="fas fa-user-graduate" th:if="${job.expertize_level=='expert'}" th:text="专家" style="color: #dd4b39"></i>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="fb_action">
+                                    <a class="btn btn-primary" href="#" style="margin-left: 0px">申请</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <!--分页部分  -->
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination">
+                            <!-- 向前1页-->
+                            <li class="page-item">
+                                <a class="page-link" th:if="${pageNum-1>0}"
+                                   th:href="@{${'job'}(pageNum=${pageNum-1},pageSize=${pageSize})}"
+                                   aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                                <a class="page-link" th:if="${pageNum-1<=0}" href="javascript:void(0);"
+                                   aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                            <!--只显示5页,不足五页的只显示有的页-->
 
-              <l th:if="${pageNum<totalPages-5}"  th:each="pageNo : ${#numbers.sequence(pageNum, pageNum+5)}">
-                <a class="btn btn-outline-secondary" th:if="${pageNum eq pageNo}" href="javascript:void(0);">
-                  <span th:text="${pageNo}"></span>
-                </a>
+                            <li  class="page-item" th:if="${totalPages>5}"
+                               th:each="pageNo : ${#numbers.sequence(pageNum, pageNum+5)}">
+                                <a class="page-link" th:if="${pageNum eq pageNo}"
+                                   href="javascript:void(0);">
+                                    <span th:text="${pageNo}"></span>
+                                </a>
 
-                <a class="btn btn-outline-secondary" th:if="${not (pageNum eq pageNo)}" th:href="@{${'job'}(pageNum=${pageNo},pageSize=${pageSize})}">
-                  <span th:text="${pageNo}"></span>
-                </a>
-              </l>
-              <l th:if="${pageNum>=totalPages-5}"  th:each="pageNo : ${#numbers.sequence(totalPages-5,totalPages)}">
-                <a  class="btn btn-outline-secondary"th:if="${pageNum eq pageNo}" href="javascript:void(0);">
-                  <span th:text="${pageNo}"></span>
-                </a>
+                                <a class="page-link" th:if="${not (pageNum eq pageNo)}"
+                                   th:href="@{${'job'}(pageNum=${pageNo},pageSize=${pageSize})}">
+                                    <span th:text="${pageNo}"></span>
+                                </a>
+                            </li>
+                            <li class="page-item" th:if="${totalPages<=5}"
+                               th:each="pageNo : ${#numbers.sequence(1,totalPages)}">
+                                <a class="page-link" th:if="${pageNum eq pageNo}"
+                                   href="javascript:void(0);">
+                                    <span th:text="${pageNo}"></span>
+                                </a>
+                                <a class="page-link" th:if="${not (pageNum eq pageNo)}"
+                                   th:href="@{${'job'}(pageNum=${pageNo},pageSize=${pageSize})}">
+                                    <span th:text="${pageNo}"></span>
+                                </a>
+                            </li>
 
-                <a  class="btn btn-outline-secondary" th:if="${not (pageNum eq pageNo)}" th:href="@{${'job'}(pageNum=${pageNo},pageSize=${pageSize})}">
-                  <span th:text="${pageNo}"></span>
-                </a>
-              </l>
-              <!--向后五页-->
-              <li>
-                <a class="btn btn-outline-secondary" th:if="${totalPages-pageNum>=0}" th:href="@{${'job'}(pageNum=${pageNum+5},pageSize=${pageSize})}" aria-label="Next">
-                  <span aria-hidden="true">下一页</span>
-                </a>
-                <a class="btn btn-outline-secondary" th:if="${totalPages-pageNum<0}" href="javascript:void(0);" aria-label="Next">
-                  <span aria-hidden="true">下一页</span>
-                </a>
-              </li>
-          </ul>
+                            <!--向后五页-->
+                            <li class="page-item">
+                                <a class="page-link" th:if="${totalPages-pageNum>=0}"
+                                   th:href="@{${'job'}(pageNum=${pageNum+5},pageSize=${pageSize})}" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                                <a class="page-link" th:if="${totalPages-pageNum<0}"
+                                   href="javascript:void(0);" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+
+                </ul>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 </main>
 
 
@@ -196,5 +224,14 @@
 <script src="/assets/js/bootstrap.min.js"></script>
 <script src="/assets/js/owl.carousel.min.js"></script>
 <script src="/assets/js/custom.js"></script>
+<script>
+    $(document).ready(function() {
+        $("#5").addClass("current_page").siblings().removeClass("current_page");
+    })
+    $(".pagination>li").click(function(){
+        $(this).addClass("active").siblings().removeClass("active");
+    })
+
+</script>
 </body>
 </html>

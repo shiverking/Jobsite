@@ -20,7 +20,7 @@ public interface JobMapper {
     //根据id找到Job
     Job findJobById(@Param("id") int id);
     //根据job信息模糊搜索
-    Job findJobByName(@Param("name") String name);
+    Job findJobByName(@Param("title") String title);
     // 按时间降序排列
     List<Job> getAllJobDesc();
     // 按时间升序排列
