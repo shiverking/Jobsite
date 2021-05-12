@@ -59,6 +59,7 @@
     <select id="isJobExist" resultType="java.lang.Boolean">
         <![CDATA[ select count(*)
                   from job where id = #{job_id}]]>
+    </select>
     <select id="findJobByName" resultType="project.model.Job">
         select * from job where title = #{title}
 

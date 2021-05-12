@@ -167,10 +167,12 @@ public class UserServiceImpl implements UserService, UserDetailsService {
      * @param id
      * @return
      */
-    public User getUserById(int id){
+    public User getUserById(int id) {
 
         return userMapper.getUserById(id);
-     * 根据id修改用户的头像地址
+    }
+
+    /* 根据id修改用户的头像地址
      * @param id
      * @param headrul
      * @return
