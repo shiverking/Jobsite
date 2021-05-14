@@ -26,4 +26,21 @@
     <select id="findOrderById" resultType="project.model.Order">
         select * from `order` where id = #{id}
     </select>
+
+    <delete id="deleteOrderById" parameterType="project.model.Order">
+        delete from `order` where id = #{id}
+    </delete>
+
+    <select id="searchOrder" resultType="project.model.Order">
+        select * from `order`
+        <where>
+            1=1
+            <if test="jobId!=null and jobId!=0">and job_id=#{jobId}</if>
+            <if test="state!=null and state!=''">and state=#{state}</if>
+        </where>
+    </select>
+
+    <select id="getOrderCount" resultType="int">
+        select count(*) from `order`
+    </select>
 </mapper>

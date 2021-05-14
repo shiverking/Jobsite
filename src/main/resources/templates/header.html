@@ -65,6 +65,15 @@
                         <li id="6"href="#" sec:authorize="hasRole('ROLE_employer')">
                             <a >找人才</a>
                         </li>
+
+                        <li th:href="@{/admin/board}" sec:authorize="hasRole('ROLE_admin')">
+                            <a>管理</a>
+                        </li>
+                        <li th:href="@{/superadmin/management}" sec:authorize="hasRole('ROLE_superadmin')">
+                            <a>管理</a>
+                        </li>
+
+
                         <li id="7" sec:authorize="isAuthenticated()">
                             <a>工作管理</a>
                         </li>

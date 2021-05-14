@@ -151,6 +151,33 @@ public class JobController {
         } else {
             return RespBean.ok("关闭该职位招聘成功");
 
+
+
+        /**
+         * 发布工作
+         * @param
+         * @return
+         */
+        @ResponseBody
+        @RequestMapping("/job/postAJob")
+        public RespBean postJob(@Valid @RequestBody Job job) {
+                //获取当前发布用户id
+                Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+                User user = (User)principal;
+                job.setEmployer_id(user.getId());
+                //获取当前系统创建时间
+                Date date = new Date();
+                Timestamp timestamp = new Timestamp(date.getTime());
+                job.setCreate_time(timestamp);
+                //设置为未审核，开启招聘
+                job.setCheck(false);
+                job.setJob_status(true);
+                //插入对象
+                jobService.insertJob(job);
+                //获取插入对象的id值
+                Map<String,Object> map = new HashMap<>();
+                map.put("JobId",job.getId());
+            return RespBean.ok("发布工作成功",map);
         }
     }
 

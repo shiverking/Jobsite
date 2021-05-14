@@ -1,20 +1,20 @@
 package project.controller;
 
-import com.github.pagehelper.PageHelper;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import project.exception.ServiceException;
+import project.common.util.JsonResult;
 import project.model.Job;
 import project.model.Order;
-import project.model.RespBean;
 import project.model.User;
 import project.service.*;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * 管理员管理控制
@@ -35,249 +35,205 @@ public class AdminController {
     JobServiceImpl jobServiceImpl;
 
     /**
-     * 分页查找所有工作
+     * 返回主版
      * @param model
      * @return
      */
-    @RequestMapping("/admin")
-    public String getJobList(Model model, @RequestParam(defaultValue = "1") Integer pageNum, @RequestParam(defaultValue = "8") Integer pageSize){
-        //引入分页查询
-        PageHelper.startPage(pageNum,pageSize);
-        //分页查询
-        List<Job> jobs = jobServiceImpl.findAllJobsAsc();
-        //使用pageinfo封装查询结果
-        PageInfo<Job> pageInfo = new PageInfo<Job>(jobs,5);
-
-        model.addAttribute("pageInfo",pageInfo);
-
-        //获得当前页
-        model.addAttribute("pageNum", pageInfo.getPageNum());
-        //获得一页显示的条数
-        model.addAttribute("pageSize", pageInfo.getPageSize());
-        //是否是第一页
-        model.addAttribute("isFirstPage", pageInfo.isIsFirstPage());
-        //获得总页数
-        model.addAttribute("totalPages", pageInfo.getPages());
-        //是否是最后一页
-        model.addAttribute("isLastPage", pageInfo.isIsLastPage());
-
-        return "admin/job_management";
+    @RequestMapping("/admin/board")
+    public String toBoard(Model model){
+        //获取用户验证信息
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = (User) principal;
+        String username = user.getUsername();
+        int jobCount = jobServiceImpl.getJobCount();
+        int userCount = userServiceImpl.getUserCount();
+        int orderCount = orderServiceImpl.getOrderCount();
+        model.addAttribute("username",username);
+        model.addAttribute("jobCount",jobCount);
+        model.addAttribute("userCount",userCount);
+        model.addAttribute("orderCount",orderCount);
+        return "admin/board";
     }
 
     /**
-     * 分页查找所有工作（按时间降序）
-     * @param model
+     * 返回职位管理
      * @return
      */
+    @RequestMapping("/admin/job")
+    public String toJobManagement(){ return "admin/job_management"; }
+
+    /**
+     * 返回订单管理
+     * @return
+     */
+    @RequestMapping("/admin/order")
+    public String toOrderManagement(){ return "admin/order_management"; }
+
+    /**
+     * 返回用户管理
+     * @return
+     */
+    @RequestMapping("/admin/user")
+    public String toUserManagement(){ return "admin/user_management"; }
+
+    /**
+     * 分页获取职位列表
+     * @param page
+     * @param limit
+     * @return
+     */
+    @PostMapping("/admin/joblist")
     @ResponseBody
-    @RequestMapping("/admin/jobOrderByTime")
-    public List<Job> getJobListAsc(Model model, @RequestParam(defaultValue = "1") Integer pageNum, @RequestParam(defaultValue = "8") Integer pageSize){
-
-        //引入分页查询
-        PageHelper.startPage(pageNum,pageSize);
-        //分页查询
-        List<Job> jobs = jobServiceImpl.findAllJobsAsc();
-        //使用pageinfo封装查询结果
-        PageInfo<Job> pageInfo = new PageInfo<Job>(jobs,5);
-
-        model.addAttribute("pageInfo",pageInfo);
-
-        //获得当前页
-        model.addAttribute("pageNum", pageInfo.getPageNum());
-        //获得一页显示的条数
-        model.addAttribute("pageSize", pageInfo.getPageSize());
-        //是否是第一页
-        model.addAttribute("isFirstPage", pageInfo.isIsFirstPage());
-        //获得总页数
-        model.addAttribute("totalPages", pageInfo.getPages());
-        //是否是最后一页
-        model.addAttribute("isLastPage", pageInfo.isIsLastPage());
-
-        return jobs;
+    public JsonResult getJobs(@RequestParam("page") Integer page, @RequestParam("limit") Integer limit){
+        PageInfo<Job> pageInfo = jobServiceImpl.findJobByPage(page,limit);
+        System.out.println(pageInfo.getList());
+        return JsonResult.success("success",pageInfo.getList(),pageInfo.getTotal());
     }
 
     /**
-     * 跳转到singlejob页面
-     * @param model
-     * @param id
+     * 根据条件查询职位
+     * @param page
+     * @param limit
+     * @param employer_id
+     * @param title
+     * @param check
      * @return
      */
-    @RequestMapping("/admin/{id}")
-    public String getJobById(Model model,@PathVariable int id){
-        Job job = jobServiceImpl.findJobById(id);
-        model.addAttribute("job",job);
-        return "job/single_job";
-    }
-
-    /**
-     * 审核职位
-     * @param info
-     * @return
-     * @throws ServiceException
-     */
+    @PostMapping("/admin/searchJob")
     @ResponseBody
-    @RequestMapping("/admin/checkJob")
-    public RespBean checkJob(@RequestBody Map<String,Object> info){
-        String idStr = (String) info.get("id");
-        int id = (int)Integer.parseInt(idStr);
-        if(jobServiceImpl.checkJob(id)){
-            return RespBean.ok("审核成功");
-        }
-        return RespBean.error("审核失败");
+    public JsonResult searchJobs(@RequestParam("page") Integer page, @RequestParam("limit") Integer limit,@RequestParam(value="employer_id") String employer_id,@RequestParam(defaultValue="",value="title") String title,@RequestParam(defaultValue="",value="check")String check){
+        int employerId = Integer.parseInt(employer_id);
+        int oneCheck = Integer.parseInt(check);
+        PageInfo<Job> pageInfo = jobServiceImpl.searchJobByPage(page,limit,employerId,title,oneCheck);
+//        System.out.println(pageInfo.getList());
+        return JsonResult.success("success",pageInfo.getList(),pageInfo.getTotal());
+    }
+
+    /**
+     * 分页获取订单列表
+     * @param page
+     * @param limit
+     * @return
+     */
+    @PostMapping("/admin/orderlist")
+    @ResponseBody
+    public JsonResult getOrders(@RequestParam("page") Integer page, @RequestParam("limit") Integer limit){
+        PageInfo<Order> pageInfo = orderServiceImpl.findOrderByPage(page,limit);
+//        System.out.println(pageInfo.getList());
+        return JsonResult.success("success",pageInfo.getList(),pageInfo.getTotal());
+    }
+
+    /**
+     * 根据条件查询订单
+     * @param page
+     * @param limit
+     * @param job_id
+     * @param state
+     * @return
+     */
+    @PostMapping("/admin/searchOrder")
+    @ResponseBody
+    public JsonResult searchOrders(@RequestParam("page") Integer page, @RequestParam("limit") Integer limit,@RequestParam(value="job_id") String job_id,@RequestParam(defaultValue="",value="state") String state){
+        int jobId = Integer.parseInt(job_id);
+        PageInfo<Order> pageInfo = orderServiceImpl.searchOrderByPage(page,limit,jobId,state);
+//        System.out.println(pageInfo.getList());
+        return JsonResult.success("success",pageInfo.getList(),pageInfo.getTotal());
+    }
+
+    /**
+     * 分页获取用户列表
+     * @param page
+     * @param limit
+     * @return
+     */
+    @PostMapping("/admin/userlist")
+    @ResponseBody
+    public JsonResult getUsers(@RequestParam("page") Integer page, @RequestParam("limit") Integer limit){
+        PageInfo<User> pageInfo = userServiceImpl.findUserByPage(page,limit);
+//        System.out.println(pageInfo.getList());
+        return JsonResult.success("success",pageInfo.getList(),pageInfo.getTotal());
+    }
+
+    /**
+     * 根据条件查询用户
+     * @param page
+     * @param limit
+     * @param username
+     * @param telephone
+     * @param rid
+     * @return
+     */
+    @PostMapping("/admin/searchUser")
+    @ResponseBody
+    public JsonResult searchUsers(@RequestParam("page") Integer page, @RequestParam("limit") Integer limit,@RequestParam(defaultValue="",value="username") String username,@RequestParam(defaultValue="",value="telephone") String telephone,@RequestParam(defaultValue="",value="rid") String rid){
+        int roleId = Integer.parseInt(rid);
+        PageInfo<User> pageInfo = userServiceImpl.searchUserByPage(page,limit,username,telephone,roleId);
+//        System.out.println(pageInfo.getList());
+        return JsonResult.success("success",pageInfo.getList(),pageInfo.getTotal());
     }
 
     /**
      * 删除职位
-     * @param info
+     * @param jobIds
      * @return
      */
+    @DeleteMapping("/admin/jobs")
     @ResponseBody
-    @RequestMapping("/admin/deleteJob")
-    public RespBean deleteJob(@RequestBody Map<String,Object>info){
-        String idStr = (String) info.get("id");
-        int id = Integer.parseInt(idStr);
-        if(jobServiceImpl.deleteJob(id)){
-            return RespBean.ok("删除成功");
+    public JsonResult deleteJobs(@RequestBody List<String> jobIds) {
+        for(String jobId:jobIds) {
+            int id = Integer.parseInt(jobId);
+            jobServiceImpl.deleteJobById(id);
+            System.out.println("delete job "+id+" success");
         }
-        return RespBean.error("删除失败");
-    }
-
-
-
-    /**
-     * 分页查找所有订单
-     * @param model
-     * @return
-     */
-    @RequestMapping("/admin/order")
-    public String getOrderList(Model model, @RequestParam(defaultValue = "1") Integer pageNum, @RequestParam(defaultValue = "8") Integer pageSize){
-        //引入分页查询
-        PageHelper.startPage(pageNum,pageSize);
-        //分页查询
-        List<Order> orders = orderServiceImpl.findAllOrder();
-        //使用pageinfo封装查询结果
-        PageInfo<Order> pageInfo = new PageInfo<Order>(orders,5);
-
-        model.addAttribute("pageInfo",pageInfo);
-        //获得当前页
-        model.addAttribute("pageNum", pageInfo.getPageNum());
-        //获得一页显示的条数
-        model.addAttribute("pageSize", pageInfo.getPageSize());
-        //是否是第一页
-        model.addAttribute("isFirstPage", pageInfo.isIsFirstPage());
-        //获得总页数
-        model.addAttribute("totalPages", pageInfo.getPages());
-        //是否是最后一页
-        model.addAttribute("isLastPage", pageInfo.isIsLastPage());
-
-        return "admin/order_management";
-    }
-    @RequestMapping("/admin/order/{id}")
-    public String getOrderById(Model model,@PathVariable int id){
-        Order order = orderServiceImpl.findOrderById(id);
-        model.addAttribute("order",order);
-        return "order/single_order";
+        return JsonResult.success();
     }
 
     /**
-     * 分页查找所有人员
-     * @param model
+     * 审核职位
+     * @param jobIds
      * @return
      */
-    @RequestMapping("/admin/user")
-    public String getUserList(Model model, @RequestParam(defaultValue = "1") Integer pageNum, @RequestParam(defaultValue = "8") Integer pageSize){
-        //引入分页查询
-        PageHelper.startPage(pageNum,pageSize);
-        //分页查询
-        List<User> users = userServiceImpl.findAllUsers();
-        //使用pageinfo封装查询结果
-        PageInfo<User> pageInfo = new PageInfo<User>(users,5);
+    @PutMapping("/admin/jobs/check")
+    @ResponseBody
+    public JsonResult checkJobs(@RequestBody List<String> jobIds){
+        for(String jobId:jobIds){
+            int id = Integer.parseInt(jobId);
+            jobServiceImpl.checkJob(id);
+            System.out.println("check job "+id+" success");
+        }
+        return JsonResult.success();
+    }
 
-        model.addAttribute("pageInfo",pageInfo);
 
-        //获得当前页
-        model.addAttribute("pageNum", pageInfo.getPageNum());
-        //获得一页显示的条数
-        model.addAttribute("pageSize", pageInfo.getPageSize());
-        //是否是第一页
-        model.addAttribute("isFirstPage", pageInfo.isIsFirstPage());
-        //获得总页数
-        model.addAttribute("totalPages", pageInfo.getPages());
-        //是否是最后一页
-        model.addAttribute("isLastPage", pageInfo.isIsLastPage());
-
-        return "admin/user_management";
+    /**
+     * 删除订单
+     * @param orderIds
+     * @return
+     */
+    @DeleteMapping("/admin/orders")
+    @ResponseBody
+    public JsonResult deleteOrders(@RequestBody List<String> orderIds) {
+        for(String orderId:orderIds) {
+            int id = Integer.parseInt(orderId);
+            orderServiceImpl.deleteOrderById(id);
+            System.out.println("delete order "+id+" success");
+        }
+        return JsonResult.success();
     }
 
     /**
-     * 分页查找所有招聘者
-     * @param model
+     * 删除用户
+     * @param userIds
      * @return
      */
-    @RequestMapping("/admin/employer")
-    public String getEmployerList(Model model, @RequestParam(defaultValue = "1") Integer pageNum, @RequestParam(defaultValue = "8") Integer pageSize){
-        //引入分页查询
-        PageHelper.startPage(pageNum,pageSize);
-        //分页查询
-        List<User> users = userServiceImpl.findUserByRid(1);
-        //使用pageinfo封装查询结果
-        PageInfo<User> pageInfo = new PageInfo<User>(users,5);
-
-        model.addAttribute("pageInfo",pageInfo);
-
-        //获得当前页
-        model.addAttribute("pageNum", pageInfo.getPageNum());
-        //获得一页显示的条数
-        model.addAttribute("pageSize", pageInfo.getPageSize());
-        //是否是第一页
-        model.addAttribute("isFirstPage", pageInfo.isIsFirstPage());
-        //获得总页数
-        model.addAttribute("totalPages", pageInfo.getPages());
-        //是否是最后一页
-        model.addAttribute("isLastPage", pageInfo.isIsLastPage());
-
-        return "admin/user_management";
-    }
-
-    /**
-     * 分页查找所有应聘者
-     * @param model
-     * @return
-     */
-    @RequestMapping("/admin/employee")
-    public String getEmployeeList(Model model, @RequestParam(defaultValue = "1") Integer pageNum, @RequestParam(defaultValue = "8") Integer pageSize){
-        //引入分页查询
-        PageHelper.startPage(pageNum,pageSize);
-        //分页查询
-        List<User> users = userServiceImpl.findUserByRid(2);
-        //使用pageinfo封装查询结果
-        PageInfo<User> pageInfo = new PageInfo<User>(users,5);
-
-        model.addAttribute("pageInfo",pageInfo);
-
-        //获得当前页
-        model.addAttribute("pageNum", pageInfo.getPageNum());
-        //获得一页显示的条数
-        model.addAttribute("pageSize", pageInfo.getPageSize());
-        //是否是第一页
-        model.addAttribute("isFirstPage", pageInfo.isIsFirstPage());
-        //获得总页数
-        model.addAttribute("totalPages", pageInfo.getPages());
-        //是否是最后一页
-        model.addAttribute("isLastPage", pageInfo.isIsLastPage());
-
-        return "admin/user_management";
-    }
-
-    @RequestMapping("/admin/user/{id}")
-    public String getUserById(Model model,@PathVariable int id){
-        User user = userServiceImpl.findUserById(id);
-        model.addAttribute("user",user);
-        return "user/single_user";
-    }
-
-    @RequestMapping("/admin/singleUser")
-    public String toStaff(Model model){
-        return "user/staffProfile";
+    @DeleteMapping("/admin/users")
+    @ResponseBody
+    public JsonResult deleteUsers(@RequestBody List<String> userIds) {
+        for(String userId:userIds) {
+            int id = Integer.parseInt(userId);
+            userServiceImpl.deleteUserById(id);
+            System.out.println("delete user "+id+" success");
+        }
+        return JsonResult.success();
     }
 }
