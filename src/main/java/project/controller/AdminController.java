@@ -44,6 +44,7 @@ public class AdminController {
         //获取用户验证信息
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = (User) principal;
+        model.addAttribute("user", user);
         String username = user.getUsername();
         int jobCount = jobServiceImpl.getJobCount();
         int userCount = userServiceImpl.getUserCount();
@@ -60,21 +61,33 @@ public class AdminController {
      * @return
      */
     @RequestMapping("/admin/job")
-    public String toJobManagement(){ return "admin/job_management"; }
+    public String toJobManagement(Model model){
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = (User) principal;
+        model.addAttribute("user", user);
+        return "admin/job_management"; }
 
     /**
      * 返回订单管理
      * @return
      */
     @RequestMapping("/admin/order")
-    public String toOrderManagement(){ return "admin/order_management"; }
+    public String toOrderManagement(Model model){
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = (User) principal;
+        model.addAttribute("user", user);
+        return "admin/order_management"; }
 
     /**
      * 返回用户管理
      * @return
      */
     @RequestMapping("/admin/user")
-    public String toUserManagement(){ return "admin/user_management"; }
+    public String toUserManagement(Model model){
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = (User) principal;
+        model.addAttribute("user", user);
+        return "admin/user_management"; }
 
     /**
      * 分页获取职位列表

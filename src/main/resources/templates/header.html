@@ -66,11 +66,11 @@
                             <a >找人才</a>
                         </li>
 
-                        <li th:href="@{/admin/board}" sec:authorize="hasRole('ROLE_admin')">
-                            <a>管理</a>
+                        <li sec:authorize="hasRole('ROLE_admin')">
+                            <a th:href="@{/admin/board}">管理</a>
                         </li>
-                        <li th:href="@{/superadmin/management}" sec:authorize="hasRole('ROLE_superadmin')">
-                            <a>管理</a>
+                        <li  sec:authorize="hasRole('ROLE_superadmin')">
+                            <a th:href="@{/superadmin/management}">管理</a>
                         </li>
 
 

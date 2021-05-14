@@ -465,8 +465,8 @@ public class UserController {
     @RequestMapping("/hello")
     public String test() {
         //测试代码
-        Object p = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        User user = (User)p;
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = (User)principal;
         System.out.println("当前登录用户信息：" + user.toString());
         System.out.println("当前登录用户id：" + user.getId());
         return principal.toString();

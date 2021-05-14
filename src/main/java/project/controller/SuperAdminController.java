@@ -32,13 +32,25 @@ public class SuperAdminController {
     RoleServiceImpl roleServiceImpl;
 
     @RequestMapping("/superadmin/management")
-    public String toSaManagement(Model model){return "superadmin/admin_management";}
+    public String toSaManagement(Model model){
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = (User) principal;
+        model.addAttribute("user", user);
+        return "superadmin/admin_management";}
 
     @RequestMapping("/superadmin/changePassword")
-    public String toChangePwd(Model model){return "superadmin/reset_admin";}
+    public String toChangePwd(Model model){
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = (User) principal;
+        model.addAttribute("user", user);
+        return "superadmin/reset_admin";}
 
     @RequestMapping("/superadmin/createAdmin")
-    public String toCreateAdmin(Model model){return "superadmin/create_admin";}
+    public String toCreateAdmin(Model model){
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = (User) principal;
+        model.addAttribute("user", user);
+        return "superadmin/create_admin";}
 
     /**
      * 删除用户
@@ -167,7 +179,7 @@ public class SuperAdminController {
     @PostMapping("/superadmin/searchUser")
     @ResponseBody
     public JsonResult searchUsers(@RequestParam("page") Integer page, @RequestParam("limit") Integer limit,@RequestParam(defaultValue="",value="username") String username,@RequestParam(defaultValue="",value="telephone") String telephone){
-        PageInfo<User> pageInfo = userServiceImpl.searchUserByPage(page,limit,username,telephone,3);
+        PageInfo<User> pageInfo = userServiceImpl.searchAdminByPage(page,limit,username,telephone);
 //        System.out.println(pageInfo.getList());
         return JsonResult.success("success",pageInfo.getList(),pageInfo.getTotal());
     }

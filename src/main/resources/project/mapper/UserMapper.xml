@@ -147,7 +147,7 @@
     </delete>
 
     <select id="getUserList" resultType="project.model.User">
-        select u.id,username,telephone,email,location from user u,user_role ur where u.id=ur.uid and ur.rid=1 or ur.rid=2
+        select u.id,username,telephone,email,location from user u,user_role ur where u.id=ur.uid and ur.rid <![CDATA[ < ]]> 3
     </select>
 
     <select id="getAdminList" resultType="project.model.User">
@@ -159,9 +159,21 @@
         <where>
             1=1
             and u.id = ur.uid
+            and ur.rid<![CDATA[ < ]]>3
             <if test="username!=null and username!=''">and u.username=#{username}</if>
             <if test="telephone!=null and telephone != ''">and u.telephone=#{telephone}</if>
             <if test="rid!=null and rid!=0">and ur.rid=#{rid}</if>
+        </where>
+    </select>
+
+    <select id="searchAdmin" resultType="project.model.User">
+        select * from user u,user_role ur
+        <where>
+            1=1
+            and u.id = ur.uid
+            and ur.rid = 3
+            <if test="username!=null and username!=''">and u.username=#{username}</if>
+            <if test="telephone!=null and telephone != ''">and u.telephone=#{telephone}</if>
         </where>
     </select>
 
