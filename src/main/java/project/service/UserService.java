@@ -65,6 +65,8 @@ public interface UserService {
 
     PageInfo<User> searchUserByPage(Integer page, Integer limit, String username, String telephone, int rid);
 
+    PageInfo<User> searchAdminByPage(Integer page, Integer limit, String username, String telephone);
+
     int getUserCount();
 
     boolean updateUserInfo(int id,String password, String username, String telephone,String email);

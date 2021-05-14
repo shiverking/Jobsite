@@ -169,6 +169,13 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
+    public PageInfo<User> searchAdminByPage(Integer page, Integer limit, String username, String telephone) {
+        PageHelper.startPage(page,limit);
+        PageInfo<User> info = new PageInfo<User>(userMapper.searchAdmin(username,telephone));
+        return info;
+    }
+
+    @Override
     public int getUserCount() {
         return userMapper.getUserCount();
     }

@@ -27,16 +27,6 @@ public interface JobService {
     //按时间降序查看job
     List<Job> findAllJobsDesc();
 
-
-
-    public int insertJob(Job job);
-
-    public List<Job> findJobsByEmployerId(int employer_id);
-
-    public int closeJobById(int id);
-
-    public int openJobById(int id);
-
     public PageInfo<Job> findJobByPage(Integer pageNum,Integer limitNum);
 
     PageInfo<Job> searchJobByPage(Integer page, Integer limit, int employerId, String title,int check);

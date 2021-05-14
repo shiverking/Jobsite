@@ -45,14 +45,10 @@ public class JobServiceImpl implements JobService {
 
     @Override
     public boolean deleteJobById(int id) {
-        if(jobMapper.deleteJobById(id)==1){
-        return false;
-    }
-  
-    @Override
-    public boolean deleteJob(int id) {
-       if (jobMapper.deleteJobById(id) == 1) {
-           return true;
+        if (jobMapper.deleteJobById(id) == 1) {
+            return true;
+        }
+        else return false;
     }
 
     @Override
@@ -95,10 +91,11 @@ public class JobServiceImpl implements JobService {
 
 
     @Override
-    public PageInfo<Job> findJobByPage(Integer pageNum,Integer limitNum){
-        PageHelper.startPage(pageNum,limitNum);
+    public PageInfo<Job> findJobByPage(Integer pageNum,Integer limitNum) {
+        PageHelper.startPage(pageNum, limitNum);
         PageInfo<Job> info = new PageInfo<Job>(jobMapper.getJobList());
         return info;
+    }
 
     @Override
     public boolean isJobExist(int job_id) {
