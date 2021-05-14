@@ -6,16 +6,16 @@
 <mapper namespace="project.dao.JobMapper">
     <insert id="insertJob" useGeneratedKeys="true" keyProperty="id" parameterType="project.model.Job">
         insert into job values (
-            null,#{title},#{employer_id},#{description},#{budget},#{expertize_level},#{isCheck},#{create_time}
-            ,#{required},#{skill},#{work_time},#{position},#{job_statue}
+            null,#{title},#{employer_id},#{description},#{budget},#{expertize_level},#{check},#{create_time}
+            ,#{required},#{skill},#{work_time},#{position},#{job_status}
         );
 
     </insert>
     <update id="closeJobById">
-        update job set job_statue = 0 where id=#{id}
+        update job set job_status = 0 where id=#{id}
     </update>
     <update id="openJobById">
-        update job set job_statue = 1 where id=#{id}
+        update job set job_status = 1 where id=#{id}
     </update>
     <select id="getAllJobs" resultType="project.model.Job">
         <!--这个地方不能加分号，否则无法分页-->
@@ -35,7 +35,7 @@
     </select>
 
     <delete id="deleteJobById" parameterType="project.model.Job">
-        delete from job where job.id=#{id}
+        delete from job where id=#{id}
     </delete>
 
     <select id="getJobIsCheck" resultType="project.model.Job">
@@ -45,16 +45,33 @@
     <update id="updateJobCheck" >
         update job
          <set>
-         ischeck = 1
+         `check` = 1
          </set>
          where id=#{id}
     </update>
 
-    <select id="getJobNotCheck" parameterType="project.model.Job">
-        select * from job where ischeck = 0
+    <select id="getJobNotCheck" resultType="project.model.Job">
+        select * from job where `check` = 0
     </select>
     <select id="findJobsByEmployerId" resultType="project.model.Job">
         select * from job where employer_id = #{employer_id}
     </select>
 
+    <select id="getJobList" resultType="project.model.Job">
+        select id,employer_id,title,budget,expertize_level,create_time,required,skill,work_time,`check`,job_status from job
+    </select>
+
+    <select id="searchJob" resultType="project.model.Job">
+        select * from job
+        <where>
+            1=1
+            <if test="employerId!=null and employerId!=0">and employer_id=#{employerId}</if>
+            <if test="title!=null and title != ''">and title=#{title}</if>
+            <if test="check!=null and check!=3">and `check`=#{check}</if>
+        </where>
+    </select>
+
+    <select id="getJobCount" resultType="int">
+        select count(*) from job
+    </select>
 </mapper>

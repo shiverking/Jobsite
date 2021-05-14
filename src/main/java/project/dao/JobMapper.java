@@ -41,4 +41,10 @@ public interface JobMapper {
     int closeJobById(@Param("id") int id);
 
     int openJobById(@Param("id") int id);
+
+    List<Job> getJobList();
+
+    List<Job> searchJob(@Param("employerId") int employerId,@Param("title") String title,@Param("check") int check);
+
+    int getJobCount();
 }

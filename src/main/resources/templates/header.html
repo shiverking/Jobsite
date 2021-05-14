@@ -65,6 +65,12 @@
                         <li href="#" sec:authorize="hasRole('ROLE_employer')">
                             <a >找人才</a>
                         </li>
+                        <li href="/admin/board" sec:authorize="hasRole('ROLE_admin')">
+                            <a>管理</a>
+                        </li>
+                        <li href="/superadmin/management" sec:authorize="hasRole('ROLE_superadmin')">
+                            <a>管理</a>
+                        </li>
                         <li sec:authorize="isAuthenticated()">
                             <a>工作管理</a>
                         </li>

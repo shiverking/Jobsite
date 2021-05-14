@@ -25,6 +25,8 @@
     <link href="/assets/css/light-theme.min.css" rel="stylesheet">
     <link href="/assets/css/dark-theme.min.css" rel="stylesheet">
     <link href="/assets/css/colored-theme.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="/layui/css/layui.css">
 </head>
 <body>
 
@@ -47,25 +49,25 @@
         <div class="container">
             <div class="row job_main">
                 <div class="sidebar">
-                    <h5>超管系统</h5>
+                    <h5>后台管理系统</h5>
                     <ul class="user_navigation">
+                        <li >
+                            <a href="/superadmin/management"><i class="fas fa-user"></i>管理员列表</a>
+                        </li>
                         <li class="is-active">
-                            <a id="1"><i class="fas fa-user"></i>创建管理员账号</a>
+                            <a href="/superadmin/createAdmin">创建管理员</a>
                         </li>
-                        <li>
-                            <a id="2"><i class="fas fa-key"></i>修改管理员密码</a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fas fa-paper-plane"></i>删除管理员账号</a>
+                        <li >
+                            <a href="/superadmin/changePassword">修改管理员密码</a>
                         </li>
                     </ul>
                 </div>
                 <div class="job_main_right">
-                    <!--创建管理员账号-->
+                    <!--修改密码-->
                     <div class="row job_section">
                         <div class="col-sm-12">
                             <div class="jm_headings">
-                                <h5>创建管理员账号</h5>
+                                <h5>创建管理员</h5>
                             </div>
                             <div class="section-divider">
                             </div>
@@ -96,7 +98,7 @@
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-md-2">
-                                        <h5>重复密码</h5>
+                                        <h5>确认密码</h5>
                                     </div>
                                     <div class="col-md-9">
                                         <input type="password" class="form-control" id="repeatPassword">
@@ -111,78 +113,11 @@
                             </form>
                         </div>
                     </div>
-                    <!--修改管理员密码-->
-                    <div class="row job_section">
-                        <div class="col-sm-12">
-                            <div class="jm_headings">
-                                <h5>修改管理员密码</h5>
-                            </div>
-                            <div class="section-divider">
-                            </div>
-                            <form>
-                                <div class="form-group row">
-                                    <div class="col-md-2">
-                                        <h5>管理员用户名</h5>
-                                    </div>
-                                    <div class="col-md-9">
-                                        <input type="text" class="form-control" id="username2">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-md-2">
-                                        <h5>新密码</h5>
-                                    </div>
-                                    <div class="col-md-9">
-                                        <input type="password" class="form-control" id="newPassword">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-md-2">
-                                        <h5>确认新密码</h5>
-                                    </div>
-                                    <div class="col-md-9">
-                                        <input type="password" class="form-control" id="newPassword2">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-md-9 offset-md-2">
-                                        <input id="confirmChangePassword" class="btn btn-primary" type="button"
-                                               th:value="确定" style="width: 30%"></input>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                    <!--删除管理员账号-->
-                    <div class="row job_section">
-                        <div class="col-sm-12">
-                            <div class="jm_headings">
-                                <h5>删除管理员账号</h5>
-                            </div>
-                            <div class="section-divider">
-                            </div>
-                            <form>
-                                <div class="form-group row">
-                                    <div class="col-md-2">
-                                        <h5>管理员用户名</h5>
-                                    </div>
-                                    <div class="col-md-9">
-                                        <input type="text" class="form-control" id="username3">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-md-9 offset-md-2">
-                                        <input id="confirmDeleteUser" class="btn btn-primary" type="button"
-                                               th:value="确定" style="width: 30%"></input>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-
                 </div>
             </div>
         </div>
+    </div>
+    </div>
     </div>
 </main>
 
@@ -201,7 +136,7 @@
 <script src="/assets/js/custom.js"></script>
 <!--提醒有关的js-->
 <script src="/assets/js/growl-notification.min.js"></script>
-<!--自己写的js-->
 <script src="/assets/js/superadmin.js"></script>
+
 </body>
 </html>

@@ -93,7 +93,7 @@ public class JobController {
                 job.setCreate_time(timestamp);
                 //设置为未审核，开启招聘
                 job.setCheck(false);
-                job.setJob_statue(true);
+                job.setJob_status(true);
                 //插入对象
                 jobService.insertJob(job);
                 //获取插入对象的id值

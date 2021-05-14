@@ -1,19 +1,3 @@
-$(window).on('load', function(){
-    $(".job_main_right>div").eq(0).show().siblings().hide();
-    //默认禁用按钮
-    $("#confirmInsertUser").attr("disabled", true);
-});
-
-$(document).ready(function () {
-    //切换标签页
-    $(".user_navigation>li").click(function () {
-        $(this).addClass("is-active").siblings().removeClass("is-active");
-        var index = $(this).index();
-        // console.log(index);
-        $(".job_main_right>div").eq(index).show().siblings().hide();
-    })
-})
-
 //确认用户名是否存在于数据库中
 $("#username1").blur(function () {
     var username = $("#username1").val();
@@ -126,7 +110,7 @@ $("#confirmInsertUser").click(function () {
                         position: 'bottom-right',
                         closeTimeout: 3000
                     });
-                    //将四个输入框的值清空
+                    //将输入框的值清空
                     $("#username1").val("");
                     $("#telephone").val("");
                     $("#password").val("");
@@ -253,89 +237,3 @@ $("#confirmChangePassword").click(function(){
     }
 });
 
-
-//确认用户名是否存在于数据库中
-$("#username3").blur(function () {
-    var username = $("#username3").val();
-    var obj = {
-        "username": username
-    }
-    $.ajax({
-        url: "/superadmin/isUsernameExist",
-        type: "post",
-        data: JSON.stringify(obj),
-        contentType: "application/json",
-        success: function (data) {
-            if (data.status == 200) {
-                //启用按钮
-                $("#confirmDeleteUser").attr("disabled", false);
-            } else {
-                //禁用按钮
-                $("#confirmDeleteUser").attr("disabled", true);
-                //弹出提示
-                GrowlNotification.notify({
-                    title: 'ERROR!',
-                    description: '用户名不存在',
-                    type: 'error',
-                    position: 'bottom-right',
-                    closeTimeout: 3000
-                });
-            }
-        }
-    })
-})
-
-//删除管理员操作
-$("#confirmDeleteUser").click(function(){
-    var username3 = $("#username3").val();
-    //用户名为空
-    if(username3==""){
-        GrowlNotification.notify({
-            title: '提醒!',
-            description: '用户名输入不允许为空',
-            type: 'warning',
-            position: 'bottom-right',
-            closeTimeout: 3000
-        });
-    }
-    //用户名不为空
-    if(username3!="") {
-        var obj = {
-            "username":username3
-        }
-        //发送重置密码请求
-        $.ajax({
-            url: "/superadmin/deleteUser",
-            type: "post",
-            data: JSON.stringify(obj),
-            contentType: "application/json",
-            success: function (data) {
-                if (data.status == 200) {
-                    //弹出提示
-                    GrowlNotification.notify({
-                        title: '成功!',
-                        description: '管理员删除成功',
-                        type: 'success',
-                        position: 'bottom-right',
-                        closeTimeout: 3000
-                    });
-                    //将三个输入框的值清空
-                    $("#username3").val("");
-                    //重新禁用按钮
-                    $("#confirmDeleteUser").attr("disabled", true);
-                } else {
-                    //弹出失败提示
-                    GrowlNotification.notify({
-                        title: '错误!',
-                        description: '用户删除失败',
-                        type: 'error',
-                        position: 'bottom-right',
-                        closeTimeout: 3000
-                    });
-
-                }
-                console.log(data);
-            }
-        })
-    }
-});
