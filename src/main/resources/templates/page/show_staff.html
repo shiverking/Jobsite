@@ -1,0 +1,114 @@
+﻿<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+<!-- Basic Page Needs
+================================================== -->
+<title>JoDice</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<link rel="icon" href="assets/images/fav.png" type="image/gif" sizes="64x64">
+
+<!-- CSS
+================================================== -->
+<link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700&display=swap&subset=latin-ext" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/all.min.css">
+<link href="/assets/css/aos.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+<link href="/assets/css/select2.min.css" rel="stylesheet" />
+<link href="/assets/css/owl.carousel.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="/assets/css/style.css">
+<link rel="stylesheet" href="/assets/css/color-1.css">
+    <!--提醒的样式-->
+    <link href="/assets/css/light-theme.min.css" rel="stylesheet">
+    <link href="/assets/css/dark-theme.min.css" rel="stylesheet">
+    <link href="/assets/css/colored-theme.min.css" rel="stylesheet">
+</head>
+<body>
+
+<!-- Header 01
+================================================== -->
+<header class="header_01 header_inner">
+  <div class="header_main">
+    <div class="header_menu fixed-top" th:include="/header.html"></div>
+    <div class="header_btm">
+    </div>
+  </div>
+</header>
+
+
+<!-- Main 
+================================================== -->
+<main>
+  <div class="job_container">
+    <div class="container">
+      <div class="row job_main">
+        <div class="sidebar">
+          <ul class="user_navigation">
+            <li>
+              <a href="/job/postJob"><i class="fas fa-paper-plane"></i>发布工作</a>
+            </li>
+            <li class="is-active">
+              <a href="/job/MyJobLists"><i class="far fa-list-alt"></i>职位管理</a>
+            </li>
+            <li>
+              <a href="/order/jobOrders"><i class="far fa-list-alt"></i>订单管理</a>
+            </li>
+          </ul>
+        </div>
+        <div class=" job_main_right" style="height: 700px">
+            <div class="row findstaf_section ">
+                  <div class="col-sm-6" th:if="${hasProfile}" th:each="profile,profileStat:${Profiles}">
+                  <div class="staffBox">
+                    <div class="staff_img">
+                    </div>
+                    <div class="staff_detail">
+                      <h3 th:text="${profile.user_name}"> </h3>
+                        <ul>
+                            <li>
+                                <h6>预期时薪</h6>
+                                <span th:text="${profile.compensation}"></span>
+                            </li>
+                            <li>
+                                <h6>工作时间</h6>
+                                <span th:text="${profile.workexperience}"></span>
+                            </li>
+                            <li>
+                                <h6>工作等级</h6>
+                                <span th:text="${profile.expertize_level}"></span>
+                            </li>
+                        </ul>
+                        <div class="staffBox_action">
+                            <a class="btn btn-third"  th:href="@{'/viewProfile/user_id='+${profile.user_id}}">查看他的简历</a>
+                            <a class="btn btn-third"  th:href="@{/message(id=${profile.user_id})}">联系他</a>
+                            <a class="btn btn-third"  style="color: white" th:onclick="hire([[${profile.user_id}]],[[${job_id}]]);">雇佣他</a>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- Footer Container
+================================================== -->
+<footer id="colophon" class="site-footer custom_footer" th:include="/footer.html"/>
+
+<!-- End Footer Container
+================================================== -->
+
+<!-- Scripts
+================================================== -->
+<script src="/assets/js/jquery-3.4.1.min.js"></script>
+<script src="/assets/js/select2.min.js"></script>
+<script src="/assets/js/bootstrap.min.js"></script>
+<script src="/assets/js/owl.carousel.min.js"></script>
+<script src="/assets/js/custom.js"></script>
+<script src="/assets/js/staff.js"></script>
+<script src="/assets/js/growl-notification.min.js"></script>
+</body>
+</html>

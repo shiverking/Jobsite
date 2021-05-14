@@ -3,7 +3,7 @@ package project.service;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.core.parameters.P;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -35,7 +35,8 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         if (userMapper.findUserByTelephone(user.getTelephone()) != null) {
             throw new ServiceException("该手机号已经存在", "203");
         }
-        return userMapper.insertUser(user.getId(),user.getUsername(),user.getPassword(),user.getTelephone(),user.getEmail());
+        //默认头像
+        return userMapper.insertUser(user.getId(),user.getUsername(),user.getPassword(),user.getTelephone(),user.getEmail(),"/assets/avatar/default.png" );
     }
 
     public String generateAuthCode(String telephone) {
@@ -204,6 +205,54 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     /**
+
+     * 根据id来返回user对象
+     * @param id
+     * @return
+     */
+    public User getUserById(int id) {
+
+        return userMapper.getUserById(id);
+    }
+
+    /* 根据id修改用户的头像地址
+     * @param id
+     * @param headrul
+     * @return
+     */
+    @Override
+    public boolean updateAvatar(int id, String headrul) {
+        if(userMapper.updateHeadUrlById(headrul,id)==1) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * 根据用户id找到其头像地址
+     * @param id
+     * @return
+     */
+    @Override
+    public String getHeadurl(int id) {
+        return userMapper.getHeadurlById(id);
+    }
+
+    /**
+     * 根据用户的id更新位置
+     * @param id
+     * @param location
+     * @return
+     */
+    @Override
+    public boolean updateLocation(int id, String location) {
+        if(userMapper.updateLocationById(location,id)==1){
+            return true;
+        }
+        return false;
+    }
+
+    /**
      * 通过用户名删除用户
      * @param username
      * @return
@@ -237,12 +286,22 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         return userMapper.getAllUsers();
     }
 
+
+    /**
+     * 通过用户的id查找其位置
+     * @param id
+     * @return
+     */
+    @Override
+    public String getLocation(int id) {
+        return userMapper.getLocationById(id);
+    }
+
     /**
      * 通过id获取用户
      * @param id
      * @return
      */
-    @Override
     public User findUserById(int id) {
         return userMapper.findUserById(id);
     }
@@ -276,5 +335,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Override
     public boolean isTelephoneExist(String telephone) {
         return userMapper.isTelephoneExist(telephone);
+
     }
 }

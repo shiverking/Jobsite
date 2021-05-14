@@ -1,10 +1,12 @@
 package project.controller;
 
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import project.model.User;
 
 /**
  * @author ：闫崇傲
@@ -22,6 +24,12 @@ public class HomeController {
      */
     @GetMapping
     public String toHome(Model model){
+        //如果已经登录
+        if(!SecurityContextHolder.getContext().getAuthentication().getName().equals("anonymousUser")) {
+            Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            User user = (User) principal;
+            model.addAttribute("user", user);
+        }
         return "home_page";
     }
 

@@ -9,6 +9,8 @@ public class Profile {
     private int id;
     //建立所属用户的id
     private int user_id;
+    //用户的姓名
+    private String user_name;
     //自我介绍
     private String biography;
     //工作经历
@@ -86,15 +88,25 @@ public class Profile {
         this.compensation = compensation;
     }
 
+    public String getUser_name() {
+        return user_name;
+    }
+
+    public void setUser_name(String user_name) {
+        this.user_name = user_name;
+    }
+
     @Override
     public String toString() {
         return "Profile{" +
-                "user_id=" + user_id +
+                "id=" + id +
+                ", user_id=" + user_id +
+                ", user_name='" + user_name + '\'' +
                 ", biography='" + biography + '\'' +
                 ", workexperience='" + workexperience + '\'' +
                 ", expertize_level='" + expertize_level + '\'' +
                 ", expertize_realm='" + expertize_realm + '\'' +
-                ", complationTime='" + completiontime + '\'' +
+                ", completiontime='" + completiontime + '\'' +
                 ", compensation='" + compensation + '\'' +
                 '}';
     }

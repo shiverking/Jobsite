@@ -15,7 +15,7 @@ import java.util.List;
  * @date ：2021/4/16 21:09
  */
 @Service
-public class JobServiceImpl implements JobService{
+public class JobServiceImpl implements JobService {
     @Autowired
     JobMapper jobMapper;
 
@@ -32,7 +32,7 @@ public class JobServiceImpl implements JobService{
 
     @Override
     public boolean checkJob(int id) {
-        if(jobMapper.updateJobCheck(id)==1){
+        if (jobMapper.updateJobCheck(id) == 1) {
             return true;
         }
         return false;
@@ -46,9 +46,13 @@ public class JobServiceImpl implements JobService{
     @Override
     public boolean deleteJobById(int id) {
         if(jobMapper.deleteJobById(id)==1){
-            return true;
-        }
         return false;
+    }
+  
+    @Override
+    public boolean deleteJob(int id) {
+       if (jobMapper.deleteJobById(id) == 1) {
+           return true;
     }
 
     @Override
@@ -60,9 +64,9 @@ public class JobServiceImpl implements JobService{
     public List<Job> findAllJobsDesc() {
         return jobMapper.getAllJobDesc();
     }
-    
+
     @Override
-    public int insertJob(Job job){
+    public int insertJob(Job job) {
         return jobMapper.insertJob(job);
     }
 
@@ -73,28 +77,33 @@ public class JobServiceImpl implements JobService{
 
     @Override
     public int closeJobById(int id) {
-        if(findJobById(id) != null){
+        if (findJobById(id) != null) {
             return jobMapper.closeJobById(id);
-        }else{
+        } else {
             return -1;
         }
     }
 
     @Override
     public int openJobById(int id) {
-        if(findJobById(id) != null){
+        if (findJobById(id) != null) {
             return jobMapper.openJobById(id);
-        }else{
+        } else {
             return -1;
         }
-
     }
+
 
     @Override
     public PageInfo<Job> findJobByPage(Integer pageNum,Integer limitNum){
         PageHelper.startPage(pageNum,limitNum);
         PageInfo<Job> info = new PageInfo<Job>(jobMapper.getJobList());
         return info;
+
+    @Override
+    public boolean isJobExist(int job_id) {
+        //如果没有找到简历，则返回false
+        return jobMapper.isJobExist(job_id);
     }
 
     @Override

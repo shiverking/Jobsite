@@ -11,10 +11,11 @@ import java.util.List;
  */
 public interface JobService {
     //返回所有的job
-    public List<Job> findAllJobs();
+    List<Job> findAllJobs();
     //按照id找到Job
-    public Job findJobById(int id);
-
+    Job findJobById(int id);
+    //插入一条工作
+    int insertJob(Job job);
     //对job进行审核
     boolean checkJob(int id);
     //返回所有通过审核的job
@@ -25,6 +26,7 @@ public interface JobService {
     List<Job> findAllJobsAsc();
     //按时间降序查看job
     List<Job> findAllJobsDesc();
+
 
 
     public int insertJob(Job job);
@@ -40,4 +42,14 @@ public interface JobService {
     PageInfo<Job> searchJobByPage(Integer page, Integer limit, int employerId, String title,int check);
 
     int getJobCount();
+
+    //通过employerId找到job
+    List<Job> findJobsByEmployerId(int employer_id);
+    //通过id关闭job
+    int closeJobById(int id);
+    //通过idopenjob
+    int openJobById(int id);
+    //job是否存在
+    boolean isJobExist(int job_id);
+
 }

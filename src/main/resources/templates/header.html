@@ -4,7 +4,7 @@
     <div class="container">
         <div class="header_top">
             <div class="logo">
-                <a href="index.html">
+                <a th:href="@{/}">
                     <img alt="JoDice" class="img-fluid" src="/assets/images/logo-2.png">
                 </a>
             </div>
@@ -17,10 +17,10 @@
                         </div>
                     </div>
                     <ul>
-                        <li class="current_page">
+                        <li id="1" class="current_page">
                             <a th:href="@{/}" >主页</a>
                         </li>
-                        <li sec:authorize="!isAuthenticated()" class="has-sub-menu" href="#">
+                        <li id="2" sec:authorize="!isAuthenticated()" class="has-sub-menu" href="#">
                             <a>找人才</a>
                             <ul class="sub-menu">
                                 <li>
@@ -31,7 +31,7 @@
                                 </li>
                             </ul>
                         </li>
-                        <li sec:authorize="!isAuthenticated()" class="has-sub-menu" href="#" >
+                        <li id="3" sec:authorize="!isAuthenticated()" class="has-sub-menu" href="#" >
                             <a >找工作</a>
                             <ul class="sub-menu">
                                 <li>
@@ -42,7 +42,7 @@
                                 </li>
                             </ul>
                         </li>
-                        <li sec:authorize="!isAuthenticated()" class="has-sub-menu" href="#" >
+                        <li id="4" sec:authorize="!isAuthenticated()" class="has-sub-menu" href="#" >
                             <a>了解我们</a>
                             <ul class="sub-menu">
                                 <li>
@@ -59,24 +59,27 @@
                                 </li>
                             </ul>
                         </li>
-                        <li href="#" sec:authorize="hasRole('ROLE_employee')">
-                            <a >找工作</a>
+                        <li id="5" sec:authorize="hasRole('ROLE_employee')">
+                            <a th:href="@{/job}">找工作</a>
                         </li>
-                        <li href="#" sec:authorize="hasRole('ROLE_employer')">
+                        <li id="6"href="#" sec:authorize="hasRole('ROLE_employer')">
                             <a >找人才</a>
                         </li>
-                        <li href="/admin/board" sec:authorize="hasRole('ROLE_admin')">
+
+                        <li th:href="@{/admin/board}" sec:authorize="hasRole('ROLE_admin')">
                             <a>管理</a>
                         </li>
-                        <li href="/superadmin/management" sec:authorize="hasRole('ROLE_superadmin')">
+                        <li th:href="@{/superadmin/management}" sec:authorize="hasRole('ROLE_superadmin')">
                             <a>管理</a>
                         </li>
-                        <li sec:authorize="isAuthenticated()">
+
+
+                        <li id="7" sec:authorize="isAuthenticated()">
                             <a>工作管理</a>
                         </li>
 
-                        <li sec:authorize="isAuthenticated()">
-                            <a  th:href="@{'/chatlist'}">在线沟通</a>
+                        <li id="8" sec:authorize="isAuthenticated()">
+                            <a  th:href="@{'/chatlist'}">在线沟通<span class="badge badge-danger badge-pill">3</span></a>
                         </li>
                     </ul>
                 </nav>
@@ -109,37 +112,40 @@
                 <div class="ac_nav after_login_ac_nav" sec:authorize="isAuthenticated()">
                     <!--Not logedin-->
                     <div class="login_pop after_login">
-                        <button class="btn btn-primary withdp"><img alt="" src="/assets/images/profile-5.png"> Hi <span sec:authentication="name"></span><i class="fas fa-caret-down"></i></button>
+                        <button class="btn btn-primary withdp"><img  th:src="${user.headurl}"> Hi <span sec:authentication="name"></span><i class="fas fa-caret-down"></i></button>
                         <div class="login_pop_box login_pop_box_menu">
-                            <div class="login_pop_box_head">
-                                <div class=" ">
-                                    <img alt="" src="/assets/images/profile-5.png">
-                                    <span></span>
-                                    <h5 sec:authentication="name"></h5>
-<!--                                    <h5 sec:authentication property="principal.username></h5>-->
-                                    <h6>Magento Certified Developer</h6>
-                                </div>
-                            </div>
                             <ul style="padding-left:15px">
+                                <li >
+                                    <a href="#"><i class="far fa-bookmark"></i>我的订单</a>
+                                </li>
+                                <hr>
+                                <li sec:authorize="hasRole('ROLE_employer')">
+                                    <a th:href="@{/job/postJob}"><i class="fas fa-glasses"></i>我的职位</a>
+                                </li>
+                                <li sec:authorize="hasRole('ROLE_employee')">
+                                    <a th:href="@{/setting}"><i class="far fa-edit"></i>修改简历</a>
+                                </li>
+                                <li sec:authorize="hasRole('ROLE_employee')">
+                                    <a th:href="@{/job/postJob}"><i class="far fa-handshake"></i>我投递的职位</a>
+                                </li>
+                                <hr>
+                                <li >
+                                    <a href="#"><i class="fas fa-money-bill"></i>我的资金</a>
+                                </li>
+
+                                <li sec:authorize="hasRole('ROLE_employer')">
+                                    <a href="#"><i class="fas fa-money-check"></i>我的发票</a>
+                                </li>
+                                <hr>
+                                <li>
+                                    <a th:href="@{/appraisals}"><i class="far fa-comment"></i>我的评价</a>
+                                </li>
                                 <li>
                                     <a th:href="@{/setting}"><i class="fas fa-search"></i>个人设置</a>
                                 </li>
                                 <li>
                                     <a th:href="@{/logout}"><i class="fas fa-power-off"></i>退出登录</a>
                                 </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="login_pop after_login">
-                        <button class="btn btn-msg">
-                            <i class="fas fa-envelope"></i>
-                            <span class="msg-count">2</span>
-                        </button>
-                        <div class="login_pop_box job_seekernotifi ">
-                            <h6>Inbox</h6>
-                            <ul>
-                                <li><img  alt="" src="/assets/images/c-logo-02.webp"><a href="#"> Thanks for applying this job, our HR team will contact you soon</a> </li>
-                                <li><img alt="" src="/assets/images/profile-5.png"><a href="#">You updated your profile picture .</a> </li>
                             </ul>
                         </div>
                     </div>

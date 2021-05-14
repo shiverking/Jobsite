@@ -1,7 +1,6 @@
 package project.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -20,16 +19,18 @@ import project.service.RoleServiceImpl;
 import project.service.UserServiceImpl;
 import project.util.AESUtil;
 import project.util.EmailUtil;
+import sun.misc.BASE64Decoder;
 
-import javax.validation.Valid;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
-import java.security.Principal;
-import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 /**
  * 用户登录注册控制
@@ -154,9 +155,6 @@ public class UserController {
             return RespBean.error(sb.toString());
         } else {
             User user = new User();
-//            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-//            String encodedPassword = passwordEncoder.encode(user.getPassword().trim());
-//            user.setPassword(encodedPassword);
             BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
             String encodedPassword = passwordEncoder.encode(((String) info.get("password")).trim());
             int id = userServiceimpl.getLastId() + 1;
@@ -167,10 +165,7 @@ public class UserController {
             user.setTelephone((String) info.get("telephone"));
             //添加用户
             userServiceimpl.insertUser(user);
-            //System.out.println(user.toString());
-            //System.out.println(info.get("identity"));
             String identity = (String) info.get("identity");
-            //System.out.println(identity);
             if (identity.equals("employer")) {
                 if (roleServiceimpl.addUserAndRole(id, 1)) {
                     return RespBean.ok("注册成功!");
@@ -316,6 +311,7 @@ public class UserController {
         //获取用户的验证信息
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = (User) principal;
+        model.addAttribute("user", user);
         int user_id =user.getId();
         //添加邮箱属性
         model.addAttribute("email", userServiceimpl.getEmail(user_id));
@@ -324,12 +320,6 @@ public class UserController {
             Profile profile = profileServiceimpl.getProfile(user_id);
             model.addAttribute("isProfileExist",true );
             model.addAttribute("profile",profile);
-//            model.addAttribute("complationTime", profile.getComplationTime());
-//            model.addAttribute("expertize_realm",profile.getExpertize_level());
-//            model.addAttribute("compensation",profile.getCompensation());
-//            model.addAttribute("expertize_level",profile.getExpertize_level() );
-//            model.addAttribute("workexperience",profile.getWorkexperience() );
-//            model.addAttribute("biography",profile.getBiography());
         }
         else{
             model.addAttribute("isProfileExist",false );
@@ -404,13 +394,76 @@ public class UserController {
     }
 
     /**
+     *保存头像
+     *
+     * @param info
+     * @return
+     */
+    @ResponseBody
+    @PostMapping("/setting/saveAvatar")
+    public RespBean saveAvatar(@RequestBody Map<String, Object> info) throws IOException {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = (User) principal;
+
+        //获取用户的验证信息
+        String imgBase64 = (String) info.get("image");
+
+        //解析base64码，获取图片格式
+        String str [] = imgBase64.split(",");
+        imgBase64 = str[1];
+        String imgInfo = str[0];
+        String imgExt = imgInfo.split("/")[1].split(";")[0];
+
+        BASE64Decoder decoder = new BASE64Decoder();
+        byte[] bs = decoder.decodeBuffer(imgBase64);
+        for(int i=0;i<bs.length;++i)
+        {
+            if(bs[i]<0)
+            {//调整异常数据
+                bs[i]+=256;
+            }
+        }
+        String currentAddress = userServiceimpl.getHeadurl(user.getId());
+        String address2;
+        //如果已经保存过头像，则覆盖
+        if(!currentAddress.equals("/assets/avatar/default.png")){
+            String address = "src/main/resources/static"+currentAddress;
+            //将头像保存到本地
+            OutputStream out = new FileOutputStream(address);
+            out.write(bs);
+            out.close();
+            //需要保存到数据库里的路径
+            address2 = currentAddress;
+        }
+        //没保存过头像，则生成新的地址
+        else{
+            //生成新的头像路径
+            UUID uuid = UUID.randomUUID();
+            //需要向文件中写入的路径
+            String address = "src/main/resources/static/assets/avatar/"+uuid+"."+imgExt;
+            //需要保存到数据库里的路径
+            address2 = "/assets/avatar/"+uuid+"."+imgExt;
+            //将头像保存到本地
+            OutputStream out = new FileOutputStream(address);
+            out.write(bs);
+            out.close();
+        }
+
+        //设置头像，如果成功则返回结果
+        if (userServiceimpl.updateAvatar(user.getId(),address2)) {
+            return RespBean.ok("头像修改成功");
+        }
+        return RespBean.error("头像修改失败");
+    }
+
+    /**
      * 一个小测试类,主要是用来测试登陆用户信息的
      *
      * @return
      */
     @ResponseBody
     @RequestMapping("/hello")
-    public String test(Principal principal) {
+    public String test() {
         //测试代码
         Object p = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = (User)p;

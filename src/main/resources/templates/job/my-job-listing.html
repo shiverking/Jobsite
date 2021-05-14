@@ -32,7 +32,7 @@
     <div class="header_main">
         <div class="header_menu fixed-top" th:include="/header.html"></div>
         <div class="header_btm">
-            <h2>设置</h2>
+            <h2>职位管理</h2>
         </div>
     </div>
 </header>
@@ -52,11 +52,19 @@
                         <li class="is-active">
                             <a href="/job/MyJobLists"><i class="far fa-list-alt"></i>职位管理</a>
                         </li>
+                        <li>
+                            <a href="/order/jobOrders"><i class="far fa-list-alt"></i>订单管理</a>
+                        </li>
+                        <li>
+                            <a href="/showjobstaff"><i class="far fa-list-alt"></i>看看</a>
+                        <li >
+                            <a th:href="@{/appraisals}"><i class="far fa-comment"></i>评价</a>
+                        </li>
                     </ul>
                 </div>
                 <div class=" job_main_right" style="height: 700px">
                     <div class="row job_section">
-                        <div class="col-sm-12">
+                        <div class="col-sm-12" th:id="hasjob">
                             <div class="jm_headings" >
                                 <h6>发布的工作如下展示</h6>
                             </div>
@@ -80,11 +88,20 @@
                                     </tbody>
                                 </table>
                             </div>
-<!--                            <div th:if="${not hasJobs}">-->
-<!--                                <h4>没工作，快去布发工作吧</h4>-->
-<!--                                <button class="btn btn-primary" onclick="window.location.href='/job/postJob'">发布工作-->
-<!--                                </button>-->
-<!--                            </div>-->
+                        </div>
+                        <div style="display: none" th:id="nojob">
+                            <div class="col-md-6">
+                                <div class="user_type_inner user_type_post">
+                                    <a href="/job/postJob">
+                                        <div class="usertype_img">
+                                            <i class="far fa-paper-plane"></i>
+                                        </div>
+                                        <div>
+                                            <h3>我想发布工作</h3>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

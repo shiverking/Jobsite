@@ -20,7 +20,7 @@ public interface JobMapper {
     //根据id找到Job
     Job findJobById(@Param("id") int id);
     //根据job信息模糊搜索
-    Job findJobByName(@Param("name") String name);
+    Job findJobByName(@Param("title") String title);
     // 按时间降序排列
     List<Job> getAllJobDesc();
     // 按时间升序排列
@@ -37,14 +37,19 @@ public interface JobMapper {
     int insertJob(Job job);
     //根据雇主id查询工作列表
     List<Job> findJobsByEmployerId(@Param("employer_id") int employer_id);
-
+    //关闭指定id工作招聘通道
     int closeJobById(@Param("id") int id);
-
+    //开启指定id工作招聘通道
     int openJobById(@Param("id") int id);
+
 
     List<Job> getJobList();
 
     List<Job> searchJob(@Param("employerId") int employerId,@Param("title") String title,@Param("check") int check);
 
     int getJobCount();
+
+    //检测指定id工作是否存在
+    boolean isJobExist(@Param("job_id") int job_id);
+
 }

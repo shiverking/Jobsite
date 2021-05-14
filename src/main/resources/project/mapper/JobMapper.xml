@@ -56,6 +56,14 @@
     <select id="findJobsByEmployerId" resultType="project.model.Job">
         select * from job where employer_id = #{employer_id}
     </select>
+    <select id="isJobExist" resultType="java.lang.Boolean">
+        <![CDATA[ select count(*)
+                  from job where id = #{job_id}]]>
+    </select>
+    <select id="findJobByName" resultType="project.model.Job">
+        select * from job where title = #{title}
+
+    </select>
 
     <select id="getJobList" resultType="project.model.Job">
         select id,employer_id,title,budget,expertize_level,create_time,required,skill,work_time,`check`,job_status from job

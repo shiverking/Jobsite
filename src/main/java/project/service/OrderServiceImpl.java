@@ -8,13 +8,32 @@ import project.dao.OrderMapper;
 import project.model.Job;
 import project.model.Order;
 
+import java.util.Date;
 import java.util.List;
 
+
 @Service
-public class OrderServiceImpl implements OrderService{
+public class OrderServiceImpl implements OrderService {
+
 
     @Autowired
     OrderMapper orderMapper;
+
+
+    @Override
+    public int countOrderByJobId(int job_id) {
+        return orderMapper.countOrdersByJobId(job_id);
+    }
+
+    @Override
+    public int insertNewOrder(int job_id, String state, Date create_time, Date end_time, int employer_id, int employee_id) {
+        return orderMapper.insertNewOrder(job_id, state, create_time, end_time, employer_id, employee_id);
+    }
+
+    @Override
+    public boolean isOrderExistByJobAndEmployee(int job_id, int employee_id) {
+        return orderMapper.isOrderExistByJobAndEmployee(job_id,employee_id);
+    }
 
     @Override
     public List<Order> findAllOrder() {
@@ -25,6 +44,7 @@ public class OrderServiceImpl implements OrderService{
     public Order findOrderById(int id) {
         return orderMapper.findOrderById(id);
     }
+
 
     @Override
     public boolean deleteOrderById(int id) {
@@ -51,4 +71,5 @@ public class OrderServiceImpl implements OrderService{
     public int getOrderCount() {
         return orderMapper.getOrderCount();
     }
+
 }
