@@ -1,5 +1,7 @@
 package project.service;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import project.dao.JobMapper;
@@ -42,11 +44,11 @@ public class JobServiceImpl implements JobService {
     }
 
     @Override
-    public boolean deleteJob(int id) {
+    public boolean deleteJobById(int id) {
         if (jobMapper.deleteJobById(id) == 1) {
             return true;
         }
-        return false;
+        else return false;
     }
 
     @Override
@@ -87,9 +89,29 @@ public class JobServiceImpl implements JobService {
         }
     }
 
+
+    @Override
+    public PageInfo<Job> findJobByPage(Integer pageNum,Integer limitNum) {
+        PageHelper.startPage(pageNum, limitNum);
+        PageInfo<Job> info = new PageInfo<Job>(jobMapper.getJobList());
+        return info;
+    }
+
+    @Override
     public boolean isJobExist(int job_id) {
         //如果没有找到简历，则返回false
         return jobMapper.isJobExist(job_id);
     }
 
+    @Override
+    public PageInfo<Job> searchJobByPage(Integer page, Integer limit, int employerId, String title,int check) {
+        PageHelper.startPage(page,limit);
+        PageInfo<Job> info = new PageInfo<Job>(jobMapper.searchJob(employerId,title,check));
+        return info;
+    }
+
+    @Override
+    public int getJobCount() {
+        return jobMapper.getJobCount();
+    }
 }

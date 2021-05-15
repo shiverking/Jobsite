@@ -1,5 +1,6 @@
 package project.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -45,21 +46,25 @@ public class User implements UserDetails{
 
     //账户是否过期
     @Override
+    @JsonIgnore
     public boolean isAccountNonExpired() {
         return true;
     }
     //账户是否被锁定
     @Override
+    @JsonIgnore
     public boolean isAccountNonLocked() {
         return !locked;
     }
     //证书是否过期
     @Override
+    @JsonIgnore
     public boolean isCredentialsNonExpired() {
         return true;
     }
     //账户是否能使用
     @Override
+    @JsonIgnore
     public boolean isEnabled() {
         return true;
         //return enabled;
@@ -67,6 +72,7 @@ public class User implements UserDetails{
 
     //返回用户的角色列表
     @Override
+    @JsonIgnore
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<SimpleGrantedAuthority> authorities = new ArrayList<>();
         for (Role role : roles) {

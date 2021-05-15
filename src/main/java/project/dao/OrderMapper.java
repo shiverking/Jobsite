@@ -32,4 +32,11 @@ public interface OrderMapper {
     List<Order> findAllOrders();
     //根据id查找order
     Order findOrderById(@Param("id") int id);
+    //根据id删除order
+    int deleteOrderById(@Param("id") int id);
+
+    List<Order> searchOrder(int jobId, String state);
+
+
+    int getOrderCount();
 }
