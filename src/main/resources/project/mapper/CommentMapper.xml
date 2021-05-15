@@ -4,6 +4,10 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="project.dao.CommentMapper">
+    <insert id="insertNewComment">
+        insert into comment (reviewer_id,commented_id,content,score,create_time) values (
+        #{reviewer_id},#{commented_id},#{content},#{score},#{create_time,jdbcType=DATE});
+    </insert>
     <select id="getOwnComments" resultType="project.model.Comment">
         select * from comment where reviewer_id =#{reviewer_id};
     </select>
@@ -11,6 +15,10 @@
         select * from comment where commented_id =#{commented_id};
     </select>
     <select id="getCommentById" resultType="project.model.Comment">
-        select * from comment;
+        select * from comment where reviewer_id = #{reviewer_id} and commented_id = #{commented_id}
+    </select>
+    <select id="ifreviewed" resultType="java.lang.Boolean">
+        <![CDATA[ select count(id)
+                  from comment where reviewer_id = #{reviewer_id} and commented_id = #{commented_id}]]>
     </select>
 </mapper>
