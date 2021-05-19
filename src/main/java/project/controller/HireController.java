@@ -2,6 +2,7 @@ package project.controller;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,6 +36,7 @@ public class HireController {
     /**
      * 雇佣工作，即将该工作添加到order
      */
+    @PreAuthorize("hasRole('ROLE_employer')" )
     @ResponseBody
     @RequestMapping("/job/hireUser")
     public RespBean addOrder(@RequestBody Map<String, Object> map) {

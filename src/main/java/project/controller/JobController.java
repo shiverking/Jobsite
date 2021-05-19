@@ -3,6 +3,7 @@ package project.controller;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -39,10 +40,12 @@ public class JobController {
     @Autowired
     HireService hireService;
 
+    @Autowired
     UserService userService;
     /**
      * 发布工作
      */
+    @PreAuthorize("hasRole('ROLE_employer')" )
     @ResponseBody
     @RequestMapping("/job/postAJob")
     public RespBean postJob(@Valid @RequestBody Job job) {
@@ -66,17 +69,19 @@ public class JobController {
     }
 
 
+    @PreAuthorize("hasRole('ROLE_employer')" )
     @RequestMapping("/job/MyJobLists")
     public ModelAndView toMyJobListsPage() {
-        ModelAndView modelAndView = new ModelAndView("/job/my-job-listing");
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = (User) principal;
+        ModelAndView modelAndView = new ModelAndView("/job/my-job-listing");
         modelAndView.addObject("user", user);
         return modelAndView;
     }
 
 
     //获取给用户展示的工作列表
+    @PreAuthorize("hasRole('ROLE_employer')" )
     @ResponseBody
     @RequestMapping("/job/showMyJobLists")
     public RespBean showMyJobLists() {
@@ -158,6 +163,7 @@ public class JobController {
     }
 
 
+    @PreAuthorize("hasRole('ROLE_employer')" )
     @ResponseBody
     @RequestMapping("/job/closeJob/{id}")
     public RespBean closeJobById(@PathVariable("id") int id) {
@@ -170,6 +176,7 @@ public class JobController {
     }
 
 
+    @PreAuthorize("hasRole('ROLE_employer')" )
     @RequestMapping("/job/postJob")
     public String toPostJobPage (Model model){
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -182,6 +189,7 @@ public class JobController {
 
 
     //根据指定id来开启工作招聘
+    @PreAuthorize("hasRole('ROLE_employer')" )
     @ResponseBody
     @RequestMapping("/job/openJob/{id}")
     public RespBean openJobById(@PathVariable("id") int id) {
@@ -199,6 +207,7 @@ public class JobController {
 
 
     //跳转到查看人员名单页面
+    @PreAuthorize("hasRole('ROLE_employer')" )
     @RequestMapping("/showjobstaff")
     public String show(Model model) {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -208,9 +217,20 @@ public class JobController {
     }
 
     //获取指定jobId的投递简历列表
+    @PreAuthorize("hasRole('ROLE_employer')" )
     @RequestMapping("/job/viewSeeker/job_id={job_id}")
     public ModelAndView showSeekerList(@PathVariable("job_id") int job_id) {
         ModelAndView modelAndView = new ModelAndView("/page/show_staff");
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = (User) principal;
+
+        //比对一下当前操作人的id和当前操作对象所属的userid是否一样
+        int currentId = user.getId();
+        Job job = jobService.findJobById(job_id);
+        if(job == null || currentId != job.getEmployer_id() ){
+            return modelAndView;
+        }
+
         if (resumeService.countByJobId(job_id) == 0) {
             modelAndView.addObject("hasError", true);
             return modelAndView;
@@ -224,8 +244,6 @@ public class JobController {
                 }
                 modelAndView.addObject("Profiles", profiles);
                 modelAndView.addObject("job_id",job_id);
-                Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-                User user = (User) principal;
                 modelAndView.addObject("user",user);
                 return modelAndView;
             } else {
@@ -246,6 +264,7 @@ public class JobController {
         return "job/find-staff";
     }
 
+    @PreAuthorize("hasRole('ROLE_employer')" )
     @ResponseBody
     @PostMapping("/findStaff/getAllProfile")
     public List<List<String>> getAllProfile(){
@@ -270,17 +289,5 @@ public class JobController {
         }
         return res;
     }
-
-
-//        @ResponseBody
-//        @RequestMapping("/job/openJob/{id}")
-//        public RespBean openJobById(@PathVariable("id") int id){
-//                int a =jobService.openJobById(id);
-//                if (a == -1){
-//                        return RespBean.error("未找到该职位招聘信息");
-//                }else {
-//                        return RespBean.ok("开启该职位招聘成功");
-//                }
-//        }
 
 }

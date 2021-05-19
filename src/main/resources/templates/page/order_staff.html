@@ -11,13 +11,14 @@
 
     <!-- CSS
     ================================================== -->
-    <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700&display=swap&subset=latin-ext" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700&display=swap&subset=latin-ext"
+          rel="stylesheet">
     <link rel="stylesheet" href="/assets/css/all.min.css">
     <link href="/assets/css/aos.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
-    <link href="/assets/css/select2.min.css" rel="stylesheet" />
-    <link href="/assets/css/owl.carousel.min.css" rel="stylesheet" />
+    <link href="/assets/css/select2.min.css" rel="stylesheet"/>
+    <link href="/assets/css/owl.carousel.min.css" rel="stylesheet"/>
     <link rel="stylesheet" href="/assets/css/style.css">
     <link rel="stylesheet" href="/assets/css/color-1.css">
     <!--提醒的样式-->
@@ -41,12 +42,14 @@
 <!-- Main
 ================================================== -->
 <main>
-    <input style="display: none" th:id="orderId" th:value="${orderId}">
-    <div class="job_container">
+    <div class="job_container" sec:authorize="hasRole('ROLE_employer')">
         <div class="container">
             <div class="row job_main">
                 <div class="sidebar">
                     <ul class="user_navigation">
+                        <li>
+                            <a href="javascript:history.go(-1)"><i class="fas fa-paper-plane"></i>返回</a>
+                        </li>
                         <li>
                             <a href="/job/postJob"><i class="fas fa-paper-plane"></i>发布工作</a>
                         </li>
@@ -58,8 +61,46 @@
                         </li>
                     </ul>
                 </div>
+                <div class=" job_main_right" style="height: 700px">
+                    <div class="col-sm-12">
+                        <div class="jm_headings">
+                            <h5>订单详情</h5>
+                        </div>
+                        <div class="section-divider"></div>
+                        <div class="newslatter_outer">
+                            <div>
+                                <ul>
+                                    <li>
+                                        工作标题:
+                                        <a th:id="JobTitle" th:value="bjhj"></a>
+                                    </li>
+                                    <li>
+                                        时薪:
+                                        <a th:id="budget"></a>元/时
+                                    </li>
+                                    <li>
+                                        所需技术:
+                                        <a th:id="skill"></a>
+                                    </li>
+                                    <li>
+                                        所需岗位:
+                                        <a th:id="position"></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="section-divider"></div>
+                        <div th:id="staffs"  class="row findstaf_section">
+
+                        </div>
+                    </div>
+
+                </div>
             </div>
         </div>
+    </div>
+    <div class="error" sec:authorize="hasRole('ROLE_employee')">
+        您没有权限浏览此页面
     </div>
 </main>
 

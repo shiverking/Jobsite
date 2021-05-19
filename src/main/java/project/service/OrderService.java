@@ -25,7 +25,6 @@ public interface OrderService {
     Order getOrderByJobId(int job_id);
     List<Order> getOrdersBystate(String state);
     int updateOrderState(int id, String state);
-    List<Integer> getJobInOrderByemployer(int employer_id);
     int getJobById(int id);
     int updateEnd(int id, Date end);
 

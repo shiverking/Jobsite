@@ -61,10 +61,6 @@ public class OrderServiceImpl implements OrderService {
         return orderinfoMapper.updateOrderState(id,state);
     }
 
-    @Override
-    public List<Integer> getJobInOrderByemployer(int employer_id) {
-            return orderinfoMapper.getJobInOrderByemployer(employer_id);
-    }
 
     @Override
     public int getJobById(int id) {
