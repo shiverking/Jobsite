@@ -185,6 +185,7 @@ public class MessageController {
         //原始分割符号
         String line_split = new String(new byte[]{0x01});
         String[] split = msg.split(line_split,2);
+        System.out.println("content====="+split[1]);
         //发送消息
         messagingTemplate.convertAndSendToUser(split[0], "/queue/chat",split[1]);
     }

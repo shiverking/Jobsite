@@ -203,7 +203,6 @@ public class UserController {
     @RequestMapping("/forgetPassword/email")
     public RespBean verifyEmail(@RequestBody Map<String, Object> info) throws Exception {
         String email = (String) info.get("email");
-        //System.out.println(email);
         //如果邮箱存在，则发送邮件并返回正确信息
         if (userServiceimpl.isEmailExist(email)) {
             // 获取系统当前时间,并转换成yyyy/MM/dd HH:mm:ss格式
@@ -250,7 +249,6 @@ public class UserController {
     public RespBean resetPassword(@RequestBody Map<String, Object> info) throws UnsupportedEncodingException, ParseException {
         //获取后缀
         String key = (String) info.get("key");
-        //System.out.println(key);
         //解密
         byte[] decode = AESUtil.parseHexStr2Byte(key);
         byte[] decryptResult = AESUtil.decrypt(decode, aesKey);
@@ -265,7 +263,6 @@ public class UserController {
         if (new Date().getTime() - sendTime.getTime() > 2 * 60 * 60 * 1000) {
             return RespBean.timeout("超时");
         }
-        //System.out.println(sendTime);
         //获取邮箱
         String email = res[1];
         if (!userServiceimpl.isEmailExist(email)) {
@@ -282,7 +279,6 @@ public class UserController {
     @ResponseBody
     @RequestMapping("/resetPassword/confirm")
     public RespBean resetPasswordConfirm(@RequestBody Map<String, Object> info) throws UnsupportedEncodingException {
-        //System.out.println(key);
         String newpPassword = (String) info.get("pwd");
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         //获取email
@@ -453,6 +449,24 @@ public class UserController {
             return RespBean.ok("头像修改成功");
         }
         return RespBean.error("头像修改失败");
+    }
+
+    /**
+     * 一个小测试类,主要是用来测试登陆用户信息的
+     *
+     * @return
+     */
+    @ResponseBody
+    @PostMapping("/setting/saveLoaction")
+    public RespBean saveLoaction(@RequestBody Map<String, Object> info){
+        //测试代码
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = (User)principal;
+        String location = (String) info.get("location");
+        if(userServiceimpl.updateLocation(user.getId(),location)){
+            return RespBean.ok("更新位置成功");
+        }
+        return RespBean.error("更新位置失败");
     }
 
     /**
