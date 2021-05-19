@@ -141,7 +141,6 @@
     <select id="getUserById" resultType="project.model.User">
         select * from user where id=#{id}
     </select>
-
     <delete id="deleteUserById" parameterType="project.model.User">
         delete from user where id = #{id}
     </delete>
