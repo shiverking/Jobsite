@@ -1,5 +1,6 @@
 package project.service;
 
+import com.github.pagehelper.PageInfo;
 import project.model.Job;
 
 import javax.persistence.criteria.CriteriaBuilder;
@@ -22,11 +23,18 @@ public interface JobService {
     //返回所有通过审核的job
     List<Job> findAllJobsChecked();
     //删除job
-    boolean deleteJob(int id);
+    boolean deleteJobById(int id);
     //按时间升序查看job
     List<Job> findAllJobsAsc();
     //按时间降序查看job
     List<Job> findAllJobsDesc();
+
+    public PageInfo<Job> findJobByPage(Integer pageNum,Integer limitNum);
+
+    PageInfo<Job> searchJobByPage(Integer page, Integer limit, int employerId, String title,int check);
+
+    int getJobCount();
+
     //通过employerId找到job
     List<Job> findJobsByEmployerId(int employer_id);
     //通过id关闭job

@@ -3,6 +3,7 @@ package project.dao;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Component;
 import project.model.Role;
 import project.model.User;
@@ -56,9 +57,22 @@ public interface UserMapper {
      String getUsernameById(@Param("id") int id);
      //根据用户名找到ID
      int getIdByUserName(@Param("username") String username);
-
+     //根据id删除用户
+     int deleteUserById(@Param("id") int id);
+     //获取用户列表（雇主和应聘者）
+     List<User> getUserList();
+     //查询用户（雇主和应聘者）
+     List<User> searchUser(String username, String telephone, int rid);
+     //查询用户（管理员）
+     List<User> searchAdmin(String username, String telephone);
+     //获取用户总数
+     int getUserCount();
+     //更新用户信息
+     int updateUserInfo(@Param("id") int id,@Param("password") String password,@Param("username") String username,@Param("telephone") String telephone,@Param("email") String email);
+     //获取管理员列表
+     List<User> getAdminList();
+     //通过id获取用户
      User getUserById(@Param("id") int id);
-
      //根据ID找到聊天对象的头像地址
      String getHeadurlById(@Param("id")int id);
      //根据ID 修改聊天对象的头像地址
@@ -67,4 +81,5 @@ public interface UserMapper {
      String getLocationById(@Param("id")int id);
      //根据id修改用户当前位置
      int updateLocationById(@Param("location") String location,@Param("id")int id);
+
 }
