@@ -123,6 +123,7 @@ public class MessageController {
             //model.addAttribute("chatListId",chatListId);
             model.addAttribute("chatList",chatList);
         }
+        model.addAttribute("user",user);
         return "message/index";
     }
 

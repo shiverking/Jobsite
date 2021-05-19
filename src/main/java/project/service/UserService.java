@@ -1,6 +1,8 @@
 package project.service;
 
+import com.github.pagehelper.PageInfo;
 import project.exception.ServiceException;
+import project.model.Job;
 import project.model.User;
 
 import java.util.List;
@@ -56,4 +58,17 @@ public interface UserService {
     String getLocation(int id);
     //获取所有Employee的id
     List<Integer> getAllEmployeeId();
+    boolean deleteUserById(int id);
+
+    public PageInfo<User> findUserByPage(Integer pageNum, Integer limitNum);
+
+    public PageInfo<User> findAdminByPage(Integer pageNum, Integer limitNum);
+
+    PageInfo<User> searchUserByPage(Integer page, Integer limit, String username, String telephone, int rid);
+
+    PageInfo<User> searchAdminByPage(Integer page, Integer limit, String username, String telephone);
+
+    int getUserCount();
+
+    boolean updateUserInfo(int id,String password, String username, String telephone,String email);
 }
