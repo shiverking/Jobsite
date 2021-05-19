@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="project.dao.HireMapper">
+    <insert id="insertNewHire">
+        insert into hire (employer_id, employee_id, job_id, created_time)
+        values (#{employer_id}, #{employee_id}, #{job_id}, #{created_time});
+    </insert>
+    <select id="countHiresByJob" resultType="java.lang.Integer">
+        select count(*)
+        from hire
+        where job_id = #{job_id};
+    </select>
+    <select id="isHireExit" resultType="java.lang.Boolean">
+        <![CDATA[
+        select count(id)
+        from `hire`
+        where job_id = #{job_id}
+          and employer_id = #{employer_id}
+        ]]>
+    </select>
+    <select id="getEmployerByJob" resultType="java.lang.Integer">
+        select employer_id from hire where job_id=#{job_id}
+    </select>
+</mapper>

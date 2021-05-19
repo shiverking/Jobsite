@@ -104,6 +104,10 @@ public class JobServiceImpl implements JobService {
     }
 
     @Override
+    public List<Integer> getAllIdByUser(int user_id) {
+        return jobMapper.getAllIdByUser(user_id);
+    }
+
     public PageInfo<Job> searchJobByPage(Integer page, Integer limit, int employerId, String title,int check) {
         PageHelper.startPage(page,limit);
         PageInfo<Job> info = new PageInfo<Job>(jobMapper.searchJob(employerId,title,check));

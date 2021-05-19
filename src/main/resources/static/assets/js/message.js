@@ -17,7 +17,7 @@ $("#confirmSend").click(function () {
     //向后台发送消息，保存聊天记录
     var obj = {
         "toUserName":toUserName,
-        "content": content
+        "content": htmlEncode(content)
     }
     $.ajax({
         url: "/message/saveMessage",
@@ -161,4 +161,19 @@ Date.prototype.Format = function (fmt) {
     for (var k in o)
         if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
     return fmt;
+}
+
+
+//转义 元素的innerHTML内容即为转义后的字符
+function htmlEncode ( str ) {
+    var ele = document.createElement('span');
+    ele.appendChild( document.createTextNode( str ) );
+    return ele.innerHTML;
+}
+
+//解析
+function htmlDecode ( str ) {
+    var ele = document.createElement('span');
+    ele.innerHTML = str;
+    return ele.textContent;
 }

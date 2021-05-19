@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="project.dao.OrderinfoMapper">
+    <insert id="insertNewOrder">
+        insert into orderinfo (id, job_id, state, created_time, end_time)
+        values (null, #{job_id}, #{state}, #{created_time}, #{end_time});
+    </insert>
+    <update id="updateOrderState">
+        update orderinfo
+        <set>
+            state =#{state}
+        </set>
+        where id =#{id}
+    </update>
+    <update id="updateEnd">
+        update orderinfo
+        <set>
+            end_time = #{end_time}
+        </set>
+        where id =#{id}
+    </update>
+    <select id="getAllOrders" resultType="project.model.Order">
+        select *
+        from orderinfo
+    </select>
+    <select id="countOrdersByJobId" resultType="java.lang.Integer">
+        select count(*)
+        from `orderinfo`
+        where job_id = #{job_id}
+    </select>
+    <select id="isOrderExistByJobAndEmployee" resultType="java.lang.Boolean">
+       <![CDATA[
+        select count(id)
+        from `orderinfo`
+        where job_id = #{job_id}
+        ]]>
+    </select>
+    <select id="findAllOrders" resultType="project.model.Order">
+        select *
+        from `orderinfo`
+    </select>
+
+    <select id="findOrderById" resultType="project.model.Order">
+        select *
+        from `orderinfo`
+        where id = #{id}
+    </select>
+    <select id="getOrdersByState" resultType="project.model.Order">
+        select *
+        from orderinfo
+        where state = #{state}
+    </select>
+    <select id="getOrderByJobId" resultType="project.model.Order">
+        select *
+        from orderinfo
+        where job_id = #{job_id}
+    </select>
+    <select id="getJobById" resultType="java.lang.Integer">
+        select job_id
+        from orderinfo
+        where id = #{id}
+    </select>
+    <delete id="deleteOrderById" parameterType="project.model.Order">
+        delete from `orderinfo` where id = #{id}
+    </delete>
+
+    <select id="searchOrder" resultType="project.model.Order">
+        select * from orderinfo
+        <where>
+            1=1
+            <if test="jobId!=null and jobId!=0">and job_id=#{jobId}</if>
+            <if test="state!=null and state!=''">and state=#{state}</if>
+        </where>
+    </select>
+
+    <select id="getOrderCount" resultType="int">
+        select count(*) from orderinfo
+    </select>
+
+</mapper>

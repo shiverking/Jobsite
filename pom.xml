@@ -104,6 +104,18 @@
             <version>1.2.12</version>
         </dependency>
 
+        <!--aop依赖-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+        </dependency>
+        <!--用于转换json格式-->
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.8.5</version>
+        </dependency>
+
         <!--使用flyway进行数据库版本管理-->
         <dependency>
             <groupId>org.flywaydb</groupId>

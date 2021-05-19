@@ -58,7 +58,6 @@ public interface UserService {
     String getLocation(int id);
     //获取所有Employee的id
     List<Integer> getAllEmployeeId();
-
     boolean deleteUserById(int id);
 
     public PageInfo<User> findUserByPage(Integer pageNum, Integer limitNum);
@@ -72,5 +71,4 @@ public interface UserService {
     int getUserCount();
 
     boolean updateUserInfo(int id,String password, String username, String telephone,String email);
-
 }
