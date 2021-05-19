@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 public class WebLogAspect {
     private static final Logger logger = LoggerFactory.getLogger(WebLogAspect.class);
 
+    //由于后两个参数有HttpServletRequest，故不能打印
     @Pointcut("execution(public * project.controller..*.*(..)) && !execution(public * project.controller.OrderController.OrderDetail*(..))")
     public void webLog() {
 
