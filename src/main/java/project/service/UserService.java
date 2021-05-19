@@ -56,5 +56,4 @@ public interface UserService {
     String getLocation(int id);
     //获取所有Employee的id
     List<Integer> getAllEmployeeId();
-
 }
