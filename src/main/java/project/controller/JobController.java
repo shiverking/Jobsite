@@ -12,6 +12,7 @@ import project.model.*;
 import project.service.JobService;
 import project.service.ProfileService;
 import project.service.ResumeService;
+import project.service.UserService;
 
 import javax.validation.Valid;
 import java.sql.Timestamp;
@@ -33,6 +34,8 @@ public class JobController {
     @Autowired
     ProfileService profileService;
 
+    @Autowired
+    UserService userService;
     /**
      * 发布工作
      */
@@ -178,7 +181,10 @@ public class JobController {
 
     //跳转到查看人员名单页面
     @RequestMapping("/showjobstaff")
-    public String show() {
+    public String show(Model model) {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = (User) principal;
+        model.addAttribute("user", user);
         return "/page/show_staff";
     }
 
@@ -209,6 +215,41 @@ public class JobController {
 
     }
 
+    @RequestMapping("/findStaff")
+    public String findStaff(Model model){
+        //如果已经登录
+        if(!SecurityContextHolder.getContext().getAuthentication().getName().equals("anonymousUser")) {
+            Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            User user = (User) principal;
+            model.addAttribute("user", user);
+        }
+        return "job/find-staff";
+    }
+
+    @ResponseBody
+    @PostMapping("/findStaff/getAllProfile")
+    public List<List<String>> getAllProfile(){
+        List<List<String>> res = new ArrayList<List<String>>();
+        List<Integer> employeeIds = userService.getAllEmployeeId();
+        for(int id :employeeIds){
+            if(profileService.isProfileExist(id)){
+                List<String> tmp = new ArrayList<String>();
+                //0
+                tmp.add(userService.getUserName(id));
+                //1
+                tmp.add(userService.getHeadurl(id));
+                //2
+                tmp.add(profileService.getProfile(id).getExpertize_level());
+                //3
+                tmp.add(profileService.getProfile(id).getCompensation());
+                //4
+                tmp.add(profileService.getProfile(id).getExpertize_realm());
+                System.out.println(tmp);
+                res.add(tmp);
+            }
+        }
+        return res;
+    }
 
 
 //        @ResponseBody

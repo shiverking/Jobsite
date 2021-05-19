@@ -1,0 +1,170 @@
+﻿<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <!-- Basic Page Needs
+    ================================================== -->
+    <title>JoDice</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="icon" href="/assets/images/fav.png" type="image/gif" sizes="64x64">
+
+    <!-- CSS
+    ================================================== -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700&display=swap&subset=latin-ext"
+          rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/all.min.css">
+    <link href="/assets/css/aos.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+    <link href="/assets/css/select2.min.css" rel="stylesheet"/>
+    <link href="/assets/css/owl.carousel.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/color-1.css">
+</head>
+<body>
+
+<!-- Header 01
+================================================== -->
+<header class="header_01 header_inner">
+    <div class="header_main">
+        <div class="header_menu fixed-top" th:include="/header.html">
+        </div>
+        <div class="header_btm">
+            <h2>找人才</h2>
+        </div>
+    </div>
+</header>
+
+
+<!-- End Header 02
+================================================== -->
+
+
+<!-- Main
+================================================== -->
+<main>
+    <div class="job_container">
+        <div class="container">
+            <div class="row job_main">
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                            data-toggle="dropdown" aria-expanded="false">
+                        全部类型
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                </div>
+                <div class="row findstaf_section " style="padding: 20px">
+                    <div class="row findstaf_section " id="people" style="padding: 20px">
+                        <div class="col-sm-3">
+                            <div class="staffBox">
+                                <div class="staff_img">
+                                    <img alt="" src="/assets/images/profile-1.png">
+                                </div>
+                                <div class="staff_detail">
+                                    <h3>Findy Sorest</h3>
+                                    <p>Magento Certified Developer</p>
+                                    <ul>
+                                        <li>
+                                            <h6>专业等级</h6>
+                                            <i class="fas fa-calendar-check"></i>
+                                            <span>5 Years</span>
+                                        </li>
+                                        <li>
+                                            <h6>薪酬</h6>
+                                            <i class="fas fa-user"></i>
+                                            <span>26</span>
+                                        </li>
+                                    </ul>
+                                    <div class="staffBox_action">
+                                        <a class="btn btn-third" href="staff-profile-single.html">查看简历</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="staffBox">
+                                <div class="staff_img">
+                                    <img alt="" src="/assets/images/profile-2.png">
+                                </div>
+                                <div class="staff_detail">
+                                    <h3>Dedolp Seofls</h3>
+                                    <p>Magento Certified Developer</p>
+                                    <ul>
+                                        <li>
+                                            <h6>专业等级</h6>
+                                            <i class="fas fa-calendar-check"></i>
+                                            <span>5 Years</span>
+                                        </li>
+                                        <li>
+                                            <h6>薪酬</h6>
+                                            <i class="fas fa-user"></i>
+                                            <span>26</span>
+                                        </li>
+                                    </ul>
+                                    <div class="staffBox_action">
+                                        <a class="btn btn-third" href="staff-profile-single.html">View profile</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="staffBox">
+                                <div class="staff_img">
+                                    <img alt="" src="/assets/images/profile-3.png">
+                                </div>
+                                <div class="staff_detail">
+                                    <h3>Dedolp Seofls</h3>
+                                    <p>Magento Certified Developer</p>
+                                    <ul>
+
+                                        <li>
+                                            <h6>Experience</h6>
+                                            <i class="fas fa-calendar-check"></i>
+                                            <span>5 Years</span>
+                                        </li>
+                                        <li>
+                                            <h6>Age</h6>
+                                            <i class="fas fa-user"></i>
+                                            <span>26</span>
+                                        </li>
+                                    </ul>
+                                    <div class="staffBox_action">
+                                        <a class="btn btn-third" href="staff-profile-single.html">View profile</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+<!-- Footer Container
+================================================== -->
+<footer id="colophon" class="site-footer custom_footer dark_footer" th:include="/footer.html">
+</footer>
+
+
+<!-- End Footer Container
+================================================== -->
+
+<!-- Scripts
+================================================== -->
+<script src="/assets/js/jquery-3.4.1.min.js"></script>
+<script src="/assets/js/select2.min.js"></script>
+<script src="https://cdn.bootcss.com/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="/assets/js/bootstrap.min.js"></script>
+<script src="/assets/js/owl.carousel.min.js"></script>
+<script src="/assets/js/custom.js"></script>
+<script src="/assets/js/allEmployee.js"></script>
+</body>
+</html>

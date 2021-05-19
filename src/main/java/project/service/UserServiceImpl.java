@@ -344,4 +344,9 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         return userMapper.isTelephoneExist(telephone);
 
     }
+
+    @Override
+    public List<Integer> getAllEmployeeId() {
+        return userMapper.getAllEmployeeId();
+    }
 }

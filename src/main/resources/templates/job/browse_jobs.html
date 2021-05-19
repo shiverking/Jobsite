@@ -226,7 +226,7 @@
 <script src="/assets/js/custom.js"></script>
 <script>
     $(document).ready(function() {
-        $("#5").addClass("current_page").siblings().removeClass("current_page");
+        $("#5,#3").addClass("current_page").siblings().removeClass("current_page");
     })
     $(".pagination>li").click(function(){
         $(this).addClass("active").siblings().removeClass("active");

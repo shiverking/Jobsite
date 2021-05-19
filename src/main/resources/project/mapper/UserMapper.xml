@@ -181,6 +181,10 @@
         select count(*) from user
     </select>
 
+    <select id="getAllEmployeeId" resultType="java.lang.Integer">
+        select uid from user_role a,user b where a.uid = b.id and a.rid=2;
+    </select>
+
     <update id="updateUserInfo" >
         update user
         <set>
