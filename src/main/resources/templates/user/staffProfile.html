@@ -36,7 +36,7 @@
         <div class="header_btm header_job_single">
             <div class="header_job_single_inner container">
                 <div class="poster_staff">
-                    <img alt="brand logo" src="/assets/images/profile-5.png">
+                    <img alt="brand logo" th:src="${user.headurl}">
                 </div>
                 <div class="poster_details">
                     <h2 th:text="${user.username}" style=" margin-bottom: 15px;"><span class="varified"><i class="fas fa-check"></i>Verified</span></h2>
@@ -169,13 +169,9 @@
                         </div>
                         <div class="sjs_box">
                             <h3>专业领域</h3>
+                            <input type="hidden" id="expertize_realm" th:value="${profile.expertize_realm}">
                             <ul class="tags">
-                                <li>PHP</li>
-                                <li>MySQL</li>
-                                <li>API Development</li>
-                                <li>PHP</li>
-                                <li>MySQL</li>
-                                <li>API Development</li>
+
                             </ul>
                         </div>
 
@@ -209,5 +205,22 @@
 <script src="/assets/js/bootstrap.min.js"></script>
 <script src="/assets/js/owl.carousel.min.js"></script>
 <script src="/assets/js/custom.js"></script>
+<script>
+    if($("#expertize_realm").val()==""||$("#expertize_realm").val()==null){
+        addtags("暂无");
+    }
+    else{
+        arr=$("#expertize_realm").val().split(';');//注split可以用字符或字符串分割搜索
+        for(var i=0;i<arr.length;i++)
+        {
+            addtags(arr[i]);
+        }
+    }
+    //添加专业领域
+    function addtags(name) {
+         var li_str='<li>'+name+'</li>';
+         $('.tags').append(li_str);
+    }
+</script>
 </body>
 </html>

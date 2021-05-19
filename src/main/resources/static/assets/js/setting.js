@@ -1,5 +1,6 @@
 $(window).on('load', function(){
     $(".job_main_right>div").eq(0).show().siblings().hide();
+    $(".user_navigation>li").eq(0).addClass("is-active").siblings().removeClass("is-active");
     //默认禁用按钮
     $("#confirmChangePassword").attr("disabled", true);
     //如果没有绑定邮箱，则设置为提示文字
@@ -214,6 +215,7 @@ $("#bindEmailConfirm").click(function(){
 })
 
 $('#isProfileExist').click(function () {
+    alert($("#staff_name1").val());
     //如果以前有简历保存
     if($("#staff_name1").val()=="true"){
         window.location.href = "/profile";
@@ -257,6 +259,10 @@ $('#saveProfile').click(function(){
             contentType: "application/json",
             success: function (data) {
                 if (data.status == 200) {
+                    //关闭提示框
+                    $("#profileNotExist").hide();
+                    //修改为true
+                    $("#staff_name1").val("true");
                     //弹出成功提示
                     GrowlNotification.notify({
                         title: '成功!',
@@ -265,8 +271,7 @@ $('#saveProfile').click(function(){
                         position: 'bottom-right',
                         closeTimeout: 3000
                     });
-                    //关闭提示框
-                    $('#profileNotExist').hidden();
+
                 } else {
                     //弹出保存失败
                     GrowlNotification.notify({
@@ -298,7 +303,7 @@ $('#saveProfile').click(function(){
                         closeTimeout: 3000
                     });
                     //关闭提示框
-                    $('#profileNotExist').hidden();
+                    $("#profileNotExist").hide();
                 } else {
                     //弹出保存失败
                     GrowlNotification.notify({
@@ -314,7 +319,59 @@ $('#saveProfile').click(function(){
     }
 })
 
-
+$("#saveLocation").click(function(){
+    var province =$("select[name='province']").val();;
+    var city = $("select[name='city']").val();;
+    var town = $("select[name='town']").val();;
+    var location ="";
+    if(province!=""&&province!=null){
+        location+=province;
+        location+="-";
+    }
+    if(city!=""&&city!=null&&(town!=""&&town!=null)){
+        location+=city;
+        location+="-";
+    }
+    else{
+        location+=city;
+    }
+    if(town!=""&&town!=null){
+        location+=town;
+    }
+    obj={
+        location:location,
+    }
+    $.ajax({
+        url: "/setting/saveLoaction",
+        type: "post",
+        data: JSON.stringify(obj),
+        contentType: "application/json",
+        success: function (data) {
+            if (data.status == 200) {
+                $("#locationLabel").html("位置(当前位置:"+location+")");
+                //弹出成功提示
+                GrowlNotification.notify({
+                    title: '成功!',
+                    description: '位置更新成功!',
+                    type: 'success',
+                    position: 'bottom-right',
+                    closeTimeout: 3000
+                });
+                //关闭提示框
+                $('#profileNotExist').hidden();
+            } else {
+                //弹出保存失败
+                GrowlNotification.notify({
+                    title: '失败!',
+                    description: '位置更新失败!',
+                    type: 'error',
+                    position: 'bottom-right',
+                    closeTimeout: 3000
+                });
+            }
+        }
+    })
+})
 
 
 

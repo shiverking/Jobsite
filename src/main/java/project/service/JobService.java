@@ -3,7 +3,6 @@ package project.service;
 import com.github.pagehelper.PageInfo;
 import project.model.Job;
 
-import javax.persistence.criteria.CriteriaBuilder;
 import java.util.List;
 
 /**

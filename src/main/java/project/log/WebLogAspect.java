@@ -15,12 +15,12 @@ import project.model.User;
 
 import javax.servlet.http.HttpServletRequest;
 
-@Aspect
-@Component
+//@Aspect
+//@Component
 public class WebLogAspect {
     private static final Logger logger = LoggerFactory.getLogger(WebLogAspect.class);
 
-    @Pointcut("execution(public * project.controller..*.*(..)) && !execution(public * project.controller.OrderController.OrderDetail*(..))")
+    @Pointcut("execution(public * project.controller..*.*(..)) && !execution(public * project.controller.OrderController.OrderDetail*(..)) && !execution(public * project.controller.MessageController.*(..))")
     public void webLog() {
 
     }

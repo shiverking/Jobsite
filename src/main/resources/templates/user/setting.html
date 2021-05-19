@@ -68,7 +68,7 @@
                 <div class="sidebar">
                     <h5>我的账户</h5>
                     <ul class="user_navigation">
-                        <li class="is-active">
+                        <li class="is-active" sec:authorize="hasRole('ROLE_employee')">
                             <a id="1"><i class="fas fa-user"></i>更新简历</a>
                         </li>
                         <li>
@@ -84,7 +84,7 @@
                 </div>
                 <div class="job_main_right">
                     <!--更新简历-->
-                    <div class="row job_section">
+                    <div class="row job_section" sec:authorize="hasRole('ROLE_employee')">
                         <div class="col-sm-12">
                             <div class="jm_headings">
                                 <h5>更新我的简历</h5>
@@ -227,7 +227,7 @@
                         </div>
                     </div>
                     <!--绑定邮箱-->
-                    <div class="row job_section">
+                    <div class="row job_section" style="display: none">
                         <div class="col-sm-12">
                             <div class="jm_headings">
                                 <h5>绑定邮箱</h5>
@@ -270,7 +270,7 @@
                         </div>
                     </div>
                     <!--个人资料-->
-                    <div class="row job_section">
+                    <div class="row job_section" style="display: none">
                         <div class="col-sm-12">
                             <div class="jm_headings">
                                 <h5>基本资料</h5>
@@ -346,23 +346,22 @@
                                 </div>
                                 <!--上传头像结束-->
                                 <div class="form-group" id="element_id">
-                                    <h6 style="font-weight: normal">新用户名</h6>
-                                    <input disabled="disabled" class="form-control" placeholder="此功能暂不可用">
-                                    <h6 style="font-weight: normal;margin-top: 0;">省份</h6>
-                                    <select class="province form-control">
-                                    </select>
-                                    <h6 style="font-weight: normal;margin-top: 0;">地/市</h6>
-                                    <select class="city form-control">
+                                    <h6 style="font-weight: normal;margin-top: 0;" id="locationLabel" th:if="${user.location==null}">位置</h6>
+                                    <h6 style="font-weight: normal;margin-top: 0;" id="locationLabel" th:if="${user.location!=null}">位置(当前位置:[[${user.location}]])</h6>
+                                    <select class="province form-control" name="province">
                                     </select>
                                     <br>
-                                    <select class="area form-control">
+                                    <select class="city form-control" name="city">
+                                    </select>
+                                    <br>
+                                    <select class="area form-control" name="town">
                                     </select>
                                 </div>
                         </div>
 
                         <div class="form-group row">
                             <div class="col-md-9 offset-md-2" style="margin-left: 0px">
-                                <input class="btn btn-primary" type="button" th:value="保存"
+                                <input class="btn btn-primary" type="button" th:value="保存" id="saveLocation"
                                        style="width: 30%"></input>
                             </div>
                         </div>
