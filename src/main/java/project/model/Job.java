@@ -173,7 +173,7 @@ public class Job {
                 ", work_time=" + work_time +
                 ", skill='" + skill + '\'' +
                 ", position='" + position + '\'' +
-                ", job_statue=" + job_statue +
+                ", job_statue=" + job_status +
                 '}';
     }
 }

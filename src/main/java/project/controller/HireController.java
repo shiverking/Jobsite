@@ -43,7 +43,7 @@ public class HireController {
         if (jobService.isJobExist(job_id)) {
             if (userService.getUserById(user_id) != null) {
                 Job job = jobService.findJobById(job_id);
-                if (job.isJob_statue()) {
+                if (job.isJob_status()) {
                     int employer_id = job.getEmployer_id();
                     int require_people = job.getRequired();
                     if (require_people <= hireService.countHiresByJob(job_id)) {

@@ -51,7 +51,7 @@
     </update>
 
     <select id="getJobNotCheck" resultType="project.model.Job">
-        select * from job where `check` = 0
+        select * from job where `ischeck` = 0
     </select>
     <select id="findJobsByEmployerId" resultType="project.model.Job">
         select * from job where employer_id = #{employer_id}
@@ -69,7 +69,7 @@
     </select>
 
     <select id="getJobList" resultType="project.model.Job">
-        select id,employer_id,title,budget,expertize_level,create_time,required,skill,work_time,`check`,job_status from job
+        select id,employer_id,title,budget,expertize_level,create_time,required,skill,work_time,`ischeck`,job_status from job
     </select>
 
     <select id="searchJob" resultType="project.model.Job">

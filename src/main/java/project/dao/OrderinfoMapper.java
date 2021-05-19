@@ -43,13 +43,16 @@ public interface OrderinfoMapper {
     int updateOrderState(@Param("id") int id, @Param("state") String state);
 
 
-    //查询指定employer_id的Order中的所有jobid
-    List<Integer> getJobInOrderByemployer(@Param("employer_id") int employer_id);
-
     //根据id查找job_id
     Integer getJobById(@Param("id") int id);
 
     int updateEnd(@Param("id") int id,@Param("end_time") Date end_time);
+    int deleteOrderById(@Param("id") int id);
+
+    List<Order> searchOrder(int jobId, String state);
+
+
+    int getOrderCount();
 
 
 

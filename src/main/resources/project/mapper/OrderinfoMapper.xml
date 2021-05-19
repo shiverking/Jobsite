@@ -53,11 +53,6 @@
         from orderinfo
         where state = #{state}
     </select>
-    <select id="getJobInOrderByemployer" resultType="java.lang.Integer">
-        select distinct job_id
-        from orderinfo
-        where employer_id = #{employer_id}
-    </select>
     <select id="getOrderByJobId" resultType="project.model.Order">
         select *
         from orderinfo
@@ -67,6 +62,22 @@
         select job_id
         from orderinfo
         where id = #{id}
+    </select>
+    <delete id="deleteOrderById" parameterType="project.model.Order">
+        delete from `orderinfo` where id = #{id}
+    </delete>
+
+    <select id="searchOrder" resultType="project.model.Order">
+        select * from orderinfo
+        <where>
+            1=1
+            <if test="jobId!=null and jobId!=0">and job_id=#{jobId}</if>
+            <if test="state!=null and state!=''">and state=#{state}</if>
+        </where>
+    </select>
+
+    <select id="getOrderCount" resultType="int">
+        select count(*) from orderinfo
     </select>
 
 </mapper>
