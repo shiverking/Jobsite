@@ -88,6 +88,7 @@ public class MessageController {
         //获取用户的验证信息
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = (User) principal;
+        model.addAttribute("user", user);
         int myId = user.getId();
         //没聊过天，在主表生成一条记录返回用户聊天关系表id，并在聊天列表表分别插入两条记录
         if(!(messageServiceImpl.isFirstChat(myId,id))&&id!=myId){

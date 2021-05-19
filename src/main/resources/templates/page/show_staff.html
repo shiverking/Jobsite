@@ -82,7 +82,7 @@
                         <div class="staffBox_action">
                             <a class="btn btn-third"  th:href="@{'/viewProfile/user_id='+${profile.user_id}}">查看他的简历</a>
                             <a class="btn btn-third"  th:href="@{/message(id=${profile.user_id})}">联系他</a>
-                            <a class="btn btn-third"  style="color: white" th:onclick="hire([[${profile.user_id}]],[[${job_id}]]);">雇佣他</a>
+                            <a class="btn btn-third"  style="color: white" th:onclick="hire([[${profile.user_id}]],[[${job_id}]],[[${profile.user_name}]]);">雇佣他</a>
                         </div>
                     </div>
                   </div>

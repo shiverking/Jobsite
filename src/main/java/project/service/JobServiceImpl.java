@@ -92,4 +92,9 @@ public class JobServiceImpl implements JobService {
         return jobMapper.isJobExist(job_id);
     }
 
+    @Override
+    public List<Integer> getAllIdByUser(int user_id) {
+        return jobMapper.getAllIdByUser(user_id);
+    }
+
 }

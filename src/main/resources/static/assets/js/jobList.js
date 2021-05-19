@@ -12,7 +12,6 @@ $(document).ready(function (){
 $(document).ready(function (){
     $.ajax({
         url: "/job/showMyJobLists",
-
         type: "post",
         success(data){
             if(data.status == 200){
@@ -39,7 +38,7 @@ $(document).ready(function (){
                             "<td>" + jobs[i].required + "</td>" +
                             "<td>" + jobs[i].position + "</td>" +
                             "<td>" + jobs[i].create_time + "</td>" +
-                            "<td>" + sends[i] + "</td>"+
+                            "<td>" +"<a href='/job/viewSeeker/job_id="+jobs[i].id+"'>"+ sends[i] + "</a></td>"+
                             "<td style=\"color:red\">关闭</td>" +
                             "<td><input  type=\"button\" onclick=\"openRow(this," + jobs[i].id + ");\" value=\"-开启(样式未调)\"/></td>"+
                             "</tr>"
@@ -79,7 +78,11 @@ function colRow(obj,id){
                     pa.eq(5).html("关闭")
                     pa.eq(5).css("color","red")
                     pa.eq(6).html("<input  type=\"button\" onclick=\"openRow(this," + id + ");\" value=\"-开启(样式未调)\"/>")
+                }else {
+
+                    warning(data.msg)
                 }
+
             }
         })
     }
@@ -99,7 +102,12 @@ function openRow(obj,id){
                     pa.eq(5).css("color","black")
                     pa.eq(6).html("<input  type=\"button\" onclick=\"colRow(this," + id + ");\" value=\"-关闭\"/>")
 
+                }else {
+
+                    warning(data.msg);
+
                 }
+
             }
         })
 

@@ -44,19 +44,18 @@ $(document).ready(function(){
         }
         else {
             var job = {
-                "title": post_title,
-                "description": post_description,
-                "budget": post_budget,
-                "expertize_level": post_require_level,
-                "work_time": post_work_time,
-                "skill": post_skill,
-                "required": post_require_people,
-                "position": post_position,
+                "title": htmlEncode(post_title),
+                "description": htmlEncode(post_description),
+                "budget": htmlEncode(post_budget),
+                "expertize_level": htmlEncode(post_require_level),
+                "work_time": htmlEncode(post_work_time),
+                "skill": htmlEncode(post_skill),
+                "required": htmlEncode(post_require_people),
+                "position": htmlEncode(post_position),
             }
             post(job)
         }
     })
-
 
     function post(job) {
         $.ajax({
@@ -153,3 +152,17 @@ function success(str, time){
 
 }
 
+
+//转义 元素的innerHTML内容即为转义后的字符
+function htmlEncode ( str ) {
+    var ele = document.createElement('span');
+    ele.appendChild( document.createTextNode( str ) );
+    return ele.innerHTML;
+}
+
+//解析
+function htmlDecode ( str ) {
+    var ele = document.createElement('span');
+    ele.innerHTML = str;
+    return ele.textContent;
+}

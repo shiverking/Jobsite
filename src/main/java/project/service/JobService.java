@@ -1,6 +1,8 @@
 package project.service;
 
 import project.model.Job;
+
+import javax.persistence.criteria.CriteriaBuilder;
 import java.util.List;
 
 /**
@@ -33,4 +35,5 @@ public interface JobService {
     int openJobById(int id);
     //job是否存在
     boolean isJobExist(int job_id);
+    List<Integer> getAllIdByUser(int user_id);
 }

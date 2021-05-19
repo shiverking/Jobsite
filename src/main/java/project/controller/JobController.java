@@ -8,7 +8,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import project.dao.HireMapper;
 import project.model.*;
+import project.service.HireService;
 import project.service.JobService;
 import project.service.ProfileService;
 import project.service.ResumeService;
@@ -32,6 +34,9 @@ public class JobController {
 
     @Autowired
     ProfileService profileService;
+
+    @Autowired
+    HireService hireService;
 
     /**
      * 发布工作
@@ -60,8 +65,12 @@ public class JobController {
 
 
     @RequestMapping("/job/MyJobLists")
-    public String toMyJobListsPage() {
-        return "/job/my-job-listing";
+    public ModelAndView toMyJobListsPage() {
+        ModelAndView modelAndView = new ModelAndView("/job/my-job-listing");
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = (User) principal;
+        modelAndView.addObject("user", user);
+        return modelAndView;
     }
 
 
@@ -79,6 +88,11 @@ public class JobController {
             //添加工作列表
             Map<String, Object> map = new HashMap<>();
             map.put("jobLists", jobs);
+            //排序
+            jobs.sort((o1, o2) -> {
+                int flag = o1.getCreate_time().compareTo(o2.getCreate_time());
+                return flag*-1;
+            });
             //获取每个工作作为投递对象的次数
             List<Integer> sends = new ArrayList<>();
             for (Job job : jobs) {
@@ -164,23 +178,23 @@ public class JobController {
 
 
 
+
+    //根据指定id来开启工作招聘
     @ResponseBody
     @RequestMapping("/job/openJob/{id}")
     public RespBean openJobById(@PathVariable("id") int id) {
-        int a = jobService.openJobById(id);
-        if (a == -1) {
-            return RespBean.error("未找到该职位招聘信息");
-        } else {
-            return RespBean.ok("开启该职位招聘成功");
-        }
+            Job job = jobService.findJobById(id);
+            int jobid= job.getId();
+            int people = hireService.countHiresByJob(jobid);
+            if(people>= job.getRequired()){
+                return RespBean.error("该工作目前招聘人数已满，开启招聘失败");
+            }else {
+                jobService.openJobById(id);
+                return RespBean.ok("开启该职位招聘成功");
+            }
     }
 
 
-    //跳转到查看人员名单页面
-    @RequestMapping("/showjobstaff")
-    public String show() {
-        return "/page/show_staff";
-    }
 
     //获取指定jobId的投递简历列表
     @RequestMapping("/job/viewSeeker/job_id={job_id}")
@@ -199,27 +213,15 @@ public class JobController {
                 }
                 modelAndView.addObject("Profiles", profiles);
                 modelAndView.addObject("job_id",job_id);
+                Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+                User user = (User) principal;
+                modelAndView.addObject("user",user);
                 return modelAndView;
             } else {
                 modelAndView.addObject("hasProfile", false);
                 return modelAndView;
             }
-
         }
-
     }
-
-
-
-//        @ResponseBody
-//        @RequestMapping("/job/openJob/{id}")
-//        public RespBean openJobById(@PathVariable("id") int id){
-//                int a =jobService.openJobById(id);
-//                if (a == -1){
-//                        return RespBean.error("未找到该职位招聘信息");
-//                }else {
-//                        return RespBean.ok("开启该职位招聘成功");
-//                }
-//        }
 
 }

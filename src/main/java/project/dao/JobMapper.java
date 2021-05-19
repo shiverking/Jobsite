@@ -43,4 +43,6 @@ public interface JobMapper {
     int openJobById(@Param("id") int id);
     //检测指定id工作是否存在
     boolean isJobExist(@Param("job_id") int job_id);
+
+    List<Integer> getAllIdByUser(@Param("user_id") int user_id);
 }
