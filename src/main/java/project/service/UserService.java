@@ -54,5 +54,7 @@ public interface UserService {
     boolean updateLocation(int id,String location);
     //获取用户的位置
     String getLocation(int id);
+    //获取所有Employee的id
+    List<Integer> getAllEmployeeId();
 
 }

@@ -215,7 +215,7 @@ $("#bindEmailConfirm").click(function(){
 
 $('#isProfileExist').click(function () {
     //如果以前有简历保存
-    if($("#staff_name1").val()){
+    if($("#staff_name1").val()=="true"){
         window.location.href = "/profile";
     }
     //如果没有简历保存

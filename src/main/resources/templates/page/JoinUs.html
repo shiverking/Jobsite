@@ -1,0 +1,140 @@
+﻿<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+<!-- Basic Page Needs
+================================================== -->
+<title>JobSite</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<link rel="icon" href="/assets/images/fav.png" type="image/gif" sizes="64x64">
+
+<!-- CSS
+================================================== -->
+<link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700&display=swap&subset=latin-ext" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/all.min.css">
+<link href="/assets/css/aos.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+<link href="/assets/css/select2.min.css" rel="stylesheet" />
+<link href="/assets/css/owl.carousel.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="/assets/css/style.css">
+<link rel="stylesheet" href="/assets/css/color-1.css">
+</head>
+<body>
+
+<!-- Header 01
+================================================== -->
+<header class="header_01 header_inner">
+  <div class="header_main">
+    <div class="header_menu fixed-top" th:include="/header.html">
+    </div>
+    <div class="header_btm">
+      <h2>加入我们</h2>
+    </div>
+  </div> 
+</header>
+
+
+<!-- End Header 02
+================================================== -->
+
+
+
+<!-- Main 
+================================================== -->
+<main>
+  <div class="only-form-pages">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+        	<div class=" contact_us" >	
+          <div class="row "   >
+            
+            <div class="col-md-12 col-lg-6 ">
+              <div class="newslatter_outer">
+                
+                <div>
+                    <h5>地址:</h5>
+                    <ul>
+                      <li><i class="fas fa-map-marker-alt"></i>
+                        长安区东祥路1号西北工业大学<br>
+                        <b>陕西</b>
+                      </li>
+                      <li><a href="tel:#"><i class="fas fa-phone"></i> xxxxxxx (固话)</a></li>
+                      <li><a href="tel:#"><i class="fas fa-phone"></i> xxxxxxx (移动电话)</a></li>
+                      <li><a href="tel:#"><i class="fas fa-fax"></i> xxxxxx (传真)</a></li>
+                    </ul>
+                    
+                  </div>
+              </div>
+
+            </div>
+            <div class="col-md-12 col-lg-6">
+              <div class="only-form-box">
+                <form>
+                  <div class="com_class_form">
+                    <div class="form-group">
+                  
+                      <input class="form-control" type="text" name="name" size="40" placeholder="姓名">
+                    </div>
+                    <div class="form-group">
+                      
+                      <input class="form-control" type="email" name="email" placeholder="邮件">
+                    </div>
+                    <div class="form-group">
+                      
+                      <select class="form-control" name="user_type">
+                        <option value="none">您是应聘者还是招聘者 ?</option >
+                        <option value="Job Seeker">应聘者</option>
+                        <option value="Employer">招聘者</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      
+                      <input class="form-control" type="text" name="subject" placeholder="标题">
+                    </div>
+                    <div class="form-group">
+                      
+                      <textarea class="form-control" name="message" cols="40" rows="3" placeholder="内容"></textarea>
+                    </div>
+                    <div class="form-group">
+                      <input class="btn btn-primary" type="submit" value="发送">
+                    </div>
+                  </div>
+                </form>
+               </div>
+            </div>
+          </div>	
+				
+			</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+
+<!-- Footer Container
+================================================== -->
+<footer id="colophon" class="site-footer custom_footer dark_footer" th:include="/footer.html">
+</footer>
+
+
+<!-- End Footer Container
+================================================== -->
+
+<!-- Scripts
+================================================== -->
+<script src="/assets/js/jquery-3.4.1.min.js"></script>
+<script src="/assets/js/select2.min.js"></script>
+<script src="/assets/js/bootstrap.min.js"></script>
+<script src="/assets/js/owl.carousel.min.js"></script>
+<script src="/assets/js/custom.js"></script>
+<script>
+  $(document).ready(function() {
+    $("#4").addClass("current_page").siblings().removeClass("current_page");
+  })
+</script>
+</body>
+</html>
