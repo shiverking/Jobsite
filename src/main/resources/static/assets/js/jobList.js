@@ -20,7 +20,7 @@ $(document).ready(function (){
                 var str1 = "";
                 var str2 = "";
                 for(var i=0;i<jobs.length;i++) {
-                    if (jobs[i].job_statue == true) {
+                    if (jobs[i].job_status == true) {
                         str1 += "<tr>" +
                             "<td>" + "<a href='/job/"+jobs[i].id+"'"+"style='color: #111111'>"+jobs[i].title + "</a></td>" +
                             "<td>" + jobs[i].required + "</td>" +
@@ -28,8 +28,7 @@ $(document).ready(function (){
                             "<td>" + jobs[i].create_time + "</td>" +
                             "<td>" +"<a href='/job/viewSeeker/job_id="+jobs[i].id+"'>"+ sends[i] + "</a></td>"+
                             "<td>开启</td>" +
-                            "<td><input  type=\"button\" onclick=\"colRow(this," + jobs[i].id + ");\" value=\"-关闭\"/></td>"+
-
+                            "<td><input  type=\"button\" onclick=\"colRow(this," + jobs[i].id + ");\" value=\"关闭\"/></td>"+
                             "</tr>"
                         }
                     else {
@@ -40,7 +39,7 @@ $(document).ready(function (){
                             "<td>" + jobs[i].create_time + "</td>" +
                             "<td>" +"<a href='/job/viewSeeker/job_id="+jobs[i].id+"'>"+ sends[i] + "</a></td>"+
                             "<td style=\"color:red\">关闭</td>" +
-                            "<td><input  type=\"button\" onclick=\"openRow(this," + jobs[i].id + ");\" value=\"-开启(样式未调)\"/></td>"+
+                            "<td><input  type=\"button\" onclick=\"openRow(this," + jobs[i].id + ");\" value=\"开启\"/></td>"+
                             "</tr>"
                     }
                 }
@@ -77,7 +76,7 @@ function colRow(obj,id){
                     //修改表格内容
                     pa.eq(5).html("关闭")
                     pa.eq(5).css("color","red")
-                    pa.eq(6).html("<input  type=\"button\" onclick=\"openRow(this," + id + ");\" value=\"-开启(样式未调)\"/>")
+                    pa.eq(6).html("<input  type=\"button\" onclick=\"openRow(this," + id + ");\" value=\"开启\"/>")
                 }else {
 
                     warning(data.msg)
@@ -100,12 +99,9 @@ function openRow(obj,id){
                 if(data.status == 200){
                     pa.eq(5).html("开启")
                     pa.eq(5).css("color","black")
-                    pa.eq(6).html("<input  type=\"button\" onclick=\"colRow(this," + id + ");\" value=\"-关闭\"/>")
-
+                    pa.eq(6).html("<input  type=\"button\" onclick=\"colRow(this," + id + ");\" value=\"关闭\"/>")
                 }else {
-
                     warning(data.msg);
-
                 }
 
             }

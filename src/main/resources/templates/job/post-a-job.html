@@ -35,7 +35,7 @@
     <div class="header_main">
         <div class="header_menu fixed-top" th:include="/header.html"></div>
         <div class="header_btm">
-            <h2>管理</h2>
+            <h2>发布工作</h2>
         </div>
     </div>
 </header>
@@ -43,7 +43,7 @@
 <!-- Main 
 ================================================== -->
 <main>
-    <div class="job_container">
+    <div class="job_container" sec:authorize="hasRole('ROLE_employer')">
         <div class="container">
             <div class="row job_main">
                 <div class="sidebar">
@@ -177,6 +177,9 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div sec:authorize="hasRole('ROLE_employee')">
+        您不能访问此页面
     </div>
 </main>
 

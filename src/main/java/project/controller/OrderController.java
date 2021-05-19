@@ -3,6 +3,7 @@ package project.controller;
 import com.google.gson.Gson;
 import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -54,6 +55,7 @@ public class OrderController {
 
 
 
+    @PreAuthorize("hasRole('ROLE_employer')" )
     @RequestMapping("/order/jobOrders")
     public ModelAndView toManageJob() {
         ModelAndView modelAndView = new ModelAndView("/job/order_job");
@@ -62,6 +64,7 @@ public class OrderController {
 
     //获取order信息
     //根据user_id去查job，返回页面展示的信息有 工作名称，参与工作的人员和人数，开始时间和结束时间，以及状态
+    @PreAuthorize("hasRole('ROLE_employer')" )
     @ResponseBody
     @RequestMapping("/order/getOrders")
     public RespBean getOrdersBystate(@RequestBody Map<String, Object> info) {
@@ -105,6 +108,7 @@ public class OrderController {
         return RespBean.ok("查询订单", map);
     }
 
+    @PreAuthorize("hasRole('ROLE_employer')" )
     @ResponseBody
     @RequestMapping("/order/updateState")
     public RespBean updataStatue(@RequestBody Map<String, Object> info) {
@@ -189,6 +193,7 @@ public class OrderController {
         }
     }
 
+    @PreAuthorize("hasRole('ROLE_employer')" )
     @ResponseBody
     @RequestMapping("/order/getDetails")
     public RespBean OrderDetailGet(HttpServletRequest request){
@@ -199,7 +204,7 @@ public class OrderController {
                 int orderId = (int) session.getAttribute("orderId");
                 Order order =  orderService.findOrderById(orderId);
                 Map<String,Object> map = new HashMap<>();
-                Job job = jobService.findJobById(order.getId());
+                Job job = jobService.findJobById(order.getJob_id());
                 //由于User的getAuthorities方法返回空指针，所以导致数据无法json化，故建立多个列表分别返回需要的值
                 List<Integer> employersId = hireService.getEmployerByJob(job.getId());
                 List<String> userNames = new ArrayList<>();

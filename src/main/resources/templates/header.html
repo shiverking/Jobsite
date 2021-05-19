@@ -68,9 +68,14 @@
                         </li>
 
 
-                        <li id="7" sec:authorize="isAuthenticated()">
-                            <a>工作管理</a>
+                        <li id="7" sec:authorize="hasRole('ROLE_employee')">
+                            <a href="/job/MyJobLists">工作管理</a>
                         </li>
+
+                        <li sec:authorize="hasRole('ROLE_employer')">
+                            <a href="/job/MyJobLists">职位管理</a>
+                        </li>
+
 
                         <li id="8" sec:authorize="isAuthenticated()">
                             <a  th:href="@{'/chatlist'}">在线沟通<span class="badge badge-danger badge-pill">3</span></a>
@@ -110,7 +115,7 @@
                         <div class="login_pop_box login_pop_box_menu">
                             <ul style="padding-left:15px">
                                 <li >
-                                    <a href="#"><i class="far fa-bookmark"></i>我的订单</a>
+                                    <a href="/order/jobOrders"><i class="far fa-bookmark"></i>我的订单</a>
                                 </li>
                                 <hr>
                                 <li sec:authorize="hasRole('ROLE_employer')">

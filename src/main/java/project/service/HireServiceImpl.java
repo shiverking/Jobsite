@@ -3,7 +3,9 @@ package project.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import project.dao.HireMapper;
+import project.dao.JobMapper;
 import project.dao.OrderinfoMapper;
+import project.model.Job;
 
 import java.util.Date;
 import java.util.List;
@@ -18,6 +20,7 @@ public class HireServiceImpl implements HireService{
 
     @Autowired
     OrderinfoMapper orderinfoMapper;
+
 
     @Override
     public int insertNewHire(int job_id, int employer_id, int employee_id, Date created_time) {
@@ -43,6 +46,7 @@ public class HireServiceImpl implements HireService{
 
     @Override
     public List<Integer> getEmployerByJob(int job_id) {
+
         return hireMapper.getEmployerByJob(job_id);
     }
 }
