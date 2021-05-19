@@ -35,8 +35,7 @@ public class Job {
     @NotNull(message = "所需专业等级不能为空")
     private String expertize_level;
     //是否通过审核
-    private boolean check;
-
+    private boolean isCheck;
     //创建时间
     private Date create_time;
     //所需人数
@@ -53,7 +52,7 @@ public class Job {
     //岗位
     private String position;
     //该招聘是否开启
-    private boolean job_status;
+    private boolean job_statue;
 
     public int getId() {
         return id;
@@ -103,10 +102,12 @@ public class Job {
         this.expertize_level = expertize_level;
     }
 
-    public boolean isCheck() { return check; }
+    public boolean isCheck() {
+        return isCheck;
+    }
 
-    public void setCheck(boolean newCheck) {
-        check = newCheck;
+    public void setCheck(boolean check) {
+        isCheck = check;
     }
 
     @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm")
@@ -150,12 +151,12 @@ public class Job {
         this.skill = skill;
     }
 
-    public boolean isJob_status() {
-        return job_status;
+    public boolean isJob_statue() {
+        return job_statue;
     }
 
-    public void setJob_status(boolean job_status) {
-        this.job_status = job_status;
+    public void setJob_statue(boolean job_statue) {
+        this.job_statue = job_statue;
     }
 
     @Override
@@ -167,7 +168,7 @@ public class Job {
                 ", description='" + description + '\'' +
                 ", budget=" + budget +
                 ", expertize_level='" + expertize_level + '\'' +
-                ", check=" + check +
+                ", isCheck=" + isCheck +
                 ", create_time=" + create_time +
                 ", required=" + required +
                 ", work_time=" + work_time +

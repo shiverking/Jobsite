@@ -25,9 +25,6 @@
     <link href="/assets/css/light-theme.min.css" rel="stylesheet">
     <link href="/assets/css/dark-theme.min.css" rel="stylesheet">
     <link href="/assets/css/colored-theme.min.css" rel="stylesheet">
-
-    <link rel="stylesheet" href="/layui/css/layui.css">
-    <link rel="stylesheet" href="/assets/css/custom.form.css">
 </head>
 <body>
 
@@ -52,17 +49,14 @@
                 <div class="sidebar">
                     <h5>后台管理系统</h5>
                     <ul class="user_navigation">
-                        <li >
-                            <a href="/admin/board"><i class="fas fa-border-all"></i>主版</a>
-                        </li>
                         <li class="is-active">
-                            <a href="/admin/job"><i class="fas fa-star"></i>职位</a>
+                            <a href="/admin"><i class="fas fa-star"></i>职位</a>
                         </li>
                         <li>
                             <a href="/admin/order"><i class="fas fa-list-alt"></i>订单</a>
                         </li>
                         <li>
-                            <a href="/admin/user"><i class="fas fa-user"></i>用户</a>
+                            <a href="/admin/user"><i class="fas fa-user"></i>人员</a>
                         </li>
                     </ul>
                 </div>
@@ -70,29 +64,98 @@
                     <!--职位管理-->
                     <div class="row job_section">
                         <div class="col-sm-12">
-                            <div class="job_table_div">
-                                <div id="searchParam" >
-                                    <div class="layui-form-item">
-                                        <div class="layui-input-inline">
-                                            <input type="text" id="title" class="layui-input" autocomplete="off" placeholder="请输入职位名称">
+                            <div class="custom-control custom-switch text-center" style="float: right">
+                                <input type="checkbox" class="custom-control-input" id="customSwitch1" onchange="checkBoxOnClick(this)">
+                                <label class="custom-control-label" for="customSwitch1"> <span>按时间排序</span> </label>
+                            </div>
+                            <div class="section-divider">
+                            </div>
+                            <div id="displayInList" class="row full_width featured_box_outer">
+                                <div class="col-sm-12" th:each="job : ${pageInfo.list}">
+                                    <div class="featured_box ">
+                                        <div class="fb_image">
+                                            <img  alt="brand logo" src="/assets/images/c-logo-03.webp">
                                         </div>
-                                        <div class="layui-input-inline">
-                                            <input type="text" id="employerId" class="layui-input" autocomplete="off" placeholder="请输入雇主ID">
+                                        <div class="fb_content">
+                                            <a th:href="@{'/job/' + ${job.id} }">
+                                                <h4 th:text="${job.title}" />
+                                                <ul>
+<!--                                                    <li style="width: 50px">-->
+<!--                                                        <i class="fas fa-paper-plane" th:text="${job.ischeck}" style="color: #dd4b39"></i>-->
+<!--                                                    </li>-->
+                                                    <li style="width: 100px">
+                                                        <i class="fas fa-yen-sign" th:text="${job.budget}" style="color: #dd4b39"></i>
+                                                    </li>
+                                                    <li style="width: 50px">
+                                                        <i class="fas fa-user" th:text="${job.required}" style="color: #dd4b39"></i>
+                                                    </li>
+                                                    <li style="width: 130px">
+                                                        <i class="far fa-clock" th:text="${#dates.format(job.create_time, 'yyyy-MM-dd')}" style="color: #dd4b39"></i>
+                                                    </li>
+                                                    <li style="width: 50px">
+                                                        <i  class="fas fa-star" th:text="${job.id}" style="color: #dd4b39"></i>
+                                                    </li>
+                                                </ul>
+                                            </a>
                                         </div>
-                                        <div class="layui-input-inline layui-form">
-                                            <select id="check">
-                                                <option value="">请选择审核状态</option>
-                                                <option value="0">未审核</option>
-                                                <option value="1">已审核</option>
-                                            </select>
-                                        </div>
-                                        <div class="layui-input-inline ">
-                                            <button type="button" class="layui-btn" onclick="search()" id="search">查询</button>
+                                        <input type="hidden" th:value="${job.id}" id="jobId"/>
+                                        <div class="fb_action">
+                                            <ul class="job-dashboard-actions">
+                                                <li>
+                                                    <input value="查看" class="job-dashboard-action-edit" type="button" > </input>
+                                                </li>
+                                                <li>
+                                                    <input th:id="checkJob" value="审核"  class="job-dashboard-action-mark_filled" type="button" ></input>
+                                                </li>
+                                                <li>
+                                                    <input th:id="deleteJob" value="删除" class="job-dashboard-action-delete" type="button" ></input>
+                                                </li>
+                                            </ul>
                                         </div>
                                     </div>
                                 </div>
-                                <table class="layui-hide" id="job_table" lay-filter="job_table"></table>
                             </div>
+                            <!--分页部分  -->
+                            <ul class="pagination">
+                                <!-- 向前1页-->
+                                <li>
+                                    <a  class="btn btn-outline-secondary" th:if="${pageNum-1>0}" th:href="@{${'job'}(pageNum=${pageNum-1},pageSize=${pageSize})}" aria-label="Previous">
+                                        <span aria-hidden="true">上一页</span>
+                                    </a>
+                                    <a  class="btn btn-outline-secondary" th:if="${pageNum-1<=0}" href="javascript:void(0);" aria-label="Previous">
+                                        <span aria-hidden="true">上一页</span>
+                                    </a>
+                                </li>
+                                <!--只显示5页-->
+
+                                <l th:if="${pageNum<totalPages-5}"  th:each="pageNo : ${#numbers.sequence(pageNum, pageNum+5)}">
+                                    <a class="btn btn-outline-secondary" th:if="${pageNum eq pageNo}" href="javascript:void(0);">
+                                        <span th:text="${pageNo}"></span>
+                                    </a>
+
+                                    <a class="btn btn-outline-secondary" th:if="${not (pageNum eq pageNo)}" th:href="@{${'job'}(pageNum=${pageNo},pageSize=${pageSize})}">
+                                        <span th:text="${pageNo}"></span>
+                                    </a>
+                                </l>
+                                <l th:if="${pageNum>=totalPages-5}"  th:each="pageNo : ${#numbers.sequence(totalPages-5,totalPages)}">
+                                    <a  class="btn btn-outline-secondary"th:if="${pageNum eq pageNo}" href="javascript:void(0);">
+                                        <span th:text="${pageNo}"></span>
+                                    </a>
+
+                                    <a  class="btn btn-outline-secondary" th:if="${not (pageNum eq pageNo)}" th:href="@{${'job'}(pageNum=${pageNo},pageSize=${pageSize})}">
+                                        <span th:text="${pageNo}"></span>
+                                    </a>
+                                </l>
+                                <!--向后五页-->
+                                <li>
+                                    <a class="btn btn-outline-secondary" th:if="${totalPages-pageNum>=0}" th:href="@{${'job'}(pageNum=${pageNum+5},pageSize=${pageSize})}" aria-label="Next">
+                                        <span aria-hidden="true">下一页</span>
+                                    </a>
+                                    <a class="btn btn-outline-secondary" th:if="${totalPages-pageNum<0}" href="javascript:void(0);" aria-label="Next">
+                                        <span aria-hidden="true">下一页</span>
+                                    </a>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 </div>
@@ -114,192 +177,9 @@
 <script src="/assets/js/bootstrap.min.js"></script>
 <script src="/assets/js/owl.carousel.min.js"></script>
 <script src="/assets/js/custom.js"></script>
-<script src="/assets/js/aos.js"></script>
 <!--提醒有关的js-->
 <script src="/assets/js/growl-notification.min.js"></script>
-
-<script src="/layui/layui.js"></script>
-<script src="/assets/js/core.util.js"></script>
-
-<script type="text/html" id="toolbar">
-    <div class="layui-btn-container">
-        <button class="layui-btn layui-btn-sm" lay-event="batchCheck" >审核</button>
-        <button class="layui-btn layui-btn-sm" lay-event="batchDeleted" >删除</button>
-    </div>
-</script>
-
-<script type="text/html" id="tool">
-    <a class="layui-btn layui-btn-xs" lay-event="check" >审核</a>
-    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del" >删除</a>
-</script>
-
-<script>
-    var tableIns1;
-    var table = layui.table;
-    var $ = jQuery = layui.jquery;
-    var layer = layui.layer;
-    var form = layui.form;
-    var startTime = null;
-    var endTime = null;
-
-    layui.use(['table','layer'], function(){
-
-        tableIns1 = table.render({
-            elem: '#job_table'
-            , height: 312
-            , url: '/admin/joblist' //数据接口
-            , limit: 5
-            , limits: [5, 10, 15]
-            , page: true //开启分页
-            , method: 'POST'
-            , totalRow: true
-            , parseData:function(res){
-                return {
-                    code:res.msg=='success'?0:1,
-                    msg:res.msg,
-                    count:res.count, //总页数，用于分页
-                    data:res.data
-                }
-            }
-            , cols: [
-                [
-                    {type: 'checkbox', fixed: 'left'},
-                    {field: 'id', title: 'id', width: 120},
-                    {field: 'employer_id', title: '雇主id', width: 120},
-                    {field: 'title', title: '职位', width: 120},
-                    {field: 'budget', title: '预算', width: 120,sort:true},
-                    {field: 'expertize_level', title: '技能等级', width: 120},
-                    {field: 'create_time', title: '创建时间', width: 120, sort:true},
-                    {field: 'required', title: '所需人数', width: 120},
-                    {field: 'skill', title: '所需技术', width: 120},
-                    {field: 'work_time',title:'工作时间',width:120},
-                    {
-                        field: 'check', title: '审核状态', width: 120, templet: function (item) {
-                            if (item.check === true) {
-                                return '  <input type="checkbox" lay-skin="switch" lay-text="已审核|未审核" checked disabled>';
-                            }
-                            if (item.check === false) {
-                                return '  <input type="checkbox" lay-skin="switch" lay-text="已审核|未审核" disabled>';
-                            }
-                        }
-                    },
-                    {
-                        field: 'job_status', title: '状态', width: 100, templet: function (item) {
-                            if (item.job_status === true) {
-                                return '  <input type="checkbox" lay-skin="switch" lay-text="开启|关闭" checked disabled>';
-                            }
-                            if (item.job_status === false) {
-                                return '  <input type="checkbox" lay-skin="switch" lay-text="开启|关闭" disabled>';
-                            }
-                        }
-                    },
-                    {width: 300, toolbar: "#tool", title: '操作'}
-                ]
-            ]
-            , toolbar: '#toolbar'
-        });
-
-        table.on('toolbar(job_table)', function (obj) {
-            switch (obj.event) {
-                case 'batchDeleted':
-                    var checkStatus = table.checkStatus(obj.config.id);
-                    var data = checkStatus.data;
-                    if (data.length == 0) {
-                        layer.msg("请选择要批量删除的职位");
-                    } else {
-                        var jobIds = [];
-                        $(data).each(function (index, item) {
-                            jobIds.push(item.id);
-                        });
-                        deleteJob(jobIds, "选中的");
-                    }
-                    break;
-                case 'batchCheck':
-                    var checkStatus = table.checkStatus(obj.config.id);
-                    var data = checkStatus.data;
-                    if (data.length == 0) {
-                        layer.msg("请选择要批量审核的职位");
-                    } else {
-                        var jobIds = [];
-                        $(data).each(function (index, item) {
-                            jobIds.push(item.id);
-                        });
-                        checkJob(jobIds, "选中的");
-                    }
-                    break;
-            }
-            ;
-        });
-
-        table.on('tool(job_table)', function (obj) {
-            var data = obj.data;
-            switch (obj.event) {
-                case 'del':
-                    var jobIds = [];
-                    jobIds.push(data.id);
-                    deleteJob(jobIds, data.title);
-                    break;
-                case 'check':
-                    var jobIds = [];
-                    jobIds.push(data.id);
-                    checkJob(jobIds,data.title);
-                    break;
-            }
-        });
-
-        var checkJob = function (jobIds, title) {
-            layer.open({
-                content: '确定要审核' + title + "职位么?",
-                yes: function (index, layero) {
-                    layer.close(index); //如果设定了yes回调，需进行手工关闭
-                    CoreUtil.sendPut("/admin/jobs/check", jobIds, function (res) {
-                        layer.msg(res.msg);
-                        tableIns1.reload();
-                    });
-                }
-            });
-        };
-
-        var deleteJob = function (jobIds, title) {
-            layer.open({
-                content: '确定要删除' + title + "职位么?",
-                yes: function (index, layero) {
-                    layer.close(index); //如果设定了yes回调，需进行手工关闭
-                    CoreUtil.sendDelete("/admin/jobs", jobIds, function (res) {
-                        layer.msg(res.msg);
-                        tableIns1.reload();
-                    });
-                }
-            });
-        };
-    });
-
-    function search(){
-        //得到搜索框里已输入的数据
-        var title = $('#title').val();
-        var employer_id = $('#employerId').val();
-        var check = $('#check').val();
-        if(employer_id===""||employer_id===null){
-            employer_id=0;
-        }
-        if(check===""||check===null){
-            check=3;
-        }
-        //执行重载
-        tableIns1.reload({
-            url:'/admin/searchJob'
-            ,method:'POST'
-            ,page: {
-                curr: 1 //重新从第 1 页开始
-            }
-            ,where: {
-                employer_id: employer_id,
-                title:  title,
-                check: check
-            }
-        });
-    };
-
-</script>
+<!--自己写的js-->
+<script src="/assets/js/admin.js"></script>
 </body>
 </html>

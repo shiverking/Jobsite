@@ -41,14 +41,6 @@ public interface JobMapper {
     int closeJobById(@Param("id") int id);
     //开启指定id工作招聘通道
     int openJobById(@Param("id") int id);
-
-
-    List<Job> getJobList();
-
-    List<Job> searchJob(@Param("employerId") int employerId,@Param("title") String title,@Param("check") int check);
-
-    int getJobCount();
-
     //检测指定id工作是否存在
     boolean isJobExist(@Param("job_id") int job_id);
 

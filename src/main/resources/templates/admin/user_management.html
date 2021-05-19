@@ -25,8 +25,6 @@
     <link href="/assets/css/light-theme.min.css" rel="stylesheet">
     <link href="/assets/css/dark-theme.min.css" rel="stylesheet">
     <link href="/assets/css/colored-theme.min.css" rel="stylesheet">
-
-    <link rel="stylesheet" href="/layui/css/layui.css">
 </head>
 <body>
 
@@ -52,16 +50,13 @@
                     <h5>后台管理系统</h5>
                     <ul class="user_navigation">
                         <li >
-                            <a href="/admin/board"><i class="fas fa-border-all"></i>主版</a>
-                        </li>
-                        <li >
-                            <a href="/admin/job"><i class="fas fa-star"></i>职位</a>
+                            <a href="/admin"><i class="fas fa-star"></i>职位</a>
                         </li>
                         <li>
                             <a href="/admin/order"><i class="fas fa-list-alt"></i>订单</a>
                         </li>
                         <li class="is-active">
-                            <a href="/admin/user"><i class="fas fa-user"></i>用户</a>
+                            <a href="/admin/user"><i class="fas fa-user"></i>人员</a>
                         </li>
                     </ul>
                 </div>
@@ -69,29 +64,87 @@
                     <!--人员管理-->
                     <div class="row job_section">
                         <div class="col-sm-12">
-                            <div class="user_table_div">
-                                <div id="searchParam" >
-                                    <div class="layui-form-item">
-                                        <div class="layui-input-inline">
-                                            <input type="text" id="username" class="layui-input" autocomplete="off" placeholder="请输入用户名">
+                            <div class="form-group">
+                                <div class="field" style="float: right;width: 150px">
+                                    <i class="fas fa-briefcase"></i>
+                                    <select class="js-example-basic-single" name="state" onchange="selectUser()">
+                                        <option value="user">所有用户</option>
+                                        <option value="employer">招聘者</option>
+                                        <option value="employee">应聘者</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="section-divider">
+                            </div>
+                            <div id="displayInList" class="row full_width feat ured_box_outer">
+                                <div class="col-sm-12" th:each="user : ${pageInfo.list}">
+                                    <div class="featured_box ">
+                                        <div class="fb_image">
+                                            <img  alt="brand logo" src="/assets/images/profile-1.png">
                                         </div>
-                                        <div class="layui-input-inline">
-                                            <input type="text" id="telephone" class="layui-input" autocomplete="off" placeholder="请输入手机号">
+                                        <div class="fb_content">
+                                            <a th:href="@{'/user/' + ${user.id} }">
+                                            <h4 th:text="${user.username}" />
+                                            <ul>
+                                                <li style="width: 50px">
+                                                    <i class="fas fa-user" th:text="${user.id}" style="color: #dd4b39"></i>
+                                                </li>
+                                                <li style="width: 150px">
+                                                    <i class="fas fa-phone" th:text="${user.telephone}" style="color: #dd4b39"></i>
+                                                </li>
+                                                <li style="width: 150px">
+                                                    <i id=jobId class="fas fa-at" th:text="${user.email}" style="color: #dd4b39"></i>
+                                                </li>
+                                            </ul>
+                                            </a>
                                         </div>
-                                        <div class="layui-input-inline layui-form">
-                                            <select id="role">
-                                                <option value="">请选择用户类别</option>
-                                                <option value="1">雇主</option>
-                                                <option value="2">应聘者</option>
-                                            </select>
-                                        </div>
-                                        <div class="layui-input-inline ">
-                                            <button type="button" class="layui-btn" onclick="search()" id="search">查询</button>
+                                        <div class="fb_action">
+                                            <a class="btn btn-primary" href="/admin/singleUser">查看</a>
                                         </div>
                                     </div>
                                 </div>
-                                <table class="layui-hide" id="user_table" lay-filter="user_table"></table>
                             </div>
+                            <!--分页部分  -->
+                            <ul class="pagination">
+                                <!-- 向前1页-->
+                                <li>
+                                    <a  class="btn btn-outline-secondary" th:if="${pageNum-1>0}" th:href="@{${'job'}(pageNum=${pageNum-1},pageSize=${pageSize})}" aria-label="Previous">
+                                        <span aria-hidden="true">上一页</span>
+                                    </a>
+                                    <a  class="btn btn-outline-secondary" th:if="${pageNum-1<=0}" href="javascript:void(0);" aria-label="Previous">
+                                        <span aria-hidden="true">上一页</span>
+                                    </a>
+                                </li>
+                                <!--只显示5页-->
+
+                                <l th:if="${pageNum<totalPages-5}"  th:each="pageNo : ${#numbers.sequence(pageNum, pageNum+5)}">
+                                    <a class="btn btn-outline-secondary" th:if="${pageNum eq pageNo}" href="javascript:void(0);">
+                                        <span th:text="${pageNo}"></span>
+                                    </a>
+
+                                    <a class="btn btn-outline-secondary" th:if="${not (pageNum eq pageNo)}" th:href="@{${'job'}(pageNum=${pageNo},pageSize=${pageSize})}">
+                                        <span th:text="${pageNo}"></span>
+                                    </a>
+                                </l>
+                                <l th:if="${pageNum>=totalPages-5}"  th:each="pageNo : ${#numbers.sequence(totalPages-5,totalPages)}">
+                                    <a  class="btn btn-outline-secondary"th:if="${pageNum eq pageNo}" href="javascript:void(0);">
+                                        <span th:text="${pageNo}"></span>
+                                    </a>
+
+                                    <a  class="btn btn-outline-secondary" th:if="${not (pageNum eq pageNo)}" th:href="@{${'job'}(pageNum=${pageNo},pageSize=${pageSize})}">
+                                        <span th:text="${pageNo}"></span>
+                                    </a>
+                                </l>
+                                <!--向后五页-->
+                                <li>
+                                    <a class="btn btn-outline-secondary" th:if="${totalPages-pageNum>=0}" th:href="@{${'job'}(pageNum=${pageNum+5},pageSize=${pageSize})}" aria-label="Next">
+                                        <span aria-hidden="true">下一页</span>
+                                    </a>
+                                    <a class="btn btn-outline-secondary" th:if="${totalPages-pageNum<0}" href="javascript:void(0);" aria-label="Next">
+                                        <span aria-hidden="true">下一页</span>
+                                    </a>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 </div>
@@ -115,122 +168,7 @@
 <script src="/assets/js/custom.js"></script>
 <!--提醒有关的js-->
 <script src="/assets/js/growl-notification.min.js"></script>
-
-<script src="/layui/layui.js"></script>
-<script src="/assets/js/core.util.js"></script>
-
-<script type="text/html" id="toolbar">
-    <div class="layui-btn-container">
-        <button class="layui-btn layui-btn-sm" lay-event="batchDeleted" >删除</button>
-    </div>
-</script>
-
-<script type="text/html" id="tool">
-    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del" >删除</a>
-</script>
-
-<script>
-    var tableIns1;
-    var table = layui.table;
-    var $ = jQuery = layui.jquery;
-    var layer = layui.layer;
-    var form = layui.form;
-    var startTime = null;
-    var endTime = null;
-
-    layui.use('table', function(){
-
-        tableIns1 = table.render({
-            elem: '#user_table'
-            , height: 312
-            , url: '/admin/userlist' //数据接口
-            , limit: 5
-            , limits: [5, 10, 15]
-            , page: true //开启分页
-            , method: 'POST'
-            , totalRow: true
-            , cols: [
-                [
-                    {type: 'checkbox', fixed: 'left'},
-                    {field: 'id', title: 'id', width: 130},
-                    {field: 'username', title: '用户名', width: 130},
-                    {field: 'telephone', title: '手机号', width: 130},
-                    {field: 'email', title: '邮箱', width: 140},
-                    {field: 'location', title: '所在地', width: 130},
-                    {width: 300, toolbar: "#tool", title: '操作'}
-                ]
-            ]
-            , toolbar: '#toolbar'
-        });
-
-        table.on('toolbar(user_table)', function (obj) {
-            switch (obj.event) {
-                case 'batchDeleted':
-                    var checkStatus = table.checkStatus(obj.config.id);
-                    var data = checkStatus.data;
-                    if (data.length == 0) {
-                        layer.msg("请选择要批量删除的用户");
-                    } else {
-                        var userIds = [];
-                        $(data).each(function (index, item) {
-                            userIds.push(item.id);
-                        });
-                        deleteUser(userIds, "选中的");
-                    }
-                    break;
-            }
-            ;
-        });
-
-        table.on('tool(user_table)', function (obj) {
-            var data = obj.data;
-            switch (obj.event) {
-                case 'del':
-                    var userIds = [];
-                    userIds.push(data.id);
-                    deleteUser(userIds, data.username);
-                    break;
-            }
-        });
-
-
-        var deleteUser = function (userIds, username) {
-            layer.open({
-                content: '确定要删除' + username + "么?",
-                yes: function (index, layero) {
-                    layer.close(index); //如果设定了yes回调，需进行手工关闭
-                    CoreUtil.sendDelete("/admin/users", userIds, function (res) {
-                        layer.msg(res.msg);
-                        tableIns1.reload();
-                    });
-                }
-            });
-        };
-
-    });
-
-    function search(){
-        //得到搜索框里已输入的数据
-        var username = $('#username').val();
-        var telephone = $('#telephone').val();
-        var rid = $('#role').val();
-        if(rid===""||rid===null){
-            rid=0;
-        }
-        //执行重载
-        tableIns1.reload({
-            url:'/admin/searchUser'
-            ,method:'POST'
-            ,page: {
-                curr: 1 //重新从第 1 页开始
-            }
-            ,where: {
-                username: username,
-                telephone:  telephone,
-                rid: rid
-            }
-        });
-    };
-</script>
+<!--自己写的js-->
+<script src="/assets/js/admin.js"></script>
 </body>
 </html>

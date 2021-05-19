@@ -54,7 +54,7 @@ public class JobController {
         job.setCreate_time(timestamp);
         //设置为未审核，开启招聘
         job.setCheck(false);
-        job.setJob_status(true);
+        job.setJob_statue(true);
         //插入对象
         jobService.insertJob(job);
         //获取插入对象的id值
@@ -164,9 +164,9 @@ public class JobController {
             return RespBean.error("未找到该职位招聘信息");
         } else {
             return RespBean.ok("关闭该职位招聘成功");
+
         }
     }
-
 
     @RequestMapping("/job/postJob")
     public String toPostJobPage (Model model){

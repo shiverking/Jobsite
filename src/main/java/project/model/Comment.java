@@ -16,7 +16,7 @@ public class Comment {
     //评论内容
     private String content;
     //评分
-    private double score;
+    private int score;
     //评论时间
     private Date create_time;
 
@@ -52,7 +52,7 @@ public class Comment {
         this.content = content;
     }
 
-    public double getScore() {
+    public int getScore() {
         return score;
     }
 

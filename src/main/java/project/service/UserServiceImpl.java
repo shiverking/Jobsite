@@ -1,7 +1,5 @@
 package project.service;
 
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.parameters.P;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -10,7 +8,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import project.dao.UserMapper;
 import project.exception.ServiceException;
-import project.model.Job;
 import project.model.User;
 
 import java.util.List;
@@ -138,53 +135,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Override
     public int getId(String username) {
         return userMapper.getIdByUserName(username);
-    }
-
-    @Override
-    public boolean deleteUserById(int id) {
-        if(userMapper.deleteUserById(id)==1)
-            return true;
-        else return false;
-    }
-
-    @Override
-    public PageInfo<User> findUserByPage(Integer pageNum, Integer limitNum) {
-        PageHelper.startPage(pageNum,limitNum);
-        PageInfo<User> info = new PageInfo<User>(userMapper.getUserList());
-        return info;
-    }
-
-    @Override
-    public PageInfo<User> findAdminByPage(Integer pageNum, Integer limitNum) {
-        PageHelper.startPage(pageNum,limitNum);
-        PageInfo<User> info = new PageInfo<User>(userMapper.getAdminList());
-        return info;
-    }
-
-    @Override
-    public PageInfo<User> searchUserByPage(Integer page, Integer limit, String username, String telephone, int rid) {
-        PageHelper.startPage(page,limit);
-        PageInfo<User> info = new PageInfo<User>(userMapper.searchUser(username,telephone,rid));
-        return info;
-    }
-
-    @Override
-    public PageInfo<User> searchAdminByPage(Integer page, Integer limit, String username, String telephone) {
-        PageHelper.startPage(page,limit);
-        PageInfo<User> info = new PageInfo<User>(userMapper.searchAdmin(username,telephone));
-        return info;
-    }
-
-    @Override
-    public int getUserCount() {
-        return userMapper.getUserCount();
-    }
-
-    @Override
-    public boolean updateUserInfo(int id,String password, String username, String telephone,String email) {
-        if(userMapper.updateUserInfo(id,password,username,telephone,email)==1)
-            return true;
-        else return false;
     }
 
     /**
