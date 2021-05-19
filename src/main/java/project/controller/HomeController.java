@@ -15,14 +15,14 @@ import project.model.User;
  */
 @EnableAutoConfiguration
 @Controller
-@RequestMapping("/")
+
 public class HomeController {
     /**
      * 返回主页
      * @param model
      * @return
      */
-    @GetMapping
+    @RequestMapping("/")
     public String toHome(Model model){
         //如果已经登录
         if(!SecurityContextHolder.getContext().getAuthentication().getName().equals("anonymousUser")) {
@@ -33,6 +33,26 @@ public class HomeController {
         return "home_page";
     }
 
+    @GetMapping("/AboutUs")
+    public String aboutUs(Model model){
+        //如果已经登录
+        if(!SecurityContextHolder.getContext().getAuthentication().getName().equals("anonymousUser")) {
+            Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            User user = (User) principal;
+            model.addAttribute("user", user);
+        }
+        return "page/AboutUs";
+    }
 
+    @GetMapping("/JoinUs")
+    public String joinUs(Model model){
+        //如果已经登录
+        if(!SecurityContextHolder.getContext().getAuthentication().getName().equals("anonymousUser")) {
+            Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            User user = (User) principal;
+            model.addAttribute("user", user);
+        }
+        return "page/JoinUs";
+    }
 }
 

@@ -1,0 +1,114 @@
+﻿<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+<!-- Basic Page Needs
+================================================== -->
+<title>JobSite</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<link rel="icon" href="/assets/images/fav.png" type="image/gif" sizes="64x64">
+
+<!-- CSS
+================================================== -->
+<link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700&display=swap&subset=latin-ext" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/all.min.css">
+<link href="/assets/css/aos.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+<link href="/assets/css/select2.min.css" rel="stylesheet" />
+<link href="/assets/css/owl.carousel.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="/assets/css/style.css">
+<link rel="stylesheet" href="/assets/css/color-1.css">
+</head>
+<body>
+
+<!-- Header 01
+================================================== -->
+<header class="header_01 header_inner">
+    <div class="header_main">
+        <div class="header_menu fixed-top" th:include="/header.html">
+        </div>
+        <div class="header_btm">
+            <h2>关于JobSite</h2>
+        </div>
+    </div>
+</header>
+
+
+<!-- End Header 02
+================================================== -->
+
+
+
+<!-- Main 
+================================================== -->
+<main>
+  <div class="blog-listing">
+    <div class="container">
+      <div class="row">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="post_box singlepb">
+                <img alt="" src="/assets/images/teamwork.jpg" class="img-responsive">
+                <div class="post_content">
+                    <p>
+                        <span style="font-size: 18px;"><strong>按需招募优秀人才</strong></span>
+                    </p>
+                    <p>
+                        在JobSite您会找到一系列优秀的自由职业者，从开发人员和开发机构到设计师和创意机构，撰稿人，广告系列经理，市场营销机构和市场营销人员等等。
+                    </p>
+                    <p>
+                        <span style="font-size: 18px;"><strong>优化企业成本</strong></span>
+                    </p>
+                    <p>
+                        在JobSite招募远程员工，企业不必额外负担办公设备开支、办公场地租赁、一二线城市员工薪资溢价，极大化降低企业的运营成本，让企业运转更加健康。
+                    </p>
+                    <p>
+                        <span style="font-size: 18px;"><strong>跟踪团队进展</strong></span>
+                    </p>
+                    <p>
+                        JobSite「团队」功能可以帮助企业，集中化管理所有远程员工，工作日志提供了大量信息，我们将这些原始的时间表数据整理成一个可视化的摘要，以了解您的团队的工作进度。
+                    </p>
+                    <p>
+                        <span style="font-size: 18px;"><strong>轻松完成结算</strong></span>
+                    </p>
+                    <p>
+                        内置了多种验证工作的方法。 对于时薪制工作，您可以查看工作日志。它跟踪计费时间并记录已完成的工作。以便您可以验证计费时间。 在固定价格的工作上，您可以按实现情况释放资金。
+                    </p>
+                    <p>
+                        <br/>
+                    </p>
+                </div>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+
+<!-- Footer Container
+================================================== -->
+<footer id="colophon" class="site-footer custom_footer dark_footer" th:include="/footer.html">
+</footer>
+
+
+<!-- End Footer Container
+================================================== -->
+
+<!-- Scripts
+================================================== -->
+<script src="/assets/js/jquery-3.4.1.min.js"></script>
+<script src="/assets/js/select2.min.js"></script>
+<script src="/assets/js/bootstrap.min.js"></script>
+<script src="/assets/js/owl.carousel.min.js"></script>
+<script src="/assets/js/custom.js"></script>
+<script>
+    $(document).ready(function() {
+        $("#4").addClass("current_page").siblings().removeClass("current_page");
+    })
+</script>
+</body>
+</html>

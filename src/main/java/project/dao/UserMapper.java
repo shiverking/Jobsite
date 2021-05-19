@@ -81,5 +81,6 @@ public interface UserMapper {
      String getLocationById(@Param("id")int id);
      //根据id修改用户当前位置
      int updateLocationById(@Param("location") String location,@Param("id")int id);
-
+     //返回所有应聘者的id
+     List<Integer> getAllEmployeeId();
 }

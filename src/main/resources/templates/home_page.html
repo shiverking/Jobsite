@@ -37,7 +37,7 @@
 						<div class="banerSearch">
 							<div class="fild-wrap fw-job-title">
 								<i class="fas fa-briefcase"></i>
-								<input class="form-control" style= "background-color:transparent;border:0;padding-left: 40px;padding-right: 0px" type="text" name="name" placeholder="Placeholder ">
+								<input class="form-control" style= "background-color:transparent;border:0;padding-left: 40px;padding-right: 0px" type="text" name="name" placeholder="请输入您要查找的内容">
 							</div>
 							<div class="fild-wrap fw-submit">
 								<input type="submit" class="btn btn-primary" value="查找工作">
@@ -48,7 +48,7 @@
 						<div class="row">
 							<div class="col-md-6" sec:authorize="hasRole('ROLE_employee')||!isAuthenticated()">
 								<div class="user_type_inner  user_type_seeker">
-									<a href="browse-jobs.html">
+									<a th:href="@{/job}">
 										<div class="usertype_img">
 											<i class="far fa-user"></i>
 										</div>
@@ -236,7 +236,7 @@
 	<!--Featured Jobs-->
 	<div class="section  featured_section">
 		<div class="container">
-			<h2 class="section_h">Featured Jobs</h2>
+			<h2 class="section_h">工作推荐</h2>
 			<div class="row full_width featured_box_outer">
 				<div class="col-sm-12">
 					<div class="featured_box ">
@@ -476,89 +476,6 @@
 				</div>
 				<div class="col-md-12 text-center mt-4">
 					<a class="btn btn-primary" th:href="@{/job}" >查看所有工作<i class="fas fa-long-arrow-alt-right"></i></a>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!--Membership Plans-->
-	<div class="section gray paln_section">
-		<div class="container">
-			<h2 class="section_h">Membership Plans</h2>
-			<div class="planduration">
-				<div class="custom-control custom-switch text-center">
-				  <label class="before-custom-control-label" for="customSwitch1"> <span>Billed Monthly</span></label>
-				  <input type="checkbox" class="custom-control-input" id="customSwitch1">
-				  <label class="custom-control-label" for="customSwitch1"> <span>Billed Yearly</span> </label>
-				  <div class="small-alert alert-success"> Save 21% </div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-4">
-					<div class="plan_box">
-						<h3>Basic Plan</h3>
-						<p>One time fee for one listing or task highlighted in search results.</p>
-						<div class="plan_price pl-monthly">
-							<h4><strong>$19</strong>/ monthly</h4>
-						</div>
-						<div class="plan_price pl-yearly hide">
-							<h4><strong>$200</strong>/ yearly</h4>
-						</div>
-						<h5>Features of Basic Plan</h5>
-						<ul>
-							<li><i class="fas fa-check"></i> 1 Listing</li>
-							<li><i class="fas fa-check"></i> 30 Days Visibility</li>
-							<li><i class="fas fa-check"></i> Highlighted in Search Results</li>
-							<li><i class="fas fa-check"></i>Fraud protection</li>
-          					<li><i class="fas fa-check"></i>Featured Listing</li>
-						</ul>
-						<a class="btn btn-primary" href="#">Buy Now</a>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="plan_box plan_box_hoverd">
-						<div class="populer_plan">
-							Most Populer
-						</div>
-						<h3>Standard Plan</h3>
-						<p>One time fee for one listing or task highlighted in search results.</p>
-						<div class="plan_price">
-							<h4><strong>$36</strong>/ monthly</h4>
-						</div>
-						<div class="plan_price pl-yearly hide">
-							<h4><strong>$396</strong>/ yearly</h4>
-						</div>
-						<h5>Features of Standard Plan</h5>
-						<ul>
-							<li><i class="fas fa-check"></i> 6 Listing</li>
-							<li><i class="fas fa-check"></i> 65 Days Visibility</li>
-							<li><i class="fas fa-check"></i> Highlighted in Search Results</li>
-							<li><i class="fas fa-check"></i>Fraud protection</li>
-          					<li><i class="fas fa-check"></i>Featured Listing</li>
-						</ul>
-						<a class="btn btn-primary" href="#">Buy Now</a>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="plan_box">
-
-						<h3>Extended Plan</h3>
-						<p>One time fee for one listing or task highlighted in search results.</p>
-						<div class="plan_price">
-							<h4><strong>$79</strong>/ monthly</h4>
-						</div>
-						<div class="plan_price pl-yearly hide">
-							<h4><strong>$850</strong>/ yearly</h4>
-						</div>
-						<h5>Features of Extended Plan</h5>
-						<ul>
-							<li><i class="fas fa-check"></i> Unlimited Listings Listing</li>
-							<li><i class="fas fa-check"></i> 100 Days Visibility</li>
-							<li><i class="fas fa-check"></i> Highlighted in Search Results</li>
-							<li><i class="fas fa-check"></i>Fraud protection</li>
-          					<li><i class="fas fa-check"></i>Featured Listing</li>
-						</ul>
-						<a class="btn btn-primary" href="#">Buy Now</a>
-					</div>
 				</div>
 			</div>
 		</div>
