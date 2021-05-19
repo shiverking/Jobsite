@@ -41,7 +41,7 @@
 <!-- Main 
 ================================================== -->
 <main>
-    <div class="job_container">
+    <div class="job_container" sec:authorize="hasRole('ROLE_employer')">
         <div class="container">
             <div class="row job_main">
                 <div class="sidebar">
@@ -105,6 +105,9 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div sec:authorize="hasRole('ROLE_employee')">
+        您没有权限浏览此页面
     </div>
 </main>
 

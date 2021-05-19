@@ -444,7 +444,6 @@ public class UserController {
             out.write(bs);
             out.close();
         }
-
         //设置头像，如果成功则返回结果
         if (userServiceimpl.updateAvatar(user.getId(),address2)) {
             return RespBean.ok("头像修改成功");
