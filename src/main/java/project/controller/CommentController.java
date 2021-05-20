@@ -178,6 +178,18 @@ public class CommentController {
         return commentFromMeList;
     }
 
+
+
+
+    @RequestMapping("/toapp")
+    public String to(Model model){
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = (User) principal;
+        model.addAttribute("user",user);
+        return "/page/test";
+    }
+
+
     @ResponseBody
     @PostMapping("/judge/tome")
     public List<CommentDetail> getJudgesToMe(){

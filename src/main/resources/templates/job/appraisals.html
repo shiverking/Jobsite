@@ -95,8 +95,11 @@
             <div class="row job_main">
                 <div class="sidebar">
                     <ul class="user_navigation">
-                        <li >
+                        <li sec:authorize="hasRole('ROLE_employer')">
                             <a href="/job/postJob"><i class="fas fa-paper-plane"></i>发布工作</a>
+                        </li>
+                        <li sec:authorize="hasRole('ROLE_employee')">
+                            <a href="/job/submittedJob"><i class="far fa-list-alt"></i>已投递的职位</a>
                         </li>
                         <li>
                             <a th:id="toJobLists"><i class="far fa-list-alt"></i>职位管理</a>
@@ -109,66 +112,66 @@
                         </li>
                     </ul>
                 </div>
-                <div class=" job_main_right">
+                <div class=" job_main_right" style="height: 700px">
                     <div class="row job_section">
                         <div class="col-sm-12">
                             <div class="jm_headings">
                                 <h5 style="font-weight: bold">评价</h5>
                             </div>
-<!--                        <button id="judgePeople" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" >评价测试</button>-->
+                            <!--                        <button id="judgePeople" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" >评价测试</button>-->
                             <!--测试用模态框，重要，不要删除-->
-<!--                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">-->
-<!--                                <div class="modal-dialog modal-dialog-centered">-->
-<!--                                    <div class="modal-content">-->
-<!--                                        <div class="modal-header">-->
-<!--                                            <h5 class="modal-title" id="exampleModalLabel">对他人进行评价<span class="varified" id="evaluation" style="display: none;"><i class="fas fa-check"></i>已评价</span></h2></h5>-->
-<!--                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
-<!--                                                <span aria-hidden="true">&times;</span>-->
-<!--                                            </button>-->
-<!--                                        </div>-->
-<!--                                        <div class="modal-body">-->
-<!--                                            <form>-->
-<!--                                                <input type="hidden"  id="commentedId"/>-->
-<!--                                                <div class="form-group row" style="margin-bottom: 0px;">-->
-<!--                                                    <div class="col-md-2">-->
-<!--                                                    <img style="max-width:53px;height: 53px;top:-3px;bottom:0;right:-3px;border-radius: 100px" src="/assets/avatar/default.png">-->
-<!--                                                    </div>-->
-<!--                                                    <div class="col-md-10">-->
-<!--                                                        <h6>[[${user.username}]]</h6>-->
-<!--                                                        <div class="rating-stars block row" id="rating">-->
-<!--                                                            <div class="rating-stars-container col-md-6" style="padding-right: 0px;">-->
-<!--                                                                <div class="rating-star">-->
-<!--                                                                    <i class="fa fa-star"></i>-->
-<!--                                                                </div>-->
-<!--                                                                <div class="rating-star">-->
-<!--                                                                    <i class="fa fa-star"></i>-->
-<!--                                                                </div>-->
-<!--                                                                <div class="rating-star">-->
-<!--                                                                    <i class="fa fa-star"></i>-->
-<!--                                                                </div>-->
-<!--                                                                <div class="rating-star">-->
-<!--                                                                    <i class="fa fa-star"></i>-->
-<!--                                                                </div>-->
-<!--                                                                <div class="rating-star">-->
-<!--                                                                    <i class="fa fa-star"></i>-->
-<!--                                                                </div>-->
-<!--                                                            </div>-->
-<!--                                                            <h6 id="ratingOnEnter" class="col-md-1" style="padding-top: 8px"></h6>-->
-<!--                                                            <h6 class="col-md-5" style="margin: 0px;padding-top: 8px;padding-left: 9px;">分</h6>-->
-<!--                                                        </div>-->
-<!--                                                    </div>-->
-<!--                                                </div>-->
-<!--                                                <label for="recipient-content" class="col-form-label">请输入您的评价</label>-->
-<!--                                                <input type="text" class="form-control" id="recipient-content"></input>-->
-<!--                                            </form>-->
-<!--                                        </div>-->
-<!--                                        <div class="modal-footer">-->
-<!--                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>-->
-<!--                                            <button type="button" class="btn btn-primary" id="confirmJudgement">保存评价</button>-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                            </div>-->
+                            <!--                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">-->
+                            <!--                                <div class="modal-dialog modal-dialog-centered">-->
+                            <!--                                    <div class="modal-content">-->
+                            <!--                                        <div class="modal-header">-->
+                            <!--                                            <h5 class="modal-title" id="exampleModalLabel">对他人进行评价<span class="varified" id="evaluation" style="display: none;"><i class="fas fa-check"></i>已评价</span></h2></h5>-->
+                            <!--                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+                            <!--                                                <span aria-hidden="true">&times;</span>-->
+                            <!--                                            </button>-->
+                            <!--                                        </div>-->
+                            <!--                                        <div class="modal-body">-->
+                            <!--                                            <form>-->
+                            <!--                                                <input type="hidden"  id="commentedId"/>-->
+                            <!--                                                <div class="form-group row" style="margin-bottom: 0px;">-->
+                            <!--                                                    <div class="col-md-2">-->
+                            <!--                                                    <img style="max-width:53px;height: 53px;top:-3px;bottom:0;right:-3px;border-radius: 100px" src="/assets/avatar/default.png">-->
+                            <!--                                                    </div>-->
+                            <!--                                                    <div class="col-md-10">-->
+                            <!--                                                        <h6>[[${user.username}]]</h6>-->
+                            <!--                                                        <div class="rating-stars block row" id="rating">-->
+                            <!--                                                            <div class="rating-stars-container col-md-6" style="padding-right: 0px;">-->
+                            <!--                                                                <div class="rating-star">-->
+                            <!--                                                                    <i class="fa fa-star"></i>-->
+                            <!--                                                                </div>-->
+                            <!--                                                                <div class="rating-star">-->
+                            <!--                                                                    <i class="fa fa-star"></i>-->
+                            <!--                                                                </div>-->
+                            <!--                                                                <div class="rating-star">-->
+                            <!--                                                                    <i class="fa fa-star"></i>-->
+                            <!--                                                                </div>-->
+                            <!--                                                                <div class="rating-star">-->
+                            <!--                                                                    <i class="fa fa-star"></i>-->
+                            <!--                                                                </div>-->
+                            <!--                                                                <div class="rating-star">-->
+                            <!--                                                                    <i class="fa fa-star"></i>-->
+                            <!--                                                                </div>-->
+                            <!--                                                            </div>-->
+                            <!--                                                            <h6 id="ratingOnEnter" class="col-md-1" style="padding-top: 8px"></h6>-->
+                            <!--                                                            <h6 class="col-md-5" style="margin: 0px;padding-top: 8px;padding-left: 9px;">分</h6>-->
+                            <!--                                                        </div>-->
+                            <!--                                                    </div>-->
+                            <!--                                                </div>-->
+                            <!--                                                <label for="recipient-content" class="col-form-label">请输入您的评价</label>-->
+                            <!--                                                <input type="text" class="form-control" id="recipient-content"></input>-->
+                            <!--                                            </form>-->
+                            <!--                                        </div>-->
+                            <!--                                        <div class="modal-footer">-->
+                            <!--                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>-->
+                            <!--                                            <button type="button" class="btn btn-primary" id="confirmJudgement">保存评价</button>-->
+                            <!--                                        </div>-->
+                            <!--                                    </div>-->
+                            <!--                                </div>-->
+                            <!--                            </div>-->
                             <!--导航栏-->
                             <nav class="navbar navbar-expand-lg navbar-light bg-light" style="padding-left: 0;">
                                 <div class="collapse navbar-collapse" id="navbarNav">
@@ -176,33 +179,38 @@
                                         <li class="nav-item active">
                                             <a id="ToMe" class="nav-link" href="#" style=" padding-left: 0;">我收到的评价</a>
                                         </li>
-                                        <li  class="nav-item">
+                                        <li class="nav-item">
                                             <a id="FromMe" class="nav-link" href="#">我发出的评价</a>
                                         </li>
                                     </ul>
                                 </div>
                             </nav>
                             <!--查看具体消息用模态框-->
-                            <div class="modal fade" id="commentModal" tabindex="-1" aria-labelledby="commentModalLabel" aria-hidden="true">
+                            <div class="modal fade" id="commentModal" tabindex="-1" aria-labelledby="commentModalLabel"
+                                 aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="commentModalLabel">评价详细内容<span class="varified" id="evaluation" ><i class="fas fa-check"></i>已评价</span></h2></h5>
+                                            <h5 class="modal-title" id="commentModalLabel">评价详细内容<span class="varified"
+                                                                                                       id="evaluation"><i
+                                                    class="fas fa-check"></i>已评价</span></h2></h5>
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
                                         </div>
                                         <div class="modal-body">
                                             <form>
-                                                <input type="hidden"  id="commentedId"/>
+                                                <input type="hidden" id="commentedId"/>
                                                 <div class="form-group row" style="margin-bottom: 0px;">
                                                     <div class="col-md-2">
-                                                        <img style="max-width:53px;height: 53px;top:-3px;bottom:0;right:-3px;border-radius: 100px" src="/assets/avatar/default.png">
+                                                        <img style="max-width:53px;height: 53px;top:-3px;bottom:0;right:-3px;border-radius: 100px"
+                                                             src="/assets/avatar/default.png">
                                                     </div>
                                                     <div class="col-md-10">
                                                         <h6></h6>
                                                         <div class="rating-stars block row" id="rating">
-                                                            <div class="rating-stars-container col-md-6" style="padding-right: 0px;">
+                                                            <div class="rating-stars-container col-md-6"
+                                                                 style="padding-right: 0px;">
                                                                 <div class="rating-star">
                                                                     <i class="fa fa-star"></i>
                                                                 </div>
@@ -219,55 +227,31 @@
                                                                     <i class="fa fa-star"></i>
                                                                 </div>
                                                             </div>
-                                                            <h6 id="ratingOnEnter" class="col-md-1" style="padding-top: 8px"></h6>
-                                                            <h6 class="col-md-5" style="margin: 0px;padding-top: 8px;padding-left: 9px;">分</h6>
+                                                            <h6 id="ratingOnEnter" class="col-md-1"
+                                                                style="padding-top: 8px"></h6>
+                                                            <h6 class="col-md-5"
+                                                                style="margin: 0px;padding-top: 8px;padding-left: 9px;">
+                                                                分</h6>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <label for="recipient-content" class="col-form-label">评价内容</label>
-                                                <input type="text" class="form-control" id="recipient-content" style="background-color: #ffffff;"></input>
+                                                <input type="text" class="form-control" id="recipient-content"
+                                                       style="background-color: #ffffff;"></input>
                                             </form>
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="list-group" id="comments_to_me">
-                                <a href="#" class="list-group-item list-group-item-action active">
-                                    <div class="d-flex w-100 justify-content-between">
-                                        <h5 class="mb-1">List group item heading</h5>
-                                        <small>2 days ago</small>
-                                    </div>
-                                    <p class="mb-1">Some placeholder content in a paragraph.</p>
-                                    <small>And some small print.</small>
-                                </a>
-                                <a href="#" class="list-group-item list-group-item-action">
-                                    <div class="d-flex w-100 justify-content-between">
-                                        <h5 class="mb-1">List group item heading</h5>
-                                        <small class="text-muted">3 days ago</small>
-                                    </div>
-                                    <p class="mb-1">Some placeholder content in a paragraph.</p>
-                                    <small class="text-muted">And some muted small print.</small>
-                                </a>
-                                <a href="#" class="list-group-item list-group-item-action">
-                            <div class="list-group" id="comments_from_me" style="display: none">
-                                <!--测试用链接-->
-                                <a href="#" class="list-group-item list-group-item-action" data-toggle="modal" data-target="#commentModal" >
-                                    <div class="d-flex w-100 justify-content-between">
-                                        <h5 class="mb-1">对 的评价 分</h5>
-                                            <small></small>
-                                    </div>
-                                    <p class="mb-1" style="overflow: hidden;text-overflow:ellipsis;white-space: nowrap;"></p>
-                                </a>
-                            </div>
+                            <div class="list-group" id="comments_to_me"></div>
+                            <div class="list-group" id="comments_from_me" style="display: none"></div>
                         </div>
                     </div>
-                </div>
-
-                <div th:id="context">
-
+                    <div th:id="context"></div>
                 </div>
             </div>
         </div>
@@ -291,6 +275,10 @@
 <script src="/assets/js/growl-notification.min.js"></script>
 <!--自己写的js-->
 <script src="/assets/js/appraisals.js"></script>
-
+<script>
+    $(document).ready(function() {
+        $("#8").addClass("current_page").siblings().removeClass("current_page");
+    })
+</script>
 </body>
 </html>

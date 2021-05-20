@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <!-- Basic Page Needs
+    ================================================== -->
+    <title>JoDice</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="icon" href="assets/images/fav.png" type="image/gif" sizes="64x64">
+
+    <!-- CSS
+    ================================================== -->
+    <!-- 星星打分CSS -->
+    <link href="http://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <style>
+        a {
+            color: #f1c40f;
+        }
+
+        a:hover,
+        a:active,
+        a:focus {
+            color: #dab10d;
+        }
+
+        .rating-stars {
+            width: 100%;
+            text-align: left;
+        }
+
+        .rating-stars .rating-stars-container {
+            font-size: 0px;
+        }
+
+        .rating-stars .rating-stars-container .rating-star {
+            display: inline-block;
+            font-size: 20px;
+            color: #555555;
+            cursor: pointer;
+            /* padding: 5px 10px; */
+            padding-top: 5px;
+            padding-bottom: 5px;
+            padding-right: 10px;
+        }
+
+        .rating-stars .rating-stars-container .rating-star.is--active,
+        .rating-stars .rating-stars-container .rating-star.is--hover {
+            color: #f1c40f;
+        }
+
+        .rating-stars .rating-stars-container .rating-star.is--no-hover {
+            color: #555555;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700&display=swap&subset=latin-ext"
+          rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/all.min.css">
+    <link rel="stylesheet" href="/assets/css/lq-score.css">
+    <link href="/assets/css/aos.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+    <link href="/assets/css/select2.min.css" rel="stylesheet"/>
+    <link href="/assets/css/owl.carousel.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/color-1.css">
+    <link href="/assets/css/light-theme.min.css" rel="stylesheet">
+    <link href="/assets/css/dark-theme.min.css" rel="stylesheet">
+    <link href="/assets/css/colored-theme.min.css" rel="stylesheet">
+</head>
+<body>
+
+<header class="header_01 header_inner">
+    <div class="header_main">
+        <div class="header_menu fixed-top" th:include="/header.html"></div>
+        <div class="header_btm">
+            <h2>订单管理</h2>
+        </div>
+    </div>
+</header>
+
+
+<!-- Main
+================================================== -->
+<main>
+    <div class="job_container">
+        <div class="container">
+            <div class="row job_main">
+                <div class="sidebar">
+                    <ul class="user_navigation" th:id="navigation">
+                        <li>
+                            <a href="javascript:history.go(-1)"><i class="fas fa-paper-plane"></i>返回</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class=" job_main_right" style="height: 700px" >
+                    <div class="row full_width featured_box_outer" th:id="comment">
+                    </div>
+                </div>
+            </div>
+            <div class="empty-table"></div>
+        </div>
+<!--        <button id="judgePeople" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" >评价测试</button>-->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">进行评价<span class="varified" id="evaluation" style="display: none;"><i class="fas fa-check"></i>已评价</span></h2></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <input type="hidden"  id="commentedId"/>
+                            <div class="form-group row" style="margin-bottom: 0px;">
+                                <div class="col-md-2">
+                                    <img style="max-width:53px;height: 53px;top:-3px;bottom:0;right:-3px;border-radius: 100px" src="/assets/avatar/default.png">
+                                </div>
+                                <div class="col-md-10">
+                                    <h6>[[${user.username}]]</h6>
+                                    <div class="rating-stars block row" id="rating">
+                                        <div class="rating-stars-container col-md-6" style="padding-right: 0px;">
+                                            <div class="rating-star">
+                                                <i class="fa fa-star"></i>
+                                            </div>
+                                            <div class="rating-star">
+                                                <i class="fa fa-star"></i>
+                                            </div>
+                                            <div class="rating-star">
+                                                <i class="fa fa-star"></i>
+                                            </div>
+                                            <div class="rating-star">
+                                                <i class="fa fa-star"></i>
+                                            </div>
+                                            <div class="rating-star">
+                                                <i class="fa fa-star"></i>
+                                            </div>
+                                        </div>
+                                        <h6 id="ratingOnEnter" class="col-md-1" style="padding-top: 8px"></h6>
+                                        <h6 class="col-md-5" style="margin: 0px;padding-top: 8px;padding-left: 9px;">分</h6>
+                                    </div>
+                                </div>
+                            </div>
+                            <label for="recipient-content" class="col-form-label">请输入您的评价</label>
+                            <input type="text" class="form-control" id="recipient-content"></input>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                        <button type="button" class="btn btn-primary" id="confirmJudgement">保存评价</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    </div>
+</main>
+
+
+<!-- Footer Container
+================================================== -->
+<footer id="colophon" class="site-footer custom_footer" th:include="/footer.html"/>
+
+
+<!-- End Footer Container
+================================================== -->
+
+<!-- Scripts
+================================================== -->
+<script src="/assets/js/jquery-3.4.1.min.js"></script>
+<script src="/assets/js/select2.min.js"></script>
+<script src="/assets/js/bootstrap.min.js"></script>
+<script src="/assets/js/owl.carousel.min.js"></script>
+<script src="/assets/js/custom.js"></script>
+<script src="/assets/js/growl-notification.min.js"></script>
+<!--star-->
+<script src="/assets/js/jquery.rating-stars.min.js"></script>
+<script src="/assets/js/jobAppraisals.js"></script>
+</body>
+</html>
