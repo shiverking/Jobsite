@@ -15,10 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributesModelMap;
 import org.springframework.web.servlet.view.RedirectView;
-import project.model.Job;
-import project.model.Order;
-import project.model.RespBean;
-import project.model.User;
+import project.model.*;
 import project.service.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -49,6 +46,9 @@ public class OrderController {
 
     @Autowired
     HireService hireService;
+
+    @Autowired
+    ProfileService profileService;
 
 
 
@@ -230,12 +230,45 @@ public class OrderController {
                 return RespBean.ok("success",map);
             }
     }
-
-    //重定向
+    
     @RequestMapping("/order/showDetails")
     public ModelAndView showd(){
         ModelAndView modelAndView = new ModelAndView("/page/order_staff");
         return  modelAndView;
     }
 
+    //订单评论参与订单的工作人员
+    @RequestMapping("/order/comment")
+    public ModelAndView commit(){
+        ModelAndView modelAndView = new ModelAndView("/page/orderComment");
+        return modelAndView;
+    }
+
+
+    //返回数据
+    @ResponseBody
+    @RequestMapping("/order/toComment")
+    public RespBean OrderDetailComment(HttpServletRequest request){
+        HttpSession session = request.getSession();
+        if(session.getAttribute("orderId") == null){
+            return RespBean.error("获取订单详情失败");
+        }else {
+            int orderId = (int) session.getAttribute("orderId");
+            Order order =  orderService.findOrderById(orderId);
+            Map<String,Object> map = new HashMap<>();
+            Job job = jobService.findJobById(order.getJob_id());
+            List<Integer> employersId = hireService.getEmployerByJob(job.getId());
+            List<Profile> profiles = new ArrayList<>();
+            List<String> headUrls = new ArrayList<>();
+            for(int id : employersId){
+                User user = userService.findUserById(id);
+                headUrls.add(user.getHeadurl());
+                profiles.add(profileService.getProfile(id));
+            }
+            map.put("Ids",employersId);
+            map.put("headUrls",headUrls);
+            map.put("profiles",profiles);
+            return RespBean.ok("success",map);
+        }
+    }
 }

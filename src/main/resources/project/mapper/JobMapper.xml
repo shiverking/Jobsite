@@ -48,7 +48,7 @@
     <update id="updateJobCheck" >
         update job
          <set>
-         `check` = 1
+         `ischeck` = 1
          </set>
          where id=#{id}
     </update>
