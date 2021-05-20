@@ -19,6 +19,7 @@ import project.service.UserService;
 
 import javax.validation.Valid;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
@@ -159,6 +160,8 @@ public class JobController {
             }
             Job job = jobService.findJobById(id);
             model.addAttribute("job",job);
+            //添加雇主头像
+            model.addAttribute("employerHeadurl",userService.getHeadurl(job.getEmployer_id()));
             return "job/single_job";
     }
 
@@ -290,4 +293,83 @@ public class JobController {
         return res;
     }
 
+    @RequestMapping("/job/submittedJob")
+    public String mySubmittedJob(Model model){
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = (User) principal;
+        model.addAttribute("user", user);
+        return "job/my-submitted-jobs";
+    }
+
+    /**
+     * 投递简历
+     * @param info
+     * @return
+     */
+    @ResponseBody
+    @PostMapping("/job/submitJobConfirm")
+    public RespBean submitJobConfirm(@RequestBody Map<String, Object> info){
+        int job_id =Integer.valueOf((String) info.get("job_id"));
+        int profile_id =Integer.valueOf((String) info.get("profile_id"));
+        Date now = new Date();
+        if(jobService.sendResume(job_id,profile_id,now)){
+            return RespBean.ok("投递简历成功");
+        }
+        return RespBean.ok("投递简历失败");
+    }
+    /**
+     * 投递简历
+     * @param info
+     * @return
+     */
+    @ResponseBody
+    @PostMapping("/job/ifHasSubmitResume")
+    public RespBean ifHasSubmitResume(@RequestBody Map<String, Object> info){
+        int job_id =Integer.valueOf((String) info.get("job_id"));
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = (User) principal;
+        //查询用户是否有profile
+        Profile profile = profileService.getProfile(user.getId());
+        if(profile==null){
+            return RespBean.error("没有简历");
+        }
+        int profile_id= profile.getId();
+        if(jobService.ifHasSendResume(job_id,profile_id)){
+            return RespBean.ok("已经投递过简历");
+        }
+        return RespBean.error("没有投递过简历");
+    }
+    /**
+     * 获取所有的已投递的简历
+     * @return
+     */
+    @ResponseBody
+    @PostMapping("/job/getAllSubmittedJobs")
+    public List<List<String>> getAllSubmitJob(){
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = (User) principal;
+        List<List<String>> res = new ArrayList<>();
+        List<String>  titles = jobService.getAllSummitedJobName(user.getId());
+        List<Date> times = jobService.getAllSummitedJobTime(user.getId());
+        List<String> positions = jobService.getAllSummitedJobPosition(user.getId());
+        List<Boolean> status = jobService.getAllSummitedJobStatus(user.getId());
+        int length = titles.size();
+        if(length==0){
+            return null;
+        }
+        for(int i=0;i<length;i++){
+            List<String> tmp = new ArrayList<String>();
+            //加入标题
+            tmp.add(titles.get(i));
+            //加入时间
+            tmp.add(new SimpleDateFormat("yyyy-MM-dd hh:mm").format(times.get(i)));
+            //加入职位
+            tmp.add(positions.get(i));
+            //加入状态
+            tmp.add(status.get(i).toString());
+
+            res.add(tmp);
+        }
+        return res;
+    }
 }

@@ -27,8 +27,9 @@
                                     <a th:href="@{/findStaff}">浏览服务</a>
                                 </li>
                                 <li>
-                                    <a href="#">+发布职位</a>
+                                    <a href="#">+发布微服务</a>
                                 </li>
+
                             </ul>
                         </li>
                         <li id="3" sec:authorize="!isAuthenticated()" class="has-sub-menu" href="#" >
@@ -38,7 +39,7 @@
                                     <a th:href="@{/job}">浏览热门职位</a>
                                 </li>
                                 <li>
-                                    <a href="#">+发布微服务</a>
+                                    <a th:href="@{/job/postJob}">+发布职位</a>
                                 </li>
                             </ul>
                         </li>
@@ -69,15 +70,15 @@
 
 
                         <li id="7" sec:authorize="hasRole('ROLE_employee')">
-                            <a href="/job/MyJobLists">工作管理</a>
+                            <a href="/job/submittedJob">工作管理</a>
                         </li>
 
-                        <li sec:authorize="hasRole('ROLE_employer')">
+                        <li id="8" sec:authorize="hasRole('ROLE_employer')">
                             <a href="/job/MyJobLists">职位管理</a>
                         </li>
 
 
-                        <li id="8" sec:authorize="isAuthenticated()">
+                        <li  sec:authorize="isAuthenticated()">
                             <a  th:href="@{'/chatlist'}">在线沟通</span></a>
                         </li>
                     </ul>
@@ -125,7 +126,7 @@
                                     <a th:href="@{/setting}"><i class="far fa-edit"></i>修改简历</a>
                                 </li>
                                 <li sec:authorize="hasRole('ROLE_employee')">
-                                    <a th:href="@{/job/postJob}"><i class="far fa-handshake"></i>我投递的职位</a>
+                                    <a th:href="@{/job/submittedJob}"><i class="far fa-handshake"></i>我投递的职位</a>
                                 </li>
                                 <hr>
                                 <li >

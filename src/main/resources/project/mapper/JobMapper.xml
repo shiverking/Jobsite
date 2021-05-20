@@ -11,6 +11,9 @@
         );
 
     </insert>
+    <insert id="insertSendResume">
+        insert into sendresume(job_id,profile_id,create_time) values (#{job_id},#{profile_id},#{create_time})
+    </insert>
     <update id="closeJobById">
         update job set job_status = 0 where id=#{id}
     </update>
@@ -84,5 +87,25 @@
 
     <select id="getJobCount" resultType="int">
         select count(*) from job
+    </select>
+    <select id="ifResumeExist" resultType="java.lang.Boolean">
+        <![CDATA[ select count(id)
+                  from sendresume where job_id = #{job_id} and profile_id=#{profile_id}]]>
+    </select>
+
+    <select id="getAllSummitedJobName" resultType="java.lang.String">
+        select job.title from job,sendresume,profile where job.id=sendresume.job_id and sendresume.profile_id = profile.id and profile.user_id=#{user_id}
+    </select>
+    <select id="getAllSummitedJobTime" resultType="java.util.Date">
+        select sendresume.create_time from sendresume,profile where sendresume.profile_id = profile.id and profile.user_id=#{user_id}
+    </select>
+    <select id="getAllSummitedJobPosition" resultType="java.lang.String">
+        select job.position from job,sendresume,profile where job.id=sendresume.job_id and sendresume.profile_id = profile.id and profile.user_id=#{user_id}
+    </select>
+    <select id="getAllSummitedJobStatus" resultType="java.lang.Boolean">
+        select job.job_status from job,sendresume,profile where job.id=sendresume.job_id and sendresume.profile_id = profile.id and profile.user_id=#{user_id}
+    </select>
+    <select id="getAllJobIdByEmployeeId" resultType="java.lang.Integer">
+        select job_id from hire where employee_id = #{user_id}
     </select>
 </mapper>

@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 import project.model.Job;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -51,6 +52,20 @@ public interface JobMapper {
 
     //检测指定id工作是否存在
     boolean isJobExist(@Param("job_id") int job_id);
-
+    //Employer查询所有与自己有关的jobid
     List<Integer> getAllIdByUser(@Param("user_id") int user_id);
+    //Employee查询所有与自己有关的jobid
+    List<Integer> getAllJobIdByEmployeeId(@Param("user_id") int user_id);
+    //向投递简历表中增添一条数据
+    int insertSendResume(@Param("job_id")int job_id,@Param("profile_id")int profile_id,@Param("create_time") Date create_time);
+    //查看是否已经投递过简历
+    boolean ifResumeExist(@Param("job_id")int job_id,@Param("profile_id")int profile_id);
+    //获取所有已投递简历的jobb标题
+    List<String> getAllSummitedJobName(@Param("user_id")int user_id);
+    //获取所有已投递简历的job投递时间
+    List<Date> getAllSummitedJobTime(@Param("user_id")int user_id);
+    //获取所有已投递简历的job的岗位
+    List<String> getAllSummitedJobPosition(@Param("user_id")int user_id);
+    //获取所有已投递简历的job状态
+    List<Boolean> getAllSummitedJobStatus(@Param("user_id")int user_id);
 }

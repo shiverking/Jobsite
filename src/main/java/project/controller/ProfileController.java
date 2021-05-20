@@ -41,7 +41,9 @@ public class ProfileController {
         if(!profileServiceImpl.isProfileExist(user.getId())){
             return RespBean.error("还没有简历");
         }
-        return RespBean.ok("简历已存在");
+        //查询成功将简历返回
+        Profile profile = profileServiceImpl.getProfile(user.getId());
+        return RespBean.ok(String.valueOf(profile.getId()));
     }
 
     /**

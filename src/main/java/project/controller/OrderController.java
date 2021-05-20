@@ -52,7 +52,6 @@ public class OrderController {
 
 
 
-    @PreAuthorize("hasRole('ROLE_employer')" )
     @RequestMapping("/order/jobOrders")
     public ModelAndView toManageJob() {
         ModelAndView modelAndView = new ModelAndView("/job/order_job");
@@ -61,15 +60,23 @@ public class OrderController {
 
     //获取order信息
     //根据user_id去查job，返回页面展示的信息有 工作名称，参与工作的人员和人数，开始时间和结束时间，以及状态
-    @PreAuthorize("hasRole('ROLE_employer')" )
     @ResponseBody
     @RequestMapping("/order/getOrders")
     public RespBean getOrdersBystate(@RequestBody Map<String, Object> info) {
         //获取当前用户上下文
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = (User) principal;
-        //获取当前用户的所有订单的jobid
-        List<Integer> jobids = jobService.getAllIdByUser(user.getId());
+        List<Integer> jobids = new ArrayList<>();
+        //如果当前用户是招聘者，则使用这种方法获取jobid
+        if(user.getAuthorities().toString().equals("[ROLE_employer]")){
+            //获取当前用户的所有订单的jobid
+            jobids = jobService.getAllIdByUser(user.getId());
+        }
+        //如果当前用户是应聘者，则使用这种方法获取jobid
+        if(user.getAuthorities().toString().equals("[ROLE_employee]")){
+            //获取当前用户的所有订单的jobid
+            jobids = jobService.getAllJobIdByEmployeeId(user.getId());
+        }
         List<String> job_titles = new ArrayList<>();
         //获取当前用户的所有的订单
         List<Order> orders = new ArrayList<>();
@@ -223,7 +230,6 @@ public class OrderController {
                 return RespBean.ok("success",map);
             }
     }
-
 
     //重定向
     @RequestMapping("/order/showDetails")

@@ -33,11 +33,11 @@
 		<div class="header_btm header_job_single">
 			<div class="header_job_single_inner container">
 				<div class="poster_company">
-					<img  alt="brand logo" src="/assets/images/demologo.png">
+					<img  alt="brand logo" th:href="${employerHeadurl}">
 				</div>
 				<div class="poster_details">
-					<h2>PHP Core Website Fixes <span class="varified"><i class="fas fa-check"></i>Verified</span></h2>
-					<h5>About the Employer</h5>
+					<h2>[[${job.title}]]<span class="varified"><i class="fas fa-check"></i>已审核</span></h2>
+					<h5>专业领域 [[${job.skill}]]</h5>
 					<ul>
 						<li>
 							<a href="#">
@@ -193,10 +193,9 @@
 						<li>API Development</li>
 					</ul>
       			</div>
-      			
       		</div>
       		<div class=" sjs_box_action">
-      				<a class="btn btn-third">联系雇主</a>
+      				<a class="btn btn-third" th:href="@{/message(id=${job.employer_id})}">联系雇主</a>
       					<p>- 或 -</p>
       				<a class="btn btn-primary">投递简历</a>
       			</div>

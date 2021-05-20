@@ -4,7 +4,7 @@
 
     <!-- Basic Page Needs
     ================================================== -->
-    <title>JoDice</title>
+    <title>JobSite</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link rel="icon" href="/assets/images/fav.png" type="image/gif" sizes="64x64">
@@ -21,6 +21,10 @@
     <link href="/assets/css/owl.carousel.min.css" rel="stylesheet"/>
     <link rel="stylesheet" href="/assets/css/style.css">
     <link rel="stylesheet" href="/assets/css/color-1.css">
+    <!--提醒的样式-->
+    <link href="/assets/css/light-theme.min.css" rel="stylesheet">
+    <link href="/assets/css/dark-theme.min.css" rel="stylesheet">
+    <link href="/assets/css/colored-theme.min.css" rel="stylesheet">
 </head>
 <body>
 
@@ -77,6 +81,26 @@
                             }
                         </script>
                     </div>
+                    <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModal" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">申请确认</h5>
+                                    <input type="hidden" id="jobId"></input>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <p>你确定要申请这份工作，并向雇主投递简历吗？</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                                    <button type="button" class="btn btn-primary" id="submittedConfirm">确定</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <!--按照列表显示-->
                     <div id="displayInList" class="row full_width featured_box_outer">
                         <div class="col-sm-12" th:each="job : ${pageInfo.list}">
@@ -110,7 +134,7 @@
                                     </a>
                                 </div>
                                 <div class="fb_action">
-                                    <a class="btn btn-primary" href="#">申请</a>
+                                    <button class="btn btn-primary" href="#" th:id="${job.id}">申请</button>
                                 </div>
                             </div>
                         </div>
@@ -224,14 +248,9 @@
 <script src="/assets/js/bootstrap.min.js"></script>
 <script src="/assets/js/owl.carousel.min.js"></script>
 <script src="/assets/js/custom.js"></script>
-<script>
-    $(document).ready(function() {
-        $("#5,#3").addClass("current_page").siblings().removeClass("current_page");
-    })
-    $(".pagination>li").click(function(){
-        $(this).addClass("active").siblings().removeClass("active");
-    })
+<!--提醒有关的js-->
+<script src="/assets/js/growl-notification.min.js"></script>
+<script src="/assets/js/browse_jobs.js"></script>
 
-</script>
 </body>
 </html>

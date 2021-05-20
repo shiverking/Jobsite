@@ -46,8 +46,8 @@ public interface UserService {
     String getUserName(int id);
     //通过用户名获取id
     int getId(String username);
+    //通过id获取user
     User getUserById(int id);
-
     //获取用户的url
     String getHeadurl(int id);
     //修改用户的头像地址
@@ -58,6 +58,7 @@ public interface UserService {
     String getLocation(int id);
     //获取所有Employee的id
     List<Integer> getAllEmployeeId();
+
     boolean deleteUserById(int id);
 
     public PageInfo<User> findUserByPage(Integer pageNum, Integer limitNum);
