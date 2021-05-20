@@ -20,7 +20,8 @@ import javax.servlet.http.HttpServletRequest;
 public class WebLogAspect {
     private static final Logger logger = LoggerFactory.getLogger(WebLogAspect.class);
 
-    @Pointcut("execution(public * project.controller..*.*(..)) && !execution(public * project.controller.OrderController.OrderDetail*(..)) && !execution(public * project.controller.MessageController.*(..))")
+    @Pointcut("execution(public * project.controller..*.*(..)) && !execution(public * project.controller.OrderController.OrderDetail*(..)) && !execution(public * project.controller.MessageController.*(..))" +
+            "&&!execution(public * project.controller.UserController.saveAvatar(..))")
     public void webLog() {
 
     }
@@ -74,7 +75,7 @@ public class WebLogAspect {
         Object result = proceedingJoinPoint.proceed();
         // 打印出参 若是返回RespBean可以将其Json化，方便查看
 
-        if (result.getClass() == project.model.RespBean.class) {
+        if (result.getClass().equals(project.model.RespBean.class)) {
             logger.info("Response Args  : {}", new Gson().toJson(result));
         } else if (result.getClass() == ModelAndView.class) {
             //给每个返回的ModelAndView添加user属性

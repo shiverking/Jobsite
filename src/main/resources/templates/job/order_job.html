@@ -11,6 +11,47 @@
 
     <!-- CSS
     ================================================== -->
+    <link href="http://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <style>
+        a {
+            color: #f1c40f;
+        }
+
+        a:hover,
+        a:active,
+        a:focus {
+            color: #dab10d;
+        }
+
+        .rating-stars {
+            width: 100%;
+            text-align: left;
+        }
+
+        .rating-stars .rating-stars-container {
+            font-size: 0px;
+        }
+
+        .rating-stars .rating-stars-container .rating-star {
+            display: inline-block;
+            font-size: 20px;
+            color: #555555;
+            cursor: pointer;
+            /* padding: 5px 10px; */
+            padding-top: 5px;
+            padding-bottom: 5px;
+            padding-right: 10px;
+        }
+
+        .rating-stars .rating-stars-container .rating-star.is--active,
+        .rating-stars .rating-stars-container .rating-star.is--hover {
+            color: #f1c40f;
+        }
+
+        .rating-stars .rating-stars-container .rating-star.is--no-hover {
+            color: #555555;
+        }
+    </style>
     <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700&display=swap&subset=latin-ext"
           rel="stylesheet">
     <link rel="stylesheet" href="/assets/css/all.min.css">
@@ -41,7 +82,7 @@
 <!-- Main
 ================================================== -->
 <main>
-    <div class="job_container" sec:authorize="hasRole('ROLE_employer')">
+    <div class="job_container" >
         <div class="container">
             <div class="row job_main">
                 <div class="sidebar">
@@ -77,7 +118,58 @@
 
                 <div class="job_main_right" style="display: none;height: 700px" th:id="finishedorder"></div>
 
-                <div class="empty-table"></div>
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">进行评价<span class="varified" id="evaluation" style="display: none;"><i class="fas fa-check"></i>已评价</span></h2></h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form>
+                                    <input type="hidden"  id="commentedId"/>
+                                    <div class="form-group row" style="margin-bottom: 0px;">
+                                        <div class="col-md-2">
+                                            <img style="max-width:53px;height: 53px;top:-3px;bottom:0;right:-3px;border-radius: 100px" src="/assets/avatar/default.png">
+                                        </div>
+                                        <div class="col-md-10">
+                                            <h6>[[${user.username}]]</h6>
+                                            <div class="rating-stars block row" id="rating">
+                                                <div class="rating-stars-container col-md-6" style="padding-right: 0px;">
+                                                    <div class="rating-star">
+                                                        <i class="fa fa-star"></i>
+                                                    </div>
+                                                    <div class="rating-star">
+                                                        <i class="fa fa-star"></i>
+                                                    </div>
+                                                    <div class="rating-star">
+                                                        <i class="fa fa-star"></i>
+                                                    </div>
+                                                    <div class="rating-star">
+                                                        <i class="fa fa-star"></i>
+                                                    </div>
+                                                    <div class="rating-star">
+                                                        <i class="fa fa-star"></i>
+                                                    </div>
+                                                </div>
+                                                <h6 id="ratingOnEnter" class="col-md-1" style="padding-top: 8px"></h6>
+                                                <h6 class="col-md-5" style="margin: 0px;padding-top: 8px;padding-left: 9px;">分</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <label for="recipient-content" class="col-form-label">请输入您的评价</label>
+                                    <input type="text" class="form-control" id="recipient-content"></input>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                                <button type="button" class="btn btn-primary" id="confirmJudgement">保存评价</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -99,9 +191,9 @@
 <script src="/assets/js/bootstrap.min.js"></script>
 <script src="/assets/js/owl.carousel.min.js"></script>
 <script src="/assets/js/custom.js"></script>
-<script src="/assets/js/job.js"></script>
-<script src="/assets/js/jobList.js"></script>
 <script src="/assets/js/growl-notification.min.js"></script>
+<!--star-->
+<script src="/assets/js/jquery.rating-stars.min.js"></script>
 <script src="/assets/js/order.js"></script>
 <script>
     $(document).ready(function() {
