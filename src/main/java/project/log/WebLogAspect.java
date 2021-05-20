@@ -15,8 +15,8 @@ import project.model.User;
 
 import javax.servlet.http.HttpServletRequest;
 
-//@Aspect
-//@Component
+@Aspect
+@Component
 public class WebLogAspect {
     private static final Logger logger = LoggerFactory.getLogger(WebLogAspect.class);
 

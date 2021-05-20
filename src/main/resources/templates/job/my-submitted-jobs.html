@@ -41,16 +41,16 @@
 <!-- Main 
 ================================================== -->
 <main>
-    <div class="job_container" sec:authorize="hasRole('ROLE_employer')">
+    <div class="job_container" sec:authorize="hasRole('ROLE_employee')">
         <div class="container">
             <div class="row job_main">
                 <div class="sidebar">
                     <ul class="user_navigation">
                         <li>
-                            <a href="/job/postJob"><i class="fas fa-paper-plane"></i>发布工作</a>
+                            <a href="/job/postJob"><i class="fas fa-paper-plane"></i>发布微服务</a>
                         </li>
-                        <li class="is-active">
-                            <a href="/job/MyJobLists"><i class="far fa-list-alt"></i>职位管理</a>
+                        <li >
+                            <a href="/job/submittedJob"><i class="far fa-list-alt"></i>已投递的职位</a>
                         </li>
                         <li>
                             <a href="/order/jobOrders"><i class="far fa-list-alt"></i>订单管理</a>
@@ -64,25 +64,21 @@
                     <div class="row job_section">
                         <div class="col-sm-12" th:id="hasjob">
                             <div class="jm_headings" >
-                                <h6>发布的工作如下展示</h6>
+                                <h6>投递的职位如下</h6>
                             </div>
                             <div class="table-cont">
                                 <table class="table" >
                                     <thead>
                                     <tr>
                                         <th>标题</th>
-                                        <th>需求人数</th>
                                         <th>岗位</th>
-                                        <th>发布时间</th>
-                                        <th>投递人数</th>
+                                        <th>投递时间</th>
                                         <th>状态</th>
                                         <th></th>
                                         <th></th>
                                     </tr>
                                     </thead>
                                     <tbody th:id="openlist">
-                                    </tbody>
-                                    <tbody th:id="closelist">
                                     </tbody>
                                 </table>
                             </div>
@@ -106,7 +102,7 @@
             </div>
         </div>
     </div>
-    <div sec:authorize="hasRole('ROLE_employee')">
+    <div sec:authorize="hasRole('ROLE_employer')">
         您没有权限浏览此页面
     </div>
 </main>
@@ -127,13 +123,7 @@
 <script src="/assets/js/bootstrap.min.js"></script>
 <script src="/assets/js/owl.carousel.min.js"></script>
 <script src="/assets/js/custom.js"></script>
-<script src="/assets/js/job.js"></script>
-<script src="/assets/js/jobList.js"></script>
 <script src="/assets/js/growl-notification.min.js"></script>
-<script>
-    $(document).ready(function() {
-        $("#8").addClass("current_page").siblings().removeClass("current_page");
-    })
-</script>
+<script src="/assets/js/my-submitted-jobs.js"></script>
 </body>
 </html>

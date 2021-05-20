@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import project.dao.JobMapper;
 import project.model.Job;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -117,5 +118,81 @@ public class JobServiceImpl implements JobService {
     @Override
     public int getJobCount() {
         return jobMapper.getJobCount();
+    }
+
+    /**
+     * 投递简历
+     * @param jobId
+     * @param profileId
+     * @param creatTime
+     * @return
+     */
+    @Override
+    public boolean sendResume(int jobId, int profileId, Date creatTime) {
+        if(jobMapper.insertSendResume(jobId,profileId,creatTime)==1){
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * 是否已经投递过简历
+     * @param jobId
+     * @param profileId
+     * @return
+     */
+    @Override
+    public boolean ifHasSendResume(int jobId, int profileId) {
+        return jobMapper.ifResumeExist(jobId,profileId);
+    }
+
+    /**
+     * 获取所有投递过的简历的标题
+     * @param user_id
+     * @return
+     */
+    @Override
+    public List<String> getAllSummitedJobName(int user_id) {
+        return jobMapper.getAllSummitedJobName(user_id);
+    }
+
+    /**
+     * 获取所有投递过简历的时间
+     * @param user_id
+     * @return
+     */
+    @Override
+    public List<Date> getAllSummitedJobTime(int user_id) {
+        return jobMapper.getAllSummitedJobTime(user_id);
+    }
+
+    /**
+     * 获取所有投递过简历的职位
+     * @param user_id
+     * @return
+     */
+    @Override
+    public List<String> getAllSummitedJobPosition(int user_id) {
+        return jobMapper.getAllSummitedJobPosition(user_id);
+    }
+
+    /**
+     * 获取所有投递过简历的状态
+     * @param user_id
+     * @return
+     */
+    @Override
+    public List<Boolean> getAllSummitedJobStatus(int user_id) {
+        return jobMapper.getAllSummitedJobStatus(user_id);
+    }
+
+    /**
+     * 通过Employee的Id查找所有自己已经被雇佣的jobId
+     * @param userId
+     * @return
+     */
+    @Override
+    public List<Integer> getAllJobIdByEmployeeId(int userId) {
+        return jobMapper.getAllJobIdByEmployeeId(userId);
     }
 }
