@@ -195,4 +195,9 @@ public class JobServiceImpl implements JobService {
     public List<Integer> getAllJobIdByEmployeeId(int userId) {
         return jobMapper.getAllJobIdByEmployeeId(userId);
     }
+
+    @Override
+    public List<Job> getJobByType(String skill) {
+        return jobMapper.getJobBySkill(skill);
+    }
 }

@@ -68,4 +68,6 @@ public interface JobMapper {
     List<String> getAllSummitedJobPosition(@Param("user_id")int user_id);
     //获取所有已投递简历的job状态
     List<Boolean> getAllSummitedJobStatus(@Param("user_id")int user_id);
+
+    List<Job> getJobBySkill(@Param("skill") String skill);
 }

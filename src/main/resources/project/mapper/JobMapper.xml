@@ -106,6 +106,9 @@
         select job.job_status from job,sendresume,profile where job.id=sendresume.job_id and sendresume.profile_id = profile.id and profile.user_id=#{user_id}
     </select>
     <select id="getAllJobIdByEmployeeId" resultType="java.lang.Integer">
-        select job_id from hire where employee_id = #{user_id}
+        select job_id from hire where employer_id = #{user_id}
+    </select>
+    <select id="getJobBySkill" resultType="project.model.Job">
+        select * from job where skill = #{skill} ORDER BY create_time DESC
     </select>
 </mapper>

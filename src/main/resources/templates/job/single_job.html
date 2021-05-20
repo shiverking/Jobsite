@@ -33,7 +33,7 @@
 		<div class="header_btm header_job_single">
 			<div class="header_job_single_inner container">
 				<div class="poster_company">
-					<img  alt="brand logo" th:href="${employerHeadurl}">
+					<img  alt="brand logo" th:src="${employerHeadurl}">
 				</div>
 				<div class="poster_details">
 					<h2>[[${job.title}]]<span class="varified"><i class="fas fa-check"></i>已审核</span></h2>
@@ -71,84 +71,85 @@
                     <p th:text="${job.description}"></p>
 		        </div>
 		        <div class="section-divider"></div>
-		        <div class="section-divider"></div>
+<!--				相似推荐，目前无用-->
+<!--		        <div class="section-divider"></div>-->
 		        <div class="col-md-12 single_job_main">
-		        	<h2>相似的工作</h2>
-		        	<div class="row two_col featured_box_outer">
-						<div class="col-sm-6">
-							<div class="featured_box ">
-								<div class="fb_image">
-									<img alt="brand logo" src="/assets/images/c-logo-01.webp">
-								</div>
-								<div class="fb_content">
-									<h4>2000 Words English to German</h4>
-									<ul>
-										<li>
-											<a href="#">
-												<i class="fas fa-landmark"></i>
-												Magna Aliqua
-											</a>
-										</li>
-										<li>
-											<a href="#">
-												<i class="fas fa-map-marker-alt"></i>
-												New York
-											</a>
-										</li>
-										<li>
-											<a href="#">
-												<i class="far fa-clock"></i>
-												2 days ago
-											</a>
-										</li>
-									</ul>
-								</div>
-								<div class="fb_action">
-									<a title="add to favourite" href="#"><i class="far fa-heart"></i></a>
-									<a class="btn btn-third" href="job-single.html">Apply Now</a>
+<!--		        	<h2>相似的工作</h2>-->
+<!--		        	<div class="row two_col featured_box_outer">-->
+<!--						<div class="col-sm-6">-->
+<!--							<div class="featured_box ">-->
+<!--								<div class="fb_image">-->
+<!--									<img alt="brand logo" src="/assets/images/c-logo-01.webp">-->
+<!--								</div>-->
+<!--								<div class="fb_content">-->
+<!--									<h4>2000 Words English to German</h4>-->
+<!--									<ul>-->
+<!--										<li>-->
+<!--											<a href="#">-->
+<!--												<i class="fas fa-landmark"></i>-->
+<!--												Magna Aliqua-->
+<!--											</a>-->
+<!--										</li>-->
+<!--										<li>-->
+<!--											<a href="#">-->
+<!--												<i class="fas fa-map-marker-alt"></i>-->
+<!--												New York-->
+<!--											</a>-->
+<!--										</li>-->
+<!--										<li>-->
+<!--											<a href="#">-->
+<!--												<i class="far fa-clock"></i>-->
+<!--												2 days ago-->
+<!--											</a>-->
+<!--										</li>-->
+<!--									</ul>-->
+<!--								</div>-->
+<!--								<div class="fb_action">-->
+<!--									<a title="add to favourite" href="#"><i class="far fa-heart"></i></a>-->
+<!--									<a class="btn btn-third" href="job-single.html">Apply Now</a>-->
 
-								</div>
-							</div>
-						</div>
-						<div class="col-sm-6">
-							<div class="featured_box ">
-								<div class="fb_image">
-									<img  alt="brand logo" src="/assets/images/c-logo-02.webp">
-								</div>
-								<div class="fb_content">
-									<h4>Fix Python Selenium Code</h4>
-									<ul>
-										<li>
-											<a href="#">
-												<i class="fas fa-landmark"></i>
-												Magna Aliqua
-											</a>
-										</li>
-										<li>
-											<a href="#">
-												<i class="fas fa-map-marker-alt"></i>
-												New York
-											</a>
-										</li>
-										<li>
-											<a href="#">
-												<i class="far fa-clock"></i>
-												3 days ago
-											</a>
-										</li>
-									</ul>
-								</div>
-								<div class="fb_action">
-									<a title="add to favourite" href="#"><i class="fas fa-heart"></i></a>
-									<a class="btn btn-third" href="job-single.html">Apply Now</a>
-									
-								</div>
-							</div>
-						</div>				
-						<div class="col-md-12 text-center">
-							<a class="btn btn-primary" th:href="@{/job}">查看所有工作<i class="fas fa-long-arrow-alt-right"></i></a>
-						</div>
-					</div>
+<!--								</div>-->
+<!--							</div>-->
+<!--						</div>-->
+<!--						<div class="col-sm-6">-->
+<!--							<div class="featured_box ">-->
+<!--								<div class="fb_image">-->
+<!--									<img  alt="brand logo" src="/assets/images/c-logo-02.webp">-->
+<!--								</div>-->
+<!--								<div class="fb_content">-->
+<!--									<h4>Fix Python Selenium Code</h4>-->
+<!--									<ul>-->
+<!--										<li>-->
+<!--											<a href="#">-->
+<!--												<i class="fas fa-landmark"></i>-->
+<!--												Magna Aliqua-->
+<!--											</a>-->
+<!--										</li>-->
+<!--										<li>-->
+<!--											<a href="#">-->
+<!--												<i class="fas fa-map-marker-alt"></i>-->
+<!--												New York-->
+<!--											</a>-->
+<!--										</li>-->
+<!--										<li>-->
+<!--											<a href="#">-->
+<!--												<i class="far fa-clock"></i>-->
+<!--												3 days ago-->
+<!--											</a>-->
+<!--										</li>-->
+<!--									</ul>-->
+<!--								</div>-->
+<!--								<div class="fb_action">-->
+<!--									<a title="add to favourite" href="#"><i class="fas fa-heart"></i></a>-->
+<!--									<a class="btn btn-third" href="job-single.html">Apply Now</a>-->
+<!--									-->
+<!--								</div>-->
+<!--							</div>-->
+<!--						</div>				-->
+<!--						<div class="col-md-12 text-center">-->
+<!--							<a class="btn btn-primary" th:href="@{/job}">查看所有工作<i class="fas fa-long-arrow-alt-right"></i></a>-->
+<!--						</div>-->
+<!--					</div>-->
 		        </div>
 		      </div>
       	</div>
@@ -181,23 +182,25 @@
 							<p th:if="${job.expertize_level=='expert'}" th:text="新手"></p>
                         </li>
 	      			</ul>
-				</div>      			
-      			<div class="sjs_box">
-      				<h3>标签</h3>
-      				<ul class="tags">
-						<li>PHP</li>
-						<li>MySQL </li>
-						<li>API Development</li>
-						<li>PHP</li>
-						<li>MySQL </li>
-						<li>API Development</li>
-					</ul>
-      			</div>
+				</div>
+<!--      			<div class="sjs_box">-->
+<!--      				<h3>标签</h3>-->
+<!--      				<ul class="tags">-->
+<!--						<li>PHP</li>-->
+<!--						<li>MySQL </li>-->
+<!--						<li>API Development</li>-->
+<!--						<li>PHP</li>-->
+<!--						<li>MySQL </li>-->
+<!--						<li>API Development</li>-->
+<!--					</ul>-->
+<!--      			</div>-->
       		</div>
       		<div class=" sjs_box_action">
       				<a class="btn btn-third" th:href="@{/message(id=${job.employer_id})}">联系雇主</a>
+      				<div sec:authorize="hasRole('ROLE_employee')">
       					<p>- 或 -</p>
       				<a class="btn btn-primary">投递简历</a>
+					</div>
       			</div>
       	</div>
       </div>

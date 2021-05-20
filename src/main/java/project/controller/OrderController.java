@@ -109,6 +109,7 @@ public class OrderController {
         Map<String, Object> map = new HashMap<>();
         map.put("order", orders);
         map.put("job_title", job_titles);
+        map.put("authority",user.getAuthorities().toString());
         return RespBean.ok("查询订单", map);
     }
 
@@ -269,6 +270,19 @@ public class OrderController {
             map.put("headUrls",headUrls);
             map.put("profiles",profiles);
             return RespBean.ok("success",map);
+        }
+    }
+    //根据传进来的order来返回order所属雇主的id
+    @ResponseBody
+    @RequestMapping("/order/getEmployerId")
+    public RespBean getEmployer(@RequestBody Map<String, Object> info){
+        if(info.get("orderId") == null){
+            return RespBean.error("获取用户失败");
+        }else {
+            int orderId = (int) info.get("orderId");
+            int jobid = orderService.getJobById(orderId);
+            Job job = jobService.findJobById(jobid);
+            return RespBean.ok("获取用户成功",job.getEmployer_id());
         }
     }
 }

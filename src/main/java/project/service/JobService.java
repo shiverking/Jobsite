@@ -61,4 +61,6 @@ public interface JobService {
     List<Boolean> getAllSummitedJobStatus(int user_id);
     //通过Employee的Id查找所有自己已经被雇佣的jobId
     List<Integer> getAllJobIdByEmployeeId(int userId);
+
+    List<Job> getJobByType(String skill);
 }

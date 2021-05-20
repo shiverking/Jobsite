@@ -43,10 +43,11 @@ public class JobController {
 
     @Autowired
     UserService userService;
+
     /**
      * 发布工作
      */
-    @PreAuthorize("hasRole('ROLE_employer')" )
+    @PreAuthorize("hasRole('ROLE_employer')")
     @ResponseBody
     @RequestMapping("/job/postAJob")
     public RespBean postJob(@Valid @RequestBody Job job) {
@@ -70,7 +71,7 @@ public class JobController {
     }
 
 
-    @PreAuthorize("hasRole('ROLE_employer')" )
+    @PreAuthorize("hasRole('ROLE_employer')")
     @RequestMapping("/job/MyJobLists")
     public ModelAndView toMyJobListsPage() {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -82,7 +83,7 @@ public class JobController {
 
 
     //获取给用户展示的工作列表
-    @PreAuthorize("hasRole('ROLE_employer')" )
+    @PreAuthorize("hasRole('ROLE_employer')")
     @ResponseBody
     @RequestMapping("/job/showMyJobLists")
     public RespBean showMyJobLists() {
@@ -99,7 +100,7 @@ public class JobController {
             //排序
             jobs.sort((o1, o2) -> {
                 int flag = o1.getCreate_time().compareTo(o2.getCreate_time());
-                return flag*-1;
+                return flag * -1;
             });
             //获取每个工作作为投递对象的次数
             List<Integer> sends = new ArrayList<>();
@@ -113,60 +114,73 @@ public class JobController {
         } else {
             return RespBean.error("列表为空");
         }
-        }
+    }
+
     /**
      * 分页查找所有工作
+     *
      * @param model
      * @return
      */
     @RequestMapping("/job")
-    public String getJobList(Model model, @RequestParam(defaultValue = "1") Integer pageNum, @RequestParam(defaultValue = "8") Integer pageSize){
-            //如果已经登录,则添加用户属性
-            if(!SecurityContextHolder.getContext().getAuthentication().getName().equals("anonymousUser")) {
-                    Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-                    User user = (User) principal;
-                    model.addAttribute("user", user);
-            }
-            //引入分页查询
-            PageHelper.startPage(pageNum,pageSize);
-            //分页查询
-            List<Job> jobs = jobService.findAllJobs();
-            //使用pageinfo封装查询结果
-            PageInfo<Job> pageInfo = new PageInfo<Job>(jobs,5);
+    public String getJobList(Model model, @RequestParam(defaultValue = "all") String type, @RequestParam(defaultValue = "1") Integer pageNum, @RequestParam(defaultValue = "5") Integer pageSize) {
+        //如果已经登录,则添加用户属性
+        if (!SecurityContextHolder.getContext().getAuthentication().getName().equals("anonymousUser")) {
+            Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            User user = (User) principal;
+            model.addAttribute("user", user);
+        }
+        //引入分页查询
+        PageHelper.startPage(pageNum, pageSize);
+        List<Job> jobs;
+        //分页查询
+        if (type.equals("all")) {
+            jobs = jobService.findAllJobs();
+            type = "all";
+        } else {
+            jobs = jobService.getJobByType(type);
+        }
+        //使用pageinfo封装查询结果
+        PageInfo<Job> pageInfo = new PageInfo<Job>(jobs, 5);
 
-            model.addAttribute("pageInfo",pageInfo);
-            //获得当前页
-            model.addAttribute("pageNum", pageInfo.getPageNum());
-            //获得一页显示的条数
-            model.addAttribute("pageSize", pageInfo.getPageSize());
-            //是否是第一页
-            model.addAttribute("isFirstPage", pageInfo.isIsFirstPage());
-            //获得总页数
+        model.addAttribute("pageInfo", pageInfo);
+        //获得当前页
+        model.addAttribute("pageNum", pageInfo.getPageNum());
+        //获得一页显示的条数
+        model.addAttribute("pageSize", pageInfo.getPageSize());
+        //是否是第一页
+        model.addAttribute("isFirstPage", pageInfo.isIsFirstPage());
+        //获得总页数
+        if (pageInfo.getPages() == 0) {
+            model.addAttribute("totalPages", 1);
+        } else {
             model.addAttribute("totalPages", pageInfo.getPages());
-            //是否是最后一页
-            model.addAttribute("isLastPage", pageInfo.isIsLastPage());
+        }
+        //是否是最后一页
+        model.addAttribute("isLastPage", pageInfo.isIsLastPage());
 
-            return "job/browse_jobs";
+        model.addAttribute("type", type);
+        return "job/browse_jobs";
     }
 
 
     @RequestMapping("/job/{id}")
-    public String getJobById(Model model,@PathVariable int id){
-            //如果已经登录,则添加用户属性
-            if(!SecurityContextHolder.getContext().getAuthentication().getName().equals("anonymousUser")) {
-                    Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-                    User user = (User) principal;
-                    model.addAttribute("user", user);
-            }
-            Job job = jobService.findJobById(id);
-            model.addAttribute("job",job);
-            //添加雇主头像
-            model.addAttribute("employerHeadurl",userService.getHeadurl(job.getEmployer_id()));
-            return "job/single_job";
+    public String getJobById(Model model, @PathVariable int id) {
+        //如果已经登录,则添加用户属性
+        if (!SecurityContextHolder.getContext().getAuthentication().getName().equals("anonymousUser")) {
+            Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            User user = (User) principal;
+            model.addAttribute("user", user);
+        }
+        Job job = jobService.findJobById(id);
+        model.addAttribute("job", job);
+        //添加雇主头像
+        model.addAttribute("employerHeadurl", userService.getHeadurl(job.getEmployer_id()));
+        return "job/single_job";
     }
 
 
-    @PreAuthorize("hasRole('ROLE_employer')" )
+    @PreAuthorize("hasRole('ROLE_employer')")
     @ResponseBody
     @RequestMapping("/job/closeJob/{id}")
     public RespBean closeJobById(@PathVariable("id") int id) {
@@ -179,9 +193,9 @@ public class JobController {
     }
 
 
-    @PreAuthorize("hasRole('ROLE_employer')" )
+    @PreAuthorize("hasRole('ROLE_employer')")
     @RequestMapping("/job/postJob")
-    public String toPostJobPage (Model model){
+    public String toPostJobPage(Model model) {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = (User) principal;
         model.addAttribute("user", user);
@@ -189,28 +203,25 @@ public class JobController {
     }
 
 
-
-
     //根据指定id来开启工作招聘
-    @PreAuthorize("hasRole('ROLE_employer')" )
+    @PreAuthorize("hasRole('ROLE_employer')")
     @ResponseBody
     @RequestMapping("/job/openJob/{id}")
     public RespBean openJobById(@PathVariable("id") int id) {
-            Job job = jobService.findJobById(id);
-            int jobid= job.getId();
-            int people = hireService.countHiresByJob(jobid);
-            if(people>= job.getRequired()){
-                return RespBean.error("该工作目前招聘人数已满，开启招聘失败");
-            }else {
-                jobService.openJobById(id);
-                return RespBean.ok("开启该职位招聘成功");
-            }
+        Job job = jobService.findJobById(id);
+        int jobid = job.getId();
+        int people = hireService.countHiresByJob(jobid);
+        if (people >= job.getRequired()) {
+            return RespBean.error("该工作目前招聘人数已满，开启招聘失败");
+        } else {
+            jobService.openJobById(id);
+            return RespBean.ok("开启该职位招聘成功");
+        }
     }
 
 
-
     //跳转到查看人员名单页面
-    @PreAuthorize("hasRole('ROLE_employer')" )
+    @PreAuthorize("hasRole('ROLE_employer')")
     @RequestMapping("/showjobstaff")
     public String show(Model model) {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -220,7 +231,7 @@ public class JobController {
     }
 
     //获取指定jobId的投递简历列表
-    @PreAuthorize("hasRole('ROLE_employer')" )
+    @PreAuthorize("hasRole('ROLE_employer')")
     @RequestMapping("/job/viewSeeker/job_id={job_id}")
     public ModelAndView showSeekerList(@PathVariable("job_id") int job_id) {
         ModelAndView modelAndView = new ModelAndView("/page/show_staff");
@@ -230,7 +241,7 @@ public class JobController {
         //比对一下当前操作人的id和当前操作对象所属的userid是否一样
         int currentId = user.getId();
         Job job = jobService.findJobById(job_id);
-        if(job == null || currentId != job.getEmployer_id() ){
+        if (job == null || currentId != job.getEmployer_id()) {
             return modelAndView;
         }
 
@@ -246,8 +257,8 @@ public class JobController {
                     profiles.add(profileService.getProfileById(id));
                 }
                 modelAndView.addObject("Profiles", profiles);
-                modelAndView.addObject("job_id",job_id);
-                modelAndView.addObject("user",user);
+                modelAndView.addObject("job_id", job_id);
+                modelAndView.addObject("user", user);
                 return modelAndView;
             } else {
                 modelAndView.addObject("hasProfile", false);
@@ -257,9 +268,9 @@ public class JobController {
     }
 
     @RequestMapping("/findStaff")
-    public String findStaff(Model model){
+    public String findStaff(Model model) {
         //如果已经登录
-        if(!SecurityContextHolder.getContext().getAuthentication().getName().equals("anonymousUser")) {
+        if (!SecurityContextHolder.getContext().getAuthentication().getName().equals("anonymousUser")) {
             Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             User user = (User) principal;
             model.addAttribute("user", user);
@@ -267,14 +278,14 @@ public class JobController {
         return "job/find-staff";
     }
 
-    @PreAuthorize("hasRole('ROLE_employer')" )
+    @PreAuthorize("hasRole('ROLE_employer')")
     @ResponseBody
     @PostMapping("/findStaff/getAllProfile")
-    public List<List<String>> getAllProfile(){
+    public List<List<String>> getAllProfile() {
         List<List<String>> res = new ArrayList<List<String>>();
         List<Integer> employeeIds = userService.getAllEmployeeId();
-        for(int id :employeeIds){
-            if(profileService.isProfileExist(id)){
+        for (int id : employeeIds) {
+            if (profileService.isProfileExist(id)) {
                 List<String> tmp = new ArrayList<String>();
                 //0
                 tmp.add(userService.getUserName(id));
@@ -294,7 +305,7 @@ public class JobController {
     }
 
     @RequestMapping("/job/submittedJob")
-    public String mySubmittedJob(Model model){
+    public String mySubmittedJob(Model model) {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = (User) principal;
         model.addAttribute("user", user);
@@ -303,61 +314,66 @@ public class JobController {
 
     /**
      * 投递简历
+     *
      * @param info
      * @return
      */
     @ResponseBody
     @PostMapping("/job/submitJobConfirm")
-    public RespBean submitJobConfirm(@RequestBody Map<String, Object> info){
-        int job_id =Integer.valueOf((String) info.get("job_id"));
-        int profile_id =Integer.valueOf((String) info.get("profile_id"));
+    public RespBean submitJobConfirm(@RequestBody Map<String, Object> info) {
+        int job_id = Integer.valueOf((String) info.get("job_id"));
+        int profile_id = Integer.valueOf((String) info.get("profile_id"));
         Date now = new Date();
-        if(jobService.sendResume(job_id,profile_id,now)){
+        if (jobService.sendResume(job_id, profile_id, now)) {
             return RespBean.ok("投递简历成功");
         }
         return RespBean.ok("投递简历失败");
     }
+
     /**
      * 投递简历
+     *
      * @param info
      * @return
      */
     @ResponseBody
     @PostMapping("/job/ifHasSubmitResume")
-    public RespBean ifHasSubmitResume(@RequestBody Map<String, Object> info){
-        int job_id =Integer.valueOf((String) info.get("job_id"));
+    public RespBean ifHasSubmitResume(@RequestBody Map<String, Object> info) {
+        int job_id = Integer.valueOf((String) info.get("job_id"));
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = (User) principal;
         //查询用户是否有profile
         Profile profile = profileService.getProfile(user.getId());
-        if(profile==null){
+        if (profile == null) {
             return RespBean.error("没有简历");
         }
-        int profile_id= profile.getId();
-        if(jobService.ifHasSendResume(job_id,profile_id)){
+        int profile_id = profile.getId();
+        if (jobService.ifHasSendResume(job_id, profile_id)) {
             return RespBean.ok("已经投递过简历");
         }
         return RespBean.error("没有投递过简历");
     }
+
     /**
      * 获取所有的已投递的简历
+     *
      * @return
      */
     @ResponseBody
     @PostMapping("/job/getAllSubmittedJobs")
-    public List<List<String>> getAllSubmitJob(){
+    public List<List<String>> getAllSubmitJob() {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = (User) principal;
         List<List<String>> res = new ArrayList<>();
-        List<String>  titles = jobService.getAllSummitedJobName(user.getId());
+        List<String> titles = jobService.getAllSummitedJobName(user.getId());
         List<Date> times = jobService.getAllSummitedJobTime(user.getId());
         List<String> positions = jobService.getAllSummitedJobPosition(user.getId());
         List<Boolean> status = jobService.getAllSummitedJobStatus(user.getId());
         int length = titles.size();
-        if(length==0){
+        if (length == 0) {
             return null;
         }
-        for(int i=0;i<length;i++){
+        for (int i = 0; i < length; i++) {
             List<String> tmp = new ArrayList<String>();
             //加入标题
             tmp.add(titles.get(i));

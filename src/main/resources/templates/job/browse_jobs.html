@@ -52,13 +52,14 @@
                     <div class="col-md-12" style="padding-left:0px;">
                         <div class="letters-list" style="margin-bottom: 20px;text-align:left;">
                             <text>职位类型</text>
-                            <a href="#">技术</a>
-                            <a href="#" class="current">文案写作</a>
-                            <a href="#">运营</a>
-                            <a href="#">市场营销</a>
-                            <a href="#">设计</a>
-                            <a href="#">音视频</a>
-                            <a href="#">生活与更多</a>
+                            <a th:href="@{${'job'}(type = 'all')}" th:class="${type}=='all'? 'current':''">全部</a>
+                            <a th:href="@{${'job'}(type = '技术')}" th:class="${type}=='技术'? 'current':''">技术</a>
+                            <a th:href="@{${'job'}(type = '文案写作')}"  th:class="${type}=='文案写作'? 'current':''">文案写作</a>
+                            <a th:href="@{${'job'}(type = '运营')}" th:class="${type}=='运营'? 'current':''">运营</a>
+                            <a th:href="@{${'job'}(type = '市场营销')}" th:class="${type}=='市场营销'? 'current':''">市场营销</a>
+                            <a th:href="@{${'job'}(type = '设计')}" th:class="${type}=='设计'? 'current':''">设计</a>
+                            <a th:href="@{${'job'}(type = '音视频')}" th:class="${type}=='音视频'? 'current':''">音视频</a>
+                            <a th:href="@{${'job'}(type = '生活与更多')}" th:class="${type}=='生活与更多'? 'current':''">生活与更多</a>
                         </div>
                     </div>
                     <div class="custom-control custom-switch">
@@ -181,7 +182,7 @@
                             <!-- 向前1页-->
                             <li class="page-item">
                                 <a class="page-link" th:if="${pageNum-1>0}"
-                                   th:href="@{${'job'}(pageNum=${pageNum-1},pageSize=${pageSize})}"
+                                   th:href="@{${'job'}(type=${type},pageNum=${pageNum-1},pageSize=${pageSize})}"
                                    aria-label="Previous">
                                     <span aria-hidden="true">&laquo;</span>
                                 </a>
@@ -192,26 +193,23 @@
                             </li>
                             <!--只显示5页,不足五页的只显示有的页-->
 
-                            <li  class="page-item" th:if="${totalPages>5}"
-                               th:each="pageNo : ${#numbers.sequence(pageNum, pageNum+5)}">
-                                <a class="page-link" th:if="${pageNum eq pageNo}"
-                                   href="javascript:void(0);">
+                            <li  class="page-item"  th:if="${totalPages>5}"  th:each="pageNo : ${#numbers.sequence(pageNum, pageNum+5)}">
+                                <a class="page-link" th:if="${pageNum eq pageNo}" style="color: #0a58ca" ;>
                                     <span th:text="${pageNo}"></span>
                                 </a>
 
                                 <a class="page-link" th:if="${not (pageNum eq pageNo)}"
-                                   th:href="@{${'job'}(pageNum=${pageNo},pageSize=${pageSize})}">
+                                   th:href="@{${'job'}(type=${type},pageNum=${pageNo},pageSize=${pageSize})}" style="color: black">
                                     <span th:text="${pageNo}"></span>
                                 </a>
                             </li>
                             <li class="page-item" th:if="${totalPages<=5}"
                                th:each="pageNo : ${#numbers.sequence(1,totalPages)}">
-                                <a class="page-link" th:if="${pageNum eq pageNo}"
-                                   href="javascript:void(0);">
+                                <a class="page-link" th:if="${pageNum eq pageNo}" style="color: #0a58ca">
                                     <span th:text="${pageNo}"></span>
                                 </a>
                                 <a class="page-link" th:if="${not (pageNum eq pageNo)}"
-                                   th:href="@{${'job'}(pageNum=${pageNo},pageSize=${pageSize})}">
+                                   th:href="@{${'job'}(type=${type},pageNum=${pageNo},pageSize=${pageSize})}" style="color:black;">
                                     <span th:text="${pageNo}"></span>
                                 </a>
                             </li>
@@ -219,7 +217,7 @@
                             <!--向后五页-->
                             <li class="page-item">
                                 <a class="page-link" th:if="${totalPages-pageNum>=0}"
-                                   th:href="@{${'job'}(pageNum=${pageNum+5},pageSize=${pageSize})}" aria-label="Next">
+                                   th:href="@{${'job'}(type=${type},pageNum=${pageNum+5},pageSize=${pageSize})}" aria-label="Next">
                                     <span aria-hidden="true">&raquo;</span>
                                 </a>
                                 <a class="page-link" th:if="${totalPages-pageNum<0}"
