@@ -124,6 +124,7 @@ function shows(id, title, state, create_time, end_time) {
         var button = "<button type='button' class='btn btn-info' onclick='tofinished(" + id + ")'>已支付</button>"
     } else {
         state = "已结束"
+        var button = "<button type='button' class='btn btn-info' onclick='toComment(" + id + ")'>去评价</button>"
     }
     var str = "";
     str += "<div class='col-sm-12'>" +
@@ -288,6 +289,20 @@ function todetaile(id){
                 window.location.href="/order/showDetails"
             }else {
                 warning("查看订单失败")
+            }
+        }
+    })
+}
+
+function toComment(id){
+    $.ajax({
+        url:"/order/saveOrderSession?orderId="+id,
+        type:"post",
+        success:function (res){
+            if(res.status == 200){
+                window.location.href="/order/comment"
+            }else {
+                warning("进入评论页面失败")
             }
         }
     })
